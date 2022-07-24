@@ -1,0 +1,9 @@
+package java8;
+
+
+public interface FI01 {
+	
+	public void display(String str);
+	
+	
+}

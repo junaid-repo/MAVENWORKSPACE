@@ -1,0 +1,24 @@
+1655653460321	Copy compilation unit
+1655833160073	Extract local variable 'isEvenPredicate'
+1655833193878	Extract local variable 'squareFunction'
+1655833310533	Extract local variable 'sysoutConsumer'
+1655834286970	Extract local variable 'accumulator'
+1655911134808	Copy compilation unit
+1655911474249	Extract local variable 'evePpredicate'
+1655911516314	Extract local variable 'oddPredicate'
+1655911744081	Extract method 'filterAndPrint'
+1655911843915	Inline local variable 'evenPredicate'
+1655911883894	Inline local variable 'oddPredicate'
+1655918371142	Copy compilation unit
+1655919792942	Extract local variable 'mapper'
+1655920156684	Extract method 'mapAndCreate'
+1655920185144	Inline local variable 'mapper'
+1655969228030	Extract local variable 'mapper'
+1655969276947	Extract method 'extracted'
+1655972847021	Extract local variable 'predicate'
+1655996076750	Delete element
+1655997692035	Copy compilation unit
+1655998149975	Copy compilation unit
+1656070089413	Extract local variable 'checkOfCollege'
+1656070126342	Extract method 'extracted'
+1656155455159	Delete element

@@ -1,0 +1,10 @@
+package com.example.demo;
+
+public class AbstractTest extends AbstractC{
+	
+	@Override
+	public void abstractTest1() {
+		System.out.println("Here is abstract1 called");
+	}
+
+}

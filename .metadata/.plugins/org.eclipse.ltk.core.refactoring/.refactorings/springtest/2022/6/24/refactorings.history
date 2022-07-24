@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;RestWebService&apos; to &apos;SpringBootTest/src/main/java&apos;&#x0D;&#x0A;- Original project: &apos;springtest&apos;&#x0D;&#x0A;- Destination element: &apos;SpringBootTest/src/main/java&apos;&#x0D;&#x0A;- Original element: &apos;springtest/src/test/java/RestWebService&apos;" description="Copy package" destination="=SpringBootTest/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/" element1="/src\/test\/java=/optional=/true=/=/maven.pomderived=/true=/=/test=/true=/&lt;RestWebService" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1654846318514" version="1.0"/>
+</session>

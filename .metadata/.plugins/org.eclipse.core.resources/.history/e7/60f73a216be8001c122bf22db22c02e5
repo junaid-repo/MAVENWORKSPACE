@@ -1,0 +1,14 @@
+package exceptionHandling;
+
+public class Throws {
+	
+	
+public static void main(String[] args) {
+	
+	int a[]= {234,456,867};
+	
+	System.out.println(a[7]);
+	
+	System.out.println("Reached after sets");
+}
+}

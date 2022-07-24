@@ -1,0 +1,13 @@
+package java8;
+
+public class LC01 {
+	
+	public static void main(String[] args) {
+		
+		FI01 x =(st)->{
+			System.out.println("Printing inside Lambda "+st);
+		};
+		x.displayConsumer("alfjjalf");
+	}
+
+}

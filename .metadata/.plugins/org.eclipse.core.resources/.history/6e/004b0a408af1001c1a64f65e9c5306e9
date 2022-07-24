@@ -1,0 +1,19 @@
+package java8;
+
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+public class F03FunctionalInterface {
+
+	public static void main(String[] args) {
+		List<Integer> numbers = List.of(45, 2, 8, 5, 10);
+
+		Predicate<Integer> isEvenPredicate = i -> i % 2 == 0;
+		Function<Integer, Integer> squareFunction = i -> i * i;
+		Consumer<Integer> sysoutConsumer = System.out::println;
+		numbers.stream().filter(isEvenPredicate).map(squareFunction).forEach(sysoutConsumer);
+	}
+
+}

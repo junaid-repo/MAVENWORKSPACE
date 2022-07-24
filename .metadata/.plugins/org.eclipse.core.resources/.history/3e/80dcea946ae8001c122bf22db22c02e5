@@ -1,0 +1,11 @@
+package exceptionHandling;
+
+public class tryCatch {
+	
+	public static void main(String[] args) {
+		int ar[] =  {23, 345, 56, 55};
+		System.out.println(ar[6]);
+		System.out.println("Reached here");
+	}
+	
+}

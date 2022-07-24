@@ -1,0 +1,31 @@
+package ioStream;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class ReadFileDemo {
+	
+	public static void main(String[] args) {
+		
+		String location = "C:\\Users\\junai\\Downloads\\float_transfer analysis.txt";
+		String dataString;
+		try {
+			FileReader read =  new FileReader(location);
+			dataString = read.toString();
+			
+			
+			try {
+				System.out.println(read.read());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

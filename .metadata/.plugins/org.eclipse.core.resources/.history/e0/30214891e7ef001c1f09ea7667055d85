@@ -1,0 +1,20 @@
+package java8;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class FP01Functional {
+
+	public static void main(String[] args) {
+		printAllNumbersInListStructured(List.of(3, 4, 1, 56, 34));
+	}
+
+	public static void printit(int n) {
+		System.out.println(n);
+	}
+	public static void printAllNumbersInListStructured(List<Integer> numbers) {
+
+		numbers.stream().forEach(FP01Functional::printit);
+	}
+
+}

@@ -1,0 +1,16 @@
+package java8;
+
+import java.util.*;
+import java.util.function.Function;
+
+public class FP03MehodReferences {
+
+	public static void main(String[] args) {
+		List<String> str = List.of("Arrays", "String", "Boolean", "Integer", "Double");
+
+		Function<String,String> mapper = x -> x.toUpperCase();
+		str.stream().map(mapper).forEach(x -> System.out.println(x));
+
+	}
+
+}

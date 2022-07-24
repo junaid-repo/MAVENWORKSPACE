@@ -1,0 +1,14 @@
+package synchronizations;
+
+public class SyncDemo extends Thread{
+	
+	public static void main(String[] args) {
+		
+		
+	SayHello so =  new SayHello();
+	
+		so.sayHello("Junaid");
+		so.sayHello("Nemat");
+	}
+
+}

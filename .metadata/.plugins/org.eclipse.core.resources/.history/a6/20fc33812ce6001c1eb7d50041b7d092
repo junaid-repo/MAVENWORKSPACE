@@ -1,0 +1,30 @@
+package com.example.demo;
+
+public class DynamicPoliyMorphs {
+	
+	
+
+}
+
+class Shape{
+	void draw() {
+		System.out.println("Drawing a shape");
+	}
+}
+class Circle extends Shape{
+	void draw() {
+		System.out.println("Drawing a Circle");
+	}
+}
+
+class Rectangle extends Shape{
+	void draw() {
+		System.out.println("Drawing a Rectagnle");
+	}
+}
+
+class Polygon extends Shape{
+	void draw() {
+		System.out.println("Drawing a Polygon");
+	}
+}

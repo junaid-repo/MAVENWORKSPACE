@@ -1,0 +1,32 @@
+package com.example.demo;
+
+public class AbstractTest extends AbstractC{
+	
+	public static void main(String[] args) {
+		
+		AbstractTest ob =  new AbstractTest();
+		ob.abstractTest1();
+		ob.abstractTest2();
+		ob.abstractTest3();
+		
+	}
+	
+	
+	@Override
+	public void abstractTest1() {
+		System.out.println("Here is abstract1 called");
+	}
+
+	@Override
+	public void abstractTest2() {
+		System.out.println("Here is abstract2 called");
+		
+	}
+
+	@Override
+	public void abstractTest3() {
+		System.out.println("Here is abstract3 called");
+		
+	}
+
+}

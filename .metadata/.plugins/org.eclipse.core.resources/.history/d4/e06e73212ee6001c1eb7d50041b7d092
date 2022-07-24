@@ -1,0 +1,15 @@
+package com.example.demo;
+
+public abstract class AbstractPractise {
+	
+	public static void main(String[] args) {
+		System.out.println("Ye abstract hai");
+	}
+
+	void testing() {
+		System.out.println("Testing abstract");
+	}
+	
+}
+
+

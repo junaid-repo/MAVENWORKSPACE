@@ -1,0 +1,234 @@
+package com.jdbcdemo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.jdbcdemo.jdbcdemo.Services;
+import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
+import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
+import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsRequest;
+import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
+import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
+import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeRequest;
+import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
+import com.jdbcdemo.jdbcdemo.interfaces.IServices;
+
+@RestController
+public class SimpleController {
+	@Autowired
+	IServices serv;
+
+	@RequestMapping(value = "jdbcDemo", method = RequestMethod.GET)
+	ResponseEntity<BaseOutput> simpleControllerDemo() {
+
+		BaseOutput bs = new BaseOutput();
+		bs.setErrorCode(133);
+		bs.setErrorDesc("Success");
+		return new ResponseEntity<BaseOutput>(bs, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "getEmployeeLists", method = RequestMethod.GET)
+	ResponseEntity<EmployeeDetailsResponse> getEmpDetails(@RequestBody EmployeeDetailsRequest empOb) {
+
+		// System.out.println(empId);
+		String empId = empOb.getDeptId();
+
+		EmployeeDetailsResponse output = new EmployeeDetailsResponse();
+		if (empId == null || empId == "") {
+
+			output.setErrorDesc(HttpStatus.BAD_REQUEST.getReasonPhrase());
+			output.setErrorCode(HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity<EmployeeDetailsResponse>(output, HttpStatus.BAD_REQUEST);
+		}
+		// IServices serv = new Services();
+		try {
+			output = serv.getEmployeeLists(empId);
+		} catch (Exception e) {
+			output.setErrorDesc(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+			output.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			return new ResponseEntity<EmployeeDetailsResponse>(output, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		output.setErrorDesc(HttpStatus.OK.getReasonPhrase());
+		output.setErrorCode(HttpStatus.OK.value());
+
+		return new ResponseEntity<EmployeeDetailsResponse>(output, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "addEmployee", method = RequestMethod.POST)
+	ResponseEntity<InsertEmployeeResponse> insertNewEmployee(@RequestBody InsertEmployeeList request) {
+
+		InsertEmployeeResponse response = new InsertEmployeeResponse();
+
+		try {
+			response = serv.insertNewEmployee(request);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setErrorDesc(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+			response.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			// return new ResponseEntity<InsertEmployeeResponse>(response,
+			// HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		String location = ServletUriComponentsBuilder
+				.fromHttpUrl(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString() + "/getEmployeeDetails")
+				.path("/{id}").buildAndExpand(response.getEmpId()).toUri().toString();
+
+		System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
+
+		response.setErrorDesc(HttpStatus.CREATED.getReasonPhrase());
+		response.setErrorCode(HttpStatus.CREATED.value());
+		response.setEmpId(response.getEmpId());
+		response.setUrl(location);
+		// return ResponseEntity.created(location).build();
+		return new ResponseEntity<InsertEmployeeResponse>(response, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "getEmployeeDetails/{empId}", method = RequestMethod.GET)
+	ResponseEntity<EmployeeDetailsResponse> getEmployeeDetails(@PathVariable String empId) {
+		EmployeeDetailsResponse response = new EmployeeDetailsResponse();
+		if (empId == null || empId == "") {
+
+			response.setErrorDesc(HttpStatus.BAD_REQUEST.getReasonPhrase());
+			response.setErrorCode(HttpStatus.BAD_REQUEST.value());
+			return new ResponseEntity<EmployeeDetailsResponse>(response, HttpStatus.BAD_REQUEST);
+		}
+		try {
+			response = serv.getEmployeeDetails(empId);
+			if (response.getName() == "" || response.getName() == null) {
+				response.setErrorDesc(HttpStatus.NOT_FOUND.getReasonPhrase());
+				response.setErrorCode(HttpStatus.NOT_FOUND.value());
+				return new ResponseEntity<EmployeeDetailsResponse>(response, HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			response.setErrorDesc(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+			response.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			return new ResponseEntity<EmployeeDetailsResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		response.setErrorDesc(HttpStatus.OK.getReasonPhrase());
+		response.setErrorCode(HttpStatus.OK.value());
+
+		return new ResponseEntity<EmployeeDetailsResponse>(response, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "deleteUser/{empId}", method = RequestMethod.DELETE)
+	ResponseEntity<BaseOutput> removeEmployee(@PathVariable String empId) {
+		BaseOutput response = new BaseOutput();
+
+		try {
+			response = serv.removeEmployee(empId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setErrorDesc(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+			response.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			return new ResponseEntity<BaseOutput>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+		response.setErrorDesc(HttpStatus.OK.getReasonPhrase());
+		response.setErrorCode(HttpStatus.OK.value());
+
+		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "freezeEmployee/{empId}", method = RequestMethod.POST)
+	ResponseEntity<BaseOutput> freezeEmployee(@PathVariable String empId) {
+		BaseOutput response = new BaseOutput();
+		Services serv = new Services();
+		response = serv.freezeEmployee(empId);
+
+		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "createBulkEmployee", method = RequestMethod.POST)
+	ResponseEntity<BulkEmployeesResponse> createBulkEmployee(@RequestBody InsertEmployeeRequest employeeList) {
+		// BaseOutput response = new BaseOutput();
+		BulkEmployeesResponse response = new BulkEmployeesResponse();
+		Services serv = new Services();
+		try {
+			response = serv.createBulkEmployee(employeeList.getEmployeeList());
+		} catch (Exception e) {
+			response.setErrorDesc(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+			response.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			e.printStackTrace();
+		}
+
+		List<InsertEmployeeResponse> newEmpRespnse = new ArrayList<>();
+		newEmpRespnse = response.getNewEmployeesResponse();
+		List<InsertEmployeeResponse> newEmployeesResponse = new ArrayList<>();
+
+		for (InsertEmployeeResponse ier : newEmpRespnse) {
+			String location = ServletUriComponentsBuilder
+					.fromHttpUrl(
+							ServletUriComponentsBuilder.fromCurrentContextPath().toUriString() + "/getEmployeeDetails")
+					.path("/{id}").buildAndExpand(ier.getEmpId()).toUri().toString();
+			
+
+			System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
+			InsertEmployeeResponse obj = new InsertEmployeeResponse();
+
+			obj.setErrorDesc(HttpStatus.CREATED.getReasonPhrase());
+			obj.setErrorCode(HttpStatus.CREATED.value());
+			obj.setEmpId(ier.getEmpId());
+			obj.setUrl(location);
+			newEmployeesResponse.add(obj);
+		}
+		response.setNewEmployeesResponse(newEmployeesResponse);
+		// return ResponseEntity.created(location).build();
+
+		return new ResponseEntity<BulkEmployeesResponse>(response, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "importBulkUsers", method = RequestMethod.POST)
+	ResponseEntity<BulkEmployeesResponse> importUsers(@RequestBody List<InsertEmployeeList> arList) {
+		// BaseOutput response = new BaseOutput();
+		BulkEmployeesResponse response = new BulkEmployeesResponse();
+		Services serv = new Services();
+		try {
+			response = serv.createBulkEmployee(employeeList.getEmployeeList());
+		} catch (Exception e) {
+			response.setErrorDesc(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+			response.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			e.printStackTrace();
+		}
+
+		List<InsertEmployeeResponse> newEmpRespnse = new ArrayList<>();
+		newEmpRespnse = response.getNewEmployeesResponse();
+		List<InsertEmployeeResponse> newEmployeesResponse = new ArrayList<>();
+
+		for (InsertEmployeeResponse ier : newEmpRespnse) {
+			String location = ServletUriComponentsBuilder
+					.fromHttpUrl(
+							ServletUriComponentsBuilder.fromCurrentContextPath().toUriString() + "/getEmployeeDetails")
+					.path("/{id}").buildAndExpand(ier.getEmpId()).toUri().toString();
+			
+
+			System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
+			InsertEmployeeResponse obj = new InsertEmployeeResponse();
+
+			obj.setErrorDesc(HttpStatus.CREATED.getReasonPhrase());
+			obj.setErrorCode(HttpStatus.CREATED.value());
+			obj.setEmpId(ier.getEmpId());
+			obj.setUrl(location);
+			newEmployeesResponse.add(obj);
+		}
+		response.setNewEmployeesResponse(newEmployeesResponse);
+		// return ResponseEntity.created(location).build();
+
+		return new ResponseEntity<BulkEmployeesResponse>(response, HttpStatus.OK);
+	}
+
+}

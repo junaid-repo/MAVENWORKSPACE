@@ -1,0 +1,107 @@
+package java8;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+class Courses {
+
+	String courseName;
+	int rating;
+	long price;
+
+	/*
+	 * public Courses(String string, int i, int j) { // TODO Auto-generated
+	 * constructor stub }
+	 */
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public long getPrice() {
+		return price;
+	}
+
+	public void setPrice(long price) {
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "Courses [courseName=" + courseName + ", rating=" + rating + ", price=" + price + "]";
+	}
+
+}
+
+public class F04CustomClass {
+
+	public static void main(String[] args) {
+		List<Courses> cr = new ArrayList<>();
+
+		Courses cr1 = new Courses();
+		cr1.setCourseName("Spring");
+		cr1.setPrice(78965);
+		cr1.setRating(87);
+		cr.add(cr1);
+
+		Courses cr2 = new Courses();
+		cr1.setCourseName("Java");
+		cr1.setPrice(84638);
+		cr1.setRating(78);
+		cr.add(cr2);
+
+		Courses cr3 = new Courses();
+		cr1.setCourseName("Python");
+		cr1.setPrice(97465);
+		cr1.setRating(93);
+		cr.add(cr3);
+
+		Courses cr4 = new Courses();
+		cr1.setCourseName("C#");
+		cr1.setPrice(78526);
+		cr1.setRating(96);
+		cr.add(cr4);
+
+		Courses cr5 = new Courses();
+		cr1.setCourseName("Cobol");
+		cr1.setPrice(88554);
+		cr1.setRating(100);
+		cr.add(cr5);
+
+		/*
+		 * List<Courses> cr = List.of(new Courses("Spring", 89, 30000), new
+		 * Courses("Rest", 98, 34000), new Courses("API", 69, 22000), new
+		 * Courses("Microservices", 78, 20000), new Courses("Boot", 85, 30000));
+		 * 
+		 */
+
+		Predicate<Courses> predicate = i -> i.getPrice() > 9;
+		//System.out.println(cr.stream().allMatch(predicate));
+		//System.out.println(cr.stream().noneMatch(predicate));
+		for(Courses cc:cr) {
+			System.out.println(cc.getCourseName());
+		}
+
+		Comparator<Courses> courseToSortIncreasing = Comparator.comparing(Courses::getRating);
+		Comparator<Courses> courseToSortDescrising = Comparator.comparing(Courses::getRating).reversed();
+
+		//System.out.println(cr.stream().sorted(courseToSortIncreasing).collect(Collectors.toList()));
+		//System.out.println(cr.stream().sorted(courseToSortDescrising).collect(Collectors.toList()));
+
+	}
+
+}

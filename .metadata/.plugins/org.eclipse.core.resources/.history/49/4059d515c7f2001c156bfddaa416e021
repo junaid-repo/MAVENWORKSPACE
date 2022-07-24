@@ -1,0 +1,30 @@
+package java8;
+
+import java.util.*;
+import java.util.function.Function;
+
+public class FP03MehodReferences {
+	
+	private static void printIt(String str) {
+		System.out.print(str+" ");
+	}
+
+	public static void main(String[] args) {
+		List<String> str = List.of("Arrays", "String", "Boolean", "Integer", "Double");
+		
+		
+		
+
+		//Function<String,String> mapper = x -> x.toUpperCase();
+		extracted(str, x -> x.toUpperCase());
+		extracted(str, x -> x.toLowerCase());
+
+
+	}
+
+	private static void extracted(List<String> str, Function<String, String> mapper) {
+		str.stream().map(mapper).forEach(x -> FP03MehodReferences.printIt(x));
+		System.out.println();
+	}
+
+}

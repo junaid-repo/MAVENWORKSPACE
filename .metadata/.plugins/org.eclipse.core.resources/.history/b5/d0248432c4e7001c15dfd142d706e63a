@@ -1,0 +1,13 @@
+package objectToStringSample;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		Passenger p = new Passenger();
+		p.setFirstName("Junaid");
+		p.setLastName("Khan");
+		
+		System.out.println(p);
+	}
+
+}

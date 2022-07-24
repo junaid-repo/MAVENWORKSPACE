@@ -1,0 +1,20 @@
+package objectToStringSample;
+
+import java.util.ArrayList;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		Passenger p = new Passenger();
+		p.setFirstName("Junaid");
+		p.setLastName("Khan");
+		
+		System.out.println(p.toString());
+		
+		ArrayList list = new ArrayList();
+		list.add(23);
+		list.add("adf");
+		System.out.println(list);
+	}
+
+}

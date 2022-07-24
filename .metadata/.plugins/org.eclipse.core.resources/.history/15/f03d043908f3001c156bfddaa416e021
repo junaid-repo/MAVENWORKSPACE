@@ -1,0 +1,9 @@
+package java8;
+
+
+public interface FI2 {
+	
+	public void displayConsumer(String str);
+	
+	
+}

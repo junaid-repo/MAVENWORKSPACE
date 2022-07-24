@@ -1,0 +1,21 @@
+package com.example.demo;
+
+public class ClassInClass {
+public static void main(String[] args) {
+    int i =23;
+    Integer j = new Integer(i);
+    System.out.println(j);
+    int k = j.intValue();
+    System.out.println(k);
+
+    ClassInClass cs = new ClassInClass();
+    cs.testingIt();
+
+	}
+
+	void testingIt() {
+		System.out.println( "Reached here");
+	}
+
+}
+

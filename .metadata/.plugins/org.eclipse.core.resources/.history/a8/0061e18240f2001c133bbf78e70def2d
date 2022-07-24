@@ -1,0 +1,23 @@
+package java8;
+
+import java.util.List;
+import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+public class F03BehaviourParamaterization {
+
+	public static void main(String[] args) {
+		List<Integer> numbers = List.of(45, 2, 8, 5, 10);
+
+		filterAndPrint(numbers, x -> x % 2 == 0);
+		filterAndPrint(numbers, x -> x % 2 == 1);
+
+	}
+
+	private static void filterAndPrint(List<Integer> numbers, Predicate<Integer> predicate) {
+		numbers.stream().filter(predicate).forEach(System.out::println);
+	}
+
+}

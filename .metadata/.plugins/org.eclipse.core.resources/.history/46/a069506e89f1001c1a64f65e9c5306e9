@@ -1,0 +1,17 @@
+package java8;
+
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+public class F03FunctionalInterface {
+
+	public static void main(String[] args) {
+		List<Integer> numbers = List.of(45, 2, 8, 5, 10);
+
+		Predicate<? super Integer> isEvenPredicate = i -> i % 2 == 0;
+		Function<? super Integer, ? extends Integer> squareFunction = i -> i * i;
+		numbers.stream().filter(isEvenPredicate).map(squareFunction).forEach(System.out::println);
+	}
+
+}

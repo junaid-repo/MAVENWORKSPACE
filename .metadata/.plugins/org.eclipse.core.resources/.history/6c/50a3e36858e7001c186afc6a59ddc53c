@@ -1,0 +1,9 @@
+package synchronizations;
+
+public class SayHello {
+	
+	public void sayHello(String name) {
+	//String name="";
+	System.out.println("Say Hello to ");
+	}
+}

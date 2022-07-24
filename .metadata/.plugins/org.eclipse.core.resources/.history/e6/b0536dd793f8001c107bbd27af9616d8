@@ -1,0 +1,45 @@
+package com.jdbcdemo.jdbcdemo;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+//import com.jdbcdemo.jdbcdemo.coreCall.BaseServicesCall;
+import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
+import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
+import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
+import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeRequest;
+import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
+
+
+public class Services {
+	
+
+@Autowired
+private CoreServiceCall coreServiceCall;
+
+	public EmployeeDetailsResponse getEmployeeLists(String empId) {
+
+		EmployeeDetailsResponse response = new EmployeeDetailsResponse();
+
+		//CoreServiceCall bs = new CoreServiceCall();
+		response = coreServiceCall.getEmployeeLists(empId);
+
+		return response;
+	}
+
+	public InsertEmployeeResponse insertNewEmployee(InsertEmployeeRequest request) {
+		ArrayList<InsertEmployeeList> employeeList = new ArrayList<>();
+		InsertEmployeeResponse response = new InsertEmployeeResponse();
+		//CoreServiceCall bs = new CoreServiceCall();
+		String empId = "";
+		empId = coreServiceCall.insertNewEmployee(employeeList);
+
+		response.setEmpId(empId);
+
+		return response;
+
+	}
+
+}
