@@ -148,7 +148,7 @@ public class SimpleController {
 			e.printStackTrace();
 			response.setErrorDesc(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 			response.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-			System.out.println("Catching exception");
+			System.out.println("Madarchod.. Bhadwa chod... tatto k saudagar");
 			return new ResponseEntity<BaseOutput>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 
 		}
