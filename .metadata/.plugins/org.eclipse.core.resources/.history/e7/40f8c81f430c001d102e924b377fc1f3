@@ -1,0 +1,2 @@
+spring.security.user.name=customer
+spring.security.user.password=customer

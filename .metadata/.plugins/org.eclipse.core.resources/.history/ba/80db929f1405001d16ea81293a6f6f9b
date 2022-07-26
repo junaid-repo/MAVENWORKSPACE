@@ -1,7 +1,0 @@
-package com.demo.ExcelProject;
-
-public class ImportURL {
-	
-	String fileLocation="";
-
-}

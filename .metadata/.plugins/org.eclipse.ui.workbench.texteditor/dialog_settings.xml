@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="BulkEmployees.csv"/>
+		<item key="selection" value="importBulkUsers"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="importBulkUsers"/>
+			<item value="getEmployeeDetails"/>
 			<item value="Document1.csv"/>
 			<item value="\powb.xlsx"/>
 			<item value="countries.csv"/>
@@ -21,8 +23,6 @@
 			<item value="D"/>
 			<item value="spring-boot-starter-web"/>
 			<item value="resultText"/>
-			<item value="security"/>
-			<item value="StringBuffer"/>
 		</list>
 		<list key="replacehistory">
 			<item value="BulkEmployees.csv"/>

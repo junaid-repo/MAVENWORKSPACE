@@ -1,9 +1,0 @@
-package com.jdbcdemo.jdbcdemo.dto;
-
-import java.util.ArrayList;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-public class EmployeeBulkDeleteRequest extends BaseOutput {
-	String empId = "";
-}

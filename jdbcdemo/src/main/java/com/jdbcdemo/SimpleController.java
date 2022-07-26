@@ -111,6 +111,7 @@ public class SimpleController {
 	@Produces(MediaType.APPLICATION_XML)
 	ResponseEntity<EmployeeDetailsResponse> getEmployeeDetails(@PathVariable String empId) {
 		EmployeeDetailsResponse response = new EmployeeDetailsResponse();
+		System.out.println("yahan tak pauch gaye ");
 		if (empId == null || empId == "") {
 
 			response.setErrorDesc(HttpStatus.BAD_REQUEST.getReasonPhrase());
@@ -148,8 +149,9 @@ public class SimpleController {
 			e.printStackTrace();
 			response.setErrorDesc(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 			response.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-			System.out.println("Madarchod.. Bhadwa chod... tatto k saudagar");
+			System.out.println("ar");
 			return new ResponseEntity<BaseOutput>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			
 
 		}
 		response.setErrorDesc(HttpStatus.OK.getReasonPhrase());
