@@ -1,16 +1,15 @@
 package config;
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("inside securingConfig.java");
-		http.authorizeRequests().anyRequest().authenticated().and().httpBasic().and().csrf().disable(); 
+public class SecurityConfig {
+
+	
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.authorizeHttpRequests((authz) -> authz.anyRequest().authenticated()).httpBasic().and().csrf().disable();
+		return http.build();
 	}
 
 }
