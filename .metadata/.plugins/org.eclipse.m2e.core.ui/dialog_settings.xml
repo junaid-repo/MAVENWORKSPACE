@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\My_Workbench\MAVENWORKSPACE\expensetrackerapi"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\springmvc-ws-master"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master"/>
 			<item value="C:\My_Workbench\SpringProject\java8Spring"/>
@@ -16,7 +17,6 @@
 			<item value="C:\My_Workbench\SpringProject\coronavirustracker"/>
 			<item value="C:\My_Workbench\SpringProject\JPA_Demo"/>
 			<item value="C:\My_Workbench\SpringProject\springtest"/>
-			<item value="C:\My_Workbench\SpringProject\spring-in-5-minutes"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
