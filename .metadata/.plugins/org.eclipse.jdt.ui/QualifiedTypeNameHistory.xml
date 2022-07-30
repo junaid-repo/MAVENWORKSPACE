@@ -7,7 +7,6 @@
     <fullyQualifiedTypeName name="org.springframework.security.config.annotation.web.configuration.EnableWebSecurity"/>
     <fullyQualifiedTypeName name="RestServices.Cars"/>
     <fullyQualifiedTypeName name="java8.CompaniesImp"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="org.springframework.context.annotation.ComponentScan"/>
     <fullyQualifiedTypeName name="java8.CollegeDetailsSetter"/>
@@ -46,7 +45,6 @@
     <fullyQualifiedTypeName name="java.net.URI"/>
     <fullyQualifiedTypeName name="org.springframework.web.servlet.support.ServletUriComponentsBuilder"/>
     <fullyQualifiedTypeName name="com.jdbcdemo.jdbcdemo.interfaces.IServices"/>
-    <fullyQualifiedTypeName name="com.jdbcdemo.jdbcdemo.Services"/>
     <fullyQualifiedTypeName name="com.jdbcdemo.jdbcdemo.interfaces.IFN01"/>
     <fullyQualifiedTypeName name="com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList"/>
     <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="java.awt.PageAttributes.MediaType"/>
     <fullyQualifiedTypeName name="javax.ws.rs.core.MediaType"/>
     <fullyQualifiedTypeName name="javax.xml.bind.annotation.XmlRootElement"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.jdbcdemo.jdbcdemo.Services"/>
 </qualifiedTypeNameHistroy>

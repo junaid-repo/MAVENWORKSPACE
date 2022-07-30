@@ -132,8 +132,10 @@ public class SimpleController {
 			response.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
 			return new ResponseEntity<EmployeeDetailsResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		response.setErrorDesc(HttpStatus.OK.getReasonPhrase());
-		response.setErrorCode(HttpStatus.OK.value());
+		/*
+		 * response.setErrorDesc(HttpStatus.OK.getReasonPhrase());
+		 * response.setErrorCode(HttpStatus.OK.value());
+		 */
 
 		return new ResponseEntity<EmployeeDetailsResponse>(response, HttpStatus.OK);
 

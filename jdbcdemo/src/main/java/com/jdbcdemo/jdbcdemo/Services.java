@@ -50,7 +50,29 @@ public class Services implements IServices {
 
 		response = bs.getEmployeeDetails(empId);
 
-		return response;
+		float sal = response.getSalary();
+		List<Float> salaryList = new ArrayList<>();
+		salaryList.add(sal);
+
+		System.out.println("printting to check lambda");
+
+		if (checkEvenSalary(salaryList))
+
+		// salaryList.stream().filter(i -> i % 2 == 1).forEach(System.out::println);
+		// System.out.println();
+		{
+			return response;
+		}
+
+		else {
+			response.setErrorDesc("Odd Salary");
+			return response;
+		}
+	}
+
+	private static boolean checkEvenSalary(List<Float> salary) {
+		return salary.stream().allMatch(i -> i % 2 == 0);
+
 	}
 
 	@Override
@@ -77,25 +99,42 @@ public class Services implements IServices {
 
 	public BulkEmployeesResponse createBulkEmployee(List<InsertEmployeeList> employeeList) {
 		BulkEmployeesResponse response = new BulkEmployeesResponse();
-		CreateEmployeeInBulkIF cf = (List<InsertEmployeeList> empList) -> {
 
-			CoreServiceCall bst = new CoreServiceCall();
-			InsertEmployeeResponse empResponse = new InsertEmployeeResponse();
-			List<InsertEmployeeResponse> empList5 = new ArrayList<>();
-			for (InsertEmployeeList empList3 : empList.stream().toList()) {
+		List<String> emailList = new ArrayList<>();
 
-				empResponse = bst.insertNewEmployee(empList3);
+		for (InsertEmployeeList eList : employeeList) {
+			emailList.add(eList.getEmail());
+		}
+		if (validateEmailId(emailList)) {
+			CreateEmployeeInBulkIF cf = (List<InsertEmployeeList> empList) -> {
 
-				empList5.add(empResponse);
-				response.setNewEmployeesResponse(empList5);
+				CoreServiceCall bst = new CoreServiceCall();
+				InsertEmployeeResponse empResponse = new InsertEmployeeResponse();
+				List<InsertEmployeeResponse> empList5 = new ArrayList<>();
+				for (InsertEmployeeList empList3 : empList.stream().toList()) {
 
-			}
+					empResponse = bst.insertNewEmployee(empList3);
 
-			return response;
-		};
+					empList5.add(empResponse);
+					response.setNewEmployeesResponse(empList5);
 
-		return cf.createBulkEmployees(employeeList);
+				}
 
+				return response;
+			};
+
+			return cf.createBulkEmployees(employeeList);
+
+		}
+		response.setErrorCode(1001);
+		response.setErrorDesc("email does is not from famous TLDs");
+		return response;
+	}
+
+	private boolean validateEmailId(List<String> emailList) {
+		// TODO Auto-generated method stub
+		return emailList.stream()
+				.allMatch(mail -> mail.contains("@gmail.") || mail.contains("@yahoo.") || mail.contains("@outlook."));
 	}
 
 }
