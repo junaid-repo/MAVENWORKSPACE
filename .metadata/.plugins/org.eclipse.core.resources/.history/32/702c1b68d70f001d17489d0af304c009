@@ -1,0 +1,26 @@
+package java8Basics;
+
+import java.util.List;
+
+public class F01FunctionalExercises {
+
+	public static void main(String[] args) {
+		printAllNumbers(List.of(32, 98, 45, 984, 234, 39));
+		printAllCourses(List.of("Sprint Java", "WebLogic Server", "Eclipse", "Oracle SQL", "Spring JSP"));
+
+	}
+
+	public static void printAllNumbers(List<Integer> L) {
+
+		L.stream().filter(i -> i % 2 == 1).forEach(System.out::println);
+
+	}
+
+	public static void printAllCourses(List<String> courses) {
+		//courses.stream().forEach(System.out::println);
+		
+		courses.stream().filter(i->i.contains("Spring")).forEach(System.out::println);
+
+	}
+
+}

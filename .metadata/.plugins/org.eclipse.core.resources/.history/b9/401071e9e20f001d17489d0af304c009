@@ -1,0 +1,20 @@
+package java8Basics;
+
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+public class F01Functional {
+
+	public static void main(String[] args) {
+		printCubesOfEvenNumber(List.of(43, 52, 98, 12, 30, 64));
+	}
+
+	private static void printCubesOfEvenNumber(List<Integer> numbers) {
+
+		Predicate<? super Integer> checkEven = i -> i % 2 == 0;
+		Function<? super Integer, ? extends Integer> makeCubes = j -> j * j * j;
+		numbers.stream().filter(checkEven).map(makeCubes).forEach(k -> System.out.println(k));
+	}
+
+}
