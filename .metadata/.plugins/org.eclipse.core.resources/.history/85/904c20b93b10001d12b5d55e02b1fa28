@@ -127,7 +127,7 @@ public class Services implements IServices {
 
 		}
 		response.setErrorCode(1001);
-		response.setErrorDesc("email is not from well knowns TLDs");
+		response.setErrorDesc("email does is not from well knowns TLDs");
 		return response;
 	}
 
