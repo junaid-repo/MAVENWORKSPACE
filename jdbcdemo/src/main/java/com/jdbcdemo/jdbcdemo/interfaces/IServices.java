@@ -14,6 +14,8 @@ public interface IServices {
 	public InsertEmployeeResponse insertNewEmployee(InsertEmployeeList request); 
 	public EmployeeDetailsResponse getEmployeeDetails(String empId);
 	public BaseOutput removeEmployee(String empId);
+	public Double sumOfDeptWiseSalary(String deptId);
+	public Double wiseCalcuation(String wise, String type,String id);
 
 
 }

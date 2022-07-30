@@ -1,0 +1,9 @@
+package com.jdbcdemo.jdbcdemo.dto;
+
+public class SalaryOperationsResponse {
+	
+	private String operation ="";
+	private Double amount =0D;
+	
+
+}

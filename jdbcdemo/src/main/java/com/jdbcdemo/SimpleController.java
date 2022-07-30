@@ -33,6 +33,7 @@ import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeRequest;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
+import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
 
 @RestController
@@ -316,5 +317,42 @@ public class SimpleController {
 
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
 	}
+	@RequestMapping(value="deptWiseTotalSalary/{type}/{deptId}", method=RequestMethod.GET)
+	ResponseEntity<Double> deptWiseTotalSalary(@PathVariable String type, @PathVariable String deptId){
+		
+		System.out.println(type);
+		System.out.println(deptId);
+		Double sum=0D;
+		sum=serv.sumOfDeptWiseSalary(deptId);
+		
+		return new ResponseEntity<Double>(sum, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="wiseCalculation/{wise}/{type}/{id}", method=RequestMethod.GET)
+	ResponseEntity<SalaryOperationsResponse> wiseCalculation(@PathVariable String wise, @PathVariable String type, @PathVariable String id){
+		SalaryOperationsResponse response =  new SalaryOperationsResponse();
+		System.out.println(wise);
+		System.out.println(type);
+		System.out.println(id);
+		Double amount=0D;
+		try {
+			amount=serv.wiseCalcuation(wise, type,id);
+
+			response.setErrorDesc(HttpStatus.OK.getReasonPhrase());
+			response.setErrorCode(HttpStatus.OK.value());
+			
+		} catch (Exception e) {
+			response.setErrorDesc(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+			response.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			e.printStackTrace();
+			
+		}
+		
+		response.setOperation(type);
+		response.setAmount(amount);
+		
+		return new ResponseEntity<SalaryOperationsResponse>(response, HttpStatus.OK);
+	}
+	
 
 }

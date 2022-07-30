@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,8 @@ import com.jdbcdemo.jdbcdemo.dto.EmployeeDetails;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
-import com.jdbcdemo.jdbcdemo.properties.PropertyClass;
 
 import connection.ConnectionClass;
-import utility.Utility;
 
 @Service
 @Component
@@ -184,6 +183,7 @@ public class CoreServiceCall {
 	public EmployeeDetailsResponse getEmployeeDetails(String empId) {
 		EmployeeDetailsResponse response = new EmployeeDetailsResponse();
 
+		
 		String query = "select ee.employee_id,ee.first_name || ' ' || ee.last_name,ee.email,ee.phone_number,ee.salary,jj.job_title,dd.department_name from dev.employees ee, dev.jobs jj, dev.departments dd where ee.job_id = jj.job_id and ee.department_id = dd.department_id  and ee.employee_id ="
 				+ empId;
 
@@ -224,7 +224,7 @@ public class CoreServiceCall {
 		int errorCode = 0;
 		String errorDesc = "Success";
 		String query = "delete from dev.employees ee where ee.employee_id = " + empId;
-		System.out.print(empId+"   ");
+		System.out.print(empId + "   ");
 
 		try {
 			Connection conn = null;
@@ -239,25 +239,58 @@ public class CoreServiceCall {
 		return response;
 
 	}
+
 	public BaseOutput freezeEmployee(String empId) {
 		BaseOutput response = new BaseOutput();
 		int errorCode = 0;
-		String errorDesc="Success";
-		String query="update dev.employees ee set ee.end_date = to_date(sysdate, 'DD/MM/RRRR') where ee.employee_id ="+empId;
-		
+		String errorDesc = "Success";
+		String query = "update dev.employees ee set ee.end_date = to_date(sysdate, 'DD/MM/RRRR') where ee.employee_id ="
+				+ empId;
+
 		try {
-			Connection conn=null;
-			conn=ConnectionClass.getEDBConnection();
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
 			Statement stmt = conn.createStatement();
 			stmt.execute(query);
-					
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		response.setErrorCode(errorCode);
 		response.setErrorDesc(errorDesc);
-		
+
 		return response;
 	}
-	
+
+	public static List<Double> sumOfSalary(String id, String wise) {
+
+		List<Double> totalSalary = new ArrayList<>();
+
+		String query = "select  e.salary from dev.employees e where "+ wise+"= "+"'"+id+"'";
+
+		try {
+
+			// DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			try {
+				conn = ConnectionClass.getEDBConnection();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+
+			Statement cstmt = conn.createStatement();
+			ResultSet rs = cstmt.executeQuery(query);
+			while (rs.next()) {
+				totalSalary.add(rs.getDouble(1));
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return totalSalary;
+
+	}
+
 }

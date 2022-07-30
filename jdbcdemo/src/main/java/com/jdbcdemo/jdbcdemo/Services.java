@@ -137,4 +137,36 @@ public class Services implements IServices {
 				.allMatch(mail -> mail.contains("@gmail.") || mail.contains("@yahoo.") || mail.contains("@outlook."));
 	}
 
+	public Double sumOfDeptWiseSalary(String deptId) {
+
+		CoreServiceCall bst = new CoreServiceCall();
+		List<Double> sumOfSalary = new ArrayList<>();
+
+		sumOfSalary = bst.sumOfSalary(deptId, "department_id");
+
+		return sumOfSalary.stream().reduce(0D, (x, y) -> x + y);
+
+	}
+
+	public Double wiseCalcuation(String wise, String type, String id) {
+
+		CoreServiceCall bst = new CoreServiceCall();
+		List<Double> salaryList = new ArrayList<>();
+
+		salaryList = bst.sumOfSalary(id, wise);
+
+		Double response = 0D;
+
+		if (type.equals("sum"))
+			response = salaryList.stream().reduce(0D, (x, y) -> x + y);
+		if (type.equals("average")) {
+			Long size = salaryList.stream().count();
+			
+			response=(double) Math.round(salaryList.stream().reduce(0D, (x, y) -> (x+y))/size);
+
+		}
+		return response;
+
+	}
+
 }
