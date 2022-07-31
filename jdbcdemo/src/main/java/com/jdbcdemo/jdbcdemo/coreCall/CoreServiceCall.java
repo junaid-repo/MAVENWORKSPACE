@@ -18,6 +18,7 @@ import com.jdbcdemo.jdbcdemo.dto.EmployeeDetails;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
+import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 
 import connection.ConnectionClass;
 
@@ -265,6 +266,7 @@ public class CoreServiceCall {
 	public static List<Double> sumOfSalary(String id, String wise) {
 
 		List<Double> totalSalary = new ArrayList<>();
+		//List<JobDetails> testRet= new ArrayList<JobDetails>(); testRet=empId("2500");
 
 		String query = "select  e.salary from dev.employees e where "+ wise+"= "+"'"+id+"'";
 
@@ -283,6 +285,41 @@ public class CoreServiceCall {
 			ResultSet rs = cstmt.executeQuery(query);
 			while (rs.next()) {
 				totalSalary.add(rs.getDouble(1));
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return totalSalary;
+
+	}
+	public  List<JobDetails> jobDetails(String salary) {
+
+		List<JobDetails> totalSalary = new ArrayList<>();
+		
+
+		String query = "select j.min_salary, j.max_salary, j.job_id from dev.jobs j where j.min_salary > "+"'"+salary+"'";
+
+		try {
+
+			// DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			try {
+				conn = ConnectionClass.getEDBConnection();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+
+			Statement cstmt = conn.createStatement();
+			ResultSet rs = cstmt.executeQuery(query);
+			while (rs.next()) {
+				JobDetails obj = new JobDetails();
+				obj.setMinSalary(rs.getDouble(1));
+				obj.setMaxSalary(rs.getDouble(2));
+				obj.setJobId(rs.getString(3));
+				totalSalary.add(obj);
 			}
 
 		} catch (Exception ex) {

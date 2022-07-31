@@ -13,6 +13,7 @@ import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
+import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.interfaces.CreateEmployeeInBulkIF;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN01;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
@@ -161,11 +162,21 @@ public class Services implements IServices {
 			response = salaryList.stream().reduce(0D, (x, y) -> x + y);
 		if (type.equals("average")) {
 			Long size = salaryList.stream().count();
-			
-			response=(double) Math.round(salaryList.stream().reduce(0D, (x, y) -> (x+y))/size);
+
+			response = (double) Math.round(salaryList.stream().reduce(0D, (x, y) -> (x + y)) / size);
 
 		}
 		return response;
+
+	}
+
+	public List<JobDetails> jobDetails(String minSalary) {
+
+		List<JobDetails> jobList = new ArrayList<>();
+		CoreServiceCall bst = new CoreServiceCall();
+		jobList = bst.jobDetails(minSalary);
+
+		return jobList;
 
 	}
 
