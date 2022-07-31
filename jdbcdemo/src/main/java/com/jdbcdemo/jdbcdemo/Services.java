@@ -1,7 +1,10 @@
 package com.jdbcdemo.jdbcdemo;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -175,9 +178,19 @@ public class Services implements IServices {
 		List<JobDetails> jobList = new ArrayList<>();
 		CoreServiceCall bst = new CoreServiceCall();
 		jobList = bst.jobDetails(minSalary);
+		List<JobDetails> jobList2 = new ArrayList<>();
 
 		return jobList;
 
 	}
 
+	public List<Double> empIdList(String salary) {
+		List<Double> empIdList = new ArrayList<>();
+		CoreServiceCall bst = new CoreServiceCall();
+		List<Double> response = new ArrayList<>();
+		empIdList = bst.getEmpIdAccToSalary(salary);
+		response = empIdList.stream().sorted().collect(Collectors.toList());
+
+		return response;
+	}
 }

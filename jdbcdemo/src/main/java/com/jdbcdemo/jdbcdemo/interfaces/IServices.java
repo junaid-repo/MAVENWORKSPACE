@@ -20,6 +20,7 @@ public interface IServices {
 	public Double sumOfDeptWiseSalary(String deptId);
 	public Double wiseCalcuation(String wise, String type,String id);
 	public List<JobDetails> jobDetails(String minimumSalary);
+	public List<Double> empIdList(String salary);
 
 
 }

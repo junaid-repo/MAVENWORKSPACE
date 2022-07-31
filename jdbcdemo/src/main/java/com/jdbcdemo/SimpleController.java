@@ -25,6 +25,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jdbcdemo.jdbcdemo.Services;
+import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeBulkDeleteRequest;
@@ -33,6 +34,7 @@ import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeRequest;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
+import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse2;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
@@ -356,7 +358,7 @@ public class SimpleController {
 		return new ResponseEntity<SalaryOperationsResponse>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "jobDetails/{minimumSalary}", method = RequestMethod.GET)
+	@RequestMapping(value = "jobDetailsWithMinimumSalaryOfAndSortedByMaxSalaryDesc/{minimumSalary}", method = RequestMethod.GET)
 	ResponseEntity<List<JobDetails>> jobDetails(@PathVariable String minimumSalary) {
 
 		List<JobDetails> response = new ArrayList<>();
@@ -367,6 +369,47 @@ public class SimpleController {
 			e.printStackTrace();
 		}
 		return new ResponseEntity<List<JobDetails>>(response, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "getEmpIdAccordingToMiniumSalaryOf/{minSalary}", method = RequestMethod.GET)
+	ResponseEntity<List<InsertEmployeeResponse2>> getEmpId(@PathVariable String minSalary) {
+		List<InsertEmployeeResponse2> response = new ArrayList<>();
+		CoreServiceCall csc = new CoreServiceCall();
+		
+		List<Double> empList = new ArrayList<>();
+		try {
+			empList = serv.empIdList(minSalary);
+		} catch (Exception e) {
+			e.printStackTrace();
+			InsertEmployeeResponse obj1 = new InsertEmployeeResponse();
+			obj1.setErrorDesc(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+			obj1.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			// return new ResponseEntity<InsertEmployeeResponse>(response,
+			// HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		for (Double empI : empList) {
+			String loc = ServletUriComponentsBuilder
+					.fromHttpUrl(
+							ServletUriComponentsBuilder.fromCurrentContextPath().toUriString() + "/getEmployeeDetails")
+					.path("/{id}").buildAndExpand(empI).toUriString();
+
+			System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
+			InsertEmployeeResponse2 obj = new InsertEmployeeResponse2();
+			Double salary = 0D;
+			
+			salary=csc.getEmpSalary(empI.toString());
+			obj.setErrorDesc(HttpStatus.CREATED.getReasonPhrase());
+			obj.setErrorCode(HttpStatus.CREATED.value());
+			obj.setEmpId(empI.toString());
+			obj.setSalary(salary);
+			
+			obj.setUrl(loc);
+			response.add(obj);
+
+		}
+		// return ResponseEntity.created(location).build();
+		return new ResponseEntity<List<InsertEmployeeResponse2>>(response, HttpStatus.OK);
 
 	}
 

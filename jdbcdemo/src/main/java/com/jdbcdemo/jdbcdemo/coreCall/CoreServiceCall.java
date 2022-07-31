@@ -21,6 +21,7 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 
 import connection.ConnectionClass;
+import oracle.jdbc.driver.OracleDriver;
 
 @Service
 @Component
@@ -184,7 +185,6 @@ public class CoreServiceCall {
 	public EmployeeDetailsResponse getEmployeeDetails(String empId) {
 		EmployeeDetailsResponse response = new EmployeeDetailsResponse();
 
-		
 		String query = "select ee.employee_id,ee.first_name || ' ' || ee.last_name,ee.email,ee.phone_number,ee.salary,jj.job_title,dd.department_name from dev.employees ee, dev.jobs jj, dev.departments dd where ee.job_id = jj.job_id and ee.department_id = dd.department_id  and ee.employee_id ="
 				+ empId;
 
@@ -266,9 +266,9 @@ public class CoreServiceCall {
 	public static List<Double> sumOfSalary(String id, String wise) {
 
 		List<Double> totalSalary = new ArrayList<>();
-		//List<JobDetails> testRet= new ArrayList<JobDetails>(); testRet=empId("2500");
+		// List<JobDetails> testRet= new ArrayList<JobDetails>(); testRet=empId("2500");
 
-		String query = "select  e.salary from dev.employees e where "+ wise+"= "+"'"+id+"'";
+		String query = "select  e.salary from dev.employees e where " + wise + "= " + "'" + id + "'";
 
 		try {
 
@@ -294,12 +294,13 @@ public class CoreServiceCall {
 		return totalSalary;
 
 	}
-	public  List<JobDetails> jobDetails(String salary) {
+
+	public List<JobDetails> jobDetails(String salary) {
 
 		List<JobDetails> totalSalary = new ArrayList<>();
-		
 
-		String query = "select j.min_salary, j.max_salary, j.job_id from dev.jobs j where j.min_salary > "+"'"+salary+"'";
+		String query = "select j.min_salary, j.max_salary,  j.job_title from dev.jobs j where j.min_salary > " + "'"
+				+ salary + "'" + "  order by j.max_salary desc";
 
 		try {
 
@@ -328,6 +329,59 @@ public class CoreServiceCall {
 
 		return totalSalary;
 
+	}
+
+	public List<Double> getEmpIdAccToSalary(String salary) {
+		List<Double> response = new ArrayList<>();
+		String query = "select e.employee_id from  dev.employees e  where e.salary > " + "'" + salary + "'";
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			try {
+				conn = ConnectionClass.getEDBConnection();
+
+				Statement cstmt = conn.createStatement();
+				ResultSet rs = cstmt.executeQuery(query);
+				while (rs.next()) {
+					response.add(rs.getDouble(1));
+				}
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return response;
+	}
+	
+	public Double getEmpSalary(String empId) {
+		Double salary=0D;
+		
+		String query= "select e.salary from dev.employees e where e.employee_id = " + "'" + empId + "'";
+		
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			Statement cstmt = conn.createStatement();
+			ResultSet rs = cstmt.executeQuery(query);
+			while (rs.next()) {
+				salary=rs.getDouble(1);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return salary;
 	}
 
 }

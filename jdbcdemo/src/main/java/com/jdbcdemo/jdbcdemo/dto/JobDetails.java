@@ -3,8 +3,9 @@ package com.jdbcdemo.jdbcdemo.dto;
 public class JobDetails {
 	
 	String jobId="";
-	Double minSalary=0D;
+	
 	Double maxSalary = 0D;
+	Double minSalary=0D;
 	public String getJobId() {
 		return jobId;
 	}
@@ -25,9 +26,9 @@ public class JobDetails {
 	}
 	@Override
 	public String toString() {
-		return "JobDetails [jobId=" + jobId + ", minSalary=" + minSalary + ", maxSalary=" + maxSalary + "]";
+		return "JobDetails [jobId=" + jobId + ", maxSalary=" + maxSalary + ", minSalary=" + minSalary + "]";
 	}
-	
+
 	
 
 }
