@@ -180,6 +180,16 @@ public class Services implements IServices {
 		jobList = bst.jobDetails(minSalary);
 		List<JobDetails> jobList2 = new ArrayList<>();
 
+		jobList.sort(Comparator.comparing(JobDetails::getJobId).reversed());
+		List<String> jobList4 = new ArrayList<>();
+	//----------------------------------------------------------------------------------------	
+		
+		jobList4 = jobList.stream().map(JobDetails::getJobId).filter(i->i.contains("ager")).collect(Collectors.toList());
+		System.out.println(jobList4);
+		
+	//----------------------------------------------------------------------------------------	
+	
+
 		return jobList;
 
 	}

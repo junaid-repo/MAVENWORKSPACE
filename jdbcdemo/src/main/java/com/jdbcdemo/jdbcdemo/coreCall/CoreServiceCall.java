@@ -300,7 +300,7 @@ public class CoreServiceCall {
 		List<JobDetails> totalSalary = new ArrayList<>();
 
 		String query = "select j.min_salary, j.max_salary,  j.job_title from dev.jobs j where j.min_salary > " + "'"
-				+ salary + "'" + "  order by j.max_salary desc";
+				+ salary + "'" /* + "  order by j.max_salary desc" */;
 
 		try {
 
