@@ -331,8 +331,8 @@ public class CoreServiceCall {
 
 	}
 
-	public List<Double> getEmpIdAccToSalary(String salary) {
-		List<Double> response = new ArrayList<>();
+	public List<Integer> getEmpIdAccToSalary(String salary) {
+		List<Integer> response = new ArrayList<>();
 		String query = "select e.employee_id from  dev.employees e  where e.salary > " + "'" + salary + "'";
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
@@ -343,7 +343,7 @@ public class CoreServiceCall {
 				Statement cstmt = conn.createStatement();
 				ResultSet rs = cstmt.executeQuery(query);
 				while (rs.next()) {
-					response.add(rs.getDouble(1));
+					response.add(rs.getInt(1));
 				}
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block

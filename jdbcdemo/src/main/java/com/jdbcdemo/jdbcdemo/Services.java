@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +22,11 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.interfaces.CreateEmployeeInBulkIF;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN01;
+import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
 
 @Component
-public class Services implements IServices {
+public class Services implements IServices, IFN02 {
 	@Autowired
 	CoreServiceCall bs;
 
@@ -182,25 +186,60 @@ public class Services implements IServices {
 
 		jobList.sort(Comparator.comparing(JobDetails::getJobId).reversed());
 		List<String> jobList4 = new ArrayList<>();
-	//----------------------------------------------------------------------------------------	
-		
-		jobList4 = jobList.stream().map(JobDetails::getJobId).filter(i->i.contains("ager")).collect(Collectors.toList());
+		// ----------------------------------------------------------------------------------------
+		Function<JobDetails, String> mapper = JobDetails::getJobId;
+		Function<JobDetails, String> mapper2 = new Function<JobDetails, String>() {
+
+			@Override
+			public String apply(JobDetails t) {
+				// TODO Auto-generated method stub
+				return t.getJobId();
+			}
+
+		};
+		Predicate<String> predicate = i -> i.contains("ager");
+		Predicate<String> predicate2 = new Predicate<String>() {
+
+			@Override
+			public boolean test(String t) {
+
+				return t.contains("ager") == false;
+			}
+
+		};
+
+		Collector<String, ?, List<String>> listColl = Collectors.toList();
+
+		jobList4 = jobList.stream().map(mapper2).filter(predicate2).collect(listColl);
 		System.out.println(jobList4);
-		
-	//----------------------------------------------------------------------------------------	
-	
+
+		// ----------------------------------------------------------------------------------------
 
 		return jobList;
 
 	}
 
-	public List<Double> empIdList(String salary) {
-		List<Double> empIdList = new ArrayList<>();
+	public List<Integer> empIdList(String salary) {
+		List<Integer> empIdList = new ArrayList<>();
 		CoreServiceCall bst = new CoreServiceCall();
-		List<Double> response = new ArrayList<>();
+		List<Integer> response = new ArrayList<>();
 		empIdList = bst.getEmpIdAccToSalary(salary);
 		response = empIdList.stream().sorted().collect(Collectors.toList());
 
 		return response;
 	}
+
+	@Override
+	public List<Integer> empIdListNew(String salary) {
+		List<Integer> response = new ArrayList<>();
+		CoreServiceCall bst = new CoreServiceCall();
+		IFN02 fn02 = (String sal) -> {
+			List<Integer> response2 = new ArrayList<>();
+			response2 = bst.getEmpIdAccToSalary(salary);
+			return response2;
+		};
+		response = fn02.empIdListNew(salary);
+		return response;
+	}
+
 }

@@ -37,6 +37,7 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse2;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
+import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
 
 @RestController
@@ -377,9 +378,10 @@ public class SimpleController {
 		List<InsertEmployeeResponse2> response = new ArrayList<>();
 		CoreServiceCall csc = new CoreServiceCall();
 		
-		List<Double> empList = new ArrayList<>();
+		List<Integer> empList = new ArrayList<>();
+		IFN02 fn =  new Services();
 		try {
-			empList = serv.empIdList(minSalary);
+			empList = fn.empIdListNew(minSalary);
 		} catch (Exception e) {
 			e.printStackTrace();
 			InsertEmployeeResponse obj1 = new InsertEmployeeResponse();
@@ -388,7 +390,7 @@ public class SimpleController {
 			// return new ResponseEntity<InsertEmployeeResponse>(response,
 			// HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		for (Double empI : empList) {
+		for (Integer empI : empList) {
 			String loc = ServletUriComponentsBuilder
 					.fromHttpUrl(
 							ServletUriComponentsBuilder.fromCurrentContextPath().toUriString() + "/getEmployeeDetails")
