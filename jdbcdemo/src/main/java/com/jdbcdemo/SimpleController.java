@@ -28,6 +28,7 @@ import com.jdbcdemo.jdbcdemo.Services;
 import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
+import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeBulkDeleteRequest;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsRequest;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
@@ -38,6 +39,7 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse2;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
+import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
 
 @RestController
@@ -414,5 +416,14 @@ public class SimpleController {
 		return new ResponseEntity<List<InsertEmployeeResponse2>>(response, HttpStatus.OK);
 
 	}
+	@RequestMapping(value="getDetpartmentDetails/{deptId}", method=RequestMethod.GET)
+	ResponseEntity<DepartmentDetailsResponse> getDepartmentDetails(@PathVariable String deptId){
+		DepartmentDetailsResponse response =  new DepartmentDetailsResponse();
+		IFN03 obj = new Services();
+		response=obj.getDeptDetails(deptId);
+		
+		return new ResponseEntity<DepartmentDetailsResponse> (response, HttpStatus.OK);
+	}
+	
 
 }

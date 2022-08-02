@@ -1,0 +1,13 @@
+package com.jdbcdemo.jdbcdemo.dto;
+
+public class DepartmentDetailsResponse extends BaseOutput{
+	
+	int deptId=0;
+	int managerId=0;
+	String address="";
+	String pinCode="";
+	String city="";
+	String state="";
+	String countryCode="";
+
+}

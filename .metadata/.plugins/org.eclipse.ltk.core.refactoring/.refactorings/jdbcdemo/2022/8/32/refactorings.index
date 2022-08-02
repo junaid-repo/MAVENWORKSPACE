@@ -1,3 +1,9 @@
 1659370547387	Extract local variable 'mapper'
 1659370647259	Extract local variable 'listColl'
 1659379190147	Extract local variable 'predicate2'
+1659422122136	Extract local variable 'action'
+1659422859289	Extract local variable 'accumulator'
+1659424759391	Extract method 'extracted'
+1659425568705	Extract local variable 'predicateType'
+1659425584727	Extract method 'extractedType'
+1659456711334	Copy compilation unit

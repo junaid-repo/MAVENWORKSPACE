@@ -1,11 +1,14 @@
 package com.jdbcdemo.jdbcdemo;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
+import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Component;
 import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
+import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
@@ -23,10 +27,11 @@ import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.interfaces.CreateEmployeeInBulkIF;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN01;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
+import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
 
 @Component
-public class Services implements IServices, IFN02 {
+public class Services implements IServices, IFN02, IFN03  {
 	@Autowired
 	CoreServiceCall bs;
 
@@ -152,8 +157,27 @@ public class Services implements IServices, IFN02 {
 
 		sumOfSalary = bst.sumOfSalary(deptId, "department_id");
 
-		return sumOfSalary.stream().reduce(0D, (x, y) -> x + y);
+		BinaryOperator<Double> accumulator = new BinaryOperator<Double>() {
 
+			@Override
+			public Double apply(Double t, Double u) {
+				// TODO Auto-generated method stub
+				return t + u;
+			}
+
+		};
+		Double sum;
+
+		sum = extracted2(sumOfSalary);
+		return sum;
+	}
+
+	private Double extracted(List<Double> sumOfSalary) {
+		return sumOfSalary.stream().reduce(0D, (x, y) -> x + y);
+	}
+
+	private Double extracted2(List<Double> sumOfSalary) {
+		return sumOfSalary.stream().reduce(0D, (x, y) -> x - y);
 	}
 
 	public Double wiseCalcuation(String wise, String type, String id) {
@@ -166,7 +190,7 @@ public class Services implements IServices, IFN02 {
 		Double response = 0D;
 
 		if (type.equals("sum"))
-			response = salaryList.stream().reduce(0D, (x, y) -> x + y);
+			response = extracted(salaryList);
 		if (type.equals("average")) {
 			Long size = salaryList.stream().count();
 
@@ -211,8 +235,25 @@ public class Services implements IServices, IFN02 {
 		Collector<String, ?, List<String>> listColl = Collectors.toList();
 
 		jobList4 = jobList.stream().map(mapper2).filter(predicate2).collect(listColl);
-		System.out.println(jobList4);
+		Consumer<String> action = new Consumer<String>() {
 
+			@Override
+			public void accept(String t) {
+				System.out.println(t + "--");
+
+			}
+
+		};
+		jobList.stream().map(mapper2).filter(predicate2).forEach(action);
+		System.out.println(jobList4);
+		
+		Supplier<Integer> supp =()->{
+			
+			Random rand = new Random();
+			return rand.nextInt(10000, 999999);
+		};
+		
+		System.out.println("The generated random number is---->"+supp.get());
 		// ----------------------------------------------------------------------------------------
 
 		return jobList;
@@ -232,6 +273,7 @@ public class Services implements IServices, IFN02 {
 	@Override
 	public List<Integer> empIdListNew(String salary) {
 		List<Integer> response = new ArrayList<>();
+		List<Integer> response3 = new ArrayList<>();
 		CoreServiceCall bst = new CoreServiceCall();
 		IFN02 fn02 = (String sal) -> {
 			List<Integer> response2 = new ArrayList<>();
@@ -239,6 +281,23 @@ public class Services implements IServices, IFN02 {
 			return response2;
 		};
 		response = fn02.empIdListNew(salary);
+		response3 = response;
+		
+		Predicate<Integer> predicateType = i -> i % 2 == 1;
+		extractedType(response3, predicateType);
+
+		return response;
+	}
+
+	private void extractedType(List<Integer> response3, Predicate<Integer> predicateType) {
+		response3.stream().filter(predicateType).forEach(System.out::println);
+	}
+
+	@Override
+	public DepartmentDetailsResponse getDeptDetails(String deptId) {
+		DepartmentDetailsResponse response = new DepartmentDetailsResponse();
+		CoreServiceCall bst = new CoreServiceCall();
+		response=bst.getDeptDetails(deptId);
 		return response;
 	}
 

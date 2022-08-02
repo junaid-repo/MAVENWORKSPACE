@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
+import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetails;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
@@ -382,6 +383,35 @@ public class CoreServiceCall {
 			e.printStackTrace();
 		}
 		return salary;
+	}
+	
+	
+	public DepartmentDetailsResponse getDeptDetails(String deptId) {
+		DepartmentDetailsResponse response =  new DepartmentDetailsResponse();
+		String query= "select d.department_id,d.department_name,d.manager_id,l.street_address,l.postal_code,l.city,l.state_province,l.country_id from dev.departments d, dev.locations l where l.location_id = d.location_id and d.department_id ="+"'"+deptId+"'";
+		
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn=null;
+			conn=ConnectionClass.getEDBConnection();
+			Statement cstmt = conn.createStatement();
+			ResultSet rs= cstmt.executeQuery(query);
+			while(rs.next()) {
+			response.setDeptId(rs.getInt(1));
+			response.setDepartmentName(rs.getString(2));
+			response.setManagerId(rs.getInt(3));
+			response.setAddress(rs.getString(4));
+			response.setPinCode(rs.getString(5));
+			response.setCity(rs.getString(6));
+			response.setState(rs.getString(7));
+			response.setCountryCode(rs.getString(8));}
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return response;
 	}
 
 }
