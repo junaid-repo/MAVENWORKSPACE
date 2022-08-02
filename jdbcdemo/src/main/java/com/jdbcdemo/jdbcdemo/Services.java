@@ -31,7 +31,7 @@ import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
 
 @Component
-public class Services implements IServices, IFN02, IFN03  {
+public class Services implements IServices, IFN02, IFN03 {
 	@Autowired
 	CoreServiceCall bs;
 
@@ -246,14 +246,14 @@ public class Services implements IServices, IFN02, IFN03  {
 		};
 		jobList.stream().map(mapper2).filter(predicate2).forEach(action);
 		System.out.println(jobList4);
-		
-		Supplier<Integer> supp =()->{
-			
+
+		Supplier<Integer> supp = () -> {
+
 			Random rand = new Random();
 			return rand.nextInt(10000, 999999);
 		};
-		
-		System.out.println("The generated random number is---->"+supp.get());
+
+		System.out.println("The generated random number is---->" + supp.get());
 		// ----------------------------------------------------------------------------------------
 
 		return jobList;
@@ -282,7 +282,7 @@ public class Services implements IServices, IFN02, IFN03  {
 		};
 		response = fn02.empIdListNew(salary);
 		response3 = response;
-		
+
 		Predicate<Integer> predicateType = i -> i % 2 == 1;
 		extractedType(response3, predicateType);
 
@@ -297,7 +297,51 @@ public class Services implements IServices, IFN02, IFN03  {
 	public DepartmentDetailsResponse getDeptDetails(String deptId) {
 		DepartmentDetailsResponse response = new DepartmentDetailsResponse();
 		CoreServiceCall bst = new CoreServiceCall();
-		response=bst.getDeptDetails(deptId);
+
+		IFN03 obj = (String deptId2) -> {
+
+			System.out.println("Inside lambda Calling of functional interface");
+			return bst.getDeptDetails(deptId);
+
+		};
+		response = obj.getDeptDetails(deptId);
+
+		Function<DepartmentDetailsResponse, String> getAddress = new Function<DepartmentDetailsResponse, String>() {
+
+			@Override
+			public String apply(DepartmentDetailsResponse t) {
+				Predicate<String> checkVowels = new Predicate<String>() {
+
+					@Override
+					public boolean test(String t) {
+						// TODO Auto-generated method stub
+						return t.contains("Centre");
+					}
+
+				};
+
+				String add = "";
+				if (checkVowels.test(t.getAddress())) {
+					add = "OK";
+				}
+
+				return add;
+			}
+
+		};
+
+		Consumer<String> printIt = new Consumer<String>() {
+
+			@Override
+			public void accept(String t) {
+				System.out.println(t);
+
+			}
+
+		};
+
+		response.setErrorDesc(getAddress.apply(response));
+
 		return response;
 	}
 
