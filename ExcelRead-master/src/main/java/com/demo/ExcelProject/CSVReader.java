@@ -105,5 +105,11 @@ public class CSVReader {
 		parser.close();
 		return response;
 	}
+	
+	public static String parseCSV2(String fileLocation) throws FileNotFoundException, IOException {
+		CSVParser parser = new CSVParser(new FileReader(fileLocation), CSVFormat.DEFAULT.withHeader());
+		String st2 = parser.getHeaderMap().toString();
+		return "ok";
+	}
 
 }

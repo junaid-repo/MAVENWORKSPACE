@@ -22255,3 +22255,252 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.apache.po
 2022-08-03 00:21:16,553 [Worker-59: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
 2022-08-03 00:21:16,555 [Worker-59: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2022-08-03 00:21:16,555 [Worker-59: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:33:19,427 [Worker-20: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2022-08-03 22:43:17,081 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:43:17,082 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:43:17,084 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:43:17,084 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:46:38,438 [Worker-26: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:46:38,438 [Worker-26: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:46:38,439 [Worker-26: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:46:38,439 [Worker-26: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:46:59,025 [Worker-25: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:46:59,026 [Worker-25: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:46:59,027 [Worker-25: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:46:59,027 [Worker-25: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:47:53,094 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:47:53,095 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:47:53,097 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:47:53,098 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:48:10,192 [Worker-29: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:48:10,193 [Worker-29: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:48:10,193 [Worker-29: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:48:10,194 [Worker-29: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:48:31,253 [Worker-28: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:48:31,254 [Worker-28: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:48:31,256 [Worker-28: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:48:31,257 [Worker-28: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:49:46,479 [Worker-27: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:49:46,479 [Worker-27: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:49:46,480 [Worker-27: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:49:46,480 [Worker-27: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:49:54,804 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:49:54,805 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:49:54,805 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:49:54,805 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:55:14,060 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:55:14,060 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:55:14,061 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:55:14,062 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:55:17,685 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:55:17,685 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:55:17,686 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:55:17,686 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:55:41,390 [Worker-31: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:55:41,390 [Worker-31: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:55:41,391 [Worker-31: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:55:41,391 [Worker-31: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:56:35,355 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:56:35,356 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:56:35,357 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:56:35,357 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:56:56,711 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:56:56,711 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:56:56,713 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:56:56,713 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:57:37,242 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:57:37,242 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:57:37,243 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:57:37,243 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 22:58:26,213 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:58:26,213 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 22:58:26,213 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 22:58:26,214 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:23:34,762 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:23:34,763 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:23:34,764 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:23:34,764 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:23:42,673 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:23:42,674 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:23:42,675 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:23:42,675 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:23:55,466 [Worker-25: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:23:55,466 [Worker-25: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:23:55,467 [Worker-25: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:23:55,467 [Worker-25: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:26:39,296 [Worker-25: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:26:39,296 [Worker-25: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:26:39,296 [Worker-25: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:26:39,296 [Worker-25: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:28:05,725 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:28:05,725 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:28:05,725 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:28:05,725 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:29:08,483 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:29:08,483 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:29:08,484 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:29:08,484 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:29:14,171 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:29:14,172 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:29:14,173 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:29:14,173 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:29:17,724 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:29:17,724 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:29:17,725 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:29:17,726 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:29:37,702 [Worker-39: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:29:37,702 [Worker-39: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:29:37,703 [Worker-39: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:29:37,703 [Worker-39: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:29:50,738 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:29:50,738 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:29:50,739 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:29:50,739 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:30:37,611 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:30:37,612 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:30:37,613 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:30:37,613 [Worker-34: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:30:47,672 [Worker-36: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:30:47,672 [Worker-36: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:30:47,673 [Worker-36: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:30:47,674 [Worker-36: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:31:22,534 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:31:22,535 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:31:22,535 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:31:22,536 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:33:32,526 [Worker-41: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:33:32,526 [Worker-41: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:33:32,527 [Worker-41: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:33:32,527 [Worker-41: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:33:47,996 [Worker-42: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:33:47,996 [Worker-42: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:33:47,998 [Worker-42: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:33:47,998 [Worker-42: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:34:19,029 [Worker-42: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:34:19,029 [Worker-42: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:34:19,030 [Worker-42: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:34:19,030 [Worker-42: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:34:31,308 [Worker-43: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:34:31,309 [Worker-43: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:34:31,310 [Worker-43: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:34:31,310 [Worker-43: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:47:31,196 [Worker-45: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:47:31,196 [Worker-45: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:47:31,197 [Worker-45: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:47:31,197 [Worker-45: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:51:48,637 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:51:48,637 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:51:48,638 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:51:48,638 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:52:19,726 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:52:19,727 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:52:19,727 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:52:19,727 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:52:38,504 [Worker-47: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:52:38,504 [Worker-47: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:52:38,505 [Worker-47: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:52:38,505 [Worker-47: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-03 23:52:59,268 [Worker-48: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:52:59,268 [Worker-48: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-03 23:52:59,269 [Worker-48: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-03 23:52:59,269 [Worker-48: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:02:24,504 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:02:24,504 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:02:24,505 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:02:24,506 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:02:39,262 [Worker-52: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:02:39,263 [Worker-52: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:02:39,263 [Worker-52: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:02:39,263 [Worker-52: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:03:45,112 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:03:45,112 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:03:45,112 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:03:45,112 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:04:46,842 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:04:46,842 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:04:46,843 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:04:46,843 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:06:15,429 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:06:15,429 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:06:15,430 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:06:15,430 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:06:40,088 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:06:40,088 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:06:40,089 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:06:40,089 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:07:52,522 [Worker-57: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:07:52,523 [Worker-57: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:07:52,523 [Worker-57: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:07:52,523 [Worker-57: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:08:00,980 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:08:00,980 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:08:00,981 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:08:00,981 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:08:20,647 [Worker-64: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:08:20,647 [Worker-64: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:08:20,647 [Worker-64: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:08:20,647 [Worker-64: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:08:32,184 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:08:32,184 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:08:32,185 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:08:32,185 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:09:40,412 [Worker-57: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:09:40,413 [Worker-57: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:09:40,413 [Worker-57: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:09:40,414 [Worker-57: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:09:57,041 [Worker-57: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:09:57,041 [Worker-57: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:09:57,041 [Worker-57: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:09:57,042 [Worker-57: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:10:58,382 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:10:58,382 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:10:58,384 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:10:58,385 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:11:11,380 [Worker-56: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:11:11,380 [Worker-56: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:11:11,380 [Worker-56: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:11:11,381 [Worker-56: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:11:48,427 [Worker-65: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:11:48,427 [Worker-65: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:11:48,428 [Worker-65: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:11:48,428 [Worker-65: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:12:17,059 [Worker-64: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:12:17,059 [Worker-64: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:12:17,060 [Worker-64: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:12:17,060 [Worker-64: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:16:05,848 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:16:05,849 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:16:05,850 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:16:05,850 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:16:33,817 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:16:33,817 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:16:33,818 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:16:33,818 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:16:38,739 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:16:38,740 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:16:38,740 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:16:38,740 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:17:04,315 [Worker-63: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:17:04,315 [Worker-63: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:17:04,316 [Worker-63: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:17:04,316 [Worker-63: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:17:20,031 [Worker-66: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:17:20,031 [Worker-66: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:17:20,032 [Worker-66: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:17:20,033 [Worker-66: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:19:20,710 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:19:20,710 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:19:20,711 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:19:20,711 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:20:18,789 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:20:18,790 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:20:18,791 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:20:18,791 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:20:46,386 [Worker-63: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:20:46,387 [Worker-63: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:20:46,387 [Worker-63: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:20:46,387 [Worker-63: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
+2022-08-04 00:21:42,960 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:21:42,960 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\main\resources
+2022-08-04 00:21:42,961 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-08-04 00:21:42,961 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master\src\test\resources
