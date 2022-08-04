@@ -371,7 +371,7 @@ public class Services implements IServices, IFN02, IFN03 {
 
 		System.out.println(tableN);
 
-		char tableCheckFlag = 'T';
+		char tableCheckFlag = 'F';
 
 		tableCheckFlag = CoreServiceCall.checkTableExistence(tableN);
 		if (tableCheckFlag == 'F') {
@@ -444,25 +444,23 @@ public class Services implements IServices, IFN02, IFN03 {
 				String values = "";
 				if (count > 0) {
 					for (int i = 0; i < record.size(); i++) {
-						values = values + record.get(i) + "~~";
+						values = values + record.get(i) + ",";
 					}
 					sb = new StringBuilder(values);
 					sb.deleteCharAt(values.length() - 1);
 
 				}
-
+				count++;
 				System.out.println(sb);
 				if (count > 0) {
-					try {
-						CoreServiceCall csc = new CoreServiceCall();
-						response = csc.insertDataInTable(tableName, sb.toString());
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				try {
+					CoreServiceCall csc = new CoreServiceCall();
+					response = csc.insertDataInTable(tableName, values);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				count++;
-			}
+			}}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
