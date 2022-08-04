@@ -379,9 +379,9 @@ public class SimpleController {
 	ResponseEntity<List<InsertEmployeeResponse2>> getEmpId(@PathVariable String minSalary) {
 		List<InsertEmployeeResponse2> response = new ArrayList<>();
 		CoreServiceCall csc = new CoreServiceCall();
-		
+
 		List<Integer> empList = new ArrayList<>();
-		IFN02 fn =  new Services();
+		IFN02 fn = new Services();
 		try {
 			empList = fn.empIdListNew(minSalary);
 		} catch (Exception e) {
@@ -401,13 +401,13 @@ public class SimpleController {
 			System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
 			InsertEmployeeResponse2 obj = new InsertEmployeeResponse2();
 			Double salary = 0D;
-			
-			salary=csc.getEmpSalary(empI.toString());
+
+			salary = csc.getEmpSalary(empI.toString());
 			obj.setErrorDesc(HttpStatus.CREATED.getReasonPhrase());
 			obj.setErrorCode(HttpStatus.CREATED.value());
 			obj.setEmpId(empI.toString());
 			obj.setSalary(salary);
-			
+
 			obj.setUrl(loc);
 			response.add(obj);
 
@@ -416,14 +416,27 @@ public class SimpleController {
 		return new ResponseEntity<List<InsertEmployeeResponse2>>(response, HttpStatus.OK);
 
 	}
-	@RequestMapping(value="getDetpartmentDetails/{deptId}", method=RequestMethod.GET)
-	ResponseEntity<DepartmentDetailsResponse> getDepartmentDetails(@PathVariable String deptId){
-		DepartmentDetailsResponse response =  new DepartmentDetailsResponse();
-		IFN03 obj = new Services();
-		response=obj.getDeptDetails(deptId);
-		
-		return new ResponseEntity<DepartmentDetailsResponse> (response, HttpStatus.OK);
-	}
-	
 
+	@RequestMapping(value = "getDetpartmentDetails/{deptId}", method = RequestMethod.GET)
+	ResponseEntity<DepartmentDetailsResponse> getDepartmentDetails(@PathVariable String deptId) {
+		DepartmentDetailsResponse response = new DepartmentDetailsResponse();
+		IFN03 obj = new Services();
+		response = obj.getDeptDetails(deptId);
+
+		return new ResponseEntity<DepartmentDetailsResponse>(response, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/createAndUploadTablesAndData", method = RequestMethod.POST)
+	ResponseEntity<BaseOutput> createAndUploadTablesAndData(@RequestBody ImportURL fileLocation) {
+		BaseOutput output = new BaseOutput();
+		
+		try {
+			output=serv.tableAndDataCreate(fileLocation.getFileLocation());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<BaseOutput>(output, HttpStatus.OK);
+	}
 }

@@ -1,8 +1,14 @@
 package com.jdbcdemo.jdbcdemo;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
@@ -12,6 +18,9 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -343,6 +352,123 @@ public class Services implements IServices, IFN02, IFN03 {
 		response.setErrorDesc(getAddress.apply(response));
 
 		return response;
+	}
+
+	public BaseOutput tableAndDataCreate(String location) throws FileNotFoundException, IOException {
+
+		BaseOutput response = new BaseOutput();
+		String errorDesc = "Success";
+
+		// String st = "C:\\Users/junai/Downloads\\BulkEmployees.csv";
+
+		location = location.replace('\\', '/');
+		System.out.println(location);
+
+		String ar[] = location.split("/");
+		String tableN = ar[ar.length - 1];
+
+		tableN = tableN.substring(0, tableN.length() - 4);
+
+		System.out.println(tableN);
+
+		char tableCheckFlag = 'F';
+
+		tableCheckFlag = CoreServiceCall.checkTableExistence(tableN);
+		if (tableCheckFlag == 'F') {
+			errorDesc = createTable(tableN, location);
+		}
+
+		if (errorDesc.equals("Success")) {
+			response = insertDataInTable(tableN, location);
+		}
+
+		return response;
+
+	}
+
+	public static String createTable(String tableName, String fileLocation) throws FileNotFoundException, IOException {
+
+		CSVParser parser = new CSVParser(new FileReader(fileLocation), CSVFormat.DEFAULT.withHeader());
+
+		Map<String, Integer> retMap = parser.getHeaderMap();
+
+		List<CSVRecord> retMap3 = parser.getRecords();
+
+		String response = "Success";
+
+		// System.out.println(retMap3.get(1));
+		// CSVRecord st = retMap3.get(0).get(null);
+
+		// System.out.println(retMap3);
+		// System.out.println(retMap3.get(0));
+		// testCSV();
+
+		Map<Integer, String> retMap2 = new HashMap<>();
+		// System.out.println(retMap);
+		String columnNames = "";
+		// System.out.println(retMap.size());
+
+		Map<Integer, String> myNewHashMap = new HashMap<>();
+		for (Map.Entry<String, Integer> entry : retMap.entrySet()) {
+			myNewHashMap.put(entry.getValue(), entry.getKey());
+		}
+		// System.out.println(myNewHashMap);
+		for (int i = 0; i < myNewHashMap.size(); i++) {
+			columnNames = columnNames + myNewHashMap.get(i) + "##";
+			// System.out.println(response);
+			// retMap2.put(retMap.get, response)
+		}
+		columnNames = columnNames.substring(0, columnNames.length() - 2);
+
+		try {
+			response = CoreServiceCall.createTable(tableName, columnNames);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+
+	}
+
+	public BaseOutput insertDataInTable(String tableName, String location) {
+
+		StringBuilder sb = null;
+		BaseOutput response = new BaseOutput();
+		int count = 0;
+		// Reader reader =
+		// Files.newBufferedReader(Paths.get("C:/Users/junai/Downloads/Document3.csv"));
+		try {
+			Reader in = new FileReader(location);
+			Iterable<CSVRecord> records = CSVFormat.DEFAULT.parse(in);
+			for (CSVRecord record : records) {
+				String values = "";
+				if (count > 0) {
+					for (int i = 0; i < record.size(); i++) {
+						values = values + record.get(i) + ",";
+					}
+					sb = new StringBuilder(values);
+					sb.deleteCharAt(values.length() - 1);
+
+				}
+				count++;
+				System.out.println(sb);
+
+				try {
+					CoreServiceCall csc = new CoreServiceCall();
+					response = csc.insertDataInTable(tableName, values);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

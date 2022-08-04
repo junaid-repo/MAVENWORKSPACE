@@ -1,5 +1,7 @@
 package com.jdbcdemo.jdbcdemo.interfaces;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -21,6 +23,7 @@ public interface IServices {
 	public Double wiseCalcuation(String wise, String type,String id);
 	public List<JobDetails> jobDetails(String minimumSalary);
 	public List<Integer> empIdList(String salary);
+	public BaseOutput tableAndDataCreate(String fileLocation) throws FileNotFoundException, IOException;
 
 
 }

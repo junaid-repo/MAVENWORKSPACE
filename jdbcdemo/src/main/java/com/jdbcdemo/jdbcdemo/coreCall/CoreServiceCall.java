@@ -413,5 +413,114 @@ public class CoreServiceCall {
 		
 		return response;
 	}
+	
+	public static char checkTableExistence(String tableName) {
+		
+		char flag='F';
+		String response="";
+		
+		String query="select table_name from user_tables where LOWER(table_name)= LOWER('"+tableName+"')";
+		
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn=null;
+			conn = ConnectionClass.getEDBConnection();
+			Statement cstmt=conn.createStatement();
+			ResultSet rs=cstmt.executeQuery(query);
+			while(rs.next()) {
+				response=rs.getString(1);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(response!="") {
+			flag='T';
+		}
+		
+		return flag;
+	}
+	
+	 public static String createTable(String tableName, String rows) {
+		Long errorCode = 0L;
+		String errorDesc="";
+		
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn= null;
+			conn=ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+			if (conn != null) {
 
+				try {
+					st = conn.prepareCall("{call dev.createTable(?,?,?,?)}");
+					// st = conn.prepareCall("{call dev.getEmployeesByDeptId(?,?,?,?)}");
+					st.setString(1, tableName);
+					st.setString(2, rows);
+					st.registerOutParameter(3, java.sql.Types.DOUBLE);
+					st.registerOutParameter(4, java.sql.Types.VARCHAR);
+					st.execute();
+					
+					errorCode =  st.getLong(3);
+					errorDesc = st.getString(4);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return errorDesc;
+	}
+	 
+	 public BaseOutput insertDataInTable(String tableName, String values) {
+		 BaseOutput output  =  new BaseOutput();
+		 int errorCode = 0;
+			String errorDesc="";
+			
+			try {
+				DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+				Connection conn= null;
+				conn=ConnectionClass.getEDBConnection();
+				CallableStatement st = null;
+				if (conn != null) {
+
+					try {
+						st = conn.prepareCall("{call dev.insertDataIntoTable(?,?,?,?)}");
+						// st = conn.prepareCall("{call dev.getEmployeesByDeptId(?,?,?,?)}");
+						st.setString(1, tableName);
+						st.setString(2, values);
+						st.registerOutParameter(3, java.sql.Types.DOUBLE);
+						st.registerOutParameter(4, java.sql.Types.VARCHAR);
+						st.execute();
+						
+						errorCode =  st.getInt(3);
+						errorDesc = st.getString(4);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			output.setErrorCode(errorCode);
+			output.setErrorDesc(errorDesc);
+		 return output;
+		 
+	 }
+	
 }

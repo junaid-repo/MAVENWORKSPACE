@@ -20,8 +20,23 @@ import org.apache.commons.csv.CSVRecord;
  */
 public class App {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		CSVParser parser = new CSVParser(new FileReader("C:/Users/junai/Downloads/Document3.csv"),
+		CSVParser parser = new CSVParser(new FileReader("C:/Users/junai/Downloads/BulkEmployees.csv"),
 				CSVFormat.DEFAULT.withHeader());
+		
+		String st = "C:\\Users/junai/Downloads\\BulkEmployees.csv";
+		
+		st=st.replace('\\', '/');
+		//System.out.println(st);
+		
+		String ar[]= st.split("/");
+		String tableN=ar[ar.length-1];
+		
+		
+		tableN=tableN.substring(0, tableN.length()-4);
+		
+		//System.out.println(tableN);
+		
+		
 		Map<String, Integer> retMap = parser.getHeaderMap();
 
 		List<CSVRecord> retMap3 = parser.getRecords();
@@ -30,7 +45,7 @@ public class App {
 		// CSVRecord st = retMap3.get(0).get(null);
 
 		// System.out.println(retMap3);
-		System.out.println(retMap3.get(0));
+		//System.out.println(retMap3.get(0));
 		testCSV();
 
 		Map<Integer, String> retMap2 = new HashMap<>();
@@ -38,24 +53,22 @@ public class App {
 		String response = "";
 		// System.out.println(retMap.size());
 
-		for (int i = 0; i < retMap.size(); i++) {
-			// response=response+retMap.get(i);
-			// retMap2.put(retMap.get, response)
-		}
+		
 
 		Map<Integer, String> myNewHashMap = new HashMap<>();
 		for (Map.Entry<String, Integer> entry : retMap.entrySet()) {
 			myNewHashMap.put(entry.getValue(), entry.getKey());
 		}
-
+		// System.out.println(myNewHashMap);
 		for (int i = 0; i < myNewHashMap.size(); i++) {
 			response = response + myNewHashMap.get(i) + "##";
+			//System.out.println(response);
 			// retMap2.put(retMap.get, response)
 		}
 		response = response.substring(0, response.length() - 2);
 
 		// System.out.println(myNewHashMap);
-		// System.out.println(response);
+	 //System.out.println(response);
 	}
 	
 	
@@ -77,8 +90,7 @@ public class App {
 			 sb = new StringBuilder(values);
 			sb.deleteCharAt(values.length()-1);
 			//sb=sb.append("~~");
-		    String columnOne = record.get(0);
-		    String columnTwo = record.get(1);
+		    
 		    
 			} 
 		    count++;
