@@ -419,6 +419,7 @@ public class Services implements IServices, IFN02, IFN03 {
 			// retMap2.put(retMap.get, response)
 		}
 		columnNames = columnNames.substring(0, columnNames.length() - 2);
+		columnNames = columnNames.replace(' ', '_');
 
 		try {
 			response = CoreServiceCall.createTable(tableName, columnNames);
@@ -435,6 +436,7 @@ public class Services implements IServices, IFN02, IFN03 {
 		StringBuilder sb = null;
 		BaseOutput response = new BaseOutput();
 		int count = 0;
+		int i;
 		// Reader reader =
 		// Files.newBufferedReader(Paths.get("C:/Users/junai/Downloads/Document3.csv"));
 		try {
@@ -443,11 +445,14 @@ public class Services implements IServices, IFN02, IFN03 {
 			for (CSVRecord record : records) {
 				String values = "";
 				if (count > 0) {
-					for (int i = 0; i < record.size(); i++) {
+					for ( i = 0; i <record.size()-1; i++) {
 						values = values + record.get(i) + "~~";
 					}
+					if(i==record.size()-1) {
+						values= values + record.get(i);
+					}
 					sb = new StringBuilder(values);
-					sb.deleteCharAt(values.length() - 1);
+					//sb.deleteCharAt(values.length() - 3);
 
 				}
 
@@ -470,7 +475,7 @@ public class Services implements IServices, IFN02, IFN03 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return response;
 	}
 
 }
