@@ -20,10 +20,10 @@ import org.apache.commons.csv.CSVRecord;
  */
 public class App {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		CSVParser parser = new CSVParser(new FileReader("C:/Users/junai/Downloads/BulkEmployees.csv"),
+		CSVParser parser = new CSVParser(new FileReader("C:/Users/junai/Downloads/Movie_Database_3.csv"),
 				CSVFormat.DEFAULT.withHeader());
 		
-		String st = "C:\\Users/junai/Downloads\\BulkEmployees.csv";
+		String st = "C:\\Users/junai/Downloads\\Movie_Database_3.csv";
 		
 		st=st.replace('\\', '/');
 		//System.out.println(st);
@@ -46,8 +46,8 @@ public class App {
 
 		// System.out.println(retMap3);
 		//System.out.println(retMap3.get(0));
-		testCSV();
-
+		//testCSV();
+System.out.println("\'");
 		Map<Integer, String> retMap2 = new HashMap<>();
 		// System.out.println(retMap);
 		String response = "";

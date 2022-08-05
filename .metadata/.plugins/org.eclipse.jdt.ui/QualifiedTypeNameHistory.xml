@@ -24,7 +24,6 @@
     <fullyQualifiedTypeName name="connection.ConnectionClass"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="utility.Utility"/>
-    <fullyQualifiedTypeName name="com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Qualifier"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="java.nio.file.Files"/>
+    <fullyQualifiedTypeName name="com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall"/>
 </qualifiedTypeNameHistroy>

@@ -448,6 +448,13 @@ public class Services implements IServices, IFN02, IFN03 {
 					for ( i = 0; i <record.size()-1; i++) {
 						values = values + record.get(i) + "~~";
 					}
+					values=values.replace('\'', ' ');
+					values=values.replace('(', ' ');
+					values=values.replace(')', ' ');
+					values=values.replace(',', ' ');
+					values=values.replace('/', ' ');
+					//values=values.replace('-', ' ');
+					//values=values.replace('#', ' ');
 					if(i==record.size()-1) {
 						values= values + record.get(i);
 					}
