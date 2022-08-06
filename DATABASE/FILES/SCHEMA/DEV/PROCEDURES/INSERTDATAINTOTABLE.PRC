@@ -40,7 +40,7 @@ begin
       cName  := replace(cName, '~~', ''',''');
       cName  := '''' || cName;
       tableC := 'insert into ' || tableName || ' values ' || '( ' ||
-                ' tablesSeq.Nextval, sysdate,';
+                ' tablesSeq.Nextval,    sysdate,';
 
       exit when(GETCOLUMNS%notfound);
       tableC := tableC || ' ' || cName;
