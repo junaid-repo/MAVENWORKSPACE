@@ -23,7 +23,7 @@ public class App {
 		CSVParser parser = new CSVParser(new FileReader("C:/Users/junai/Downloads/Movie_Database_3.csv"),
 				CSVFormat.DEFAULT.withHeader());
 		
-		String st = "C:\\Users/junai/Downloads\\BulkEmployees_2.csv";
+		String st = "C:\\Users/junai/Downloads\\Movie_Database_3.csv";
 		
 		st=st.replace('\\', '/');
 		//System.out.println(st);

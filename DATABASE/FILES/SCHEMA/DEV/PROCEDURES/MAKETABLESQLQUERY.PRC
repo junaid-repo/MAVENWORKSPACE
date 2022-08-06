@@ -14,6 +14,7 @@
   crResult       refcursor;
   vTableColumns2 varchar2(200);
   vColumnType2   varchar2(200);
+  vDateFormat     varchar2(200);
 
   cursor getTables is
   
@@ -29,6 +30,7 @@
      WHERE table_name = vTableName;
 
 BEGIN
+  vDateFormat:='to_date(';
 
   open getTables;
   loop
@@ -57,18 +59,27 @@ BEGIN
       fetch getTableColumns
         into vTableColumns2, vColumnType2;
     
-      --IF vColumnType2 <> 'DATE' THEN
+ --    IF vColumnType2 <> 'DATE' THEN
     
       vTableColumns2 := 'E.' || vTableColumns2;
       exit when(getTableColumns%notfound);
-      VQUERY2 := VQUERY2 ||   vTableColumns2 || '||'','' ||';
-      --    END IF;
+     -- VQUERY2 := VQUERY2 ||   vTableColumns2 || '||'','' ||';
+     
+     VQUERY2 := VQUERY2 ||   vTableColumns2 || '||'' '''',''''   '' ||';
+      
+      
+      
+      
+      
+     --   END IF;
     
-      /*IF vColumnType2 = 'DATE' THEN
-      vTableColumns2:='E.'||vTableColumns2
-        VQUERY2 := 'SELECT '||vTableColumns2;
-      END IF;*/
-    
+    /*  IF vColumnType2 = 'DATE' THEN
+      vTableColumns2:='E.'||vTableColumns2;
+        VQUERY2 := VQUERY2 ||   vTableColumns2 || '||'' ,   '' ||';
+        
+      
+      END IF;
+    */
     end loop;
     close getTableColumns;
   
@@ -80,7 +91,9 @@ BEGIN
        FETCH CrResult into  vQuery3;
        
        
-       EXECUTE IMmediate vQuery3;
+    vQuery3:=''''||   vQuery3;
+       vQuery3 := SUBSTR(vQuery3, 1, LENGTH(vQuery3) - 1);
+      -- EXECUTE IMmediate vQuery3;
        
        
        

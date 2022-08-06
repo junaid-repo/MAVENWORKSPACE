@@ -13,14 +13,14 @@
 
   CURSOR GETCOLUMNS IS
     SELECT
-    
+
      REGEXP_SUBSTR(tableColumns, '[^##]+', 1, level)
       FROM dual
     CONNECT BY REGEXP_SUBSTR(tableColumns, '[^##]+', 1, level) IS NOT NULL;
 
   CURSOR GETVALUES IS
     SELECT
-    
+
      REGEXP_SUBSTR(tableColumns, '[^,]+', 1, level)
       FROM dual
     CONNECT BY REGEXP_SUBSTR(tableColumns, '[^,]+', 1, level) IS NOT NULL;
@@ -41,23 +41,23 @@ begin
       cName  := '''' || cName;
       tableC := 'insert into ' || tableName || ' values ' || '( ' ||
                 ' tablesSeq.Nextval, sysdate,';
-    
+
       exit when(GETCOLUMNS%notfound);
       tableC := tableC || ' ' || cName;
       --  tableC := SUBSTR(tableC, 1, LENGTH(tableC) - 1);
-    
+
       tableC := tableC || ''')';
       vQuery := tableC;
       execute immediate vQuery;
-    
+
     end loop;
     close GETCOLUMNS;
-  
+
   exception
     when others then
       RETCODE := SQLCODE;
       retErr  := SQLERRM;
-    
+
   end;
 
 exception
