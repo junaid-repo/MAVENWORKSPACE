@@ -29,7 +29,7 @@ begin
   vCount := 0;
 
   RETCODE := 0;
-  retErr  := 'SuccesSsss';
+  retErr  := 'SuccsspbDDs';
 
   --vCount:=GETCOLUMNS%rowcount;
   BEGIN

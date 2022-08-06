@@ -1,0 +1,9 @@
+package com.jdbcdemo.jdbcdemo.interfaces;
+
+import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
+
+public interface ExportTableDataAsScript {
+	
+	BaseOutput freezeEmployee(String empId);
+
+}

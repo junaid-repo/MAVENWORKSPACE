@@ -439,4 +439,13 @@ public class SimpleController {
 
 		return new ResponseEntity<BaseOutput>(output, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/exportTableDataAs_SQL_Script/{tableName}", method=RequestMethod.POST)
+	ResponseEntity<BaseOutput> exportTableDataAsDBScript(@PathVariable String tableName){
+		BaseOutput response= new BaseOutput();
+		
+		return new ResponseEntity<BaseOutput>(response, HttpStatus.CREATED);
+	}
+	
+	
 }

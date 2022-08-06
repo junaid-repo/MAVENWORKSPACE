@@ -1,0 +1,35 @@
+package com.demo.ExcelProject;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
+/**
+ * Hello world!
+ *
+ */
+public class App2 {
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+
+		String a = "NETWORKHOSPITALLIST_2####NETWORKHOSPITALLIST_2_ID,CREATED_DATE,NAME,ADDRESS,STATE,CITY,PINCODE,PHONE,EMAIL ####  115684,05-AUG-22, Ainu  Asian Institute Of Nephrology & Urology ,47-11-12 1St Lane Dwarakanagar,Andhra Pradesh,Visakhapatnam,530016,6763333,BILLING.VIZAG@AINUINDIA.COM";
+
+		String ar[] = a.split("####");
+
+		System.out.println(ar[0]);
+		System.out.println(ar[1]);
+		System.out.println(ar[2]);
+		System.out.println(ar[3]);
+
+	}
+
+}

@@ -34,13 +34,14 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.interfaces.CreateEmployeeInBulkIF;
+import com.jdbcdemo.jdbcdemo.interfaces.IExportTableDataAsScript;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN01;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
 
 @Component
-public class Services implements IServices, IFN02, IFN03 {
+public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScript {
 	@Autowired
 	CoreServiceCall bs;
 
@@ -445,21 +446,21 @@ public class Services implements IServices, IFN02, IFN03 {
 			for (CSVRecord record : records) {
 				String values = "";
 				if (count > 0) {
-					for ( i = 0; i <record.size()-1; i++) {
+					for (i = 0; i < record.size() - 1; i++) {
 						values = values + record.get(i) + "~~";
 					}
-					values=values.replace('\'', ' ');
-					values=values.replace('(', ' ');
-					values=values.replace(')', ' ');
-					values=values.replace(',', ' ');
-					values=values.replace('/', ' ');
-					//values=values.replace('-', ' ');
-					//values=values.replace('#', ' ');
-					if(i==record.size()-1) {
-						values= values + record.get(i);
+					values = values.replace('\'', ' ');
+					values = values.replace('(', ' ');
+					values = values.replace(')', ' ');
+					values = values.replace(',', ' ');
+					values = values.replace('/', ' ');
+					// values=values.replace('-', ' ');
+					// values=values.replace('#', ' ');
+					if (i == record.size() - 1) {
+						values = values + record.get(i);
 					}
 					sb = new StringBuilder(values);
-					//sb.deleteCharAt(values.length() - 3);
+					// sb.deleteCharAt(values.length() - 3);
 
 				}
 
@@ -483,6 +484,19 @@ public class Services implements IServices, IFN02, IFN03 {
 			e.printStackTrace();
 		}
 		return response;
+	}
+
+	@Override
+	public BaseOutput exportTableDataAsScript(String tableName) {
+		// TODO Auto-generated method stub
+		BaseOutput bo = new BaseOutput();
+
+		IExportTableDataAsScript ob = (String tbName) -> {
+
+			return bo;
+		};
+		return ob.exportTableDataAsScript(tableName);
+
 	}
 
 }
