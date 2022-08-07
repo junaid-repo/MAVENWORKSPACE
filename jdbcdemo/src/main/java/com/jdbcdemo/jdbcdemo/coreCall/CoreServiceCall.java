@@ -567,5 +567,36 @@ public class CoreServiceCall {
 		return clobSting;
 
 	}
+	
+ public	List<String>  getNumberOfDBTables(String schema){
+		
+		List<String> DBTables= new ArrayList<>();
+		String tableName="";
+		String query = "SELECT T.object_name     FROM all_objects T    WHERE object_type IN ('TABLE')   AND T.owner = '" + schema + "'";
+		System.out.println(query);
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			Statement cstmt = conn.createStatement();
+			ResultSet rs = cstmt.executeQuery(query);
+			while (rs.next()) {
+				tableName = rs.getString(1);
+				DBTables.add(tableName);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		
+		return DBTables;
+		
+	}
 
 }

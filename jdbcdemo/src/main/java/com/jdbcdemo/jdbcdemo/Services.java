@@ -492,31 +492,59 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 	public BaseOutput exportTableDataAsScript(String tableName) {
 		// TODO Auto-generated method stub
 
-		IExportTableDataAsScript ob = (String tbName) -> {
+		IExportTableDataAsScript export = (String tbName) -> {
+
+			List<String> tableList = new ArrayList<>();
+
 			BaseOutput bo = new BaseOutput();
-			String clobString = "";
-			ArrayList<String> masterQueryList = new ArrayList<>();
-			CoreServiceCall csc = new CoreServiceCall();
 
-			clobString = csc.getClobTableData(tableName);
-			String superMasterQuery = "";
-
-			masterQueryList = convertTableStringToQuery(clobString);
-
-			for (String masterQuery : masterQueryList) {
-
-				superMasterQuery = superMasterQuery + "\r\n" + masterQuery;
-
+			if (tableName.equals("all")) {
+				try {
+					CoreServiceCall csc = new CoreServiceCall();
+					tableList = csc.getNumberOfDBTables("DEV");
+					for (String tempTableName : tableList) {
+						if(!tempTableName.equals("TABLERAWSTRUCTURE"))
+							bo = fetchAndWriteTableDataQuery(tempTableName);
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				bo = fetchAndWriteTableDataQuery(tbName);
 			}
-			System.out.println(tableName);
-			System.out.println(superMasterQuery);
-			Utility util = new Utility();
 
-			bo = util.createAndWriteInAndWriteInAFile(tableName, superMasterQuery);
 			return bo;
-		};
-		return ob.exportTableDataAsScript(tableName);
 
+		};
+		return export.exportTableDataAsScript(tableName);
+
+	}
+
+	BaseOutput fetchAndWriteTableDataQuery(String tableName) {
+		BaseOutput response = new BaseOutput();
+
+		String clobString = "";
+		ArrayList<String> masterQueryList = new ArrayList<>();
+		CoreServiceCall csc = new CoreServiceCall();
+
+		clobString = csc.getClobTableData(tableName);
+		String superMasterQuery = "";
+
+		masterQueryList = convertTableStringToQuery(clobString);
+
+		for (String masterQuery : masterQueryList) {
+
+			superMasterQuery = superMasterQuery + "\r\n" + masterQuery;
+
+		}
+		System.out.println(tableName);
+		System.out.println(superMasterQuery);
+		Utility util = new Utility();
+
+		response = util.createAndWriteInAndWriteInAFile(tableName, superMasterQuery);
+
+		return response;
 	}
 
 	ArrayList<String> convertTableStringToQuery(String rawSQLData) {
