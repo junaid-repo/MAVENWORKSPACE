@@ -504,7 +504,7 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 			if (tableName.toUpperCase().equals("ALL")) {
 				try {
 					CoreServiceCall csc = new CoreServiceCall();
-					tableList = csc.getNumberOfDBTables("DEV");
+					tableList = csc.getNamesOfDBTables("DEV");
 					for (String tempTableName : tableList) {
 						if (!tempTableName.equals("TABLERAWSTRUCTURE"))
 							bo = util.fetchAndWriteTableDataQuery(tempTableName);
@@ -516,7 +516,7 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 			} else {
 
 				CoreServiceCall csc = new CoreServiceCall();
-				tableList = csc.getNumberOfDBTables("DEV");
+				tableList = csc.getNamesOfDBTables("DEV");
 				for (String tempTableName : tableList) {
 					if (tempTableName.toUpperCase().equals(tableName.toUpperCase())) {
 						tableExistenceFlag = "T";

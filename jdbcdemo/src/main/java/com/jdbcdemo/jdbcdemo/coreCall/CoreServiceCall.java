@@ -568,7 +568,7 @@ public class CoreServiceCall {
 
 	}
 	
- public	List<String>  getNumberOfDBTables(String schema){
+ public	List<String>  getNamesOfDBTables(String schema){
 		
 		List<String> DBTables= new ArrayList<>();
 		String tableName="";

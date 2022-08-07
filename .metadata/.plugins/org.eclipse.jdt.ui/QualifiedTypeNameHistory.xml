@@ -58,6 +58,6 @@
     <fullyQualifiedTypeName name="oracle.jdbc.driver.OracleDriver"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
-    <fullyQualifiedTypeName name="java.nio.file.Files"/>
     <fullyQualifiedTypeName name="com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall"/>
+    <fullyQualifiedTypeName name="java.nio.file.Files"/>
 </qualifiedTypeNameHistroy>

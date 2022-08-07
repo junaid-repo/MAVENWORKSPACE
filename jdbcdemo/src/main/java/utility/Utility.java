@@ -61,10 +61,20 @@ public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
 		ArrayList<String> masterQueryList = new ArrayList<>();
 		CoreServiceCall csc = new CoreServiceCall();
 
-		clobString = csc.getClobTableData(tableName);
+		try {
+			clobString = csc.getClobTableData(tableName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String superMasterQuery = "";
 		//Utility util = new Utility();
-		masterQueryList = convertTableStringToQuery(clobString);
+		try {
+			masterQueryList = convertTableStringToQuery(clobString);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		for (String masterQuery : masterQueryList) {
 
@@ -74,7 +84,12 @@ public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
 		System.out.println(tableName);
 		System.out.println(superMasterQuery);
 
-		response = createAndWriteInAndWriteInAFile(tableName, superMasterQuery);
+		try {
+			response = createAndWriteInAndWriteInAFile(tableName, superMasterQuery);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return response;
 	}
@@ -85,8 +100,13 @@ public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
 	 BaseOutput output = new BaseOutput();
 	 String dir = "C:\\My_Workbench\\MAVENWORKSPACE\\DATABASE\\FILES\\SCHEMA\\DEV\\TABLE_DATA_SCRIPTS\\";
 	 
-	 createAFile(tableName, dir);
-	 witeInAFile(tableName, tableQuery, dir);
+	 try {
+		createAFile(tableName, dir);
+		 witeInAFile(tableName, tableQuery, dir);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 		
 		
 	 output.setErrorCode(0);
