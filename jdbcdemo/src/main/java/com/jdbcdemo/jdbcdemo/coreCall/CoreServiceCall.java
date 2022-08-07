@@ -23,6 +23,7 @@ import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 
 import connection.ConnectionClass;
 import oracle.jdbc.driver.OracleDriver;
+import utility.Utility;
 
 @Service
 @Component
@@ -360,12 +361,12 @@ public class CoreServiceCall {
 
 		return response;
 	}
-	
+
 	public Double getEmpSalary(String empId) {
-		Double salary=0D;
-		
-		String query= "select e.salary from dev.employees e where e.employee_id = " + "'" + empId + "'";
-		
+		Double salary = 0D;
+
+		String query = "select e.salary from dev.employees e where e.employee_id = " + "'" + empId + "'";
+
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			Connection conn = null;
@@ -373,7 +374,7 @@ public class CoreServiceCall {
 			Statement cstmt = conn.createStatement();
 			ResultSet rs = cstmt.executeQuery(query);
 			while (rs.next()) {
-				salary=rs.getDouble(1);
+				salary = rs.getDouble(1);
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -384,51 +385,51 @@ public class CoreServiceCall {
 		}
 		return salary;
 	}
-	
-	
+
 	public DepartmentDetailsResponse getDeptDetails(String deptId) {
-		DepartmentDetailsResponse response =  new DepartmentDetailsResponse();
-		String query= "select d.department_id,d.department_name,d.manager_id,l.street_address,l.postal_code,l.city,l.state_province,l.country_id from dev.departments d, dev.locations l where l.location_id = d.location_id and d.department_id ="+"'"+deptId+"'";
-		
+		DepartmentDetailsResponse response = new DepartmentDetailsResponse();
+		String query = "select d.department_id,d.department_name,d.manager_id,l.street_address,l.postal_code,l.city,l.state_province,l.country_id from dev.departments d, dev.locations l where l.location_id = d.location_id and d.department_id ="
+				+ "'" + deptId + "'";
+
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			Connection conn=null;
-			conn=ConnectionClass.getEDBConnection();
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
 			Statement cstmt = conn.createStatement();
-			ResultSet rs= cstmt.executeQuery(query);
-			while(rs.next()) {
-			response.setDeptId(rs.getInt(1));
-			response.setDepartmentName(rs.getString(2));
-			response.setManagerId(rs.getInt(3));
-			response.setAddress(rs.getString(4));
-			response.setPinCode(rs.getString(5));
-			response.setCity(rs.getString(6));
-			response.setState(rs.getString(7));
-			response.setCountryCode(rs.getString(8));}
-			
-		}
-		catch(Exception e) {
+			ResultSet rs = cstmt.executeQuery(query);
+			while (rs.next()) {
+				response.setDeptId(rs.getInt(1));
+				response.setDepartmentName(rs.getString(2));
+				response.setManagerId(rs.getInt(3));
+				response.setAddress(rs.getString(4));
+				response.setPinCode(rs.getString(5));
+				response.setCity(rs.getString(6));
+				response.setState(rs.getString(7));
+				response.setCountryCode(rs.getString(8));
+			}
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return response;
 	}
-	
+
 	public static char checkTableExistence(String tableName) {
-		
-		char flag='F';
-		String response="";
-		
-		String query="select table_name from user_tables where LOWER(table_name)= LOWER('"+tableName+"')";
-		
+
+		char flag = 'F';
+		String response = "";
+
+		String query = "select table_name from user_tables where LOWER(table_name)= LOWER('" + tableName + "')";
+
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			Connection conn=null;
+			Connection conn = null;
 			conn = ConnectionClass.getEDBConnection();
-			Statement cstmt=conn.createStatement();
-			ResultSet rs=cstmt.executeQuery(query);
-			while(rs.next()) {
-				response=rs.getString(1);
+			Statement cstmt = conn.createStatement();
+			ResultSet rs = cstmt.executeQuery(query);
+			while (rs.next()) {
+				response = rs.getString(1);
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -437,22 +438,22 @@ public class CoreServiceCall {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		if(response!="") {
-			flag='T';
+
+		if (response != "") {
+			flag = 'T';
 		}
-		
+
 		return flag;
 	}
-	
-	 public static String createTable(String tableName, String rows) {
+
+	public static String createTable(String tableName, String rows) {
 		Long errorCode = 0L;
-		String errorDesc="";
-		
+		String errorDesc = "";
+
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			Connection conn= null;
-			conn=ConnectionClass.getEDBConnection();
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
 			CallableStatement st = null;
 			if (conn != null) {
 
@@ -464,8 +465,8 @@ public class CoreServiceCall {
 					st.registerOutParameter(3, java.sql.Types.DOUBLE);
 					st.registerOutParameter(4, java.sql.Types.VARCHAR);
 					st.execute();
-					
-					errorCode =  st.getLong(3);
+
+					errorCode = st.getLong(3);
 					errorDesc = st.getString(4);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -478,49 +479,93 @@ public class CoreServiceCall {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return errorDesc;
 	}
-	 
-	 public BaseOutput insertDataInTable(String tableName, String values) {
-		 BaseOutput output  =  new BaseOutput();
-		 int errorCode = 0;
-			String errorDesc="";
-			
-			try {
-				DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-				Connection conn= null;
-				conn=ConnectionClass.getEDBConnection();
-				CallableStatement st = null;
-				if (conn != null) {
 
-					try {
-						st = conn.prepareCall("{call dev.insertDataIntoTable(?,?,?,?)}");
-						// st = conn.prepareCall("{call dev.getEmployeesByDeptId(?,?,?,?)}");
-						st.setString(1, tableName);
-						st.setString(2, values);
-						st.registerOutParameter(3, java.sql.Types.DOUBLE);
-						st.registerOutParameter(4, java.sql.Types.VARCHAR);
-						st.execute();
-						
-						errorCode =  st.getInt(3);
-						errorDesc = st.getString(4);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+	public BaseOutput insertDataInTable(String tableName, String values) {
+		BaseOutput output = new BaseOutput();
+		int errorCode = 0;
+		String errorDesc = "";
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+			if (conn != null) {
+
+				try {
+					st = conn.prepareCall("{call dev.insertDataIntoTable(?,?,?,?)}");
+					// st = conn.prepareCall("{call dev.getEmployeesByDeptId(?,?,?,?)}");
+					st.setString(1, tableName);
+					st.setString(2, values);
+					st.registerOutParameter(3, java.sql.Types.DOUBLE);
+					st.registerOutParameter(4, java.sql.Types.VARCHAR);
+					st.execute();
+
+					errorCode = st.getInt(3);
+					errorDesc = st.getString(4);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		output.setErrorCode(errorCode);
+		output.setErrorDesc(errorDesc);
+		return output;
+
+	}
+
+	public String getClobTableData(String tableName) {
+
+		BaseOutput output = new BaseOutput();
+
+		int errorCode = 0;
+		String errorDesc = "";
+		String clobSting = "";
+		java.sql.Clob clobOut=null;
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call dev.extractClobDataForTables(?,?,?,?)}");
+				st.setString(1, tableName);
+				st.registerOutParameter(2, java.sql.Types.CLOB);
+				st.registerOutParameter(3, java.sql.Types.DOUBLE);
+				st.registerOutParameter(4, java.sql.Types.VARCHAR);
+				st.execute();
+				clobOut=st.getClob(2);
+				
+				clobSting=Utility.convertCLOBToString(clobOut);
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			output.setErrorCode(errorCode);
-			output.setErrorDesc(errorDesc);
-		 return output;
-		 
-	 }
-	
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(clobSting);
+
+		return clobSting;
+
+	}
+
 }

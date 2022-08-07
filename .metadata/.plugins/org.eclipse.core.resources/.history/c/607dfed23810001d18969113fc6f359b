@@ -1,5 +1,0 @@
-package com.jdbcdemo.jdbcdemo.dto;
-
-public class SalaryOperationsResponse {
-
-}

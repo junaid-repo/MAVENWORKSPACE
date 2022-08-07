@@ -38,6 +38,7 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse2;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
+import com.jdbcdemo.jdbcdemo.interfaces.IExportTableDataAsScript;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
@@ -443,6 +444,15 @@ public class SimpleController {
 	@RequestMapping(value = "/exportTableDataAs_SQL_Script/{tableName}", method=RequestMethod.POST)
 	ResponseEntity<BaseOutput> exportTableDataAsDBScript(@PathVariable String tableName){
 		BaseOutput response= new BaseOutput();
+		
+		IExportTableDataAsScript obj= new Services();
+		
+		try {
+			response= obj.exportTableDataAsScript(tableName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.CREATED);
 	}

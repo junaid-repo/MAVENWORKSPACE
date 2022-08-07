@@ -1,0 +1,51 @@
+package com.demo.ExcelProject;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+/**
+ * Hello world!
+ *
+ */
+public class App3 {
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+		File file = new File("C:\\Users\\junai\\OneDrive\\Documents\\JavaFile.java");
+
+		try {
+
+			// create a new file with name specified
+			// by the file object
+			boolean value = file.createNewFile();
+			if (value) {
+				System.out.println("New Java File is created.");
+			} else {
+				System.out.println("The file already exists.");
+			}
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+
+		String program = "testsssssssssssssssssssss";
+		try {
+// Creates a Writer using FileWriter
+			FileWriter output = new FileWriter("JavaFile.java");
+
+// Writes the program to file
+			output.write(program);
+			System.out.println("Data is written to the file.");
+
+// Closes the writer
+			output.close();
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		
+		String text = "Text to save to file";
+		Files.write(Paths.get("C:\\\\Users\\\\junai\\\\OneDrive\\\\Documents\\\\fileName.txt"), text.getBytes());
+	}
+
+}

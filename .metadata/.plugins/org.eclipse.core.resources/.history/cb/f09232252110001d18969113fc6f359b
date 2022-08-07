@@ -1,3 +1,0 @@
-spring.security.user.name=dev
-spring.security.user.password=dev
-server.port=8072

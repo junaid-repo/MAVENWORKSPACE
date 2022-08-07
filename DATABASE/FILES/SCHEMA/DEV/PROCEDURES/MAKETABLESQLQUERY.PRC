@@ -25,7 +25,7 @@
     SELECT T.object_name
       FROM all_objects T
      WHERE object_type IN ('TABLE')
-       AND T.owner = 'DEV';
+       AND T.owner = 'DEV' and t.OBJECT_NAME<>'TABLERAWSTRUCTURE';
 
   cursor getTableColumns is
   
@@ -97,7 +97,7 @@ BEGIN
      LOOP 
        FETCH CrResult into  vQuery3;
        
-       vQuery3:=replace(vQuery3, ',','`');
+  --     vQuery3:=replace(vQuery3, ',','`');
    -- vQuery3:=''''||   vQuery3;
      --  vQuery3 := SUBSTR(vQuery3, 1, LENGTH(vQuery3) - 1);
       -- EXECUTE IMmediate vQuery3;
@@ -118,7 +118,7 @@ BEGIN
         
      --vClob := SUBSTR(vQuery3, 1, LENGTH(vClob) - 3);
 
-       INSERT INTO TABLERAWSTRUCTURE VALUEs(TABLERAWSTRUCTURE_SEQ.Nextval  ,vClob);
+       INSERT INTO TABLERAWSTRUCTURE VALUEs(TABLERAWSTRUCTURE_SEQ.Nextval  ,vTableName,vClob);
        vClob:='';
   
     --vMasterQuery := 'SELECT ''' || vQuery1 || vQuery2 || ' FROM DUAL';
