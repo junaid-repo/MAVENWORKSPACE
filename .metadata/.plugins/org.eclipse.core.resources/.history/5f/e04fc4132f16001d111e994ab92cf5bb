@@ -54,7 +54,7 @@ public class Utility {
  }
  
 	
-public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
+BaseOutput fetchAndWriteTableDataQuery(String tableName) {
 		BaseOutput response = new BaseOutput();
 
 		String clobString = "";

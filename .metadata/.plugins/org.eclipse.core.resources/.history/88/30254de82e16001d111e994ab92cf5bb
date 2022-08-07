@@ -53,33 +53,6 @@ public class Utility {
 	 return clobAsString;
  }
  
-	
-public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
-		BaseOutput response = new BaseOutput();
-
-		String clobString = "";
-		ArrayList<String> masterQueryList = new ArrayList<>();
-		CoreServiceCall csc = new CoreServiceCall();
-
-		clobString = csc.getClobTableData(tableName);
-		String superMasterQuery = "";
-		//Utility util = new Utility();
-		masterQueryList = convertTableStringToQuery(clobString);
-
-		for (String masterQuery : masterQueryList) {
-
-			superMasterQuery = superMasterQuery + "\r\n" + masterQuery;
-
-		}
-		System.out.println(tableName);
-		System.out.println(superMasterQuery);
-
-		response = createAndWriteInAndWriteInAFile(tableName, superMasterQuery);
-
-		return response;
-	}
- 
- 
  public BaseOutput createAndWriteInAndWriteInAFile(String tableName, String tableQuery){
 	 
 	 BaseOutput output = new BaseOutput();
@@ -217,5 +190,29 @@ public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
 		}
 		return masterQueryList;
 	}
+	
+	BaseOutput fetchAndWriteTableDataQuery(String tableName) {
+		BaseOutput response = new BaseOutput();
 
+		String clobString = "";
+		ArrayList<String> masterQueryList = new ArrayList<>();
+		CoreServiceCall csc = new CoreServiceCall();
+
+		clobString = csc.getClobTableData(tableName);
+		String superMasterQuery = "";
+		Utility util = new Utility();
+		masterQueryList = util.convertTableStringToQuery(clobString);
+
+		for (String masterQuery : masterQueryList) {
+
+			superMasterQuery = superMasterQuery + "\r\n" + masterQuery;
+
+		}
+		System.out.println(tableName);
+		System.out.println(superMasterQuery);
+
+		response = util.createAndWriteInAndWriteInAFile(tableName, superMasterQuery);
+
+		return response;
+	}
 }

@@ -491,8 +491,6 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 	@Override
 	public BaseOutput exportTableDataAsScript(String tableName) {
 		// TODO Auto-generated method stub
-		
-		BaseOutput response = new BaseOutput();
 
 		IExportTableDataAsScript export = (String tbName) -> {
 
@@ -518,7 +516,7 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 				CoreServiceCall csc = new CoreServiceCall();
 				tableList = csc.getNumberOfDBTables("DEV");
 				for (String tempTableName : tableList) {
-					if (tempTableName.toUpperCase().equals(tableName.toUpperCase())) {
+					if (tempTableName.equals(tableName)) {
 						tableExistenceFlag = "T";
 						break;
 					}
@@ -534,8 +532,7 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 			return bo;
 
 		};
-		 response = export.exportTableDataAsScript(tableName);
-		 return response;
+		return export.exportTableDataAsScript(tableName);
 
 	}
 

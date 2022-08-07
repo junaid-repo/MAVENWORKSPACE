@@ -491,17 +491,14 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 	@Override
 	public BaseOutput exportTableDataAsScript(String tableName) {
 		// TODO Auto-generated method stub
-		
-		BaseOutput response = new BaseOutput();
 
 		IExportTableDataAsScript export = (String tbName) -> {
 
 			List<String> tableList = new ArrayList<>();
-			String tableExistenceFlag = "F";
 
 			BaseOutput bo = new BaseOutput();
 			Utility util = new Utility();
-			if (tableName.toUpperCase().equals("ALL")) {
+			if (tableName.equals("all")) {
 				try {
 					CoreServiceCall csc = new CoreServiceCall();
 					tableList = csc.getNumberOfDBTables("DEV");
@@ -514,29 +511,16 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 					e.printStackTrace();
 				}
 			} else {
-
-				CoreServiceCall csc = new CoreServiceCall();
-				tableList = csc.getNumberOfDBTables("DEV");
-				for (String tempTableName : tableList) {
-					if (tempTableName.toUpperCase().equals(tableName.toUpperCase())) {
-						tableExistenceFlag = "T";
-						break;
-					}
-				}
-				if (tableExistenceFlag.equals("T"))
-					bo = util.fetchAndWriteTableDataQuery(tbName);
-				else {
-					bo.setErrorCode(100);
-					bo.setErrorDesc("Table Doesn't exist for user DEV");
-				}
+				bo = util.fetchAndWriteTableDataQuery(tbName);
 			}
 
 			return bo;
 
 		};
-		 response = export.exportTableDataAsScript(tableName);
-		 return response;
+		return export.exportTableDataAsScript(tableName);
 
 	}
+
+	
 
 }

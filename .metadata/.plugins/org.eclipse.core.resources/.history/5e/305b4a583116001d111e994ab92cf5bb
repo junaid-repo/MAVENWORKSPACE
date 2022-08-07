@@ -518,7 +518,7 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 				CoreServiceCall csc = new CoreServiceCall();
 				tableList = csc.getNumberOfDBTables("DEV");
 				for (String tempTableName : tableList) {
-					if (tempTableName.toUpperCase().equals(tableName.toUpperCase())) {
+					if (tempTableName.equals(tableName)) {
 						tableExistenceFlag = "T";
 						break;
 					}

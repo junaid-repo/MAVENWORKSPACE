@@ -1,7 +1,8 @@
 
-  CREATE OR REPLACE PROCEDURE "DEV"."EXTRACTCLOBDATAFORTABLES" (vClob     out clob,
-                                                     vRetCode  out number,
-                                                     vRetError out varchar2) as
+  CREATE OR REPLACE PROCEDURE "DEV"."EXTRACTCLOBDATAFORTABLES" (vTableName in varchar2,
+                                                     vClob      out clob,
+                                                     vRetCode   out number,
+                                                     vRetError  out varchar2) as
 begin
   begin
   
@@ -12,15 +13,20 @@ begin
       vRetError := sqlerrm;
   end;
 
- 
+  /* select a.rawstructure
+      into vClob
+      from (
+            
+            select rownum rnum, t.rawstructure from TABLERAWSTRUCTURE t
+            
+            ) a
+     where rnum = 3;
+  */
 
-  select a.rawstructure into vClob
-    from (
-          
-          select rownum rnum, t.rawstructure from TABLERAWSTRUCTURE t
-          
-          ) a
-   where rnum = 3;
+  select t.rawstructure
+    into vClob
+    from TABLERAWSTRUCTURE t
+   where upper(t.tablename) = upper(vTableName);
 
 exception
 

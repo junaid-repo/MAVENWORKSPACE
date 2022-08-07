@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import org.apache.commons.io.IOUtils;
 
-import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 
@@ -52,33 +51,6 @@ public class Utility {
 	 
 	 return clobAsString;
  }
- 
-	
-public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
-		BaseOutput response = new BaseOutput();
-
-		String clobString = "";
-		ArrayList<String> masterQueryList = new ArrayList<>();
-		CoreServiceCall csc = new CoreServiceCall();
-
-		clobString = csc.getClobTableData(tableName);
-		String superMasterQuery = "";
-		//Utility util = new Utility();
-		masterQueryList = convertTableStringToQuery(clobString);
-
-		for (String masterQuery : masterQueryList) {
-
-			superMasterQuery = superMasterQuery + "\r\n" + masterQuery;
-
-		}
-		System.out.println(tableName);
-		System.out.println(superMasterQuery);
-
-		response = createAndWriteInAndWriteInAFile(tableName, superMasterQuery);
-
-		return response;
-	}
- 
  
  public BaseOutput createAndWriteInAndWriteInAFile(String tableName, String tableQuery){
 	 
@@ -133,7 +105,7 @@ public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
 		}
 	}
 
-	public ArrayList<String> convertTableStringToQuery(String rawSQLData) {
+	ArrayList<String> convertTableStringToQuery(String rawSQLData) {
 
 		String newSt = rawSQLData;
 
@@ -217,5 +189,4 @@ public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
 		}
 		return masterQueryList;
 	}
-
 }
