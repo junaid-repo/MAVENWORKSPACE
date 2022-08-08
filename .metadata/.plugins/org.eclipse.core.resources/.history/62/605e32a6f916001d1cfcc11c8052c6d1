@@ -10,12 +10,8 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.IOUtils;
 
@@ -28,137 +24,42 @@ public class Utility {
 	public String changeData(ArrayList<InsertEmployeeList> arrayData, String seperator, Object ob) {
 
 		String stringData = "";
-		String tempString = "";
-
-		for (InsertEmployeeList empList : arrayData) {
-			tempString = empList.getDepartmentId() + "$$" + empList.getCommisionPct();
+		String tempString="";
+		
+		for(InsertEmployeeList empList: arrayData) {
+			tempString=
+					empList.getDepartmentId()+"$$"+empList.getCommisionPct();
 
 		}
 
 		return stringData;
 	}
 	
-	public static String createTable(String tableName, String fileLocation) throws FileNotFoundException, IOException {
-
-		CSVParser parser = new CSVParser(new FileReader(fileLocation), CSVFormat.DEFAULT.withHeader());
-
-		Map<String, Integer> retMap = parser.getHeaderMap();
-
-		List<CSVRecord> retMap3 = parser.getRecords();
-
-		String response = "Success";
-
-		// System.out.println(retMap3.get(1));
-		// CSVRecord st = retMap3.get(0).get(null);
-
-		// System.out.println(retMap3);
-		// System.out.println(retMap3.get(0));
-		// testCSV();
-
-		Map<Integer, String> retMap2 = new HashMap<>();
-		// System.out.println(retMap);
-		String columnNames = "";
-		// System.out.println(retMap.size());
-
-		Map<Integer, String> myNewHashMap = new HashMap<>();
-		for (Map.Entry<String, Integer> entry : retMap.entrySet()) {
-			myNewHashMap.put(entry.getValue(), entry.getKey());
-		}
-		// System.out.println(myNewHashMap);
-		for (int i = 0; i < myNewHashMap.size(); i++) {
-			columnNames = columnNames + myNewHashMap.get(i) + "##";
-			// System.out.println(response);
-			// retMap2.put(retMap.get, response)
-		}
-		columnNames = columnNames.substring(0, columnNames.length() - 2);
-		columnNames = columnNames.replace(' ', '_');
-
-		try {
-			response = CoreServiceCall.createTable(tableName, columnNames);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return response;
-
-	}
 	
-
-	public BaseOutput insertDataInTable(String tableName, String location) {
-
-		StringBuilder sb = null;
-		BaseOutput response = new BaseOutput();
-		int count = 0;
-		int i;
-		// Reader reader =
-		// Files.newBufferedReader(Paths.get("C:/Users/junai/Downloads/Document3.csv"));
-		try {
-			Reader in = new FileReader(location);
-			Iterable<CSVRecord> records = CSVFormat.DEFAULT.parse(in);
-			for (CSVRecord record : records) {
-				String values = "";
-				if (count > 0) {
-					for (i = 0; i < record.size() - 1; i++) {
-						values = values + record.get(i) + "~~";
-					}
-					values = values.replace('\'', ' ');
-					values = values.replace('(', ' ');
-					values = values.replace(')', ' ');
-					values = values.replace(',', ' ');
-					values = values.replace('/', ' ');
-					// values=values.replace('-', ' ');
-					// values=values.replace('#', ' ');
-					if (i == record.size() - 1) {
-						values = values + record.get(i);
-					}
-					sb = new StringBuilder(values);
-					// sb.deleteCharAt(values.length() - 3);
-
-				}
-
-				System.out.println(sb);
-				if (count > 0) {
-					try {
-						CoreServiceCall csc = new CoreServiceCall();
-						response = csc.insertDataInTable(tableName, sb.toString());
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				count++;
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return response;
+ 
+ 
+ public static String convertCLOBToString(java.sql.Clob clobObject) {
+	 
+	 String clobAsString=null;
+	 
+	 try {
+		InputStream in = clobObject.getAsciiStream();
+		 StringWriter w = new StringWriter();
+		 IOUtils.copy(in, w);
+		 clobAsString=w.toString();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
-
-	public static String convertCLOBToString(java.sql.Clob clobObject) {
-
-		String clobAsString = null;
-
-		try {
-			InputStream in = clobObject.getAsciiStream();
-			StringWriter w = new StringWriter();
-			IOUtils.copy(in, w);
-			clobAsString = w.toString();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return clobAsString;
-	}
-
-	public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
+	 
+	 return clobAsString;
+ }
+ 
+	
+public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
 		BaseOutput response = new BaseOutput();
 
 		String clobString = "";
@@ -172,7 +73,7 @@ public class Utility {
 			e.printStackTrace();
 		}
 		String superMasterQuery = "";
-		// Utility util = new Utility();
+		//Utility util = new Utility();
 		try {
 			masterQueryList = convertTableStringToQuery(clobString);
 		} catch (Exception e) {
@@ -197,30 +98,32 @@ public class Utility {
 
 		return response;
 	}
-
-	public BaseOutput createAndWriteInAndWriteInAFile(String tableName, String tableQuery) {
-
-		BaseOutput output = new BaseOutput();
-		String dir = "C:\\My_Workbench\\MAVENWORKSPACE\\DATABASE\\FILES\\SCHEMA\\DEV\\TABLE_DATA_SCRIPTS\\";
-
-		try {
-			createAFile(tableName, dir);
-			witeInAFile(tableName, tableQuery, dir);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		output.setErrorCode(0);
-		output.setErrorDesc("Success");
-
-		return output;
-
+ 
+ 
+ public BaseOutput createAndWriteInAndWriteInAFile(String tableName, String tableQuery){
+	 
+	 BaseOutput output = new BaseOutput();
+	 String dir = "C:\\My_Workbench\\MAVENWORKSPACE\\DATABASE\\FILES\\SCHEMA\\DEV\\TABLE_DATA_SCRIPTS\\";
+	 
+	 try {
+		createAFile(tableName, dir);
+		 witeInAFile(tableName, tableQuery, dir);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
+		
+		
+	 output.setErrorCode(0);
+	 output.setErrorDesc("Success");
+	 
+	 return output;
+	 
+ }
+ 
+ public static void createAFile(String tableName, String dir) {
 
-	public static void createAFile(String tableName, String dir) {
-
-		// String location = "C:\\Users\\junai\\OneDrive\\Documents\\";
+		//String location = "C:\\Users\\junai\\OneDrive\\Documents\\";
 		String fileName = dir + tableName + ".sql";
 		System.out.println(fileName);
 
@@ -240,7 +143,7 @@ public class Utility {
 
 	public static void witeInAFile(String tableName, String tableScrpts, String dir) {
 
-		// String location = "C:\\Users\\junai\\OneDrive\\Documents\\";
+		//String location = "C:\\Users\\junai\\OneDrive\\Documents\\";
 		String fileName = dir + tableName + ".sql";
 		System.out.println(fileName);
 
@@ -339,8 +242,59 @@ public class Utility {
 		}
 		return masterQueryList;
 	}
-
 	
+	public BaseOutput insertDataInTable(String tableName, String location) {
 
+		StringBuilder sb = null;
+		BaseOutput response = new BaseOutput();
+		int count = 0;
+		int i;
+		// Reader reader =
+		// Files.newBufferedReader(Paths.get("C:/Users/junai/Downloads/Document3.csv"));
+		try {
+			Reader in = new FileReader(location);
+			Iterable<CSVRecord> records = CSVFormat.DEFAULT.parse(in);
+			for (CSVRecord record : records) {
+				String values = "";
+				if (count > 0) {
+					for (i = 0; i < record.size() - 1; i++) {
+						values = values + record.get(i) + "~~";
+					}
+					values = values.replace('\'', ' ');
+					values = values.replace('(', ' ');
+					values = values.replace(')', ' ');
+					values = values.replace(',', ' ');
+					values = values.replace('/', ' ');
+					// values=values.replace('-', ' ');
+					// values=values.replace('#', ' ');
+					if (i == record.size() - 1) {
+						values = values + record.get(i);
+					}
+					sb = new StringBuilder(values);
+					// sb.deleteCharAt(values.length() - 3);
+
+				}
+
+				System.out.println(sb);
+				if (count > 0) {
+					try {
+						CoreServiceCall csc = new CoreServiceCall();
+						response = csc.insertDataInTable(tableName, sb.toString());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				count++;
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
 
 }

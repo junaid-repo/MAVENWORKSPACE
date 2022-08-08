@@ -389,10 +389,13 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 
 	}
 
+	
+	
+
 	@Override
 	public BaseOutput exportTableDataAsScript(String tableName) {
 		// TODO Auto-generated method stub
-
+		
 		BaseOutput response = new BaseOutput();
 
 		IExportTableDataAsScript export = (String tbName) -> {
@@ -435,8 +438,8 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 			return bo;
 
 		};
-		response = export.exportTableDataAsScript(tableName);
-		return response;
+		 response = export.exportTableDataAsScript(tableName);
+		 return response;
 
 	}
 

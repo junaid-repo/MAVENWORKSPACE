@@ -378,7 +378,7 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 
 		tableCheckFlag = CoreServiceCall.checkTableExistence(tableN);
 		if (tableCheckFlag == 'F') {
-			errorDesc = util.createTable(tableN, location);
+			errorDesc = createTable(tableN, location);
 		}
 
 		if (errorDesc.equals("Success")) {
@@ -389,10 +389,13 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 
 	}
 
+	
+	
+
 	@Override
 	public BaseOutput exportTableDataAsScript(String tableName) {
 		// TODO Auto-generated method stub
-
+		
 		BaseOutput response = new BaseOutput();
 
 		IExportTableDataAsScript export = (String tbName) -> {
@@ -435,8 +438,8 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 			return bo;
 
 		};
-		response = export.exportTableDataAsScript(tableName);
-		return response;
+		 response = export.exportTableDataAsScript(tableName);
+		 return response;
 
 	}
 
