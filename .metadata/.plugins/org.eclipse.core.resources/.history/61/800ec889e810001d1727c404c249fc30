@@ -1,9 +1,0 @@
-package com.jdbcdemo.jdbcdemo.dto;
-
-public class JobDetails {
-	
-	String jobId="";
-	Double minSalary=0D;
-	Double maxSalary = 0D;
-
-}

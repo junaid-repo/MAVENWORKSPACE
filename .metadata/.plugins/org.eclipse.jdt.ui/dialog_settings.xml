@@ -14,6 +14,7 @@
 	<item key="Comments" value="true"/>
 	<item key="InstanceOf" value="false"/>
 	<item key="delegateUpdating" value="false"/>
+	<item key="ProjectSelectionDialog.show_all" value="false"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item key="group_libraries" value="true"/>
 		<item key="layout" value="2"/>
@@ -160,5 +161,8 @@
 		<item key="expanded6" value="false"/>
 		<item key="expanded7" value="false"/>
 		<item key="expanded8" value="false"/>
+	</section>
+	<section name="ClasspathContainerSelectionPage">
+		<item key="index" value="0"/>
 	</section>
 </section>

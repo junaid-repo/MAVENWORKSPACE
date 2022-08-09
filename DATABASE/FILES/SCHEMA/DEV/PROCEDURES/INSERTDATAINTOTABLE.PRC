@@ -8,7 +8,7 @@
 
   tableC varchar2(20000);
   vQuery varchar2(20000);
-  cName  varchar2(200);
+  cName  varchar2(20000);
   vCount number;
 
   CURSOR GETCOLUMNS IS

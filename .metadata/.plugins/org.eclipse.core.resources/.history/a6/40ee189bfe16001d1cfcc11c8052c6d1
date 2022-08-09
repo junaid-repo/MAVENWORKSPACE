@@ -1,0 +1,9 @@
+package com.appsdeveloperblog.app.ws.shared.dto;
+
+public class ErrorTesting {
+	
+	public static void main(String[] args) {
+		System.out.println("Done here");
+	}
+
+}

@@ -72,7 +72,7 @@ public class Utility {
 		}
 		columnNames = columnNames.substring(0, columnNames.length() - 2);
 		columnNames = columnNames.replace(' ', '_');
-
+System.out.println(columnNames);
 		try {
 			response = CoreServiceCall.createTable(tableName, columnNames);
 		} catch (Exception e) {
