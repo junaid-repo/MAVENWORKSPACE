@@ -13,7 +13,7 @@
 
   CURSOR GETCOLUMNS IS
     SELECT
-    
+
      REGEXP_SUBSTR(tableColumns, '[^##]+', 1, level) || ' varchar2(200),'
       FROM dual
     CONNECT BY REGEXP_SUBSTR(tableColumns, '[^##]+', 1, level) IS NOT NULL;
@@ -26,7 +26,7 @@ begin
   RETCODE := 0;
   retErr  := 'SuccessS';
 
-  --vCount:=GETCOLUMNS%rowcount; 
+  --vCount:=GETCOLUMNS%rowcount;
   BEGIN
     OPEN GETCOLUMNS;
     LOOP
@@ -35,11 +35,11 @@ begin
       vCount := vCount + 1;
       exit when(GETCOLUMNS%notfound);
       tableC := tableC || ' ' || cName;
-    
+
     end loop;
     close GETCOLUMNS;
     tableC := SUBSTR(tableC, 1, LENGTH(tableC) - 1);
-  
+
     tableC := tableC || ')';
     vQuery := tableC;
     execute immediate vQuery;
@@ -47,12 +47,12 @@ begin
     when others then
       RETCODE := SQLCODE;
       retErr  := SQLERRM;
-    
+
   end;
 
 exception
   when others then
     RETCODE := SQLCODE;
     retErr  := SQLERRM;
-  
+
 end;

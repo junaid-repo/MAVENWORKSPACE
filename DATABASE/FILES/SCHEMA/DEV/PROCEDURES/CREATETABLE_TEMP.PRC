@@ -21,8 +21,8 @@
     CONNECT BY REGEXP_SUBSTR(tableColumns, '[^##]+', 1, level) IS NOT NULL;
 
 begin
-  tableColumns := 'aaa~~varchar##bbb~~varchar##createdDate~~date##revenue~~number';
-  tableName    := 'Testing';
+  tableColumns := 'SHIPTO_ADDR_KEY~~VARCHAR##OFFICE_KEY~~VARCHAR##EMPL_KEY~~VARCHAR##PROD_KEY~~VARCHAR##ORDER_KEY~~VARCHAR##UNITS~~NUMBER##DISCNT_VALUE~~NUMBER##BILL_MTH_KEY~~NUMBER##BILL_QTR_KEY~~NUMBER##BILL_DAY_DT~~DATE##ORDER_DAY_DT~~DATE##PAID_DAY_DT~~DATE##DISCNT_RATE~~NUMBER##ORDER_STATUS~~VARCHAR##CURRENCY~~VARCHAR##ORDER_TYPE~~VARCHAR##CUST_KEY~~VARCHAR##SHIP_DAY_DT~~DATE##COST_FIXED~~NUMBER##COST_VARIABLE~~NUMBER##SRC_ORDER_NUMBER~~NUMBER##ORDER_NUMBER~~NUMBER##REVENUE~~NUMBER##ORDER_DTIME2_TIMEZONE~~VARCHAR';
+  tableName    := 'Testing4';
 
   vCount := 0;
   tableC := 'create table ' || tableName || ' ( ' || tableName ||

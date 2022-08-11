@@ -361,6 +361,7 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 
 		BaseOutput response = new BaseOutput();
 		String errorDesc = "Success";
+		BaseOutput base = new BaseOutput();
 		Utility util = new Utility();
 		// String st = "C:\\Users/junai/Downloads\\BulkEmployees.csv";
 
@@ -378,11 +379,11 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 
 		tableCheckFlag = CoreServiceCall.checkTableExistence(tableN);
 		if (tableCheckFlag == 'F') {
-			errorDesc = util.createTable(tableN, location);
+			base = util.createTableWithColumnType(tableN, location);
 		}
 
-		if (errorDesc.equals("Success")) {
-			response = util.insertDataInTable(tableN, location);
+		if (base.getErrorCode()==0) {
+			response = util.insertDataInTable_WithColoumnName(tableN, location);
 		}
 
 		return response;

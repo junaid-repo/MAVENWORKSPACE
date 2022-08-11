@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;TestContext.xml&apos; to &apos;jdbcdemo/src/main/resources&apos;&#x0D;&#x0A;- Original project: &apos;in28minutes-spring-basic-example&apos;&#x0D;&#x0A;- Destination element: &apos;jdbcdemo/src/main/resources&apos;&#x0D;&#x0A;- Original element: &apos;TestContext.xml&apos;" description="Copy file" destination="=jdbcdemo/src\/main\/resources=/maven.pomderived=/true=/" element1="src/test/resources/TestContext.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1656615179648" units="0" version="1.0"/>
-</session>

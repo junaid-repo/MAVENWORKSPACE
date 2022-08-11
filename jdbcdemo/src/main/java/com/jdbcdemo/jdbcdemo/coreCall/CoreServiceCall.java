@@ -446,9 +446,10 @@ public class CoreServiceCall {
 		return flag;
 	}
 
-	public static String createTable(String tableName, String rows) {
+	public static BaseOutput createTable(String tableName, String rows) {
 		Long errorCode = 0L;
 		String errorDesc = "";
+		BaseOutput bs = new BaseOutput();
 
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
@@ -458,7 +459,7 @@ public class CoreServiceCall {
 			if (conn != null) {
 
 				try {
-					st = conn.prepareCall("{call dev.createTable(?,?,?,?)}");
+					st = conn.prepareCall("{call dev.createTable_withColumnType(?,?,?,?)}");
 					// st = conn.prepareCall("{call dev.getEmployeesByDeptId(?,?,?,?)}");
 					st.setString(1, tableName);
 					st.setString(2, rows);
@@ -479,8 +480,9 @@ public class CoreServiceCall {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return errorDesc;
+		bs.setErrorCode(errorCode.intValue());
+		bs.setErrorDesc(errorDesc);
+		return bs;
 	}
 
 	public BaseOutput insertDataInTable(String tableName, String values) {
@@ -496,7 +498,7 @@ public class CoreServiceCall {
 			if (conn != null) {
 
 				try {
-					st = conn.prepareCall("{call dev.insertDataIntoTable(?,?,?,?)}");
+					st = conn.prepareCall("{call dev.INSERTDATAINTOTABLE_ColumnWise(?,?,?,?)}");
 					// st = conn.prepareCall("{call dev.getEmployeesByDeptId(?,?,?,?)}");
 					st.setString(1, tableName);
 					st.setString(2, values);

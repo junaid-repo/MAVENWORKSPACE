@@ -1,9 +1,0 @@
-package java8;
-
-
-public interface FI3 {
-	
-	public String displayConsumer(String str);
-	
-	
-}

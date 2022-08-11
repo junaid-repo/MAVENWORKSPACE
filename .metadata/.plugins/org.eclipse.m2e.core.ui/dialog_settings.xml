@@ -2,21 +2,8 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
-			<item value="C:\My_Workbench\MAVENWORKSPACE\expensetrackerapi"/>
-			<item value="C:\My_Workbench\MAVENWORKSPACE\springmvc-ws-master"/>
-			<item value="C:\My_Workbench\MAVENWORKSPACE\ExcelRead-master"/>
-			<item value="C:\My_Workbench\SpringProject\java8Spring"/>
-			<item value="C:\My_Workbench\SpringIn28Minutes-master\1.BasicExample"/>
-			<item value="C:\My_Workbench\MAVENWORKSPACE\jdbc2"/>
-			<item value="C:\My_Workbench\SpringProject\demo"/>
-			<item value="C:\My_Workbench\SpringProject\restful-web-services"/>
-			<item value="C:\My_Workbench\MAVENWORKSPACE\jdbcdemo"/>
-			<item value="C:\My_Workbench\SpringProject\Java8Spring"/>
-			<item value="C:\My_Workbench\SpringProject\SpringTst"/>
-			<item value="C:\My_Workbench\MAVENWORKSPACE\SpringBootTest"/>
-			<item value="C:\My_Workbench\SpringProject\coronavirustracker"/>
-			<item value="C:\My_Workbench\SpringProject\JPA_Demo"/>
-			<item value="C:\My_Workbench\SpringProject\springtest"/>
+			<item value="C:\My_Workbench\MAVENWORKSPACEs"/>
+			<item value="C:\My_Workbench\MAVENWORKSPACEs\jdbcdemo"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -26,9 +13,5 @@
 			<item value="[groupId].[artifactId]-[version]"/>
 			<item value="[name]"/>
 		</list>
-	</section>
-	<section name="org.eclipse.m2e.core.pom.overview">
-	</section>
-	<section name="org.eclipse.m2e.core.pom.dependencies">
 	</section>
 </section>

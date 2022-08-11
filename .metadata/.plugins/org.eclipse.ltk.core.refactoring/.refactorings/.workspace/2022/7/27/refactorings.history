@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;in28minutes-spring-basic-example&apos;" deleteContents="false" description="Delete resource &apos;in28minutes-spring-basic-example&apos;" element1="/in28minutes-spring-basic-example" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1656641824955"/>&#x0A;<refactoring comment="Delete resource &apos;jdbc2&apos;" deleteContents="false" description="Delete resource &apos;jdbc2&apos;" element1="/jdbc2" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1656750623445"/>
-</session>
