@@ -1,0 +1,2 @@
+
+insert into TESTING (TESTING_ID,CREATED_DATE,AAA,BBB,CREATEDDATE,REVENUE ) values ('11-08-22',to_date('insert into environmental_expenditure values (  tablesSeq.Nextval','dd-mm-yyyy'),'sysdate',''2020'',to_date(''Local government'','dd-mm-yyyy'),''Wastewater'');

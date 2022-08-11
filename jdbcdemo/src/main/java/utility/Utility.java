@@ -126,6 +126,7 @@ public class Utility {
 		}
 		// columnNames = columnNames.substring(0, columnNames.length() - 2);
 		columnNames = columnNames.replace(' ', '_');
+		columnNames = columnNames.replace('-', '_');
 		// System.out.println(columnNames);
 
 		BufferedReader br = null;
@@ -165,6 +166,8 @@ public class Utility {
 			// do stuff
 		}
 		finalRows = finalRows.substring(0, finalRows.length() - 2);
+		finalRows = finalRows.replace(' ', '_');
+		finalRows = finalRows.replace('-', '_');
 		try {
 			output = CoreServiceCall.createTable(tableName, finalRows);
 		} catch (Exception e) {
