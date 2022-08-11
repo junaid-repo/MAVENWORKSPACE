@@ -2,21 +2,21 @@
   CREATE OR REPLACE PROCEDURE "DEV"."MAKETABLESQLQUERY" (RETCODE  OUT NUMBER,
                                               RETERROR OUT VARCHAR2) AS
 
-  vTableName    varchar2(200);
-  vQuery1       varchar2(2000);
-  vQuery2       varchar2(2000);
+  vTableName    varchar2(2000);
+  vQuery1       varchar2(20000);
+  vQuery2       varchar2(20000);
    vQuery3       varchar2(20000);
-  vMasterQuery  varchar2(2000);
-  vTableColumns varchar2(200);
-  vColumnType   varchar2(200);
+  vMasterQuery  varchar2(20000);
+  vTableColumns varchar2(2000);
+  vColumnType   varchar2(2000);
 
   TYPE REFCURSOR IS REF CURSOR;
   crResult       refcursor;
-  vTableColumns2 varchar2(200);
-  vColumnType2   varchar2(200);
+  vTableColumns2 varchar2(2000);
+  vColumnType2   varchar2(2000);
     vColumnTypeRows   varchar2(20000);
     vSuperMasterQuery varchar2(20000);
-  vDateFormat     varchar2(200);
+  vDateFormat     varchar2(2000);
   
   vClob           clob;
 

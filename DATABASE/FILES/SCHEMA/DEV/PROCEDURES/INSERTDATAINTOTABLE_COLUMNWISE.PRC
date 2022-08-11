@@ -1,5 +1,5 @@
 
-  CREATE OR REPLACE PROCEDURE "DEV"."INSERTDATAINTOTABLE_TEMP" (tableName    in varchar2,
+  CREATE OR REPLACE PROCEDURE "DEV"."INSERTDATAINTOTABLE_COLUMNWISE" (tableName    in varchar2,
                                                      tableColumns in varchar2,
                                                      retCode      out number,
                                                      retErr       out varchar2)
