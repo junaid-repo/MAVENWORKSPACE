@@ -1,14 +1,10 @@
 package com.jdbcdemo.jdbcdemo;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
@@ -18,9 +14,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +21,7 @@ import org.springframework.stereotype.Component;
 import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
+import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
@@ -38,12 +32,13 @@ import com.jdbcdemo.jdbcdemo.interfaces.IExportTableDataAsScript;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN01;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
+import com.jdbcdemo.jdbcdemo.interfaces.IGDPCountries;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
 
 import utility.Utility;
 
 @Component
-public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScript {
+public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScript, IGDPCountries {
 	@Autowired
 	CoreServiceCall bs;
 
@@ -379,10 +374,10 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 
 		tableCheckFlag = CoreServiceCall.checkTableExistence(tableN);
 		if (tableCheckFlag == 'F') {
-			base = util.createTableWithColumnType(tableN, location);
+			response = util.createTableWithColumnType(tableN, location);
 		}
 
-		if (base.getErrorCode()==0) {
+		if (response.getErrorCode()==0) {
 			response = util.insertDataInTable_WithColoumnName(tableN, location);
 		}
 
@@ -439,6 +434,19 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 		response = export.exportTableDataAsScript(tableName);
 		return response;
 
+	}
+	public CountryGDPResponse getGDPWiseCounrties(String year, String gpd) {
+		
+		
+		IGDPCountries obj = (String year2, String gdp2)->{
+			CountryGDPResponse response  =  new CountryGDPResponse();
+			CoreServiceCall core =  new CoreServiceCall();
+			  response=core.getYearWiseGDPofWorld(year);
+			return response;
+		};
+		
+	return	obj.getGDPWiseCounrties(year, gpd);
+		
 	}
 
 }

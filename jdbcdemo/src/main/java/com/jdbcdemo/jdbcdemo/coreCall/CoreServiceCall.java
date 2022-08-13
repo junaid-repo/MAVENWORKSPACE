@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
+import com.jdbcdemo.jdbcdemo.dto.CountryGDPList;
+import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetails;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
@@ -22,7 +24,6 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 
 import connection.ConnectionClass;
-import oracle.jdbc.driver.OracleDriver;
 import utility.Utility;
 
 @Service
@@ -450,6 +451,8 @@ public class CoreServiceCall {
 		Long errorCode = 0L;
 		String errorDesc = "";
 		BaseOutput bs = new BaseOutput();
+		System.out.println("The Table Name -->  " + tableName);
+		System.out.println("The Table Columns -->  " + rows);
 
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
@@ -533,7 +536,7 @@ public class CoreServiceCall {
 		int errorCode = 0;
 		String errorDesc = "";
 		String clobSting = "";
-		java.sql.Clob clobOut=null;
+		java.sql.Clob clobOut = null;
 
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
@@ -548,9 +551,9 @@ public class CoreServiceCall {
 				st.registerOutParameter(3, java.sql.Types.DOUBLE);
 				st.registerOutParameter(4, java.sql.Types.VARCHAR);
 				st.execute();
-				clobOut=st.getClob(2);
-				
-				clobSting=Utility.convertCLOBToString(clobOut);
+				clobOut = st.getClob(2);
+
+				clobSting = Utility.convertCLOBToString(clobOut);
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -563,18 +566,19 @@ public class CoreServiceCall {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		System.out.println(clobSting);
 
 		return clobSting;
 
 	}
-	
- public	List<String>  getNamesOfDBTables(String schema){
-		
-		List<String> DBTables= new ArrayList<>();
-		String tableName="";
-		String query = "SELECT T.object_name     FROM all_objects T    WHERE object_type IN ('TABLE')   AND T.owner = '" + schema + "'";
+
+	public List<String> getNamesOfDBTables(String schema) {
+
+		List<String> DBTables = new ArrayList<>();
+		String tableName = "";
+		String query = "SELECT T.object_name     FROM all_objects T    WHERE object_type IN ('TABLE')   AND T.owner = '"
+				+ schema + "'";
 		System.out.println(query);
 
 		try {
@@ -595,10 +599,64 @@ public class CoreServiceCall {
 			e.printStackTrace();
 		}
 
-		
-		
 		return DBTables;
+
+	}
+
+	public CountryGDPResponse getYearWiseGDPofWorld(String year) {
+		CountryGDPResponse response = new CountryGDPResponse();
 		
+		List<CountryGDPList> objList = new ArrayList<>();
+		int errorCode=0;
+		String errorDesc ="Success";
+
+		String query = "";
+
+		if (year.equals("2018"))
+
+			query = "select y.country_name, y.country_code, y.indicator_code, y.year_2018 from dev.year_wise_gdp y ";
+
+		if (year.equals("2019"))
+
+			query = "select y.country_name, y.country_code, y.indicator_code, y.year_2019 from dev.year_wise_gdp y ";
+		if (year.equals("2020"))
+
+			query = "select y.country_name, y.country_code, y.indicator_code, y.year_2020 from dev.year_wise_gdp y ";
+
+		if (year.equals("2021"))
+
+			query = "select y.country_name, y.country_code, y.indicator_code, y.year_2021 from dev.year_wise_gdp y ";
+
+		
+	System.out.println(query);	
+	
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn=ConnectionClass.getEDBConnection();
+			Statement cstmt = conn.createStatement();
+			ResultSet rs = cstmt.executeQuery(query);
+			while(rs.next()) {
+				CountryGDPList obj = new CountryGDPList();
+				obj.setCountryName(rs.getString(1));
+				obj.setCountryCode(rs.getString(2));
+				obj.setUnit(rs.getString(3));
+				obj.setYear(year);
+				obj.setGpd(rs.getDouble(4));
+				objList.add(obj);
+				
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.setCountryGDPList(objList);
+		response.setErrorCode(errorCode);
+		response.setErrorDesc(errorDesc);
+		return response;
 	}
 
 }

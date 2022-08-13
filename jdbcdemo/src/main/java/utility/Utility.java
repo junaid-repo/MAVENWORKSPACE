@@ -119,7 +119,7 @@ public class Utility {
 		ArrayList<String> arList = new ArrayList<>();
 		// System.out.println(myNewHashMap);
 		for (int i = 0; i < myNewHashMap.size(); i++) {
-			columnNames = myNewHashMap.get(i);
+			columnNames = myNewHashMap.get(i).trim();
 			// System.out.println(response);
 			// retMap2.put(retMap.get, response)
 			arList.add(columnNames.trim());

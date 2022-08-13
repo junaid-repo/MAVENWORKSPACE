@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -27,6 +27,7 @@ import com.jdbcdemo.jdbcdemo.Services;
 import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
+import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeBulkDeleteRequest;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsRequest;
@@ -40,6 +41,7 @@ import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
 import com.jdbcdemo.jdbcdemo.interfaces.IExportTableDataAsScript;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
+import com.jdbcdemo.jdbcdemo.interfaces.IGDPCountries;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
 
 import excelProject.CSVReader;
@@ -421,9 +423,13 @@ public class SimpleController {
 	}
 
 	@RequestMapping(value = "getDetpartmentDetails/{deptId}", method = RequestMethod.GET)
-	ResponseEntity<DepartmentDetailsResponse> getDepartmentDetails(@PathVariable String deptId) {
+	ResponseEntity<DepartmentDetailsResponse> getDepartmentDetails(@PathVariable String deptId,
+			@RequestParam String name, String name2) {
 		DepartmentDetailsResponse response = new DepartmentDetailsResponse();
 		IFN03 obj = new Services();
+		System.out.println("the input taken in the request are ------------------->" + name);
+		System.out.println("the input taken in the request are -------------------2>" + name2);
+
 		response = obj.getDeptDetails(deptId);
 
 		return new ResponseEntity<DepartmentDetailsResponse>(response, HttpStatus.OK);
@@ -432,9 +438,9 @@ public class SimpleController {
 	@RequestMapping(value = "/createAndUploadTablesAndData", method = RequestMethod.POST)
 	ResponseEntity<BaseOutput> createAndUploadTablesAndData(@RequestBody ImportURL fileLocation) {
 		BaseOutput output = new BaseOutput();
-		
+
 		try {
-			output=serv.tableAndDataCreate(fileLocation.getFileLocation());
+			output = serv.tableAndDataCreate(fileLocation.getFileLocation());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -442,22 +448,40 @@ public class SimpleController {
 
 		return new ResponseEntity<BaseOutput>(output, HttpStatus.OK);
 	}
-	
-	@RequestMapping(value = "/exportTableDataAs_SQL_Script/{tableName}", method=RequestMethod.POST)
-	ResponseEntity<BaseOutput> exportTableDataAsDBScript(@PathVariable String tableName){
-		BaseOutput response= new BaseOutput();
-		
-		IExportTableDataAsScript obj= new Services();
-		
+
+	@RequestMapping(value = "/exportTableDataAs_SQL_Script/{tableName}", method = RequestMethod.POST)
+	ResponseEntity<BaseOutput> exportTableDataAsDBScript(@PathVariable String tableName) {
+		BaseOutput response = new BaseOutput();
+
+		IExportTableDataAsScript obj = new Services();
+
 		try {
-			response= obj.exportTableDataAsScript(tableName);
+			response = obj.exportTableDataAsScript(tableName);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.CREATED);
 	}
-	
-	
+
+	@RequestMapping(value = "/getGPDWiseCountries", method = RequestMethod.GET)
+	ResponseEntity<CountryGDPResponse> gpdWiseCountries(@RequestParam String gpd, String year) {
+		CountryGDPResponse response = new CountryGDPResponse();
+
+		System.out.println(gpd);
+		System.out.println(year);
+
+		IGDPCountries obj = new Services();
+
+		try {
+			response = obj.getGDPWiseCounrties(year, gpd);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<CountryGDPResponse>(response, HttpStatus.OK);
+	}
+
 }
