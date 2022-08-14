@@ -3,6 +3,7 @@ package com.jdbcdemo.jdbcdemo;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Component;
 import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
+import com.jdbcdemo.jdbcdemo.dto.CountryGDPList;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
@@ -241,7 +243,7 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 
 		Collector<String, ?, List<String>> listColl = Collectors.toList();
 
-		jobList4 = jobList.stream().map(mapper2).filter(predicate2).collect(listColl);
+		jobList4 = jobList.stream().map(JobDetails::getJobId).filter(i -> i.contains("ager")).collect(listColl);
 		Consumer<String> action = new Consumer<String>() {
 
 			@Override
@@ -377,7 +379,7 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 			response = util.createTableWithColumnType(tableN, location);
 		}
 
-		if (response.getErrorCode()==0) {
+		if (response.getErrorCode() == 0) {
 			response = util.insertDataInTable_WithColoumnName(tableN, location);
 		}
 
@@ -435,18 +437,58 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 		return response;
 
 	}
+
 	public CountryGDPResponse getGDPWiseCounrties(String year, String gpd) {
-		
-		
-		IGDPCountries obj = (String year2, String gdp2)->{
-			CountryGDPResponse response  =  new CountryGDPResponse();
-			CoreServiceCall core =  new CoreServiceCall();
-			  response=core.getYearWiseGDPofWorld(year);
-			return response;
+
+		IGDPCountries obj = (String year2, String gdp2) -> {
+			CountryGDPResponse response = new CountryGDPResponse();
+			CountryGDPResponse response2 = new CountryGDPResponse();
+			List<CountryGDPList> countryGDPList2 = new ArrayList<>();
+
+			CoreServiceCall core = new CoreServiceCall();
+			response2 = core.getYearWiseGDPofWorld(year);
+
+			List<CountryGDPList> countryGDPList = new ArrayList<>();
+
+			countryGDPList = response2.getCountryGDPList();
+
+			// getGPDFilter(gpd, response, response2, countryGDPList2, countryGDPList);
+
+			countryGDPList.sort(Comparator.comparing(CountryGDPList::getGpd).reversed());
+
+			countryGDPList.stream().map(CountryGDPList::getGpd).filter(i -> i >= 7000);
+
+			response2.getCountryGDPList().forEach(obj3 -> {
+				
+				
+				
+				if (obj3.getGpd() >= Long.valueOf(gpd)) {
+					countryGDPList2.add(obj3);
+				}
+			});
+			response2.setCountryGDPList(countryGDPList2);
+			System.out.println(countryGDPList.stream().map(CountryGDPList::getGpd).filter(i -> i >= 7000)
+					.collect(Collectors.toList()));
+
+			return response2;
 		};
-		
-	return	obj.getGDPWiseCounrties(year, gpd);
-		
+
+		return obj.getGDPWiseCounrties(year, gpd);
+
+	}
+
+	private void getGPDFilter(String gpd, CountryGDPResponse response, CountryGDPResponse response2,
+			List<CountryGDPList> countryGDPList2, List<CountryGDPList> countryGDPList) {
+		for (CountryGDPList dpList : countryGDPList) {
+
+			if (dpList.getGpd() >= Long.valueOf(gpd)) {
+				countryGDPList2.add(dpList);
+			}
+
+			response.setCountryGDPList(countryGDPList2);
+			response.setErrorCode(response2.getErrorCode());
+			response.setErrorDesc(response2.getErrorDesc());
+		}
 	}
 
 }
