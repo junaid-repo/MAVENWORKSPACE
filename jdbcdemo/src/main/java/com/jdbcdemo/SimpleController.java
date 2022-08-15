@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +53,7 @@ import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
 import com.jdbcdemo.jdbcdemo.interfaces.IGDPCountries;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
+import com.jdbcdemo.jdbcdemo.interfaces.IUploadFile;
 import com.jdbcdemo.security.AuthenticationRequest;
 import com.jdbcdemo.security.AuthenticationResponse;
 import com.jdbcdemo.security.JwtUtil;
@@ -72,9 +75,6 @@ public class SimpleController {
 
 	@Autowired
 	JwtUtil jwtTokenUtil;
-	
-	@Value("${file.upload-dir}")
-	String FILE_DIRECTORY;
 
 	@RequestMapping(value = "webService/jdbcDemo", method = RequestMethod.GET)
 	ResponseEntity<BaseOutput> simpleControllerDemo() {
@@ -247,7 +247,7 @@ public class SimpleController {
 	@RequestMapping(value = "webService/importBulkUsers", method = RequestMethod.POST)
 	ResponseEntity<BulkEmployeesResponse> importUsers(@RequestBody ImportURL fileLocation) {
 		// BaseOutput response = new BaseOutput();
-		String loc = "C:\\\\Users\\\\junai\\\\Downloads\\\\BulkEmployees.csv";
+		String loc = "C:\\Users\\junai\\Downloads\\BulkEmployees.csv";
 		CSVReader rd = new CSVReader();
 		String jsonString = "";
 		try {
@@ -492,24 +492,21 @@ public class SimpleController {
 	@RequestMapping(value = "webService/getGPDWiseCountries", method = RequestMethod.GET)
 	ResponseEntity<CountryGDPResponse> gpdWiseCountries(@RequestParam String gpd, String year) {
 		CountryGDPResponse response = new CountryGDPResponse();
-		
+
 		AuthenticationRequest auth = new AuthenticationRequest();
-		//AuthenticationResponse authRes = new AuthenticationResponse(null);
+		// AuthenticationResponse authRes = new AuthenticationResponse(null);
 		auth.setUserName("dev");
 		auth.setPassword("dev");
-		
+
 		try {
 			createAuthenticationToken(auth);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		
 
 		System.out.println(gpd);
 		System.out.println(year);
-		
 
 		IGDPCountries obj = new Services();
 
@@ -541,16 +538,46 @@ public class SimpleController {
 
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
-	
-	@RequestMapping(value ="/fileUpload", method = RequestMethod.POST)
-	public ResponseEntity<Object> fileUpload(@RequestParam("File") MultipartFile file) throws IOException{
-		System.out.println(FILE_DIRECTORY);
-		File myFile = new File("C:\\Users\\junai\\OneDrive\\Documents\\FileUploadDir\\"+file.getOriginalFilename());
-		myFile.createNewFile();
-		FileOutputStream fos =new FileOutputStream(myFile);
-		fos.write(file.getBytes());
-		fos.close();
-		return new ResponseEntity<Object>("The File Uploaded Successfully", HttpStatus.OK);
+
+	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
+	public ResponseEntity<Object> fileUpload(@RequestParam("File") MultipartFile file) throws IOException {
+
+		// String fileLocation =
+		// "C:\\Users\\junai\\OneDrive\\Documents\\FileUploadDir\\";
+		IUploadFile upload = new Services();
+		String response = upload.uploadFile(file);
+		return new ResponseEntity<Object>("Success", HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "webService/uploadDataTable", method = RequestMethod.POST)
+	ResponseEntity<BaseOutput> createAndUploadTablesAndDataWithFileUpload(@RequestParam("File") MultipartFile file) {
+		BaseOutput output = new BaseOutput();
+		String response = null;
+		File myFile = null;
+		try {
+			IUploadFile upload = new Services();
+			response = upload.uploadFile(file);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if (!response.equals(null)) {
+			try {
+				output = serv.tableAndDataCreate(response);
+
+				if (output.getErrorCode() == 0) {
+					// File deleteFile = new File(response);
+
+					Files.deleteIfExists(Paths.get(response));
+				}
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return new ResponseEntity<BaseOutput>(output, HttpStatus.OK);
 	}
 
 }

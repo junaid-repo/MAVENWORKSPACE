@@ -1,6 +1,8 @@
 package com.jdbcdemo.jdbcdemo;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +18,9 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 //import com.jdbcdemo.jdbcdemo.coreCall.BaseServicesCall;
 import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
@@ -36,11 +40,14 @@ import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
 import com.jdbcdemo.jdbcdemo.interfaces.IGDPCountries;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
+import com.jdbcdemo.jdbcdemo.interfaces.IUploadFile;
 
 import utility.Utility;
 
 @Component
-public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScript, IGDPCountries {
+public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScript, IGDPCountries, IUploadFile {
+	@Value("${upload-dir}")
+	private static String FILE_DIRECTORY="C:/Users/junai/OneDrive/Documents/FileUploadDir/";
 	@Autowired
 	CoreServiceCall bs;
 
@@ -459,9 +466,7 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 			countryGDPList.stream().map(CountryGDPList::getGpd).filter(i -> i >= 7000);
 
 			response2.getCountryGDPList().forEach(obj3 -> {
-				
-				
-				
+
 				if (obj3.getGpd() >= Long.valueOf(gpd)) {
 					countryGDPList2.add(obj3);
 				}
@@ -489,6 +494,34 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 			response.setErrorCode(response2.getErrorCode());
 			response.setErrorDesc(response2.getErrorDesc());
 		}
+	}
+
+	@Override
+	public String uploadFile(MultipartFile file) {
+
+		IUploadFile upload = (MultipartFile file2) -> {
+			File myFile = new File(FILE_DIRECTORY + file2.getOriginalFilename());
+			try {
+				
+				System.out.println(myFile.toString());
+				myFile.createNewFile();
+				FileOutputStream fos = new FileOutputStream(myFile);
+				fos.write(file2.getBytes());
+				fos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return myFile.toString();
+		};
+
+		String response = upload.uploadFile(file);
+
+		return response;
 	}
 
 }
