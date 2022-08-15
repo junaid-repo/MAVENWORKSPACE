@@ -529,6 +529,43 @@ public class CoreServiceCall {
 
 	}
 
+	public String insertDocDetails(String fileName, String fileLocation) {
+		String errorDesc = null;
+		int errorCode = 0;
+		String docId="";
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+			
+			if (conn != null) {
+				try {
+					st = conn.prepareCall("{call dev.insertDocDetails(?,?,?,?,?)}");
+					st.setString(1, fileName);
+					st.setString(2, fileLocation);
+					st.registerOutParameter(3, java.sql.Types.VARCHAR);
+					st.registerOutParameter(4, java.sql.Types.DOUBLE);
+					st.registerOutParameter(5, java.sql.Types.VARCHAR);
+					st.execute();
+					docId = st.getString(3);
+					errorCode = st.getInt(4);
+					errorDesc = st.getString(5);
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return docId;
+	}
+
 	public String getClobTableData(String tableName) {
 
 		BaseOutput output = new BaseOutput();
@@ -605,10 +642,10 @@ public class CoreServiceCall {
 
 	public CountryGDPResponse getYearWiseGDPofWorld(String year) {
 		CountryGDPResponse response = new CountryGDPResponse();
-		
+
 		List<CountryGDPList> objList = new ArrayList<>();
-		int errorCode=0;
-		String errorDesc ="Success";
+		int errorCode = 0;
+		String errorDesc = "Success";
 
 		String query = "";
 
@@ -627,16 +664,15 @@ public class CoreServiceCall {
 
 			query = "select y.country_name, y.country_code, y.indicator_code, y.year_2021 from dev.year_wise_gdp y ";
 
-		
-	System.out.println(query);	
-	
+		System.out.println(query);
+
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			Connection conn = null;
-			conn=ConnectionClass.getEDBConnection();
+			conn = ConnectionClass.getEDBConnection();
 			Statement cstmt = conn.createStatement();
 			ResultSet rs = cstmt.executeQuery(query);
-			while(rs.next()) {
+			while (rs.next()) {
 				CountryGDPList obj = new CountryGDPList();
 				obj.setCountryName(rs.getString(1));
 				obj.setCountryCode(rs.getString(2));
@@ -644,7 +680,7 @@ public class CoreServiceCall {
 				obj.setYear(year);
 				obj.setGpd(rs.getDouble(4));
 				objList.add(obj);
-				
+
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -658,5 +694,32 @@ public class CoreServiceCall {
 		response.setErrorDesc(errorDesc);
 		return response;
 	}
+	public String getStoredFileLocation(String docId) {
 
+		String fileLocation="";
+		String query = "select t.file_location from DOCUMENT_DETAILS t where t.doc_id = '"
+				+ docId + "'";
+		System.out.println(query);
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			Statement cstmt = conn.createStatement();
+			ResultSet rs = cstmt.executeQuery(query);
+			while (rs.next()) {
+				fileLocation = rs.getString(1);
+				
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return fileLocation;
+
+	}
 }

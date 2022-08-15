@@ -2,18 +2,18 @@ package com.jdbcdemo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.glassfish.jersey.media.multipart.MultiPart;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,6 +48,7 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse2;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
+import com.jdbcdemo.jdbcdemo.interfaces.IDownloadFile;
 import com.jdbcdemo.jdbcdemo.interfaces.IExportTableDataAsScript;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
@@ -75,6 +76,8 @@ public class SimpleController {
 
 	@Autowired
 	JwtUtil jwtTokenUtil;
+
+	private static String FILE_DIRECTORY = "C:/Users/junai/OneDrive/Documents/FileUploadDir/";
 
 	@RequestMapping(value = "webService/jdbcDemo", method = RequestMethod.GET)
 	ResponseEntity<BaseOutput> simpleControllerDemo() {
@@ -539,16 +542,6 @@ public class SimpleController {
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
 
-	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
-	public ResponseEntity<Object> fileUpload(@RequestParam("File") MultipartFile file) throws IOException {
-
-		// String fileLocation =
-		// "C:\\Users\\junai\\OneDrive\\Documents\\FileUploadDir\\";
-		IUploadFile upload = new Services();
-		String response = upload.uploadFile(file);
-		return new ResponseEntity<Object>("Success", HttpStatus.OK);
-	}
-
 	@RequestMapping(value = "webService/uploadDataTable", method = RequestMethod.POST)
 	ResponseEntity<BaseOutput> createAndUploadTablesAndDataWithFileUpload(@RequestParam("File") MultipartFile file) {
 		BaseOutput output = new BaseOutput();
@@ -564,12 +557,11 @@ public class SimpleController {
 		if (!response.equals(null)) {
 			try {
 				output = serv.tableAndDataCreate(response);
-
-				if (output.getErrorCode() == 0) {
-					// File deleteFile = new File(response);
-
-					Files.deleteIfExists(Paths.get(response));
-				}
+				/*
+				 * if (output.getErrorCode() == 0) { // File deleteFile = new File(response);
+				 * 
+				 * Files.deleteIfExists(Paths.get(response)); }
+				 */
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -578,6 +570,53 @@ public class SimpleController {
 		}
 
 		return new ResponseEntity<BaseOutput>(output, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
+	public ResponseEntity<Object> fileUpload(@RequestParam("File") MultipartFile file) throws IOException {
+
+		// String fileLocation =
+		// "C:\\Users\\junai\\OneDrive\\Documents\\FileUploadDir\\";
+		IUploadFile upload = new Services();
+		String response = upload.uploadFile(file);
+
+		String location = ServletUriComponentsBuilder
+				.fromHttpUrl(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString() + "/fileDownload")
+				.path("/{id}").buildAndExpand(response).toUri().toString();
+
+		System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
+		return new ResponseEntity<Object>(location, HttpStatus.OK);
+	}
+
+	
+	@RequestMapping(value = "/fileDownload/{docId}", method = RequestMethod.GET)
+	public ResponseEntity<Resource> fileDownload(@PathVariable String docId) throws IOException {
+
+		MultiPart objMultiPart = null;
+		String filePath = "";
+		File file = null;
+		// String fileName = "";
+		ByteArrayResource resource = null;
+		HttpHeaders header = null;
+
+		try {
+			IDownloadFile down = new Services();
+			filePath = down.DownloadFile(docId);
+			file = new File(filePath);
+
+			resource = new ByteArrayResource(
+					java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(file.getAbsolutePath())));
+			header = new HttpHeaders();
+			header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getName());
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok().headers(header).contentLength(file.length())
+				.contentType(org.springframework.http.MediaType.parseMediaType("application/octet-stream"))
+				.body(resource);
+
 	}
 
 }

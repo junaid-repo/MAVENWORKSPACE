@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -19,6 +18,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,6 +34,7 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.interfaces.CreateEmployeeInBulkIF;
+import com.jdbcdemo.jdbcdemo.interfaces.IDownloadFile;
 import com.jdbcdemo.jdbcdemo.interfaces.IExportTableDataAsScript;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN01;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
@@ -45,9 +46,10 @@ import com.jdbcdemo.jdbcdemo.interfaces.IUploadFile;
 import utility.Utility;
 
 @Component
-public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScript, IGDPCountries, IUploadFile {
+public class Services
+		implements IServices, IFN02, IFN03, IExportTableDataAsScript, IGDPCountries, IUploadFile, IDownloadFile {
 	@Value("${upload-dir}")
-	private static String FILE_DIRECTORY="C:/Users/junai/OneDrive/Documents/FileUploadDir/";
+	private static String FILE_DIRECTORY = "C:/Users/junai/OneDrive/Documents/FileUploadDir/";
 	@Autowired
 	CoreServiceCall bs;
 
@@ -499,15 +501,20 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 	@Override
 	public String uploadFile(MultipartFile file) {
 
+		String docId = "";
 		IUploadFile upload = (MultipartFile file2) -> {
 			File myFile = new File(FILE_DIRECTORY + file2.getOriginalFilename());
 			try {
-				
+
 				System.out.println(myFile.toString());
 				myFile.createNewFile();
 				FileOutputStream fos = new FileOutputStream(myFile);
 				fos.write(file2.getBytes());
 				fos.close();
+
+				CoreServiceCall core = new CoreServiceCall();
+				return core.insertDocDetails(file2.getOriginalFilename(), myFile.toString());
+
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -522,6 +529,17 @@ public class Services implements IServices, IFN02, IFN03, IExportTableDataAsScri
 		String response = upload.uploadFile(file);
 
 		return response;
+	}
+
+	@Override
+	public String DownloadFile(String docId) {
+		IDownloadFile down = (String documentId) -> {
+			CoreServiceCall core = new CoreServiceCall();
+			String filePath = core.getStoredFileLocation(documentId);
+			return filePath;
+		};
+
+		return down.DownloadFile(docId);
 	}
 
 }
