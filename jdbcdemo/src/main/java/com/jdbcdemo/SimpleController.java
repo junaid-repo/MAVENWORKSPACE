@@ -1,6 +1,8 @@
 package com.jdbcdemo;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,14 +11,20 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -43,6 +51,10 @@ import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
 import com.jdbcdemo.jdbcdemo.interfaces.IGDPCountries;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
+import com.jdbcdemo.security.AuthenticationRequest;
+import com.jdbcdemo.security.AuthenticationResponse;
+import com.jdbcdemo.security.JwtUtil;
+import com.jdbcdemo.security.MyUserDetailsService;
 
 import excelProject.CSVReader;
 import excelProject.ImportURL;
@@ -52,7 +64,19 @@ public class SimpleController {
 	@Autowired
 	IServices serv;
 
-	@RequestMapping(value = "jdbcDemo", method = RequestMethod.GET)
+	@Autowired
+	AuthenticationManager authenticationManager;
+
+	@Autowired
+	MyUserDetailsService userDetailsService;
+
+	@Autowired
+	JwtUtil jwtTokenUtil;
+	
+	@Value("${file.upload-dir}")
+	String FILE_DIRECTORY;
+
+	@RequestMapping(value = "webService/jdbcDemo", method = RequestMethod.GET)
 	ResponseEntity<BaseOutput> simpleControllerDemo() {
 
 		BaseOutput bs = new BaseOutput();
@@ -61,7 +85,7 @@ public class SimpleController {
 		return new ResponseEntity<BaseOutput>(bs, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "getEmployeeLists", method = RequestMethod.GET)
+	@RequestMapping(value = "webService/getEmployeeLists", method = RequestMethod.GET)
 	ResponseEntity<EmployeeDetailsResponse> getEmpDetails(@RequestBody EmployeeDetailsRequest empOb) {
 
 		// System.out.println(empId);
@@ -89,7 +113,7 @@ public class SimpleController {
 
 	}
 
-	@RequestMapping(value = "addEmployee", method = RequestMethod.POST)
+	@RequestMapping(value = "webService/addEmployee", method = RequestMethod.POST)
 	ResponseEntity<InsertEmployeeResponse> insertNewEmployee(@RequestBody InsertEmployeeList request) {
 
 		InsertEmployeeResponse response = new InsertEmployeeResponse();
@@ -119,7 +143,7 @@ public class SimpleController {
 
 	}
 
-	@RequestMapping(value = "getEmployeeDetails/{empId}", method = RequestMethod.GET)
+	@RequestMapping(value = "webService/getEmployeeDetails/{empId}", method = RequestMethod.GET)
 	@Produces(MediaType.APPLICATION_XML)
 	ResponseEntity<EmployeeDetailsResponse> getEmployeeDetails(@PathVariable String empId) {
 		EmployeeDetailsResponse response = new EmployeeDetailsResponse();
@@ -153,7 +177,7 @@ public class SimpleController {
 
 	}
 
-	@RequestMapping(value = "deleteUser/{empId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "webService/deleteUser/{empId}", method = RequestMethod.DELETE)
 	ResponseEntity<BaseOutput> removeEmployee(@PathVariable String empId) {
 		BaseOutput response = new BaseOutput();
 
@@ -173,7 +197,7 @@ public class SimpleController {
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "freezeEmployee/{empId}", method = RequestMethod.POST)
+	@RequestMapping(value = "webService/freezeEmployee/{empId}", method = RequestMethod.POST)
 	ResponseEntity<BaseOutput> freezeEmployee(@PathVariable String empId) {
 		BaseOutput response = new BaseOutput();
 		Services serv = new Services();
@@ -182,7 +206,7 @@ public class SimpleController {
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "createBulkEmployee", method = RequestMethod.POST)
+	@RequestMapping(value = "webService/createBulkEmployee", method = RequestMethod.POST)
 	ResponseEntity<BulkEmployeesResponse> createBulkEmployee(@RequestBody InsertEmployeeRequest employeeList) {
 		// BaseOutput response = new BaseOutput();
 		BulkEmployeesResponse response = new BulkEmployeesResponse();
@@ -220,7 +244,7 @@ public class SimpleController {
 		return new ResponseEntity<BulkEmployeesResponse>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "importBulkUsers", method = RequestMethod.POST)
+	@RequestMapping(value = "webService/importBulkUsers", method = RequestMethod.POST)
 	ResponseEntity<BulkEmployeesResponse> importUsers(@RequestBody ImportURL fileLocation) {
 		// BaseOutput response = new BaseOutput();
 		String loc = "C:\\\\Users\\\\junai\\\\Downloads\\\\BulkEmployees.csv";
@@ -283,7 +307,7 @@ public class SimpleController {
 		return new ResponseEntity<BulkEmployeesResponse>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "deleteBulkUser", method = RequestMethod.POST)
+	@RequestMapping(value = "webService/deleteBulkUser", method = RequestMethod.POST)
 	ResponseEntity<BaseOutput> removeBulkEmployee(@RequestBody ImportURL fileLocation) {
 		BaseOutput response = new BaseOutput();
 		CSVReader rd = new CSVReader();
@@ -328,7 +352,7 @@ public class SimpleController {
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "deptWiseTotalSalary/{type}/{deptId}", method = RequestMethod.GET)
+	@RequestMapping(value = "webService/deptWiseTotalSalary/{type}/{deptId}", method = RequestMethod.GET)
 	ResponseEntity<Double> deptWiseTotalSalary(@PathVariable String type, @PathVariable String deptId) {
 
 		System.out.println(type);
@@ -339,7 +363,7 @@ public class SimpleController {
 		return new ResponseEntity<Double>(sum, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "wiseCalculation/{wise}/{type}/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "webService/wiseCalculation/{wise}/{type}/{id}", method = RequestMethod.GET)
 	ResponseEntity<SalaryOperationsResponse> wiseCalculation(@PathVariable String wise, @PathVariable String type,
 			@PathVariable String id) {
 		SalaryOperationsResponse response = new SalaryOperationsResponse();
@@ -366,7 +390,7 @@ public class SimpleController {
 		return new ResponseEntity<SalaryOperationsResponse>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "jobDetailsWithMinimumSalaryOfAndSortedByMaxSalaryDesc/{minimumSalary}", method = RequestMethod.GET)
+	@RequestMapping(value = "webService/jobDetailsWithMinimumSalaryOfAndSortedByMaxSalaryDesc/{minimumSalary}", method = RequestMethod.GET)
 	ResponseEntity<List<JobDetails>> jobDetails(@PathVariable String minimumSalary) {
 
 		List<JobDetails> response = new ArrayList<>();
@@ -380,7 +404,7 @@ public class SimpleController {
 
 	}
 
-	@RequestMapping(value = "getEmpIdAccordingToMiniumSalaryOf/{minSalary}", method = RequestMethod.GET)
+	@RequestMapping(value = "webService/getEmpIdAccordingToMiniumSalaryOf/{minSalary}", method = RequestMethod.GET)
 	ResponseEntity<List<InsertEmployeeResponse2>> getEmpId(@PathVariable String minSalary) {
 		List<InsertEmployeeResponse2> response = new ArrayList<>();
 		CoreServiceCall csc = new CoreServiceCall();
@@ -422,7 +446,7 @@ public class SimpleController {
 
 	}
 
-	@RequestMapping(value = "getDetpartmentDetails/{deptId}", method = RequestMethod.GET)
+	@RequestMapping(value = "webService/getDetpartmentDetails/{deptId}", method = RequestMethod.GET)
 	ResponseEntity<DepartmentDetailsResponse> getDepartmentDetails(@PathVariable String deptId,
 			@RequestParam String name, String name2) {
 		DepartmentDetailsResponse response = new DepartmentDetailsResponse();
@@ -435,7 +459,7 @@ public class SimpleController {
 		return new ResponseEntity<DepartmentDetailsResponse>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/createAndUploadTablesAndData", method = RequestMethod.POST)
+	@RequestMapping(value = "webService/createAndUploadTablesAndData", method = RequestMethod.POST)
 	ResponseEntity<BaseOutput> createAndUploadTablesAndData(@RequestBody ImportURL fileLocation) {
 		BaseOutput output = new BaseOutput();
 
@@ -449,7 +473,7 @@ public class SimpleController {
 		return new ResponseEntity<BaseOutput>(output, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/exportTableDataAs_SQL_Script/{tableName}", method = RequestMethod.POST)
+	@RequestMapping(value = "webService/exportTableDataAs_SQL_Script/{tableName}", method = RequestMethod.POST)
 	ResponseEntity<BaseOutput> exportTableDataAsDBScript(@PathVariable String tableName) {
 		BaseOutput response = new BaseOutput();
 
@@ -465,12 +489,27 @@ public class SimpleController {
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/getGPDWiseCountries", method = RequestMethod.GET)
+	@RequestMapping(value = "webService/getGPDWiseCountries", method = RequestMethod.GET)
 	ResponseEntity<CountryGDPResponse> gpdWiseCountries(@RequestParam String gpd, String year) {
 		CountryGDPResponse response = new CountryGDPResponse();
+		
+		AuthenticationRequest auth = new AuthenticationRequest();
+		//AuthenticationResponse authRes = new AuthenticationResponse(null);
+		auth.setUserName("dev");
+		auth.setPassword("dev");
+		
+		try {
+			createAuthenticationToken(auth);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
 
 		System.out.println(gpd);
 		System.out.println(year);
+		
 
 		IGDPCountries obj = new Services();
 
@@ -482,6 +521,36 @@ public class SimpleController {
 		}
 
 		return new ResponseEntity<CountryGDPResponse>(response, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+	ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticateRequest)
+			throws Exception {
+
+		try {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+					authenticateRequest.getUserName(), authenticateRequest.getPassword()));
+		} catch (AuthenticationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticateRequest.getUserName());
+
+		final String jwt = jwtTokenUtil.generateToken(userDetails);
+		System.out.println(jwt);
+
+		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+	}
+	
+	@RequestMapping(value ="/fileUpload", method = RequestMethod.POST)
+	public ResponseEntity<Object> fileUpload(@RequestParam("File") MultipartFile file) throws IOException{
+		System.out.println(FILE_DIRECTORY);
+		File myFile = new File("C:\\Users\\junai\\OneDrive\\Documents\\FileUploadDir\\"+file.getOriginalFilename());
+		myFile.createNewFile();
+		FileOutputStream fos =new FileOutputStream(myFile);
+		fos.write(file.getBytes());
+		fos.close();
+		return new ResponseEntity<Object>("The File Uploaded Successfully", HttpStatus.OK);
 	}
 
 }
