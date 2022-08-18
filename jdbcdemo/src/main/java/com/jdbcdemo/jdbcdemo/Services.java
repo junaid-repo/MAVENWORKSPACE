@@ -46,7 +46,7 @@ import com.jdbcdemo.jdbcdemo.interfaces.IUploadFile;
 import utility.Utility;
 
 @Component
-public class Services
+public class Services extends Thread
 		implements IServices, IFN02, IFN03, IExportTableDataAsScript, IGDPCountries, IUploadFile, IDownloadFile {
 	@Value("${upload-dir}")
 	private static String FILE_DIRECTORY = "C:/Users/junai/OneDrive/Documents/FileUploadDir/";
@@ -542,4 +542,66 @@ public class Services
 		return down.DownloadFile(docId);
 	}
 
+	public BaseOutput exportTableDataAsScriptWithThreads(String tableName) {
+		// TODO Auto-generated method stub
+
+		BaseOutput response = new BaseOutput();
+		
+		Thread thread = new Thread();
+		
+		thread.start();
+		try {
+			thread.sleep(100000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+
+		IExportTableDataAsScript export = (String tbName) -> {
+
+			List<String> tableList = new ArrayList<>();
+			String tableExistenceFlag = "F";
+
+			BaseOutput bo = new BaseOutput();
+			Utility util = new Utility();
+			if (tableName.toUpperCase().equals("ALL")) {
+				try {
+					CoreServiceCall csc = new CoreServiceCall();
+					tableList = csc.getNamesOfDBTables("DEV");
+					for (String tempTableName : tableList) {
+						if (!tempTableName.equals("TABLERAWSTRUCTURE"))
+							bo = util.fetchAndWriteTableDataQuery(tempTableName);
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+
+				CoreServiceCall csc = new CoreServiceCall();
+				tableList = csc.getNamesOfDBTables("DEV");
+				for (String tempTableName : tableList) {
+					if (tempTableName.toUpperCase().equals(tableName.toUpperCase())) {
+						tableExistenceFlag = "T";
+						break;
+					}
+				}
+				if (tableExistenceFlag.equals("T"))
+					bo = util.fetchAndWriteTableDataQuery(tbName);
+				else {
+					bo.setErrorCode(100);
+					bo.setErrorDesc("Table Doesn't exist for user DEV");
+				}
+			}
+
+			return bo;
+
+		};
+		response = export.exportTableDataAsScript(tableName);
+		return response;
+
+	}
+	
+	
 }

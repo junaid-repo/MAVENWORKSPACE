@@ -587,6 +587,21 @@ public class SimpleController {
 		System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
 		return new ResponseEntity<Object>(location, HttpStatus.OK);
 	}
+	@RequestMapping(value = "tableDataAs_SQL_Script/{tableName}", method = RequestMethod.POST)
+	ResponseEntity<BaseOutput> exportTableDataAsDBScriptWithThreading(@PathVariable String tableName) {
+		BaseOutput response = new BaseOutput();
+
+		Services obj = new Services();
+
+		try {
+			response = obj.exportTableDataAsScriptWithThreads(tableName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<BaseOutput>(response, HttpStatus.CREATED);
+	}
 
 	
 	@RequestMapping(value = "/fileDownload/{docId}", method = RequestMethod.GET)
@@ -618,5 +633,5 @@ public class SimpleController {
 				.body(resource);
 
 	}
-
+	
 }
