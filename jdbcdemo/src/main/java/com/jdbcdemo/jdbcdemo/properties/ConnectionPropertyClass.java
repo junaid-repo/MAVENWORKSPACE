@@ -1,6 +1,6 @@
 package com.jdbcdemo.jdbcdemo.properties;
 
-public abstract class PropertyClass {
+public abstract class ConnectionPropertyClass {
 	
 	public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:XE";
     public static final String DBUSER = "dev";

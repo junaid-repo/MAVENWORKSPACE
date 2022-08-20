@@ -22,8 +22,13 @@ import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
+import com.jdbcdemo.jdbcdemo.dto.Property;
+import com.jdbcdemo.jdbcdemo.properties.AppProperties;
 
 import connection.ConnectionClass;
+import oracle.sql.ARRAY;
+import oracle.sql.ArrayDescriptor;
+import recordTab.TRECORDTAB;
 import utility.Utility;
 
 @Service
@@ -532,13 +537,13 @@ public class CoreServiceCall {
 	public String insertDocDetails(String fileName, String fileLocation) {
 		String errorDesc = null;
 		int errorCode = 0;
-		String docId="";
+		String docId = "";
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			Connection conn = null;
 			conn = ConnectionClass.getEDBConnection();
 			CallableStatement st = null;
-			
+
 			if (conn != null) {
 				try {
 					st = conn.prepareCall("{call dev.insertDocDetails(?,?,?,?,?)}");
@@ -694,11 +699,11 @@ public class CoreServiceCall {
 		response.setErrorDesc(errorDesc);
 		return response;
 	}
+
 	public String getStoredFileLocation(String docId) {
 
-		String fileLocation="";
-		String query = "select t.file_location from DOCUMENT_DETAILS t where t.doc_id = '"
-				+ docId + "'";
+		String fileLocation = "";
+		String query = "select t.file_location from DOCUMENT_DETAILS t where t.doc_id = '" + docId + "'";
 		System.out.println(query);
 
 		try {
@@ -709,7 +714,7 @@ public class CoreServiceCall {
 			ResultSet rs = cstmt.executeQuery(query);
 			while (rs.next()) {
 				fileLocation = rs.getString(1);
-				
+
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -721,5 +726,68 @@ public class CoreServiceCall {
 
 		return fileLocation;
 
+	}
+
+	public static String getDocLocationWithDocId(String docId) {
+
+		String fileLocation = "";
+
+		String query = "select dd.file_location from dev.document_details dd where dd.doc_id = '" + docId + "'";
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			Statement cstmt = conn.createStatement();
+			ResultSet rs = cstmt.executeQuery(query);
+			while (rs.next()) {
+				fileLocation = rs.getString(1);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return fileLocation;
+	}
+	
+	public static String getDocLocationWithDocId2(String docId) {
+
+		String fileLocation = "";
+		
+		String fieldSeperator = AppProperties.strCHAR164;
+		ARRAY inputData = null;
+		List<Property> property = new ArrayList<>();
+		
+		ArrayDescriptor objArrayDesc = null;
+		TRECORDTAB PROPERTY = new TRECORDTAB(null);
+		
+		//objArrayDesc = 
+		
+		
+
+		String query = "select dd.file_location from dev.document_details dd where dd.doc_id = '" + docId + "'";
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			Statement cstmt = conn.createStatement();
+			ResultSet rs = cstmt.executeQuery(query);
+			while (rs.next()) {
+				fileLocation = rs.getString(1);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return fileLocation;
 	}
 }

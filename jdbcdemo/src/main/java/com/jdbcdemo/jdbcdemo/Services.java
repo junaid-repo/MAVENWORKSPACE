@@ -547,15 +547,7 @@ public class Services extends Thread
 
 		BaseOutput response = new BaseOutput();
 		
-		Thread thread = new Thread();
 		
-		thread.start();
-		try {
-			thread.sleep(100000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		
 
 		IExportTableDataAsScript export = (String tbName) -> {

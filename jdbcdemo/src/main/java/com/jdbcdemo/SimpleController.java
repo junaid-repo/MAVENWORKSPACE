@@ -248,7 +248,7 @@ public class SimpleController {
 	}
 
 	@RequestMapping(value = "webService/importBulkUsers", method = RequestMethod.POST)
-	ResponseEntity<BulkEmployeesResponse> importUsers(@RequestBody ImportURL fileLocation) {
+	public ResponseEntity<BulkEmployeesResponse> importUsers(@RequestBody ImportURL fileLocation) {
 		// BaseOutput response = new BaseOutput();
 		String loc = "C:\\Users\\junai\\Downloads\\BulkEmployees.csv";
 		CSVReader rd = new CSVReader();
@@ -547,6 +547,8 @@ public class SimpleController {
 		BaseOutput output = new BaseOutput();
 		String response = null;
 		File myFile = null;
+		String fileLocation = "";
+		CoreServiceCall core = new CoreServiceCall();
 		try {
 			IUploadFile upload = new Services();
 			response = upload.uploadFile(file);
@@ -555,8 +557,12 @@ public class SimpleController {
 			e1.printStackTrace();
 		}
 		if (!response.equals(null)) {
+
 			try {
-				output = serv.tableAndDataCreate(response);
+				fileLocation = core.getDocLocationWithDocId(response);
+				if (fileLocation != "") {
+					output = serv.tableAndDataCreate(fileLocation);
+				}
 				/*
 				 * if (output.getErrorCode() == 0) { // File deleteFile = new File(response);
 				 * 
@@ -587,6 +593,7 @@ public class SimpleController {
 		System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
 		return new ResponseEntity<Object>(location, HttpStatus.OK);
 	}
+
 	@RequestMapping(value = "tableDataAs_SQL_Script/{tableName}", method = RequestMethod.POST)
 	ResponseEntity<BaseOutput> exportTableDataAsDBScriptWithThreading(@PathVariable String tableName) {
 		BaseOutput response = new BaseOutput();
@@ -603,7 +610,6 @@ public class SimpleController {
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.CREATED);
 	}
 
-	
 	@RequestMapping(value = "/fileDownload/{docId}", method = RequestMethod.GET)
 	public ResponseEntity<Resource> fileDownload(@PathVariable String docId) throws IOException {
 
@@ -633,5 +639,5 @@ public class SimpleController {
 				.body(resource);
 
 	}
-	
+
 }

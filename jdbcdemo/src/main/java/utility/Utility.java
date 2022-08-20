@@ -21,11 +21,22 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.IOUtils;
 
+import com.jdbcdemo.SimpleController;
 import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 
-public class Utility {
+import excelProject.ImportURL;
+
+public class Utility implements Runnable {
+
+	ImportURL newImportUrl = new ImportURL();
+
+	public ImportURL setImportUrl(ImportURL importUrl) {
+		newImportUrl = importUrl;
+		return newImportUrl;
+
+	}
 
 	public String changeData(ArrayList<InsertEmployeeList> arrayData, String seperator, Object ob) {
 
@@ -186,11 +197,7 @@ public class Utility {
 		int i;
 		// Reader reader =
 		// Files.newBufferedReader(Paths.get("C:/Users/junai/Downloads/Document3.csv"));
-		
-		
-		
-		
-		
+
 		try {
 			Reader in = new FileReader(location);
 			Iterable<CSVRecord> records = CSVFormat.DEFAULT.parse(in);
@@ -236,11 +243,11 @@ public class Utility {
 		}
 		return response;
 	}
-	
-	
-	public BaseOutput insertDataInTable_WithColoumnName(String tableName, String fileLocation) throws FileNotFoundException, IOException {
 
-		//String fileLocation = "C:\\\\Users\\\\junai\\\\Downloads\\\\REVENUE_2.csv";
+	public BaseOutput insertDataInTable_WithColoumnName(String tableName, String fileLocation)
+			throws FileNotFoundException, IOException {
+
+		// String fileLocation = "C:\\\\Users\\\\junai\\\\Downloads\\\\REVENUE_2.csv";
 		CSVParser parser = new CSVParser(new FileReader(fileLocation), CSVFormat.DEFAULT.withHeader());
 
 		// createTable2(tableName, fileLocation);
@@ -312,17 +319,14 @@ public class Utility {
 		for (int i = 0; i < arList.size(); i++) {
 			str1 = arList.get(i);
 			str2 = secondRowList.get(i);
-			finalRows =finalRows+ str1 + "~~" + str2 + "##";
+			finalRows = finalRows + str1 + "~~" + str2 + "##";
 			// do stuff
 		}
 		finalRows = finalRows.substring(0, finalRows.length() - 2);
 		System.out.println(finalRows);
-		
-		
-
 
 		StringBuilder sb = null;
-	//	BaseOutput response = new BaseOutput();
+		// BaseOutput response = new BaseOutput();
 		int count2 = 0;
 		int i;
 		// Reader reader =
@@ -334,13 +338,12 @@ public class Utility {
 				String values = "";
 				if (count2 > 1) {
 					for (i = 0; i < record.size() - 1; i++) {
-						
-						if(secondRowList.get(i).equals("DATE")) {
-							String tempDate="to_date(@@"+record.get(i)+"@@, @@dd-mm-rrrr HH24:MI:SS@@)"+"~~";
-							values = values + tempDate +secondRowList.get(i) + "##";
-						}
-						else
-							values = values + record.get(i)+"~~"+secondRowList.get(i) + "##";
+
+						if (secondRowList.get(i).equals("DATE")) {
+							String tempDate = "to_date(@@" + record.get(i) + "@@, @@dd-mm-rrrr HH24:MI:SS@@)" + "~~";
+							values = values + tempDate + secondRowList.get(i) + "##";
+						} else
+							values = values + record.get(i) + "~~" + secondRowList.get(i) + "##";
 					}
 					/*
 					 * values = values.replace('\@@, ' '); values = values.replace('(', ' '); values
@@ -350,12 +353,12 @@ public class Utility {
 					// values=values.replace('-', ' ');
 					// values=values.replace('#', ' ');
 					if (i == record.size() - 1) {
-						values = values + record.get(i)+"~~"+secondRowList.get(i);
+						values = values + record.get(i) + "~~" + secondRowList.get(i);
 					}
 					sb = new StringBuilder(values);
 					// sb.deleteCharAt(values.length() - 3);
 					System.out.println(sb);
-					
+
 					try {
 						CoreServiceCall csc = new CoreServiceCall();
 						response = csc.insertDataInTable(tableName, sb.toString());
@@ -365,8 +368,7 @@ public class Utility {
 					}
 				}
 				count2++;
-				
-				
+
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -376,9 +378,7 @@ public class Utility {
 			e.printStackTrace();
 		}
 		return response;
-	
 
-		
 	}
 
 	public static String convertCLOBToString(java.sql.Clob clobObject) {
@@ -399,46 +399,6 @@ public class Utility {
 		}
 
 		return clobAsString;
-	}
-
-	public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
-		BaseOutput response = new BaseOutput();
-
-		String clobString = "";
-		ArrayList<String> masterQueryList = new ArrayList<>();
-		CoreServiceCall csc = new CoreServiceCall();
-
-		try {
-			clobString = csc.getClobTableData(tableName);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String superMasterQuery = "";
-		// Utility util = new Utility();
-		try {
-			masterQueryList = convertTableStringToQuery(clobString);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		for (String masterQuery : masterQueryList) {
-
-			superMasterQuery = superMasterQuery + "\r\n" + masterQuery;
-
-		}
-		System.out.println(tableName);
-		System.out.println(superMasterQuery);
-
-		try {
-			response = createAndWriteInAndWriteInAFile(tableName, superMasterQuery);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return response;
 	}
 
 	public BaseOutput createAndWriteInAndWriteInAFile(String tableName, String tableQuery) {
@@ -581,6 +541,74 @@ public class Utility {
 
 		}
 		return masterQueryList;
+	}
+
+	public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
+		BaseOutput response = new BaseOutput();
+		Utility util = new Utility();
+		Thread td = new Thread(util);
+
+		String clobString = "";
+		ArrayList<String> masterQueryList = new ArrayList<>();
+		CoreServiceCall csc = new CoreServiceCall();
+
+		try {
+			clobString = csc.getClobTableData(tableName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String superMasterQuery = "";
+		// Utility util = new Utility();
+		try {
+			masterQueryList = convertTableStringToQuery(clobString);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Utility util2 = new Utility();
+		ImportURL url = new ImportURL();
+		url.setFileLocation("C:\\Users\\junai\\Downloads\\BulkEmployees.csv");
+
+		util2.setImportUrl(url);
+		td.start();
+
+		for (String masterQuery : masterQueryList) {
+			try {
+				td.sleep(300);
+
+				System.out.println(masterQuery);
+
+				superMasterQuery = superMasterQuery + "\r\n" + masterQuery;
+
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		System.out.println(tableName);
+		System.out.println(superMasterQuery);
+
+		try {
+			response = createAndWriteInAndWriteInAFile(tableName, superMasterQuery);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return response;
+	}
+
+	@Override
+	public void run() {
+		System.out.println("inside run method");
+		Utility util = new Utility();
+		String fileLocation = newImportUrl.getFileLocation();
+		System.out.println(fileLocation);
+		SimpleController simple = new SimpleController();
+		simple.importUsers(newImportUrl);
+
 	}
 
 }
