@@ -1,11 +1,13 @@
 package com.jdbcdemo.jdbcdemo.coreCall;
 
+import java.sql.Array;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,9 +25,11 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.Property;
+import com.jdbcdemo.jdbcdemo.dto.Report;
 import com.jdbcdemo.jdbcdemo.properties.AppProperties;
 
 import connection.ConnectionClass;
+import oracle.jdbc.OracleConnection;
 import oracle.sql.ARRAY;
 import oracle.sql.ArrayDescriptor;
 import recordTab.TRECORDTAB;
@@ -753,33 +757,45 @@ public class CoreServiceCall {
 
 		return fileLocation;
 	}
-	
+
 	public static String getDocLocationWithDocId2(String docId) {
 
 		String fileLocation = "";
-		
+
 		String fieldSeperator = AppProperties.strCHAR164;
 		ARRAY inputData = null;
-		List<Property> property = new ArrayList<>();
-		
-		ArrayDescriptor objArrayDesc = null;
+		List<Property> propertyList = new ArrayList<>();
+
+		for (int i = 0; i < 5; i++) {
+			Property prop = new Property();
+			prop.setParamName("CheckParamName");
+			prop.setParamValue("checkParamValue");
+			propertyList.add(prop);
+
+		}
+		Struct[] struct = new Struct[propertyList.size()];
+
+		System.out.println(propertyList);
 		TRECORDTAB PROPERTY = new TRECORDTAB(null);
-		
-		//objArrayDesc = 
-		
-		
 
 		String query = "select dd.file_location from dev.document_details dd where dd.doc_id = '" + docId + "'";
 
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			Connection conn = null;
+
 			conn = ConnectionClass.getEDBConnection();
-			Statement cstmt = conn.createStatement();
-			ResultSet rs = cstmt.executeQuery(query);
-			while (rs.next()) {
-				fileLocation = rs.getString(1);
+			ArrayDescriptor objArrayDesc = null;
+			objArrayDesc = ConnectionClass.getDescriptor("UTIL.TRECORDTAB", conn);
+
+			for (Property property : propertyList) {
+				PROPERTY.set(PROPERTY.getCount(), property.getParamName() + fieldSeperator + property.getParamValue());
+				PROPERTY.extend(1, PROPERTY.getCount());
 			}
+			PROPERTY.delete(PROPERTY.getCount());
+
+			inputData = ConnectionClass.getARRAY(objArrayDesc, conn, PROPERTY.toArray());
+
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -789,5 +805,41 @@ public class CoreServiceCall {
 		}
 
 		return fileLocation;
+	}
+
+	public static String getDocLocationWithDocId4(List<Property> property) {
+		
+
+		try {
+			Object[] reportArray = new Object[3];
+			Struct[] struct = new Struct[property.size()];
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+
+			conn = ConnectionClass.getEDBConnection();
+
+			int arrayIndex = 0;
+			for (Property data : property) {
+				reportArray[0] = data.getParamName();
+				reportArray[1] = data.getParamValue();
+
+				struct[arrayIndex++] = conn.createStruct("R_REPORT_OBJECT", reportArray);
+			}
+			CallableStatement cstmt = null;
+
+			Array reportsArray = ((OracleConnection) conn).createOracleArray("T_REPORT_TABLE", struct);
+			cstmt = conn.prepareCall(null);
+
+			cstmt.setArray(1, reportsArray);
+
+			cstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "OK";
 	}
 }

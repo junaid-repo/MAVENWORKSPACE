@@ -1,36 +1,34 @@
 package excelProject;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsRequest;
+import com.jdbcdemo.jdbcdemo.dto.Property;
 
 /**
  * Hello world!
  *
  */
-public class App7 implements Runnable {
+public class App7 {
 	EmployeeDetailsRequest emp = new EmployeeDetailsRequest();
-
-	public App7(EmployeeDetailsRequest empNew) {
-		// empNew.setDeptId("35253059");
-		emp = empNew;
-	}
-
-	public void run() {
-
-		System.out.println(emp.getDeptId());
-	}
+	
+	
 
 	public static void main(String[] args) {
+		List<Property> propertyList = new ArrayList<>();
 
-		EmployeeDetailsRequest empNew = new EmployeeDetailsRequest();
-		empNew.setDeptId("9923893");
-		App7 obj = new App7(empNew);
+		for (int i = 0; i < 5; i++) {
+			Property prop = new Property();
+			prop.setParamName("CheckParamName");
+			prop.setParamValue("checkParamValue");
+			propertyList.add(prop);
 
-		Thread thread = new Thread(obj);
-		thread.start();
-
+		}
+		
+		CoreServiceCall core = new CoreServiceCall();
+		core.getDocLocationWithDocId4(propertyList);
 	}
 
 }
