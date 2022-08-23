@@ -600,6 +600,11 @@ public class Utility implements Runnable {
 		return response;
 	}
 
+	public static String getLanguageAlphaCode(String language) {
+		CoreServiceCall core = new CoreServiceCall();
+		return core.getLanguageCode(language);
+	}
+
 	@Override
 	public void run() {
 		System.out.println("inside run method");

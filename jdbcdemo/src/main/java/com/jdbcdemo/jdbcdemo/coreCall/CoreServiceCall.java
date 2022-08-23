@@ -842,4 +842,36 @@ public class CoreServiceCall {
 		}
 		return "OK";
 	}
+	
+	public String getLanguageCode(String language) {
+
+		List<String> DBTables = new ArrayList<>();
+		String languageCode = "";
+		String query = "select lc.alpha2 from dev.language_codes lc where Upper(lc.language) =upper('"
+				+ language + "')";
+		System.out.println(query);
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			Statement cstmt = conn.createStatement();
+			ResultSet rs = cstmt.executeQuery(query);
+			while (rs.next()) {
+				languageCode = rs.getString(1);
+				if(languageCode.equals("")) {
+					return "This language is not present in our local DB";
+				}
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return languageCode;
+
+	}
 }

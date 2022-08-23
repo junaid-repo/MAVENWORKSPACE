@@ -653,5 +653,7 @@ public class SimpleController {
 		return new ResponseEntity<String>(translatedText, HttpStatus.OK);
 
 	}
+	
+	
 
 }

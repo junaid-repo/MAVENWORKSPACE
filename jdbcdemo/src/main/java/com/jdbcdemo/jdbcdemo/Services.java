@@ -603,8 +603,11 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 			String translatedText = "";
 
 			String textToTranslate = textDetails.getText();
-			String fromLang = textDetails.getFrom();
-			String toLang = textDetails.getTo();
+			String fromLang = Utility.getLanguageAlphaCode(textDetails.getFrom());
+			String toLang = Utility.getLanguageAlphaCode(textDetails.getTo());
+
+			System.out.println(fromLang);
+			System.out.println(toLang);
 
 			translatedText = serv.translateText(textToTranslate, fromLang, toLang);
 
