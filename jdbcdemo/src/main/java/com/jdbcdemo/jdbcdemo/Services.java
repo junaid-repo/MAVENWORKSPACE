@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,6 +32,7 @@ import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
+import com.jdbcdemo.jdbcdemo.dto.TranslateText;
 import com.jdbcdemo.jdbcdemo.interfaces.CreateEmployeeInBulkIF;
 import com.jdbcdemo.jdbcdemo.interfaces.IDownloadFile;
 import com.jdbcdemo.jdbcdemo.interfaces.IExportTableDataAsScript;
@@ -41,13 +41,15 @@ import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
 import com.jdbcdemo.jdbcdemo.interfaces.IGDPCountries;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
+import com.jdbcdemo.jdbcdemo.interfaces.ITextTranslate;
 import com.jdbcdemo.jdbcdemo.interfaces.IUploadFile;
 
+import externalApi.ExternalServices;
 import utility.Utility;
 
 @Component
-public class Services extends Thread
-		implements IServices, IFN02, IFN03, IExportTableDataAsScript, IGDPCountries, IUploadFile, IDownloadFile {
+public class Services extends Thread implements IServices, IFN02, IFN03, IExportTableDataAsScript, IGDPCountries,
+		IUploadFile, IDownloadFile, ITextTranslate {
 	@Value("${upload-dir}")
 	private static String FILE_DIRECTORY = "C:/Users/junai/OneDrive/Documents/FileUploadDir/";
 	@Autowired
@@ -546,9 +548,6 @@ public class Services extends Thread
 		// TODO Auto-generated method stub
 
 		BaseOutput response = new BaseOutput();
-		
-		
-		
 
 		IExportTableDataAsScript export = (String tbName) -> {
 
@@ -594,6 +593,26 @@ public class Services extends Thread
 		return response;
 
 	}
-	
-	
+
+	@Override
+	public String textTranslate(TranslateText textDetails) {
+
+		ITextTranslate trans = String -> {
+
+			ExternalServices serv = new ExternalServices();
+			String translatedText = "";
+
+			String textToTranslate = textDetails.getText();
+			String fromLang = textDetails.getFrom();
+			String toLang = textDetails.getTo();
+
+			translatedText = serv.translateText(textToTranslate, fromLang, toLang);
+
+			return translatedText;
+
+		};
+		return trans.textTranslate(textDetails);
+
+	}
+
 }

@@ -48,12 +48,14 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse2;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
+import com.jdbcdemo.jdbcdemo.dto.TranslateText;
 import com.jdbcdemo.jdbcdemo.interfaces.IDownloadFile;
 import com.jdbcdemo.jdbcdemo.interfaces.IExportTableDataAsScript;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
 import com.jdbcdemo.jdbcdemo.interfaces.IGDPCountries;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
+import com.jdbcdemo.jdbcdemo.interfaces.ITextTranslate;
 import com.jdbcdemo.jdbcdemo.interfaces.IUploadFile;
 import com.jdbcdemo.security.AuthenticationRequest;
 import com.jdbcdemo.security.AuthenticationResponse;
@@ -637,6 +639,18 @@ public class SimpleController {
 		return ResponseEntity.ok().headers(header).contentLength(file.length())
 				.contentType(org.springframework.http.MediaType.parseMediaType("application/octet-stream"))
 				.body(resource);
+
+	}
+
+	@RequestMapping(value = "/external/translateText", method = RequestMethod.POST)
+	public ResponseEntity<String> translateText(@RequestBody TranslateText textToTranslate) {
+
+		ITextTranslate obj = new Services();
+		String translatedText = "";
+
+		translatedText = obj.textTranslate(textToTranslate);
+
+		return new ResponseEntity<String>(translatedText, HttpStatus.OK);
 
 	}
 
