@@ -616,4 +616,15 @@ public class Utility implements Runnable {
 
 	}
 
+	public static String convertSingleStringToJsonType(String value) {
+		value = "\"" + value + "\"";
+		System.out.println(value);
+		return value;
+	}
+
+	public static String insertApiLogs(String url, String request, String response) {
+		CoreServiceCall core = new CoreServiceCall();
+
+		return core.insertApiLogs(url, request, response);
+	}
 }

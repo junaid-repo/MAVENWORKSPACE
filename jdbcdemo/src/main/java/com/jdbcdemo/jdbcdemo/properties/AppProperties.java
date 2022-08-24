@@ -12,4 +12,8 @@ public class AppProperties {
 
 	public static String googleTranslateURI = "https://google-translate1.p.rapidapi.com/language/translate/v2";
 
+	public static String sendGridSimpleMailURI="https://rapidprod-sendgrid-v1.p.rapidapi.com/mail/send";
+
+	public static String sendGridSimpleMailHost="rapidprod-sendgrid-v1.p.rapidapi.com";
+
 }

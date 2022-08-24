@@ -39,6 +39,7 @@ import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
+import com.jdbcdemo.jdbcdemo.dto.EmailRequest;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeBulkDeleteRequest;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsRequest;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
@@ -54,6 +55,7 @@ import com.jdbcdemo.jdbcdemo.interfaces.IExportTableDataAsScript;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
 import com.jdbcdemo.jdbcdemo.interfaces.IGDPCountries;
+import com.jdbcdemo.jdbcdemo.interfaces.ISendSimpleEmail;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
 import com.jdbcdemo.jdbcdemo.interfaces.ITextTranslate;
 import com.jdbcdemo.jdbcdemo.interfaces.IUploadFile;
@@ -586,6 +588,7 @@ public class SimpleController {
 		// String fileLocation =
 		// "C:\\Users\\junai\\OneDrive\\Documents\\FileUploadDir\\";
 		IUploadFile upload = new Services();
+
 		String response = upload.uploadFile(file);
 
 		String location = ServletUriComponentsBuilder
@@ -653,7 +656,21 @@ public class SimpleController {
 		return new ResponseEntity<String>(translatedText, HttpStatus.OK);
 
 	}
-	
-	
+
+	@RequestMapping(value = "/external/sendSimpleEmail", method = RequestMethod.POST)
+	public ResponseEntity<BaseOutput> sendSimpleEmail(@RequestBody EmailRequest emailRequest) {
+
+		BaseOutput response = new BaseOutput();
+		ISendSimpleEmail email = new Services();
+
+		try {
+			response = email.sendSimpleMail(emailRequest);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
+	}
 
 }

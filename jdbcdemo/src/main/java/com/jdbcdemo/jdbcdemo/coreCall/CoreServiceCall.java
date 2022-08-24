@@ -808,7 +808,6 @@ public class CoreServiceCall {
 	}
 
 	public static String getDocLocationWithDocId4(List<Property> property) {
-		
 
 		try {
 			Object[] reportArray = new Object[3];
@@ -842,13 +841,13 @@ public class CoreServiceCall {
 		}
 		return "OK";
 	}
-	
+
 	public String getLanguageCode(String language) {
 
 		List<String> DBTables = new ArrayList<>();
 		String languageCode = "";
-		String query = "select lc.alpha2 from dev.language_codes lc where Upper(lc.language) =upper('"
-				+ language + "')";
+		String query = "select lc.alpha2 from dev.language_codes lc where Upper(lc.language) =upper('" + language
+				+ "')";
 		System.out.println(query);
 
 		try {
@@ -859,7 +858,7 @@ public class CoreServiceCall {
 			ResultSet rs = cstmt.executeQuery(query);
 			while (rs.next()) {
 				languageCode = rs.getString(1);
-				if(languageCode.equals("")) {
+				if (languageCode.equals("")) {
 					return "This language is not present in our local DB";
 				}
 			}
@@ -872,6 +871,52 @@ public class CoreServiceCall {
 		}
 
 		return languageCode;
+
+	}
+
+	public String insertApiLogs(String url, String request, String response) {
+
+		BaseOutput output = new BaseOutput();
+
+		double errorCode = 0;
+		String errorDesc = "";
+		String clobSting = "";
+		java.sql.Clob clobOut = null;
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call dev.insert_api_data(?,?,?,?,?)}");
+				st.setString(1, url);
+				st.setString(2, request);
+				st.setString(3, response);
+
+				st.registerOutParameter(4, java.sql.Types.DOUBLE);
+				st.registerOutParameter(5, java.sql.Types.VARCHAR);
+				st.execute();
+
+				errorCode = st.getDouble(4);
+				errorDesc = st.getString(5);
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(clobSting);
+
+		return errorDesc;
 
 	}
 }

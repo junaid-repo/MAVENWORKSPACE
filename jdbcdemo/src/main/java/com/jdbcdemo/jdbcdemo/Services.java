@@ -28,6 +28,7 @@ import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPList;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
+import com.jdbcdemo.jdbcdemo.dto.EmailRequest;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
@@ -40,6 +41,7 @@ import com.jdbcdemo.jdbcdemo.interfaces.IFN01;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN03;
 import com.jdbcdemo.jdbcdemo.interfaces.IGDPCountries;
+import com.jdbcdemo.jdbcdemo.interfaces.ISendSimpleEmail;
 import com.jdbcdemo.jdbcdemo.interfaces.IServices;
 import com.jdbcdemo.jdbcdemo.interfaces.ITextTranslate;
 import com.jdbcdemo.jdbcdemo.interfaces.IUploadFile;
@@ -49,7 +51,7 @@ import utility.Utility;
 
 @Component
 public class Services extends Thread implements IServices, IFN02, IFN03, IExportTableDataAsScript, IGDPCountries,
-		IUploadFile, IDownloadFile, ITextTranslate {
+		IUploadFile, IDownloadFile, ITextTranslate, ISendSimpleEmail {
 	@Value("${upload-dir}")
 	private static String FILE_DIRECTORY = "C:/Users/junai/OneDrive/Documents/FileUploadDir/";
 	@Autowired
@@ -616,6 +618,31 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 		};
 		return trans.textTranslate(textDetails);
 
+	}
+
+	@Override
+	public BaseOutput sendSimpleMail(EmailRequest emailRequest) {
+		// TODO Auto-generated method stub
+		ISendSimpleEmail obj = BaseOutput -> {
+			BaseOutput response = new BaseOutput();
+			String from = emailRequest.getFrom();
+			String to = emailRequest.getTo();
+			String subject = emailRequest.getSubject();
+			String messageBody = emailRequest.getMailBody();
+
+			ExternalServices ext = new ExternalServices();
+			int errorCode = 0;
+			String errorDesc = "Success";
+
+			errorDesc = ext.sendSimpleMail(messageBody, subject, from, to);
+
+			response.setErrorCode(errorCode);
+			response.setErrorDesc(errorDesc);
+
+			return response;
+
+		};
+		return obj.sendSimpleMail(emailRequest);
 	}
 
 }

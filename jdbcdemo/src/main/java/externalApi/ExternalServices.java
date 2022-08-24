@@ -11,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.jdbcdemo.jdbcdemo.properties.AppProperties;
 
+import utility.Utility;
+
 public class ExternalServices {
 
 	// private final RestTemplate restTemplate;
@@ -22,9 +24,9 @@ public class ExternalServices {
 	 */
 
 	public String translateText(String text, String fromLang, String toLang) {
-		
+
 		String translatedText = "";
-		String body = "q="+text+"&target="+toLang+"&"+fromLang;
+		String body = "q=" + text + "&target=" + toLang + "&" + fromLang;
 		System.out.println(body);
 
 		try {
@@ -32,8 +34,7 @@ public class ExternalServices {
 					.header("content-type", "application/x-www-form-urlencoded")
 					.header("Accept-Encoding", "application/gzip").header("X-RapidAPI-Key", AppProperties.rapidAPIKey)
 					.header("X-RapidAPI-Host", AppProperties.rapidAPITranlateHost)
-					.method("POST", HttpRequest.BodyPublishers.ofString(body))
-					.build();
+					.method("POST", HttpRequest.BodyPublishers.ofString(body)).build();
 			HttpResponse<String> response = HttpClient.newHttpClient().send(request,
 					HttpResponse.BodyHandlers.ofString());
 			translatedText = response.body();
@@ -44,22 +45,26 @@ public class ExternalServices {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(Utility.insertApiLogs(AppProperties.rapidAPITranslateURI, body, translatedText));
 		return translatedText;
 	}
 
-	public String consumeAPI() {
-		RestTemplate restTemplate = new RestTemplate();
+	public String sendSimpleMail(String message, String subject, String from, String to) {
 
-		return restTemplate.getForObject("https://reqres.in/api/users?page=2", String.class);
-	}
+		from = Utility.convertSingleStringToJsonType(from);
+		to = Utility.convertSingleStringToJsonType(to);
+		subject = Utility.convertSingleStringToJsonType(subject);
+		message = Utility.convertSingleStringToJsonType(message);
 
-	{
+		String masterMessage = "{\"personalizations\": [{\"to\": [{\"email\": " + to + "}],\"subject\": " + subject
+				+ "}],\"from\": {\"email\": " + from + "},\"content\": [{\"type\": \"text/plain\",\"value\": " + message
+				+ "}]}\n" + "";
+		System.out.println(masterMessage);
 		try {
-			HttpRequest request = HttpRequest.newBuilder()
-					.uri(URI.create("https://weatherapi-com.p.rapidapi.com/future.json?q=London&dt=2022-12-25"))
-					.header("X-RapidAPI-Key", "ec006851b0mshb00e264fb95e9cap181e4ajsna56a1113b969")
-					.header("X-RapidAPI-Host", "weatherapi-com.p.rapidapi.com")
-					.method("GET", HttpRequest.BodyPublishers.noBody()).build();
+			HttpRequest request = HttpRequest.newBuilder().uri(URI.create(AppProperties.sendGridSimpleMailURI))
+					.header("content-type", "application/json").header("X-RapidAPI-Key", AppProperties.rapidAPIKey)
+					.header("X-RapidAPI-Host", AppProperties.sendGridSimpleMailHost)
+					.method("POST", HttpRequest.BodyPublishers.ofString(masterMessage)).build();
 			HttpResponse<String> response = HttpClient.newHttpClient().send(request,
 					HttpResponse.BodyHandlers.ofString());
 			System.out.println(response.body());
@@ -70,5 +75,8 @@ public class ExternalServices {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(Utility.insertApiLogs(AppProperties.sendGridSimpleMailURI, masterMessage, ""));
+		return "Success!!!";
 	}
+
 }
