@@ -33,6 +33,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jdbcdemo.jdbcdemo.Services;
 import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
@@ -66,6 +67,7 @@ import com.jdbcdemo.security.MyUserDetailsService;
 
 import excelProject.CSVReader;
 import excelProject.ImportURL;
+import utility.Utility;
 
 @RestController
 public class SimpleController {
@@ -81,6 +83,8 @@ public class SimpleController {
 	@Autowired
 	JwtUtil jwtTokenUtil;
 
+	ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+
 	private static String FILE_DIRECTORY = "C:/Users/junai/OneDrive/Documents/FileUploadDir/";
 
 	@RequestMapping(value = "webService/jdbcDemo", method = RequestMethod.GET)
@@ -93,10 +97,10 @@ public class SimpleController {
 	}
 
 	@RequestMapping(value = "webService/getEmployeeLists", method = RequestMethod.GET)
-	ResponseEntity<EmployeeDetailsResponse> getEmpDetails(@RequestBody EmployeeDetailsRequest empOb) {
+	ResponseEntity<EmployeeDetailsResponse> getEmpDetails(@RequestBody EmployeeDetailsRequest request) {
 
 		// System.out.println(empId);
-		String empId = empOb.getDeptId();
+		String empId = request.getDeptId();
 
 		EmployeeDetailsResponse output = new EmployeeDetailsResponse();
 		if (empId == null || empId == "") {
@@ -214,7 +218,8 @@ public class SimpleController {
 	}
 
 	@RequestMapping(value = "webService/createBulkEmployee", method = RequestMethod.POST)
-	ResponseEntity<BulkEmployeesResponse> createBulkEmployee(@RequestBody InsertEmployeeRequest employeeList) {
+	ResponseEntity<BulkEmployeesResponse> createBulkEmployee(@RequestBody InsertEmployeeRequest employeeList)
+			throws JsonProcessingException {
 		// BaseOutput response = new BaseOutput();
 		BulkEmployeesResponse response = new BulkEmployeesResponse();
 		Services serv = new Services();
@@ -232,8 +237,8 @@ public class SimpleController {
 
 		for (InsertEmployeeResponse ier : newEmpRespnse) {
 			String location = ServletUriComponentsBuilder
-					.fromHttpUrl(
-							ServletUriComponentsBuilder.fromCurrentContextPath().toUriString() + "/getEmployeeDetails")
+					.fromHttpUrl(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString()
+							+ "/webService/getEmployeeDetails")
 					.path("/{id}").buildAndExpand(ier.getEmpId()).toUri().toString();
 
 			System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
@@ -247,6 +252,9 @@ public class SimpleController {
 		}
 		response.setNewEmployeesResponse(newEmployeesResponse);
 		// return ResponseEntity.created(location).build();
+
+		Utility.insertInternalApiLogs("webService/createBulkEmployee", ow.writeValueAsString(employeeList),
+				ow.writeValueAsString(response));
 
 		return new ResponseEntity<BulkEmployeesResponse>(response, HttpStatus.OK);
 	}
@@ -658,7 +666,8 @@ public class SimpleController {
 	}
 
 	@RequestMapping(value = "/external/sendSimpleEmail", method = RequestMethod.POST)
-	public ResponseEntity<BaseOutput> sendSimpleEmail(@RequestBody EmailRequest emailRequest) {
+	public ResponseEntity<BaseOutput> sendSimpleEmail(@RequestBody EmailRequest emailRequest)
+			throws JsonProcessingException {
 
 		BaseOutput response = new BaseOutput();
 		ISendSimpleEmail email = new Services();
@@ -670,6 +679,8 @@ public class SimpleController {
 			e.printStackTrace();
 		}
 
+		Utility.insertInternalApiLogs("/external/sendSimpleEmail", ow.writeValueAsString(emailRequest),
+				ow.writeValueAsString(response));
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
 	}
 

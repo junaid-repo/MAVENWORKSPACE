@@ -874,7 +874,7 @@ public class CoreServiceCall {
 
 	}
 
-	public String insertApiLogs(String url, String request, String response) {
+	public String insertExternalApiLogs(String url, String request, String response) {
 
 		BaseOutput output = new BaseOutput();
 
@@ -891,6 +891,51 @@ public class CoreServiceCall {
 
 			try {
 				st = conn.prepareCall("{call dev.insert_api_data(?,?,?,?,?)}");
+				st.setString(1, url);
+				st.setString(2, request);
+				st.setString(3, response);
+
+				st.registerOutParameter(4, java.sql.Types.DOUBLE);
+				st.registerOutParameter(5, java.sql.Types.VARCHAR);
+				st.execute();
+
+				errorCode = st.getDouble(4);
+				errorDesc = st.getString(5);
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(clobSting);
+
+		return errorDesc;
+
+	}
+	public String insertInternalApiLogs(String url, String request, String response) {
+
+		BaseOutput output = new BaseOutput();
+
+		double errorCode = 0;
+		String errorDesc = "";
+		String clobSting = "";
+		java.sql.Clob clobOut = null;
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call dev.insert_interal_api_data(?,?,?,?,?)}");
 				st.setString(1, url);
 				st.setString(2, request);
 				st.setString(3, response);

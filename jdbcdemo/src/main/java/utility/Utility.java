@@ -21,6 +21,8 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.IOUtils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jdbcdemo.SimpleController;
 import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
@@ -625,6 +627,14 @@ public class Utility implements Runnable {
 	public static String insertApiLogs(String url, String request, String response) {
 		CoreServiceCall core = new CoreServiceCall();
 
-		return core.insertApiLogs(url, request, response);
+		return core.insertExternalApiLogs(url, request, response);
+	}
+	public static String insertInternalApiLogs(String url, String request, String response) {
+		CoreServiceCall core = new CoreServiceCall();
+		
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		//String json = ow.writeValueAsString(object);
+
+		return core.insertInternalApiLogs(url, request, response);
 	}
 }
