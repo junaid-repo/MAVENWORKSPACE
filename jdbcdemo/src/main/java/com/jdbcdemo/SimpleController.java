@@ -96,8 +96,9 @@ public class SimpleController {
 		return new ResponseEntity<BaseOutput>(bs, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "webService/getEmployeeLists", method = RequestMethod.GET)
-	ResponseEntity<EmployeeDetailsResponse> getEmpDetails(@RequestBody EmployeeDetailsRequest request) {
+	@RequestMapping(value = URIConstants.GET_EMPLOYEE_DETAILS, method = RequestMethod.GET)
+	ResponseEntity<EmployeeDetailsResponse> getEmpDetails(@RequestBody EmployeeDetailsRequest request)
+			throws JsonProcessingException {
 
 		// System.out.println(empId);
 		String empId = request.getDeptId();
@@ -112,6 +113,7 @@ public class SimpleController {
 		// IServices serv = new Services();
 		try {
 			output = serv.getEmployeeLists(empId);
+
 		} catch (Exception e) {
 			output.setErrorDesc(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 			output.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
@@ -120,12 +122,16 @@ public class SimpleController {
 		output.setErrorDesc(HttpStatus.OK.getReasonPhrase());
 		output.setErrorCode(HttpStatus.OK.value());
 
+		Utility.insertInternalApiLogs(URIConstants.GET_EMPLOYEE_DETAILS, ow.writeValueAsString(request),
+				ow.writeValueAsString(output));
+
 		return new ResponseEntity<EmployeeDetailsResponse>(output, HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "webService/addEmployee", method = RequestMethod.POST)
-	ResponseEntity<InsertEmployeeResponse> insertNewEmployee(@RequestBody InsertEmployeeList request) {
+	@RequestMapping(value = URIConstants.ADD_EMPLOYEE, method = RequestMethod.POST)
+	ResponseEntity<InsertEmployeeResponse> insertNewEmployee(@RequestBody InsertEmployeeList request)
+			throws JsonProcessingException {
 
 		InsertEmployeeResponse response = new InsertEmployeeResponse();
 
@@ -150,13 +156,16 @@ public class SimpleController {
 		response.setEmpId(response.getEmpId());
 		response.setUrl(location);
 		// return ResponseEntity.created(location).build();
+		Utility.insertInternalApiLogs(URIConstants.ADD_EMPLOYEE, ow.writeValueAsString(request),
+				ow.writeValueAsString(response));
 		return new ResponseEntity<InsertEmployeeResponse>(response, HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "webService/getEmployeeDetails/{empId}", method = RequestMethod.GET)
+	@RequestMapping(value = URIConstants.GET_EMPLOYEE_DETAIL, method = RequestMethod.GET)
 	@Produces(MediaType.APPLICATION_XML)
-	ResponseEntity<EmployeeDetailsResponse> getEmployeeDetails(@PathVariable String empId) {
+	ResponseEntity<EmployeeDetailsResponse> getEmployeeDetails(@PathVariable String empId)
+			throws JsonProcessingException {
 		EmployeeDetailsResponse response = new EmployeeDetailsResponse();
 		System.out.println("yahan tak pauch gaye ");
 		if (empId == null || empId == "") {
@@ -183,13 +192,14 @@ public class SimpleController {
 		 * response.setErrorDesc(HttpStatus.OK.getReasonPhrase());
 		 * response.setErrorCode(HttpStatus.OK.value());
 		 */
-
+		Utility.insertInternalApiLogs(URIConstants.GET_EMPLOYEE_DETAIL, ow.writeValueAsString(empId),
+				ow.writeValueAsString(response));
 		return new ResponseEntity<EmployeeDetailsResponse>(response, HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "webService/deleteUser/{empId}", method = RequestMethod.DELETE)
-	ResponseEntity<BaseOutput> removeEmployee(@PathVariable String empId) {
+	@RequestMapping(value = URIConstants.REMOVE_EMPLOYEE, method = RequestMethod.DELETE)
+	ResponseEntity<BaseOutput> removeEmployee(@PathVariable String empId) throws JsonProcessingException {
 		BaseOutput response = new BaseOutput();
 
 		try {
@@ -204,20 +214,22 @@ public class SimpleController {
 		}
 		response.setErrorDesc(HttpStatus.OK.getReasonPhrase());
 		response.setErrorCode(HttpStatus.OK.value());
-
+		Utility.insertInternalApiLogs(URIConstants.REMOVE_EMPLOYEE, ow.writeValueAsString(empId),
+				ow.writeValueAsString(response));
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "webService/freezeEmployee/{empId}", method = RequestMethod.POST)
-	ResponseEntity<BaseOutput> freezeEmployee(@PathVariable String empId) {
+	@RequestMapping(value = URIConstants.FREEZE_EMPLOYEE, method = RequestMethod.POST)
+	ResponseEntity<BaseOutput> freezeEmployee(@PathVariable String empId) throws JsonProcessingException {
 		BaseOutput response = new BaseOutput();
 		Services serv = new Services();
 		response = serv.freezeEmployee(empId);
-
+		Utility.insertInternalApiLogs(URIConstants.FREEZE_EMPLOYEE, ow.writeValueAsString(empId),
+				ow.writeValueAsString(response));
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "webService/createBulkEmployee", method = RequestMethod.POST)
+	@RequestMapping(value = URIConstants.CREATE_BULK_EMPLOYEE, method = RequestMethod.POST)
 	ResponseEntity<BulkEmployeesResponse> createBulkEmployee(@RequestBody InsertEmployeeRequest employeeList)
 			throws JsonProcessingException {
 		// BaseOutput response = new BaseOutput();
@@ -253,14 +265,14 @@ public class SimpleController {
 		response.setNewEmployeesResponse(newEmployeesResponse);
 		// return ResponseEntity.created(location).build();
 
-		Utility.insertInternalApiLogs("webService/createBulkEmployee", ow.writeValueAsString(employeeList),
+		Utility.insertInternalApiLogs(URIConstants.CREATE_BULK_EMPLOYEE, ow.writeValueAsString(employeeList),
 				ow.writeValueAsString(response));
-
 		return new ResponseEntity<BulkEmployeesResponse>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "webService/importBulkUsers", method = RequestMethod.POST)
-	public ResponseEntity<BulkEmployeesResponse> importUsers(@RequestBody ImportURL fileLocation) {
+	@RequestMapping(value = URIConstants.IMPORT_BULK_EMPLOYEE, method = RequestMethod.POST)
+	public ResponseEntity<BulkEmployeesResponse> importUsers(@RequestBody ImportURL fileLocation)
+			throws JsonProcessingException {
 		// BaseOutput response = new BaseOutput();
 		String loc = "C:\\Users\\junai\\Downloads\\BulkEmployees.csv";
 		CSVReader rd = new CSVReader();
@@ -318,12 +330,14 @@ public class SimpleController {
 		}
 		response.setNewEmployeesResponse(newEmployeesResponse);
 		// return ResponseEntity.created(location).build();
+		Utility.insertInternalApiLogs(URIConstants.IMPORT_BULK_EMPLOYEE, ow.writeValueAsString(fileLocation),
+				ow.writeValueAsString(response));
 
 		return new ResponseEntity<BulkEmployeesResponse>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "webService/deleteBulkUser", method = RequestMethod.POST)
-	ResponseEntity<BaseOutput> removeBulkEmployee(@RequestBody ImportURL fileLocation) {
+	@RequestMapping(value = URIConstants.DELETE_BULK_EMPLOYEE, method = RequestMethod.POST)
+	ResponseEntity<BaseOutput> removeBulkEmployee(@RequestBody ImportURL fileLocation) throws JsonProcessingException {
 		BaseOutput response = new BaseOutput();
 		CSVReader rd = new CSVReader();
 		String jsonString = "";
@@ -363,11 +377,13 @@ public class SimpleController {
 		}
 		response.setErrorDesc(HttpStatus.OK.getReasonPhrase());
 		response.setErrorCode(HttpStatus.OK.value());
+		Utility.insertInternalApiLogs(URIConstants.DELETE_BULK_EMPLOYEE, ow.writeValueAsString(fileLocation),
+				ow.writeValueAsString(response));
 
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "webService/deptWiseTotalSalary/{type}/{deptId}", method = RequestMethod.GET)
+	@RequestMapping(value = URIConstants.DEPT_WISE_TOTAL_SALARY, method = RequestMethod.GET)
 	ResponseEntity<Double> deptWiseTotalSalary(@PathVariable String type, @PathVariable String deptId) {
 
 		System.out.println(type);
@@ -378,9 +394,9 @@ public class SimpleController {
 		return new ResponseEntity<Double>(sum, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "webService/wiseCalculation/{wise}/{type}/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = URIConstants.WISE_CALCULATION, method = RequestMethod.GET)
 	ResponseEntity<SalaryOperationsResponse> wiseCalculation(@PathVariable String wise, @PathVariable String type,
-			@PathVariable String id) {
+			@PathVariable String id) throws JsonProcessingException {
 		SalaryOperationsResponse response = new SalaryOperationsResponse();
 		System.out.println(wise);
 		System.out.println(type);
@@ -401,12 +417,14 @@ public class SimpleController {
 
 		response.setOperation(type);
 		response.setAmount(amount);
+		Utility.insertInternalApiLogs(URIConstants.WISE_CALCULATION, ow.writeValueAsString(wise + "##" + type),
+				ow.writeValueAsString(response));
 
 		return new ResponseEntity<SalaryOperationsResponse>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "webService/jobDetailsWithMinimumSalaryOfAndSortedByMaxSalaryDesc/{minimumSalary}", method = RequestMethod.GET)
-	ResponseEntity<List<JobDetails>> jobDetails(@PathVariable String minimumSalary) {
+	@RequestMapping(value = URIConstants.JOB_DETAILS, method = RequestMethod.GET)
+	ResponseEntity<List<JobDetails>> jobDetails(@PathVariable String minimumSalary) throws JsonProcessingException {
 
 		List<JobDetails> response = new ArrayList<>();
 		try {
@@ -415,12 +433,16 @@ public class SimpleController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Utility.insertInternalApiLogs(URIConstants.JOB_DETAILS, ow.writeValueAsString(minimumSalary),
+				ow.writeValueAsString(response));
+
 		return new ResponseEntity<List<JobDetails>>(response, HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "webService/getEmpIdAccordingToMiniumSalaryOf/{minSalary}", method = RequestMethod.GET)
-	ResponseEntity<List<InsertEmployeeResponse2>> getEmpId(@PathVariable String minSalary) {
+	@RequestMapping(value = URIConstants.LIST_EMPLOYEES, method = RequestMethod.GET)
+	ResponseEntity<List<InsertEmployeeResponse2>> getEmpId(@PathVariable String minSalary)
+			throws JsonProcessingException {
 		List<InsertEmployeeResponse2> response = new ArrayList<>();
 		CoreServiceCall csc = new CoreServiceCall();
 
@@ -457,25 +479,31 @@ public class SimpleController {
 
 		}
 		// return ResponseEntity.created(location).build();
+		Utility.insertInternalApiLogs(URIConstants.LIST_EMPLOYEES, ow.writeValueAsString(minSalary),
+				ow.writeValueAsString(response));
+
 		return new ResponseEntity<List<InsertEmployeeResponse2>>(response, HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "webService/getDetpartmentDetails/{deptId}", method = RequestMethod.GET)
+	@RequestMapping(value = URIConstants.GET_DEPARTMENT_DETAILS, method = RequestMethod.GET)
 	ResponseEntity<DepartmentDetailsResponse> getDepartmentDetails(@PathVariable String deptId,
-			@RequestParam String name, String name2) {
+			@RequestParam String name, String name2) throws JsonProcessingException {
 		DepartmentDetailsResponse response = new DepartmentDetailsResponse();
 		IFN03 obj = new Services();
 		System.out.println("the input taken in the request are ------------------->" + name);
 		System.out.println("the input taken in the request are -------------------2>" + name2);
 
 		response = obj.getDeptDetails(deptId);
+		Utility.insertInternalApiLogs(URIConstants.GET_DEPARTMENT_DETAILS, ow.writeValueAsString(deptId),
+				ow.writeValueAsString(response));
 
 		return new ResponseEntity<DepartmentDetailsResponse>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "webService/createAndUploadTablesAndData", method = RequestMethod.POST)
-	ResponseEntity<BaseOutput> createAndUploadTablesAndData(@RequestBody ImportURL fileLocation) {
+	@RequestMapping(value = URIConstants.CREATE_UPLOAD_TABLE_FROM_URI, method = RequestMethod.POST)
+	ResponseEntity<BaseOutput> createAndUploadTablesAndData(@RequestBody ImportURL fileLocation)
+			throws JsonProcessingException {
 		BaseOutput output = new BaseOutput();
 
 		try {
@@ -484,12 +512,15 @@ public class SimpleController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Utility.insertInternalApiLogs(URIConstants.CREATE_UPLOAD_TABLE_FROM_URI, ow.writeValueAsString(fileLocation),
+				ow.writeValueAsString(output));
 
 		return new ResponseEntity<BaseOutput>(output, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "webService/exportTableDataAs_SQL_Script/{tableName}", method = RequestMethod.POST)
-	ResponseEntity<BaseOutput> exportTableDataAsDBScript(@PathVariable String tableName) {
+	@RequestMapping(value = URIConstants.EXPORT_TABLE_DATA_AS_SCRIPT, method = RequestMethod.POST)
+	ResponseEntity<BaseOutput> exportTableDataAsDBScript(@PathVariable String tableName)
+			throws JsonProcessingException {
 		BaseOutput response = new BaseOutput();
 
 		IExportTableDataAsScript obj = new Services();
@@ -500,12 +531,15 @@ public class SimpleController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Utility.insertInternalApiLogs(URIConstants.EXPORT_TABLE_DATA_AS_SCRIPT, ow.writeValueAsString(tableName),
+				ow.writeValueAsString(response));
 
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "webService/getGPDWiseCountries", method = RequestMethod.GET)
-	ResponseEntity<CountryGDPResponse> gpdWiseCountries(@RequestParam String gpd, String year) {
+	@RequestMapping(value = URIConstants.GET_GDP_WISE_COUNRTY, method = RequestMethod.GET)
+	ResponseEntity<CountryGDPResponse> gpdWiseCountries(@RequestParam String gpd, String year)
+			throws JsonProcessingException {
 		CountryGDPResponse response = new CountryGDPResponse();
 
 		AuthenticationRequest auth = new AuthenticationRequest();
@@ -531,6 +565,8 @@ public class SimpleController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Utility.insertInternalApiLogs(URIConstants.GET_GDP_WISE_COUNRTY, ow.writeValueAsString(""),
+				ow.writeValueAsString(response));
 
 		return new ResponseEntity<CountryGDPResponse>(response, HttpStatus.OK);
 	}
@@ -554,8 +590,9 @@ public class SimpleController {
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
 
-	@RequestMapping(value = "webService/uploadDataTable", method = RequestMethod.POST)
-	ResponseEntity<BaseOutput> createAndUploadTablesAndDataWithFileUpload(@RequestParam("File") MultipartFile file) {
+	@RequestMapping(value = URIConstants.UPLOAD_TABLE_WITH_DATA, method = RequestMethod.POST)
+	ResponseEntity<BaseOutput> createAndUploadTablesAndDataWithFileUpload(@RequestParam("File") MultipartFile file)
+			throws JsonProcessingException {
 		BaseOutput output = new BaseOutput();
 		String response = null;
 		File myFile = null;
@@ -586,11 +623,13 @@ public class SimpleController {
 				e.printStackTrace();
 			}
 		}
+		Utility.insertInternalApiLogs(URIConstants.UPLOAD_TABLE_WITH_DATA, ow.writeValueAsString(file),
+				ow.writeValueAsString(output));
 
 		return new ResponseEntity<BaseOutput>(output, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
+	@RequestMapping(value = URIConstants.FILE_UPLOAD, method = RequestMethod.POST)
 	public ResponseEntity<Object> fileUpload(@RequestParam("File") MultipartFile file) throws IOException {
 
 		// String fileLocation =
@@ -604,11 +643,15 @@ public class SimpleController {
 				.path("/{id}").buildAndExpand(response).toUri().toString();
 
 		System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
+		Utility.insertInternalApiLogs(URIConstants.FILE_UPLOAD, ow.writeValueAsString(""),
+				ow.writeValueAsString(response));
+
 		return new ResponseEntity<Object>(location, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "tableDataAs_SQL_Script/{tableName}", method = RequestMethod.POST)
-	ResponseEntity<BaseOutput> exportTableDataAsDBScriptWithThreading(@PathVariable String tableName) {
+	@RequestMapping(value = URIConstants.EXPORT_TABLE_DATA, method = RequestMethod.POST)
+	ResponseEntity<BaseOutput> exportTableDataAsDBScriptWithThreading(@PathVariable String tableName)
+			throws JsonProcessingException {
 		BaseOutput response = new BaseOutput();
 
 		Services obj = new Services();
@@ -619,11 +662,13 @@ public class SimpleController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Utility.insertInternalApiLogs(URIConstants.EXPORT_TABLE_DATA, ow.writeValueAsString(tableName),
+				ow.writeValueAsString(response));
 
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/fileDownload/{docId}", method = RequestMethod.GET)
+	@RequestMapping(value = URIConstants.FILE_DOWNLOAD, method = RequestMethod.GET)
 	public ResponseEntity<Resource> fileDownload(@PathVariable String docId) throws IOException {
 
 		MultiPart objMultiPart = null;
@@ -647,25 +692,32 @@ public class SimpleController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		Utility.insertInternalApiLogs(URIConstants.FILE_DOWNLOAD, ow.writeValueAsString(docId),
+				ow.writeValueAsString(""));
+
 		return ResponseEntity.ok().headers(header).contentLength(file.length())
 				.contentType(org.springframework.http.MediaType.parseMediaType("application/octet-stream"))
 				.body(resource);
 
 	}
 
-	@RequestMapping(value = "/external/translateText", method = RequestMethod.POST)
-	public ResponseEntity<String> translateText(@RequestBody TranslateText textToTranslate) {
+	@RequestMapping(value = URIConstants.TRANSLATE_TEXT, method = RequestMethod.POST)
+	public ResponseEntity<String> translateText(@RequestBody TranslateText textToTranslate)
+			throws JsonProcessingException {
 
 		ITextTranslate obj = new Services();
 		String translatedText = "";
 
 		translatedText = obj.textTranslate(textToTranslate);
+		Utility.insertInternalApiLogs(URIConstants.TRANSLATE_TEXT, ow.writeValueAsString(textToTranslate),
+				ow.writeValueAsString(translatedText));
 
 		return new ResponseEntity<String>(translatedText, HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "/external/sendSimpleEmail", method = RequestMethod.POST)
+	@RequestMapping(value = URIConstants.SEND_SIMPLE_EMAIL, method = RequestMethod.POST)
 	public ResponseEntity<BaseOutput> sendSimpleEmail(@RequestBody EmailRequest emailRequest)
 			throws JsonProcessingException {
 
@@ -679,8 +731,10 @@ public class SimpleController {
 			e.printStackTrace();
 		}
 
-		Utility.insertInternalApiLogs("/external/sendSimpleEmail", ow.writeValueAsString(emailRequest),
+	
+		Utility.insertInternalApiLogs(URIConstants.SEND_SIMPLE_EMAIL, ow.writeValueAsString(emailRequest),
 				ow.writeValueAsString(response));
+
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
 	}
 
