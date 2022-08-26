@@ -6,7 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
@@ -25,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
+import com.jdbcdemo.jdbcdemo.dto.CountriesDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPList;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
@@ -367,7 +370,7 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 		return response;
 	}
 
-	public BaseOutput tableAndDataCreate(String location) throws FileNotFoundException, IOException {
+	public BaseOutput tableAndDataCreate(String location, String version) throws FileNotFoundException, IOException {
 
 		BaseOutput response = new BaseOutput();
 		String errorDesc = "Success";
@@ -386,14 +389,24 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 		System.out.println(tableN);
 
 		char tableCheckFlag = 'T';
+		String tableType = "R";
 
+		if (version.equals("simple"))
+			tableType = "NR";
+		else if (version.equals("relational"))
+			tableType = "R";
+		else {
+			response.setErrorCode(100);
+			response.setErrorDesc("Type selected in the URI is wrong");
+			return response;
+		}
 		tableCheckFlag = CoreServiceCall.checkTableExistence(tableN);
 		if (tableCheckFlag == 'F') {
-			response = util.createTableWithColumnType(tableN, location);
+			response = util.createTableWithColumnType(tableN, location, tableType);
 		}
 
 		if (response.getErrorCode() == 0) {
-			response = util.insertDataInTable_WithColoumnName(tableN, location);
+			response = util.insertDataInTable_WithColoumnName(tableN, location, tableType);
 		}
 
 		return response;
@@ -643,6 +656,27 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 
 		};
 		return obj.sendSimpleMail(emailRequest);
+	}
+
+	public Map getCountriesDetails(String paramName, String paramValue, String comp) {
+		Map<String, Object> response = new HashMap();
+		CoreServiceCall csc = new CoreServiceCall();
+		Map<String, String> retMap = new HashMap<>();
+		List<Map> megaList = new ArrayList<>();
+		retMap = csc.getCountryDetails(paramName, paramValue, comp);
+		if (retMap.get("clobData") != null) {
+			try {
+				megaList = Utility.getClobDataToListOfMaps(retMap.get("clobData"), retMap.get("primaryConcat"),
+						retMap.get("secondaryConcat"), retMap.get("tertConcat"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		response.put("response", megaList);
+
+		return response;
+
 	}
 
 }

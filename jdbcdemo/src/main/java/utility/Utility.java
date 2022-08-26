@@ -21,6 +21,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.IOUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jdbcdemo.SimpleController;
@@ -53,7 +54,7 @@ public class Utility implements Runnable {
 		return stringData;
 	}
 
-	public static BaseOutput createTable(String tableName, String fileLocation)
+	public static BaseOutput createTable(String tableName, String fileLocation, String version)
 			throws FileNotFoundException, IOException {
 
 		CSVParser parser = new CSVParser(new FileReader(fileLocation), CSVFormat.DEFAULT.withHeader());
@@ -91,7 +92,7 @@ public class Utility implements Runnable {
 		columnNames = columnNames.replace(' ', '_');
 		System.out.println(columnNames);
 		try {
-			output = CoreServiceCall.createTable(tableName, columnNames);
+			output = CoreServiceCall.createTable(tableName, columnNames, version);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,7 +101,7 @@ public class Utility implements Runnable {
 
 	}
 
-	public static BaseOutput createTableWithColumnType(String tableName, String fileLocation)
+	public static BaseOutput createTableWithColumnType(String tableName, String fileLocation, String version)
 			throws FileNotFoundException, IOException {
 
 		CSVParser parser = new CSVParser(new FileReader(fileLocation), CSVFormat.DEFAULT.withHeader());
@@ -181,8 +182,9 @@ public class Utility implements Runnable {
 		finalRows = finalRows.substring(0, finalRows.length() - 2);
 		finalRows = finalRows.replace(' ', '_');
 		finalRows = finalRows.replace('-', '_');
+
 		try {
-			output = CoreServiceCall.createTable(tableName, finalRows);
+			output = CoreServiceCall.createTable(tableName, finalRows, version);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -191,7 +193,7 @@ public class Utility implements Runnable {
 
 	}
 
-	public BaseOutput insertDataInTable(String tableName, String location) {
+	public BaseOutput insertDataInTable(String tableName, String location, String version) {
 
 		StringBuilder sb = null;
 		BaseOutput response = new BaseOutput();
@@ -228,7 +230,7 @@ public class Utility implements Runnable {
 				if (count > 1) {
 					try {
 						CoreServiceCall csc = new CoreServiceCall();
-						response = csc.insertDataInTable(tableName, sb.toString());
+						response = csc.insertDataInTable(tableName, sb.toString(), version);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -246,7 +248,7 @@ public class Utility implements Runnable {
 		return response;
 	}
 
-	public BaseOutput insertDataInTable_WithColoumnName(String tableName, String fileLocation)
+	public BaseOutput insertDataInTable_WithColoumnName(String tableName, String fileLocation, String version)
 			throws FileNotFoundException, IOException {
 
 		// String fileLocation = "C:\\\\Users\\\\junai\\\\Downloads\\\\REVENUE_2.csv";
@@ -363,7 +365,7 @@ public class Utility implements Runnable {
 
 					try {
 						CoreServiceCall csc = new CoreServiceCall();
-						response = csc.insertDataInTable(tableName, sb.toString());
+						response = csc.insertDataInTable(tableName, sb.toString(), version);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -614,7 +616,12 @@ public class Utility implements Runnable {
 		String fileLocation = newImportUrl.getFileLocation();
 		System.out.println(fileLocation);
 		SimpleController simple = new SimpleController();
-		simple.importUsers(newImportUrl);
+		try {
+			simple.importUsers(newImportUrl);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -629,12 +636,52 @@ public class Utility implements Runnable {
 
 		return core.insertExternalApiLogs(url, request, response);
 	}
+
 	public static String insertInternalApiLogs(String url, String request, String response) {
 		CoreServiceCall core = new CoreServiceCall();
-		
+
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-		//String json = ow.writeValueAsString(object);
+		// String json = ow.writeValueAsString(object);
 
 		return core.insertInternalApiLogs(url, request, response);
 	}
+
+	public static List<Map> getClobDataToListOfMaps(String megaData, String primaryConcat, String secondaryConcat,
+			String tertConcact) {
+		
+		
+		//List<Map> superList = new ArrayList<>();
+		List<Map> listOfMaps = new ArrayList<>();
+		
+		
+	String megaDataArr[] = megaData.split(primaryConcat);
+		for (int i = 0; i < megaDataArr.length; i++) {
+			// System.out.println(megaDataArr[i]);
+
+			String dataArr[] = megaDataArr[i].split(secondaryConcat);
+
+			
+			Map<String, String> retMap = new HashMap<>();
+			for (int j = 0; j < dataArr.length; j++) {
+			
+				// System.out.println(tempData);
+
+				String arr[] = dataArr[j].split(tertConcact);
+				
+
+				
+					if (arr[0] != null && arr[1] != null)
+						
+					
+				retMap.put(arr[1], arr[0]);
+				// System.out.println(retMap);
+			}listOfMaps.add(retMap);
+			// System.out.println(listOfMaps);
+			//superList.add(listOfMaps);
+		}
+		//System.out.println(superList);
+
+		return listOfMaps;
+	}
+
 }

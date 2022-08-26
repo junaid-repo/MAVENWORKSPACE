@@ -2,6 +2,7 @@ package com.jdbcdemo.jdbcdemo.coreCall;
 
 import java.sql.Array;
 import java.sql.CallableStatement;
+import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,7 +11,11 @@ import java.sql.Statement;
 import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -25,7 +30,6 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.Property;
-import com.jdbcdemo.jdbcdemo.dto.Report;
 import com.jdbcdemo.jdbcdemo.properties.AppProperties;
 
 import connection.ConnectionClass;
@@ -456,7 +460,7 @@ public class CoreServiceCall {
 		return flag;
 	}
 
-	public static BaseOutput createTable(String tableName, String rows) {
+	public static BaseOutput createTable(String tableName, String rows, String version) {
 		Long errorCode = 0L;
 		String errorDesc = "";
 		BaseOutput bs = new BaseOutput();
@@ -471,16 +475,17 @@ public class CoreServiceCall {
 			if (conn != null) {
 
 				try {
-					st = conn.prepareCall("{call dev.createTable_withColumnType(?,?,?,?)}");
+					st = conn.prepareCall("{call dev.CREATETABLE_VERSION(?,?,?,?, ?)}");
 					// st = conn.prepareCall("{call dev.getEmployeesByDeptId(?,?,?,?)}");
 					st.setString(1, tableName);
 					st.setString(2, rows);
-					st.registerOutParameter(3, java.sql.Types.DOUBLE);
-					st.registerOutParameter(4, java.sql.Types.VARCHAR);
+					st.setString(3, version);
+					st.registerOutParameter(4, java.sql.Types.DOUBLE);
+					st.registerOutParameter(5, java.sql.Types.VARCHAR);
 					st.execute();
 
-					errorCode = st.getLong(3);
-					errorDesc = st.getString(4);
+					errorCode = st.getLong(4);
+					errorDesc = st.getString(5);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -497,7 +502,7 @@ public class CoreServiceCall {
 		return bs;
 	}
 
-	public BaseOutput insertDataInTable(String tableName, String values) {
+	public BaseOutput insertDataInTable(String tableName, String values, String version) {
 		BaseOutput output = new BaseOutput();
 		int errorCode = 0;
 		String errorDesc = "";
@@ -510,16 +515,17 @@ public class CoreServiceCall {
 			if (conn != null) {
 
 				try {
-					st = conn.prepareCall("{call dev.INSERTDATAINTOTABLE_ColumnWise(?,?,?,?)}");
+					st = conn.prepareCall("{call dev.INSERTDATAINTOTABLE_Versioned(?,?,?,?,?)}");
 					// st = conn.prepareCall("{call dev.getEmployeesByDeptId(?,?,?,?)}");
 					st.setString(1, tableName);
 					st.setString(2, values);
-					st.registerOutParameter(3, java.sql.Types.DOUBLE);
-					st.registerOutParameter(4, java.sql.Types.VARCHAR);
+					st.setString(3, version);
+					st.registerOutParameter(4, java.sql.Types.DOUBLE);
+					st.registerOutParameter(5, java.sql.Types.VARCHAR);
 					st.execute();
 
-					errorCode = st.getInt(3);
-					errorDesc = st.getString(4);
+					errorCode = st.getInt(4);
+					errorDesc = st.getString(5);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -919,6 +925,7 @@ public class CoreServiceCall {
 		return errorDesc;
 
 	}
+
 	public String insertInternalApiLogs(String url, String request, String response) {
 
 		BaseOutput output = new BaseOutput();
@@ -933,12 +940,16 @@ public class CoreServiceCall {
 			Connection conn = null;
 			conn = ConnectionClass.getEDBConnection();
 			CallableStatement st = null;
+			Clob requestClob = conn.createClob();
+			Clob responseClob = conn.createClob();
+			requestClob.setString(1, request);
+			responseClob.setString(1, response);
 
 			try {
 				st = conn.prepareCall("{call dev.insert_interal_api_data(?,?,?,?,?)}");
 				st.setString(1, url);
-				st.setString(2, request);
-				st.setString(3, response);
+				st.setClob(2, requestClob);
+				st.setClob(3, responseClob);
 
 				st.registerOutParameter(4, java.sql.Types.DOUBLE);
 				st.registerOutParameter(5, java.sql.Types.VARCHAR);
@@ -962,6 +973,70 @@ public class CoreServiceCall {
 		System.out.println(clobSting);
 
 		return errorDesc;
+
+	}
+
+	public Map<String, String> getCountryDetails(String paramName, String paramValue, String comp) {
+
+		BaseOutput output = new BaseOutput();
+		Map<String, String> retMap = new HashMap<>();
+
+		int errorCode = 0;
+		String errorDesc = "Success";
+		String clobSting = null;
+		String primaryConcat = "~~";
+		String secondaryConcat = "##";
+		String tertConcat = "@@";
+		java.sql.Clob clobOut = null;
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call dev.getCountryData(?,?,?,?,?,?,?,?,?)}");
+				st.setString(1, paramName);
+				st.setString(2, paramValue);
+				st.setString(3, comp);
+				st.registerOutParameter(4, java.sql.Types.CLOB);
+				st.registerOutParameter(5, java.sql.Types.VARCHAR);
+				st.registerOutParameter(6, java.sql.Types.VARCHAR);
+				st.registerOutParameter(7, java.sql.Types.VARCHAR);
+				st.registerOutParameter(8, java.sql.Types.DOUBLE);
+				st.registerOutParameter(9, java.sql.Types.VARCHAR);
+				st.execute();
+				clobOut = st.getClob(4);
+				primaryConcat = st.getString(5);
+				secondaryConcat = st.getString(6);
+				tertConcat = st.getString(7);
+				errorCode = (int) st.getDouble(8);
+				errorDesc = st.getString(9);
+				if(clobOut!=null)
+					clobSting = Utility.convertCLOBToString(clobOut);
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		retMap.put("clobData", clobSting);
+		retMap.put("primaryConcat", primaryConcat);
+		retMap.put("secondaryConcat", secondaryConcat);
+		retMap.put("tertConcat", tertConcat);
+		// retMap.put("errorCode", errorCode);
+		retMap.put("errorDesc", errorDesc);
+
+		System.out.println(clobSting);
+
+		return retMap;
 
 	}
 }

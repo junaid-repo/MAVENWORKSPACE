@@ -23,7 +23,7 @@ public interface IServices {
 	public Double wiseCalcuation(String wise, String type,String id);
 	public List<JobDetails> jobDetails(String minimumSalary);
 	public List<Integer> empIdList(String salary);
-	public BaseOutput tableAndDataCreate(String fileLocation) throws FileNotFoundException, IOException;
+	public BaseOutput tableAndDataCreate(String fileLocation, String version) throws FileNotFoundException, IOException;
 
 
 }

@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -38,6 +40,7 @@ import com.jdbcdemo.jdbcdemo.Services;
 import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
+import com.jdbcdemo.jdbcdemo.dto.CountriesDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmailRequest;
@@ -502,12 +505,12 @@ public class SimpleController {
 	}
 
 	@RequestMapping(value = URIConstants.CREATE_UPLOAD_TABLE_FROM_URI, method = RequestMethod.POST)
-	ResponseEntity<BaseOutput> createAndUploadTablesAndData(@RequestBody ImportURL fileLocation)
-			throws JsonProcessingException {
+	ResponseEntity<BaseOutput> createAndUploadTablesAndData(@RequestBody ImportURL fileLocation,
+			@PathVariable String vesion) throws JsonProcessingException {
 		BaseOutput output = new BaseOutput();
 
 		try {
-			output = serv.tableAndDataCreate(fileLocation.getFileLocation());
+			output = serv.tableAndDataCreate(fileLocation.getFileLocation(), vesion);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -591,8 +594,8 @@ public class SimpleController {
 	}
 
 	@RequestMapping(value = URIConstants.UPLOAD_TABLE_WITH_DATA, method = RequestMethod.POST)
-	ResponseEntity<BaseOutput> createAndUploadTablesAndDataWithFileUpload(@RequestParam("File") MultipartFile file)
-			throws JsonProcessingException {
+	ResponseEntity<BaseOutput> createAndUploadTablesAndDataWithFileUpload(@RequestParam("File") MultipartFile file,
+			@PathVariable String version) throws JsonProcessingException {
 		BaseOutput output = new BaseOutput();
 		String response = null;
 		File myFile = null;
@@ -610,7 +613,7 @@ public class SimpleController {
 			try {
 				fileLocation = core.getDocLocationWithDocId(response);
 				if (fileLocation != "") {
-					output = serv.tableAndDataCreate(fileLocation);
+					output = serv.tableAndDataCreate(fileLocation, version);
 				}
 				/*
 				 * if (output.getErrorCode() == 0) { // File deleteFile = new File(response);
@@ -623,7 +626,7 @@ public class SimpleController {
 				e.printStackTrace();
 			}
 		}
-		Utility.insertInternalApiLogs(URIConstants.UPLOAD_TABLE_WITH_DATA, ow.writeValueAsString(file),
+		Utility.insertInternalApiLogs(URIConstants.UPLOAD_TABLE_WITH_DATA, ow.writeValueAsString(""),
 				ow.writeValueAsString(output));
 
 		return new ResponseEntity<BaseOutput>(output, HttpStatus.OK);
@@ -731,11 +734,31 @@ public class SimpleController {
 			e.printStackTrace();
 		}
 
-	
 		Utility.insertInternalApiLogs(URIConstants.SEND_SIMPLE_EMAIL, ow.writeValueAsString(emailRequest),
 				ow.writeValueAsString(response));
 
 		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = URIConstants.GET_COUNTRY_DETAILS, method = RequestMethod.GET)
+	public ResponseEntity<Map> getCountryDetails(@RequestParam String paramName, String paramValue,
+			String comp) throws JsonProcessingException {
+		
+		//CountriesDetailsResponse response = new CountriesDetailsResponse();
+
+		Map<String, Object> response = new HashMap<>();
+		//List<List<Map>> response = new ArrayList<>();
+		Services serv = new Services();
+
+		response = serv.getCountriesDetails(paramName, paramValue, comp);
+
+		
+		  Utility.insertInternalApiLogs(URIConstants.GET_COUNTRY_DETAILS,
+		  ow.writeValueAsString("Its a GET, so no json"),
+		  ow.writeValueAsString(response));
+		 
+
+		return new ResponseEntity<Map>(response, HttpStatus.OK);
 	}
 
 }
