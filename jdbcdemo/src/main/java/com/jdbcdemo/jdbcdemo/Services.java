@@ -20,14 +20,15 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 //import com.jdbcdemo.jdbcdemo.coreCall.BaseServicesCall;
 import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
-import com.jdbcdemo.jdbcdemo.dto.CountriesDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPList;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
@@ -54,7 +55,7 @@ import utility.Utility;
 
 @Component
 public class Services extends Thread implements IServices, IFN02, IFN03, IExportTableDataAsScript, IGDPCountries,
-		IUploadFile, IDownloadFile, ITextTranslate, ISendSimpleEmail {
+		IUploadFile, IDownloadFile, ITextTranslate, ISendSimpleEmail, Runnable {
 	@Value("${upload-dir}")
 	private static String FILE_DIRECTORY = "C:/Users/junai/OneDrive/Documents/FileUploadDir/";
 	@Autowired
@@ -677,6 +678,112 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 
 		return response;
 
+	}
+
+	public Map createBulkEmployeeAndGetCountryData(List<InsertEmployeeList> employeeList, String paramName,
+			String paramValue, String comp, int threadTime) throws InterruptedException {
+
+		long startTime = System.currentTimeMillis() / 1000;
+		BulkEmployeesResponse response = new BulkEmployeesResponse();
+		Map<String, Object> retResponse = new HashMap<>();
+		List<InsertEmployeeResponse> newEmployeesResponse = new ArrayList<>();
+		// CreateEmployeeInBulkIF cf = (List<InsertEmployeeList> empList) -> {
+
+		CoreServiceCall bst = new CoreServiceCall();
+		Thread t1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				List<InsertEmployeeResponse> empList5 = new ArrayList<>();
+
+				for (InsertEmployeeList empList3 : employeeList.stream().toList()) {
+					InsertEmployeeResponse empResponse = new InsertEmployeeResponse();
+					try {
+
+						empResponse = bst.insertNewEmployee(empList3);
+
+						empList5.add(empResponse);
+						response.setNewEmployeesResponse(empList5);
+						Thread.sleep(threadTime);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+				System.out.println(empList5);
+
+				System.out.println("This much time it took in the run method");
+				System.out.println((System.currentTimeMillis() / 1000) - startTime);
+			}
+		});
+		t1.start();
+
+		t1.join();
+
+		// return response;
+		// };
+
+		// return cf.createBulkEmployees(employeeList);
+		Services serv = new Services();
+
+		List<Map> responseList = new ArrayList<>();
+
+		for (InsertEmployeeResponse ier : response.getNewEmployeesResponse()) {
+			String location = ServletUriComponentsBuilder
+					.fromHttpUrl(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString()
+							+ "/webService/getEmployeeDetails")
+					.path("/{id}").buildAndExpand(ier.getEmpId()).toUri().toString();
+
+			System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
+			InsertEmployeeResponse obj = new InsertEmployeeResponse();
+
+			Map<String, Object> retMap = new HashMap<>();
+			retMap.put("errorCode", HttpStatus.CREATED.getReasonPhrase());
+			retMap.put("errorDesc", HttpStatus.CREATED.value());
+			retMap.put("empId", ier.getEmpId());
+			retMap.put("url", location);
+			responseList.add(retMap);
+
+			obj.setErrorDesc(HttpStatus.CREATED.getReasonPhrase());
+			obj.setErrorCode(HttpStatus.CREATED.value());
+			obj.setEmpId(ier.getEmpId());
+			obj.setUrl(location);
+			newEmployeesResponse.add(obj);
+		}
+
+		retResponse.put("employeeList", newEmployeesResponse);
+
+		// ----------------------------------------------------------------------------
+
+		Thread t2 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+
+				Map<String, Object> responseCountry = new HashMap();
+				CoreServiceCall csc = new CoreServiceCall();
+				Map<String, String> retMap = new HashMap<>();
+				List<Map> megaList = new ArrayList<>();
+				retMap = csc.getCountryDetails(paramName, paramValue, comp);
+				if (retMap.get("clobData") != null) {
+					try {
+						megaList = Utility.getClobDataToListOfMaps(retMap.get("clobData"), retMap.get("primaryConcat"),
+								retMap.get("secondaryConcat"), retMap.get("tertConcat"));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				System.out.println(megaList);
+				retResponse.put("response", megaList);
+
+			}
+		});
+		t2.start();
+
+		t2.join();
+		System.out.println("This much time it took in the Service class for this Service");
+		System.out.println((System.currentTimeMillis() / 1000) - startTime);
+		return retResponse;
 	}
 
 }

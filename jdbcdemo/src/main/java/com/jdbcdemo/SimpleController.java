@@ -741,24 +741,46 @@ public class SimpleController {
 	}
 
 	@RequestMapping(value = URIConstants.GET_COUNTRY_DETAILS, method = RequestMethod.GET)
-	public ResponseEntity<Map> getCountryDetails(@RequestParam String paramName, String paramValue,
-			String comp) throws JsonProcessingException {
-		
-		//CountriesDetailsResponse response = new CountriesDetailsResponse();
+	public ResponseEntity<Map> getCountryDetails(@RequestParam String paramName, String paramValue, String comp)
+			throws JsonProcessingException {
+
+		// CountriesDetailsResponse response = new CountriesDetailsResponse();
 
 		Map<String, Object> response = new HashMap<>();
-		//List<List<Map>> response = new ArrayList<>();
+		// List<List<Map>> response = new ArrayList<>();
 		Services serv = new Services();
 
 		response = serv.getCountriesDetails(paramName, paramValue, comp);
 
-		
-		  Utility.insertInternalApiLogs(URIConstants.GET_COUNTRY_DETAILS,
-		  ow.writeValueAsString("Its a GET, so no json"),
-		  ow.writeValueAsString(response));
-		 
+		Utility.insertInternalApiLogs(URIConstants.GET_COUNTRY_DETAILS, ow.writeValueAsString("Its a GET, so no json"),
+				ow.writeValueAsString(response));
 
 		return new ResponseEntity<Map>(response, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = URIConstants.CREATE_BULK_EMPLOYEE_AND_GET_COUNTRY_DATA, method = RequestMethod.POST)
+	ResponseEntity<Map> createBulkEmployeeAndGetCountryData(@RequestBody InsertEmployeeRequest employeeList,
+			@RequestParam String paramName, String paramValue, String comp, int threadTime) throws JsonProcessingException {
+		// BaseOutput response = new BaseOutput();
+
+		// BulkEmployeesResponse response = new BulkEmployeesResponse();
+		Map<String, Object> response = new HashMap<>();
+		Services serv = new Services();
+		// Map<String, Object> response2 = new HashMap<>();
+
+		try {
+			response = serv.createBulkEmployeeAndGetCountryData(employeeList.getEmployeeList(), paramName, paramValue,
+					comp, threadTime);
+
+			// List<List<Map>> response = new ArrayList<>();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+		Utility.insertInternalApiLogs(URIConstants.CREATE_BULK_EMPLOYEE_AND_GET_COUNTRY_DATA,
+				ow.writeValueAsString(employeeList), ow.writeValueAsString(response));
+		return new ResponseEntity<Map>(response, HttpStatus.OK);
+	}
 }
