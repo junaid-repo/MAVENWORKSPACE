@@ -1,4 +1,4 @@
-package com.jdbcdemo.jdbcdemo;
+package com.jdbcdemo.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 //import com.jdbcdemo.jdbcdemo.coreCall.BaseServicesCall;
-import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
+import com.jdbcdemo.service.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPList;
@@ -736,7 +736,6 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 		t1.setPriority(MIN_PRIORITY);
 		t1.start();
 		t1.join();
-		
 
 		// return response;
 		// };

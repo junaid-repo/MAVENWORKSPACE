@@ -1,7 +1,7 @@
 package com.jdbcdemo.jdbcdemo.javaTest;
 
 
-import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
+import com.jdbcdemo.service.CoreServiceCall;
 
 public class NoOfTablesChecks {
 

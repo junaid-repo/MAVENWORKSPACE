@@ -2,7 +2,7 @@ package com.jdbcdemo.jdbcdemo.javaTest;
 
 import java.util.ArrayList;
 
-import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
+import com.jdbcdemo.service.CoreServiceCall;
 
 public class TestFI {
 

@@ -25,7 +25,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jdbcdemo.SimpleController;
-import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
+import com.jdbcdemo.service.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 
@@ -550,7 +550,6 @@ public class Utility implements Runnable {
 	public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
 		BaseOutput response = new BaseOutput();
 		Utility util = new Utility();
-		
 
 		String clobString = "";
 		ArrayList<String> masterQueryList = new ArrayList<>();
@@ -575,11 +574,9 @@ public class Utility implements Runnable {
 		url.setFileLocation("C:\\Users\\junai\\Downloads\\BulkEmployees.csv");
 
 		util2.setImportUrl(url);
-		
 
 		for (String masterQuery : masterQueryList) {
 			try {
-				
 
 				System.out.println(masterQuery);
 
@@ -648,38 +645,33 @@ public class Utility implements Runnable {
 
 	public static List<Map> getClobDataToListOfMaps(String megaData, String primaryConcat, String secondaryConcat,
 			String tertConcact) {
-		
-		
-		//List<Map> superList = new ArrayList<>();
+
+		// List<Map> superList = new ArrayList<>();
 		List<Map> listOfMaps = new ArrayList<>();
-		
-		
-	String megaDataArr[] = megaData.split(primaryConcat);
+
+		String megaDataArr[] = megaData.split(primaryConcat);
 		for (int i = 0; i < megaDataArr.length; i++) {
 			// System.out.println(megaDataArr[i]);
 
 			String dataArr[] = megaDataArr[i].split(secondaryConcat);
 
-			
 			Map<String, String> retMap = new HashMap<>();
 			for (int j = 0; j < dataArr.length; j++) {
-			
+
 				// System.out.println(tempData);
 
 				String arr[] = dataArr[j].split(tertConcact);
-				
 
-				
-					if (arr[0] != null && arr[1] != null)
-						
-					
-				retMap.put(arr[1], arr[0]);
+				if (arr[0] != null && arr[1] != null)
+
+					retMap.put(arr[1], arr[0]);
 				// System.out.println(retMap);
-			}listOfMaps.add(retMap);
+			}
+			listOfMaps.add(retMap);
 			// System.out.println(listOfMaps);
-			//superList.add(listOfMaps);
+			// superList.add(listOfMaps);
 		}
-		//System.out.println(superList);
+		// System.out.println(superList);
 
 		return listOfMaps;
 	}

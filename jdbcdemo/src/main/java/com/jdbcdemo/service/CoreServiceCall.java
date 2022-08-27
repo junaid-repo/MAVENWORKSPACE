@@ -1,4 +1,4 @@
-package com.jdbcdemo.jdbcdemo.coreCall;
+package com.jdbcdemo.service;
 
 import java.sql.Array;
 import java.sql.CallableStatement;

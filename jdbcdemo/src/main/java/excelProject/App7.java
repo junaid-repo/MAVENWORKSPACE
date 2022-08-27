@@ -8,7 +8,7 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jdbcdemo.jdbcdemo.coreCall.CoreServiceCall;
+import com.jdbcdemo.service.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsRequest;
 import com.jdbcdemo.jdbcdemo.dto.Property;
 import com.jdbcdemo.jdbcdemo.properties.AppProperties;
