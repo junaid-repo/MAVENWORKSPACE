@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\My_Workbench\MAVENWORKSPACE\jdbcdemo"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACEs"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACEs\jdbcdemo"/>
 		</list>
