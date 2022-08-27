@@ -6,7 +6,8 @@
 begin
   begin
   
-    DEV.MAKETABLESQLQUERY(vRetCode, vRetError);
+  
+    DEV.SQLQUERY_TABLESPECIFIC( vTableName, vRetCode, vRetError);
   exception
     when others then
       vRetCode  := sqlcode;

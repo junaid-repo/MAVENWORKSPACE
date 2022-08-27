@@ -490,13 +490,10 @@ public class SimpleController {
 	}
 
 	@RequestMapping(value = URIConstants.GET_DEPARTMENT_DETAILS, method = RequestMethod.GET)
-	ResponseEntity<DepartmentDetailsResponse> getDepartmentDetails(@PathVariable String deptId,
-			@RequestParam String name, String name2) throws JsonProcessingException {
+	ResponseEntity<DepartmentDetailsResponse> getDepartmentDetails(@PathVariable String deptId) throws JsonProcessingException {
 		DepartmentDetailsResponse response = new DepartmentDetailsResponse();
 		IFN03 obj = new Services();
-		System.out.println("the input taken in the request are ------------------->" + name);
-		System.out.println("the input taken in the request are -------------------2>" + name2);
-
+		
 		response = obj.getDeptDetails(deptId);
 		Utility.insertInternalApiLogs(URIConstants.GET_DEPARTMENT_DETAILS, ow.writeValueAsString(deptId),
 				ow.writeValueAsString(response));

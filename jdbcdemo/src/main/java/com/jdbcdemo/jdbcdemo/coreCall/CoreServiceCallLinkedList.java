@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Struct;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -41,14 +41,14 @@ import utility.Utility;
 
 @Service
 @Component
-public class CoreServiceCall {
+public class CoreServiceCallLinkedList {
 
 	public EmployeeDetailsResponse getEmployeeLists(String empId) {
 
 		EmployeeDetailsResponse response = new EmployeeDetailsResponse();
 		BaseOutput baseOutput = new BaseOutput();
 
-		ArrayList<EmployeeDetails> employeeDetails = new ArrayList<>();
+		LinkedList<EmployeeDetails> employeeDetails = new LinkedList<>();
 		String errorDesc = "";
 		int errorCode = 0;
 
@@ -132,7 +132,7 @@ public class CoreServiceCall {
 
 		System.out.println(employeeDetails);
 
-		response.setEmployeeDetails(employeeDetails);
+		//response.setEmployeeDetails(employeeDetails);
 		response.setErrorCode(0);
 		response.setErrorDesc("Success");
 
@@ -283,8 +283,8 @@ public class CoreServiceCall {
 
 	public static List<Double> sumOfSalary(String id, String wise) {
 
-		List<Double> totalSalary = new ArrayList<>();
-		// List<JobDetails> testRet= new ArrayList<JobDetails>(); testRet=empId("2500");
+		List<Double> totalSalary = new LinkedList<>();
+		// List<JobDetails> testRet= new LinkedList<JobDetails>(); testRet=empId("2500");
 
 		String query = "select  e.salary from dev.employees e where " + wise + "= " + "'" + id + "'";
 
@@ -315,7 +315,7 @@ public class CoreServiceCall {
 
 	public List<JobDetails> jobDetails(String salary) {
 
-		List<JobDetails> totalSalary = new ArrayList<>();
+		List<JobDetails> totalSalary = new LinkedList<>();
 
 		String query = "select j.min_salary, j.max_salary,  j.job_title from dev.jobs j where j.min_salary > " + "'"
 				+ salary + "'" /* + "  order by j.max_salary desc" */;
@@ -350,7 +350,7 @@ public class CoreServiceCall {
 	}
 
 	public List<Integer> getEmpIdAccToSalary(String salary) {
-		List<Integer> response = new ArrayList<>();
+		List<Integer> response = new LinkedList<>();
 		String query = "select e.employee_id from  dev.employees e  where e.salary > " + "'" + salary + "'";
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
@@ -629,7 +629,7 @@ public class CoreServiceCall {
 
 	public List<String> getNamesOfDBTables(String schema) {
 
-		List<String> DBTables = new ArrayList<>();
+		List<String> DBTables = new LinkedList<>();
 		String tableName = "";
 		String query = "SELECT T.object_name     FROM all_objects T    WHERE object_type IN ('TABLE')   AND T.owner = '"
 				+ schema + "'";
@@ -660,7 +660,7 @@ public class CoreServiceCall {
 	public CountryGDPResponse getYearWiseGDPofWorld(String year) {
 		CountryGDPResponse response = new CountryGDPResponse();
 
-		List<CountryGDPList> objList = new ArrayList<>();
+		List<CountryGDPList> objList = new LinkedList<>();
 		int errorCode = 0;
 		String errorDesc = "Success";
 
@@ -772,7 +772,7 @@ public class CoreServiceCall {
 
 		String fieldSeperator = AppProperties.strCHAR164;
 		ARRAY inputData = null;
-		List<Property> propertyList = new ArrayList<>();
+		List<Property> propertyList = new LinkedList<>();
 
 		for (int i = 0; i < 5; i++) {
 			Property prop = new Property();
@@ -852,7 +852,7 @@ public class CoreServiceCall {
 
 	public String getLanguageCode(String language) {
 
-		List<String> DBTables = new ArrayList<>();
+		List<String> DBTables = new LinkedList<>();
 		String languageCode = "";
 		String query = "select lc.alpha2 from dev.language_codes lc where Upper(lc.language) =upper('" + language
 				+ "')";

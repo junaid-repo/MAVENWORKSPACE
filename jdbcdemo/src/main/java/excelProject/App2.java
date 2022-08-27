@@ -1,8 +1,10 @@
 package excelProject;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Hello world!
@@ -11,10 +13,21 @@ import java.io.IOException;
 public class App2 {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 
-		String ar[] = "dafs@@dgget".split("@@");
-		
-		System.out.println(ar[0]);
-		System.out.println(ar[1]);
+		List<Integer> linkedL = new LinkedList<>();
+		List<Integer> arrayL = new ArrayList<>();
+		long lSt = System.currentTimeMillis();
+		for (int i = 0; i < 50000000; i++) {
+			linkedL.add(i);
+		}
+		System.out.println(System.currentTimeMillis() - lSt);
+
+		long aSt = System.currentTimeMillis();
+		for (int i = 0; i < 50000000; i++) {
+			arrayL.add(i);
+		}
+		System.out.println(System.currentTimeMillis() - aSt);
+		// System.out.println(linkedL);
+
 	}
 
 }

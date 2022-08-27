@@ -550,7 +550,7 @@ public class Utility implements Runnable {
 	public BaseOutput fetchAndWriteTableDataQuery(String tableName) {
 		BaseOutput response = new BaseOutput();
 		Utility util = new Utility();
-		Thread td = new Thread(util);
+		
 
 		String clobString = "";
 		ArrayList<String> masterQueryList = new ArrayList<>();
@@ -575,17 +575,17 @@ public class Utility implements Runnable {
 		url.setFileLocation("C:\\Users\\junai\\Downloads\\BulkEmployees.csv");
 
 		util2.setImportUrl(url);
-		td.start();
+		
 
 		for (String masterQuery : masterQueryList) {
 			try {
-				td.sleep(300);
+				
 
 				System.out.println(masterQuery);
 
 				superMasterQuery = superMasterQuery + "\r\n" + masterQuery;
 
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

@@ -145,21 +145,37 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 			emailList.add(eList.getEmail());
 		}
 		if (validateEmailId(emailList)) {
+
 			CreateEmployeeInBulkIF cf = (List<InsertEmployeeList> empList) -> {
 
-				CoreServiceCall bst = new CoreServiceCall();
-				InsertEmployeeResponse empResponse = new InsertEmployeeResponse();
-				List<InsertEmployeeResponse> empList5 = new ArrayList<>();
-				for (InsertEmployeeList empList3 : empList.stream().toList()) {
+				Thread thread = new Thread(new Runnable() {
 
-					empResponse = bst.insertNewEmployee(empList3);
+					@Override
+					public void run() {
+						CoreServiceCall bst = new CoreServiceCall();
+						InsertEmployeeResponse empResponse = new InsertEmployeeResponse();
+						List<InsertEmployeeResponse> empList5 = new ArrayList<>();
+						for (InsertEmployeeList empList3 : empList.stream().toList()) {
 
-					empList5.add(empResponse);
-					response.setNewEmployeesResponse(empList5);
+							empResponse = bst.insertNewEmployee(empList3);
 
+							empList5.add(empResponse);
+							response.setNewEmployeesResponse(empList5);
+
+						}
+
+					}
+
+				});
+				thread.start();
+				try {
+					thread.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-
 				return response;
+
 			};
 
 			return cf.createBulkEmployees(employeeList);
@@ -680,7 +696,7 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 
 	}
 
-	public Map createBulkEmployeeAndGetCountryData(List<InsertEmployeeList> employeeList, String paramName,
+	public synchronized Map createBulkEmployeeAndGetCountryData(List<InsertEmployeeList> employeeList, String paramName,
 			String paramValue, String comp, int threadTime) throws InterruptedException {
 
 		long startTime = System.currentTimeMillis() / 1000;
@@ -698,27 +714,29 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 				for (InsertEmployeeList empList3 : employeeList.stream().toList()) {
 					InsertEmployeeResponse empResponse = new InsertEmployeeResponse();
 					try {
-
+						Thread.sleep(threadTime);
 						empResponse = bst.insertNewEmployee(empList3);
 
 						empList5.add(empResponse);
 						response.setNewEmployeesResponse(empList5);
-						Thread.sleep(threadTime);
+
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
 				}
+
 				System.out.println(empList5);
 
-				System.out.println("This much time it took in the run method");
+				System.out.println("This much time it took in the run method of create Employees");
 				System.out.println((System.currentTimeMillis() / 1000) - startTime);
 			}
 		});
+		t1.setPriority(MIN_PRIORITY);
 		t1.start();
-
 		t1.join();
+		
 
 		// return response;
 		// };
@@ -773,14 +791,17 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 						e.printStackTrace();
 					}
 				}
+				System.out.println("This much time it took in the run method of Countires Details");
+				System.out.println((System.currentTimeMillis() / 1000) - startTime);
 				System.out.println(megaList);
 				retResponse.put("response", megaList);
 
 			}
 		});
+		t2.setPriority(MAX_PRIORITY);
 		t2.start();
-
 		t2.join();
+
 		System.out.println("This much time it took in the Service class for this Service");
 		System.out.println((System.currentTimeMillis() / 1000) - startTime);
 		return retResponse;
