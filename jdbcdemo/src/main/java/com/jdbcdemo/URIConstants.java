@@ -26,5 +26,7 @@ public class URIConstants {
 	public static final String SEND_SIMPLE_EMAIL = "/external/sendSimpleEmail";
 	public static final String GET_COUNTRY_DETAILS = "/webService/getCountryDetails";
 	public static final String CREATE_BULK_EMPLOYEE_AND_GET_COUNTRY_DATA = "webService/createBulkEmployeeAndGetCountryData";
+	public static final String CREATE_NEW_CUSTOMER="webService/createNewCustomer";
+	
 
 }

@@ -141,8 +141,8 @@ public class CoreServiceCall {
 
 	public synchronized InsertEmployeeResponse insertNewEmployee(InsertEmployeeList employeeList) {
 		// TODO Auto-generated method stub
-		
-		System.out.println("The thread number-->"+employeeList.getJobId());
+
+		System.out.println("The thread number-->" + employeeList.getJobId());
 		InsertEmployeeResponse response = new InsertEmployeeResponse();
 		String empId = "0";
 		String errorDesc = "Success";
@@ -1015,7 +1015,7 @@ public class CoreServiceCall {
 				tertConcat = st.getString(7);
 				errorCode = (int) st.getDouble(8);
 				errorDesc = st.getString(9);
-				if(clobOut!=null)
+				if (clobOut != null)
 					clobSting = Utility.convertCLOBToString(clobOut);
 
 			} catch (SQLException e) {
@@ -1040,5 +1040,66 @@ public class CoreServiceCall {
 
 		return retMap;
 
+	}
+
+	public Map<String, Object> createNewCustomer(String name, String address, String website, Float creditLimit,
+			String type,
+
+			String firstName, String lastName, String email, String phoneNumer) {
+
+		BaseOutput output = new BaseOutput();
+		Map<String, Object> retMap = new HashMap<>();
+
+		int errorCode = 0;
+		String errorDesc = "Success";
+		String clobSting = null;
+		String primaryConcat = "";
+		String secondaryConcat = "";
+		String customerCode = "";
+		java.sql.Clob clobOut = null;
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call ot.createsinglecutomer(?,?,?,?,?,?,?,?,?,?,?,?)}");
+				st.setString(1, name);
+				st.setString(2, type);
+				st.setString(3, address);
+				st.setString(4, website);
+				st.setDouble(5, creditLimit);
+
+				st.setString(6, firstName);
+				st.setString(7, lastName);
+				st.setString(8, email);
+				st.setString(9, phoneNumer);
+				st.registerOutParameter(10, java.sql.Types.VARCHAR);
+				st.registerOutParameter(11, java.sql.Types.DOUBLE);
+				st.registerOutParameter(12, java.sql.Types.VARCHAR);
+				st.execute();
+
+				customerCode = st.getString(10);
+				errorCode = (int) st.getDouble(11);
+				errorDesc = st.getString(12);
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			retMap.put("customerCode", customerCode);
+			retMap.put("errorCode", errorCode);
+			retMap.put("errorDesc", errorDesc);
+
+			
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return retMap;
 	}
 }

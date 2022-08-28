@@ -36,11 +36,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.jdbcdemo.service.Services;
-import com.jdbcdemo.service.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
-import com.jdbcdemo.jdbcdemo.dto.CountriesDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmailRequest;
@@ -52,6 +49,7 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeRequest;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse2;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
+import com.jdbcdemo.jdbcdemo.dto.NewCustomerRequest;
 import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
 import com.jdbcdemo.jdbcdemo.dto.TranslateText;
 import com.jdbcdemo.jdbcdemo.interfaces.IDownloadFile;
@@ -67,6 +65,8 @@ import com.jdbcdemo.security.AuthenticationRequest;
 import com.jdbcdemo.security.AuthenticationResponse;
 import com.jdbcdemo.security.JwtUtil;
 import com.jdbcdemo.security.MyUserDetailsService;
+import com.jdbcdemo.service.CoreServiceCall;
+import com.jdbcdemo.service.Services;
 
 import excelProject.CSVReader;
 import excelProject.ImportURL;
@@ -490,10 +490,11 @@ public class SimpleController {
 	}
 
 	@RequestMapping(value = URIConstants.GET_DEPARTMENT_DETAILS, method = RequestMethod.GET)
-	ResponseEntity<DepartmentDetailsResponse> getDepartmentDetails(@PathVariable String deptId) throws JsonProcessingException {
+	ResponseEntity<DepartmentDetailsResponse> getDepartmentDetails(@PathVariable String deptId)
+			throws JsonProcessingException {
 		DepartmentDetailsResponse response = new DepartmentDetailsResponse();
 		IFN03 obj = new Services();
-		
+
 		response = obj.getDeptDetails(deptId);
 		Utility.insertInternalApiLogs(URIConstants.GET_DEPARTMENT_DETAILS, ow.writeValueAsString(deptId),
 				ow.writeValueAsString(response));
@@ -757,7 +758,8 @@ public class SimpleController {
 
 	@RequestMapping(value = URIConstants.CREATE_BULK_EMPLOYEE_AND_GET_COUNTRY_DATA, method = RequestMethod.POST)
 	ResponseEntity<Map> createBulkEmployeeAndGetCountryData(@RequestBody InsertEmployeeRequest employeeList,
-			@RequestParam String paramName, String paramValue, String comp, int threadTime) throws JsonProcessingException {
+			@RequestParam String paramName, String paramValue, String comp, int threadTime)
+			throws JsonProcessingException {
 		// BaseOutput response = new BaseOutput();
 
 		// BulkEmployeesResponse response = new BulkEmployeesResponse();
@@ -780,4 +782,22 @@ public class SimpleController {
 				ow.writeValueAsString(employeeList), ow.writeValueAsString(response));
 		return new ResponseEntity<Map>(response, HttpStatus.OK);
 	}
+
+	@RequestMapping(value = URIConstants.CREATE_NEW_CUSTOMER, method = RequestMethod.POST)
+	ResponseEntity<Map> createNewCustomer(@RequestBody NewCustomerRequest newCustomer) throws JsonProcessingException {
+		Map<String, Object> response = new HashMap<>();
+		
+		IServices serv = new Services();
+		
+		response=serv.saveNewCustomer(newCustomer);
+		response.put("errorCode", HttpStatus.CREATED.value());
+		response.put("errorDesc", HttpStatus.CREATED.getReasonPhrase());
+		
+		Utility.insertInternalApiLogs(URIConstants.GET_COUNTRY_DETAILS, ow.writeValueAsString(newCustomer),
+				ow.writeValueAsString(response));
+
+		return new ResponseEntity<Map>(response, HttpStatus.CREATED);
+
+	}
+
 }

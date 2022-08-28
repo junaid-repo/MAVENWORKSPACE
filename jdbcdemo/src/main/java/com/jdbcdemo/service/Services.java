@@ -37,6 +37,7 @@ import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
+import com.jdbcdemo.jdbcdemo.dto.NewCustomerRequest;
 import com.jdbcdemo.jdbcdemo.dto.TranslateText;
 import com.jdbcdemo.jdbcdemo.interfaces.CreateEmployeeInBulkIF;
 import com.jdbcdemo.jdbcdemo.interfaces.IDownloadFile;
@@ -804,6 +805,29 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 		System.out.println("This much time it took in the Service class for this Service");
 		System.out.println((System.currentTimeMillis() / 1000) - startTime);
 		return retResponse;
+	}
+
+	@Override
+	public Map saveNewCustomer(NewCustomerRequest newCustomer) {
+
+		Map<String, Object> response = new HashMap<>();
+
+		String name = newCustomer.getName();
+		String address = newCustomer.getAddress();
+		String website = newCustomer.getWebsite();
+		Float creditLimit = newCustomer.getCreditLimit();
+		String type = newCustomer.getType();
+
+		String getFirstName = newCustomer.getCustomerContact().getFirstName();
+		String lastName = newCustomer.getCustomerContact().getLastName();
+		String email = newCustomer.getCustomerContact().getEmail();
+		String phoneNumer = newCustomer.getCustomerContact().getPhoneNumber();
+
+		CoreServiceCall core = new CoreServiceCall();
+		response = core.createNewCustomer(name, address, website, creditLimit, type, getFirstName, lastName, email,
+				phoneNumer);
+
+		return response;
 	}
 
 }

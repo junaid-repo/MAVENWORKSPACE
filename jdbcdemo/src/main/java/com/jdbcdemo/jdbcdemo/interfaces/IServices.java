@@ -3,6 +3,7 @@ package com.jdbcdemo.jdbcdemo.interfaces;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
+import com.jdbcdemo.jdbcdemo.dto.NewCustomerRequest;
 
 @Component
 public interface IServices {
@@ -24,6 +26,7 @@ public interface IServices {
 	public List<JobDetails> jobDetails(String minimumSalary);
 	public List<Integer> empIdList(String salary);
 	public BaseOutput tableAndDataCreate(String fileLocation, String version) throws FileNotFoundException, IOException;
+	public Map	saveNewCustomer(NewCustomerRequest newCustomer);
 
 
 }
