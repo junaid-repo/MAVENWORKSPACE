@@ -26,7 +26,7 @@ public interface IServices {
 	public List<JobDetails> jobDetails(String minimumSalary);
 	public List<Integer> empIdList(String salary);
 	public BaseOutput tableAndDataCreate(String fileLocation, String version) throws FileNotFoundException, IOException;
-	public Map	saveNewCustomer(NewCustomerRequest newCustomer);
+	
 
 
 }

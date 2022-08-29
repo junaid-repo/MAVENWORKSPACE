@@ -25,9 +25,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jdbcdemo.SimpleController;
-import com.jdbcdemo.service.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
+import com.jdbcdemo.jdbcdemo.dto.CustomerContact;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
+import com.jdbcdemo.jdbcdemo.dto.NewCustomerRequest;
+import com.jdbcdemo.service.CoreServiceCall;
 
 import excelProject.ImportURL;
 
@@ -388,7 +390,7 @@ public class Utility implements Runnable {
 	public static String convertCLOBToString(java.sql.Clob clobObject) {
 
 		String clobAsString = null;
-
+if(clobObject!=null) {
 		try {
 			InputStream in = clobObject.getAsciiStream();
 			StringWriter w = new StringWriter();
@@ -401,7 +403,7 @@ public class Utility implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+}
 		return clobAsString;
 	}
 
@@ -674,6 +676,27 @@ public class Utility implements Runnable {
 		// System.out.println(superList);
 
 		return listOfMaps;
+	}
+
+	public static NewCustomerRequest getADummyClassWithData() {
+
+		NewCustomerRequest ncr = new NewCustomerRequest();
+		CustomerContact con = new CustomerContact();
+
+		ncr.setName("Dummy_Name");
+		ncr.setType("O");
+		ncr.setAddress("Dummy_Address");
+		ncr.setWebsite("example.com");
+		ncr.setCreditLimit(10000F);
+		ncr.setCustomerContact(con);
+
+		con.setFirstName("Dummy_FirstName");
+		con.setLastName("Dummy_LastName");
+		con.setEmail("example@example.com");
+		con.setPhoneNumber("9999999999");
+
+		return ncr;
+
 	}
 
 }

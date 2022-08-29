@@ -41,7 +41,7 @@ import utility.Utility;
 
 @Service
 @Component
-public class CoreServiceCall {
+public class CoreServiceCall extends Services {
 
 	public EmployeeDetailsResponse getEmployeeLists(String empId) {
 
@@ -1094,12 +1094,161 @@ public class CoreServiceCall {
 			retMap.put("errorCode", errorCode);
 			retMap.put("errorDesc", errorDesc);
 
-			
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return retMap;
 	}
+
+	public Map calculateOrderValue(String orderNumber) {
+
+		BaseOutput output = new BaseOutput();
+		Map<String, Object> retMap = new HashMap<>();
+		Float grossAmount = 0F;
+		Float gstAmount = 0F;
+		Float netAmount = 0F;
+
+		int errorCode = 0;
+		String errorDesc = "";
+		String clobSting = "";
+		java.sql.Clob clobOut = null;
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call ot.calculateBillAmount(?,?,?,?,?,?,?)}");
+				st.setString(1, orderNumber);
+				st.registerOutParameter(2, java.sql.Types.CLOB);
+				st.registerOutParameter(3, java.sql.Types.DOUBLE);
+				st.registerOutParameter(4, java.sql.Types.DOUBLE);
+				st.registerOutParameter(5, java.sql.Types.DOUBLE);
+				st.registerOutParameter(6, java.sql.Types.DOUBLE);
+				st.registerOutParameter(7, java.sql.Types.VARCHAR);
+				st.execute();
+				clobOut = st.getClob(2);
+
+				clobSting = Utility.convertCLOBToString(clobOut);
+
+				grossAmount = st.getFloat(3);
+				netAmount = st.getFloat(4);
+				gstAmount = st.getFloat(5);
+				errorCode = (int) st.getDouble(6);
+				errorDesc = st.getString(7);
+
+				retMap.put("grossAmount", grossAmount);
+				retMap.put("netAmount", netAmount);
+				retMap.put("gstAmount", gstAmount);
+				retMap.put("clobData", clobSting);
+				retMap.put("errorCode", errorCode);
+				retMap.put("errorDesc", errorDesc);
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(clobSting);
+
+		return retMap;
+
+	}
+
+	public Map<String, Object> createSingleOrder(String customerCode, String employeeCode) {
+
+		String errorDesc = "Success";
+		int errorCode = 0;
+		String orderCode = "";
+		Map<String, Object> retMap = new HashMap<>();
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call ot.createOrder(?,?,?,?,?)}");
+				st.setString(1, customerCode);
+				st.setString(2, employeeCode);
+				st.registerOutParameter(3, java.sql.Types.VARCHAR);
+				st.registerOutParameter(4, java.sql.Types.DOUBLE);
+				st.registerOutParameter(5, java.sql.Types.VARCHAR);
+				st.execute();
+				orderCode = st.getString(3);
+				errorCode = st.getInt(4);
+				errorDesc = st.getString(5);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		retMap.put("orderCode", orderCode);
+		retMap.put("errorCode", errorCode);
+		retMap.put("errorDesc", errorDesc);
+
+		return retMap;
+	}
+
+	public Map<String, Object> insertOrderItems(Map orderItems, String orderNumber, int itemCount) {
+
+		String errorDesc = "Success";
+		int errorCode = 0;
+
+		Map<String, Object> retMap = new HashMap<>();
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call ot.insertOrderItems(?,?,?,?,?,?)}");
+				st.setString(1, orderNumber);
+				st.setInt(2, (Integer) orderItems.get("productId"));
+				st.setInt(3, (Integer) orderItems.get("quantity"));
+				st.setInt(4, itemCount);
+				st.registerOutParameter(5, java.sql.Types.DOUBLE);
+				st.registerOutParameter(6, java.sql.Types.VARCHAR);
+				st.execute();
+
+				errorCode = st.getInt(5);
+				errorDesc = st.getString(6);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		retMap.put("errorCode", errorCode);
+		retMap.put("errorDesc", errorDesc);
+
+		return retMap;
+	}
+
 }

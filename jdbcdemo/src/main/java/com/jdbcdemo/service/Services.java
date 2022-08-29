@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -25,8 +29,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-//import com.jdbcdemo.jdbcdemo.coreCall.BaseServicesCall;
-import com.jdbcdemo.service.CoreServiceCall;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPList;
@@ -40,6 +42,7 @@ import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.NewCustomerRequest;
 import com.jdbcdemo.jdbcdemo.dto.TranslateText;
 import com.jdbcdemo.jdbcdemo.interfaces.CreateEmployeeInBulkIF;
+import com.jdbcdemo.jdbcdemo.interfaces.ICompany;
 import com.jdbcdemo.jdbcdemo.interfaces.IDownloadFile;
 import com.jdbcdemo.jdbcdemo.interfaces.IExportTableDataAsScript;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN01;
@@ -51,12 +54,13 @@ import com.jdbcdemo.jdbcdemo.interfaces.IServices;
 import com.jdbcdemo.jdbcdemo.interfaces.ITextTranslate;
 import com.jdbcdemo.jdbcdemo.interfaces.IUploadFile;
 
+import connection.ConnectionClass;
 import externalApi.ExternalServices;
 import utility.Utility;
 
 @Component
 public class Services extends Thread implements IServices, IFN02, IFN03, IExportTableDataAsScript, IGDPCountries,
-		IUploadFile, IDownloadFile, ITextTranslate, ISendSimpleEmail, Runnable {
+		IUploadFile, IDownloadFile, ITextTranslate, ISendSimpleEmail, Runnable, ICompany {
 	@Value("${upload-dir}")
 	private static String FILE_DIRECTORY = "C:/Users/junai/OneDrive/Documents/FileUploadDir/";
 	@Autowired
@@ -828,6 +832,77 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 				phoneNumer);
 
 		return response;
+	}
+
+	@Override
+	public Map calculateOrderValue(String orderNumber) {
+		CoreServiceCall core = new CoreServiceCall();
+		Map<String, Object> response = new HashMap<>();
+		Map<String, Object> retMap = new HashMap<>();
+		retMap = core.calculateOrderValue(orderNumber);
+		List<Map> megaList = new ArrayList<>();
+
+		if (retMap.get("clobData") != null) {
+			try {
+				megaList = Utility.getClobDataToListOfMaps((String) retMap.get("clobData"), "##", "~~", "@@");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		response.put("orderNumber", orderNumber);
+		response.put("productDetails", megaList);
+		response.put("grossAmount", retMap.get("grossAmount"));
+		response.put("gstAmount", retMap.get("gstAmount"));
+		response.put("netAmount", retMap.get("netAmount"));
+		return response;
+
+	}
+
+	@Override
+	public Map createNewOrder(Map orderDetails) {
+		String customerCode = (String) orderDetails.get("customerCode");
+		String employeeCode = (String) orderDetails.get("employeeCode");
+		String orderCode = "";
+		List<Map> itemList = new ArrayList<>();
+		Map<String, Object> itemMapOut = new HashMap<>();
+		Map<String, Object> retMap = new HashMap<>();
+		Map<String, Object> response = new HashMap<>();
+		itemList = (List<Map>) orderDetails.get("itemLists");
+		CoreServiceCall core = new CoreServiceCall();
+		int itemCount = 0;
+		if (customerCode.equals("") || customerCode == null) {
+			NewCustomerRequest newCustomer = new NewCustomerRequest();
+			newCustomer = Utility.getADummyClassWithData();
+
+			Map<String, Object> newCustomerMap = new HashMap<>();
+			newCustomerMap = saveNewCustomer(newCustomer);
+			customerCode = (String) newCustomerMap.get("customerCode");
+
+		}
+
+		if (customerCode != null) {
+			retMap = core.createSingleOrder(customerCode, employeeCode);
+		}
+		orderCode = (String) retMap.get("orderCode");
+		if (!orderCode.equals("")) {
+
+			for (Map itemMap : itemList) {
+				itemCount++;
+
+				itemMapOut = core.insertOrderItems(itemMap, orderCode, itemCount);
+
+			}
+
+		}
+
+		if (!orderCode.equals("")) {
+			response = calculateOrderValue(orderCode);
+
+		}
+		response.put("CustomerCode", customerCode);
+		return response;
+
 	}
 
 }

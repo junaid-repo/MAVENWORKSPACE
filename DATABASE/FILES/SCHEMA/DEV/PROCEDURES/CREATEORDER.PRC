@@ -9,6 +9,9 @@
   empId      number;
 
 begin
+  retCode:=0;
+  retError:='Success';
+  
   begin
     select 'ODR' || OT.CODE_SEQ.NEXTVAL into orderCode from dual;
   
@@ -24,7 +27,8 @@ begin
   
   exception
     when others then
-      orderCode := null;
+      retCode  := sqlcode;
+      retError := sqlerrm;
   end;
 
   begin
@@ -40,7 +44,8 @@ begin
   
   exception
     when others then
-      null;
+      retCode  := sqlcode;
+      retError := sqlerrm;
   end;
 exception
   when others then

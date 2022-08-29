@@ -14,16 +14,8 @@ public class NewCustomerRequest {
 		return name;
 	}
 
-	public String getWebsite() {
-		return website;
-	}
-
-	public Float getCreditLimit() {
-		return creditLimit;
-	}
-
-	public CustomerContact getCustomerContact() {
-		return customerContact;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getType() {
@@ -42,10 +34,36 @@ public class NewCustomerRequest {
 		this.address = address;
 	}
 
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public Float getCreditLimit() {
+		return creditLimit;
+	}
+
+	public void setCreditLimit(Float creditLimit) {
+		this.creditLimit = creditLimit;
+	}
+
+	public CustomerContact getCustomerContact() {
+		return customerContact;
+	}
+
+	public void setCustomerContact(CustomerContact customerContact) {
+		this.customerContact = customerContact;
+	}
+
 	@Override
 	public String toString() {
 		return "NewCustomerRequest [name=" + name + ", type=" + type + ", address=" + address + ", website=" + website
 				+ ", creditLimit=" + creditLimit + ", customerContact=" + customerContact + "]";
 	}
+
+	
 
 }

@@ -52,6 +52,7 @@ import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.NewCustomerRequest;
 import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
 import com.jdbcdemo.jdbcdemo.dto.TranslateText;
+import com.jdbcdemo.jdbcdemo.interfaces.ICompany;
 import com.jdbcdemo.jdbcdemo.interfaces.IDownloadFile;
 import com.jdbcdemo.jdbcdemo.interfaces.IExportTableDataAsScript;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN02;
@@ -74,8 +75,13 @@ import utility.Utility;
 
 @RestController
 public class SimpleController {
-	@Autowired
-	IServices serv;
+	/*
+	 * @Autowired IServices serv;
+	 */
+
+	/*
+	 * @Autowired ICompany comp;
+	 */
 
 	@Autowired
 	AuthenticationManager authenticationManager;
@@ -113,7 +119,7 @@ public class SimpleController {
 			output.setErrorCode(HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity<EmployeeDetailsResponse>(output, HttpStatus.BAD_REQUEST);
 		}
-		// IServices serv = new Services();
+		IServices serv = new Services();
 		try {
 			output = serv.getEmployeeLists(empId);
 
@@ -137,6 +143,7 @@ public class SimpleController {
 			throws JsonProcessingException {
 
 		InsertEmployeeResponse response = new InsertEmployeeResponse();
+		IServices serv = new Services();
 
 		try {
 			response = serv.insertNewEmployee(request);
@@ -177,6 +184,8 @@ public class SimpleController {
 			response.setErrorCode(HttpStatus.BAD_REQUEST.value());
 			return new ResponseEntity<EmployeeDetailsResponse>(response, HttpStatus.BAD_REQUEST);
 		}
+		IServices serv = new Services();
+
 		try {
 			response = serv.getEmployeeDetails(empId);
 			if (response.getName() == "" || response.getName() == null) {
@@ -204,6 +213,7 @@ public class SimpleController {
 	@RequestMapping(value = URIConstants.REMOVE_EMPLOYEE, method = RequestMethod.DELETE)
 	ResponseEntity<BaseOutput> removeEmployee(@PathVariable String empId) throws JsonProcessingException {
 		BaseOutput response = new BaseOutput();
+		IServices serv = new Services();
 
 		try {
 			response = serv.removeEmployee(empId);
@@ -366,6 +376,7 @@ public class SimpleController {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		IServices serv = new Services();
 
 		try {
 			for (EmployeeBulkDeleteRequest empList : arList) {
@@ -392,6 +403,8 @@ public class SimpleController {
 		System.out.println(type);
 		System.out.println(deptId);
 		Double sum = 0D;
+		IServices serv = new Services();
+
 		sum = serv.sumOfDeptWiseSalary(deptId);
 
 		return new ResponseEntity<Double>(sum, HttpStatus.OK);
@@ -405,6 +418,8 @@ public class SimpleController {
 		System.out.println(type);
 		System.out.println(id);
 		Double amount = 0D;
+		IServices serv = new Services();
+
 		try {
 			amount = serv.wiseCalcuation(wise, type, id);
 
@@ -430,6 +445,8 @@ public class SimpleController {
 	ResponseEntity<List<JobDetails>> jobDetails(@PathVariable String minimumSalary) throws JsonProcessingException {
 
 		List<JobDetails> response = new ArrayList<>();
+		IServices serv = new Services();
+
 		try {
 			response = serv.jobDetails(minimumSalary);
 		} catch (Exception e) {
@@ -506,6 +523,7 @@ public class SimpleController {
 	ResponseEntity<BaseOutput> createAndUploadTablesAndData(@RequestBody ImportURL fileLocation,
 			@PathVariable String vesion) throws JsonProcessingException {
 		BaseOutput output = new BaseOutput();
+		IServices serv = new Services();
 
 		try {
 			output = serv.tableAndDataCreate(fileLocation.getFileLocation(), vesion);
@@ -607,6 +625,7 @@ public class SimpleController {
 			e1.printStackTrace();
 		}
 		if (!response.equals(null)) {
+			IServices serv = new Services();
 
 			try {
 				fileLocation = core.getDocLocationWithDocId(response);
@@ -786,17 +805,45 @@ public class SimpleController {
 	@RequestMapping(value = URIConstants.CREATE_NEW_CUSTOMER, method = RequestMethod.POST)
 	ResponseEntity<Map> createNewCustomer(@RequestBody NewCustomerRequest newCustomer) throws JsonProcessingException {
 		Map<String, Object> response = new HashMap<>();
-		
-		IServices serv = new Services();
-		
-		response=serv.saveNewCustomer(newCustomer);
+
+		ICompany servs = new Services();
+
+		response = servs.saveNewCustomer(newCustomer);
 		response.put("errorCode", HttpStatus.CREATED.value());
 		response.put("errorDesc", HttpStatus.CREATED.getReasonPhrase());
-		
-		Utility.insertInternalApiLogs(URIConstants.GET_COUNTRY_DETAILS, ow.writeValueAsString(newCustomer),
+
+		Utility.insertInternalApiLogs(URIConstants.CREATE_NEW_CUSTOMER, ow.writeValueAsString(newCustomer),
 				ow.writeValueAsString(response));
 
 		return new ResponseEntity<Map>(response, HttpStatus.CREATED);
+
+	}
+
+	@RequestMapping(value = URIConstants.CALCULATE_ORDER_VALUE, method = RequestMethod.GET)
+	ResponseEntity<Map> calculateOrderValue(@RequestParam String orderNumber) throws JsonProcessingException {
+
+		Map<String, Object> response = new HashMap<>();
+
+		ICompany servs = new Services();
+
+		response = servs.calculateOrderValue(orderNumber);
+
+		Utility.insertInternalApiLogs(URIConstants.CALCULATE_ORDER_VALUE, ow.writeValueAsString(orderNumber),
+				ow.writeValueAsString(response));
+		return new ResponseEntity<Map>(response, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = URIConstants.CREATE_NEW_ORDER, method = RequestMethod.POST)
+	ResponseEntity<Map> createNewOrder(@RequestBody Map orderDetails) throws JsonProcessingException {
+
+		Map<String, Object> response = new HashMap<>();
+		ICompany serv = new Services();
+		response = serv.createNewOrder(orderDetails);
+
+		Utility.insertInternalApiLogs(URIConstants.CREATE_NEW_ORDER, ow.writeValueAsString(orderDetails),
+				ow.writeValueAsString(response));
+		return new ResponseEntity<Map>(response, HttpStatus.OK);
 
 	}
 
