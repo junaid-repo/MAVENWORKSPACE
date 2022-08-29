@@ -29,6 +29,7 @@ public class URIConstants {
 	public static final String CREATE_NEW_CUSTOMER="company/createNewCustomer";
 	public static final String CALCULATE_ORDER_VALUE="company/calculateOrderValue";
 	public static final String CREATE_NEW_ORDER="company/createNewOrder";
+	public static final String DOWNLOAD_REPORT="company/downloadReport";
 	
 
 }

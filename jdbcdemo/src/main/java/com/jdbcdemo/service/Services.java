@@ -898,8 +898,11 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 
 		if (!orderCode.equals("")) {
 			response = calculateOrderValue(orderCode);
+			core.updateOrderData((String) response.get("orderNumber"), (Float) response.get("grossAmount"),
+					(Float) response.get("gstAmount"), (Float) response.get("netAmount"));
 
 		}
+
 		response.put("CustomerCode", customerCode);
 		return response;
 

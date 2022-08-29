@@ -1,5 +1,6 @@
 package com.jdbcdemo;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,9 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.MultiPart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -22,6 +25,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +43,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
+import com.jdbcdemo.jdbcdemo.dto.Customer;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmailRequest;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeBulkDeleteRequest;
@@ -50,8 +55,10 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse2;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.NewCustomerRequest;
+import com.jdbcdemo.jdbcdemo.dto.ReceiptItem;
 import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
 import com.jdbcdemo.jdbcdemo.dto.TranslateText;
+import com.jdbcdemo.jdbcdemo.interfaces.ExportPdfService;
 import com.jdbcdemo.jdbcdemo.interfaces.ICompany;
 import com.jdbcdemo.jdbcdemo.interfaces.IDownloadFile;
 import com.jdbcdemo.jdbcdemo.interfaces.IExportTableDataAsScript;
@@ -91,6 +98,14 @@ public class SimpleController {
 
 	@Autowired
 	JwtUtil jwtTokenUtil;
+
+	@Autowired
+	private ExportPdfService exportPdfService;
+
+	@RequestMapping("/")
+	public String index() {
+		return "index";
+	}
 
 	ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
@@ -845,6 +860,15 @@ public class SimpleController {
 				ow.writeValueAsString(response));
 		return new ResponseEntity<Map>(response, HttpStatus.OK);
 
+	}
+
+	@RequestMapping(value = URIConstants.DOWNLOAD_REPORT, method = RequestMethod.POST)
+	public void downloadReceipt(HttpServletResponse response) throws IOException {
+		Map<String, Object> data = Utility.createReportData();
+		ByteArrayInputStream exportedData = exportPdfService.exportReceiptPdf("receipt", data);
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment; filename=receipt.pdf");
+		IOUtils.copy(exportedData, response.getOutputStream());
 	}
 
 }

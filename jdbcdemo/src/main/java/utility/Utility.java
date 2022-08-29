@@ -26,9 +26,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jdbcdemo.SimpleController;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
+import com.jdbcdemo.jdbcdemo.dto.Customer;
 import com.jdbcdemo.jdbcdemo.dto.CustomerContact;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.NewCustomerRequest;
+import com.jdbcdemo.jdbcdemo.dto.ReceiptItem;
 import com.jdbcdemo.service.CoreServiceCall;
 
 import excelProject.ImportURL;
@@ -390,20 +392,20 @@ public class Utility implements Runnable {
 	public static String convertCLOBToString(java.sql.Clob clobObject) {
 
 		String clobAsString = null;
-if(clobObject!=null) {
-		try {
-			InputStream in = clobObject.getAsciiStream();
-			StringWriter w = new StringWriter();
-			IOUtils.copy(in, w);
-			clobAsString = w.toString();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (clobObject != null) {
+			try {
+				InputStream in = clobObject.getAsciiStream();
+				StringWriter w = new StringWriter();
+				IOUtils.copy(in, w);
+				clobAsString = w.toString();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-}
 		return clobAsString;
 	}
 
@@ -697,6 +699,42 @@ if(clobObject!=null) {
 
 		return ncr;
 
+	}
+
+	public static Map<String, Object> createReportData() {
+		Map<String, Object> data = new HashMap<>();
+		Customer customer = new Customer();
+		customer.setCompanyName("Simple Solution");
+		customer.setContactName("John Doe");
+		customer.setAddress("123, Simple Street");
+		customer.setEmail("contact@simplesolution.dev");
+		customer.setPhone("123 456 789");
+		data.put("customer", customer);
+
+		List<ReceiptItem> receiptItems = new ArrayList<>();
+		ReceiptItem receiptItem1 = new ReceiptItem();
+		receiptItem1.setDescription("Test Item 1");
+		receiptItem1.setQuantity(1);
+		receiptItem1.setUnitPrice(100.0);
+		receiptItem1.setTotal(100.0);
+		receiptItems.add(receiptItem1);
+
+		ReceiptItem receiptItem2 = new ReceiptItem();
+		receiptItem2.setDescription("Test Item 2");
+		receiptItem2.setQuantity(4);
+		receiptItem2.setUnitPrice(500.0);
+		receiptItem2.setTotal(2000.0);
+		receiptItems.add(receiptItem2);
+
+		ReceiptItem receiptItem3 = new ReceiptItem();
+		receiptItem3.setDescription("Test Item 3");
+		receiptItem3.setQuantity(2);
+		receiptItem3.setUnitPrice(200.0);
+		receiptItem3.setTotal(400.0);
+		receiptItems.add(receiptItem3);
+
+		data.put("receiptItems", receiptItems);
+		return data;
 	}
 
 }

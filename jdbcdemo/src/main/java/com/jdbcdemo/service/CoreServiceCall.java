@@ -1251,4 +1251,39 @@ public class CoreServiceCall extends Services {
 		return retMap;
 	}
 
+	public void updateOrderData(String orderNumber, Float grossAmount, Float gstAmount, Float netAmount) {
+		String errorDesc = "Success";
+		int errorCode = 0;
+
+		Map<String, Object> retMap = new HashMap<>();
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call ot.updateOrderdetails(?,?,?,?)}");
+				st.setString(1, orderNumber);
+				st.setFloat(2, grossAmount);
+				st.setFloat(3, gstAmount);
+				st.setFloat(4, netAmount);
+
+				st.execute();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 }
