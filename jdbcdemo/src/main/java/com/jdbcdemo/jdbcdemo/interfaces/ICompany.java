@@ -8,4 +8,5 @@ public interface ICompany {
 	public Map saveNewCustomer(NewCustomerRequest newCustomer);
 	public Map calculateOrderValue(String orderNumber);
 	public Map createNewOrder(Map orderDetails);
+	public Map getEmployeeData(String employeeCode);
 }

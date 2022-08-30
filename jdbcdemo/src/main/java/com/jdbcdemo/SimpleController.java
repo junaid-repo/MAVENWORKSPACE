@@ -43,7 +43,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
-import com.jdbcdemo.jdbcdemo.dto.Customer;
+import com.jdbcdemo.reports.dto.Customer;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmailRequest;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeBulkDeleteRequest;
@@ -55,7 +55,7 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse2;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.NewCustomerRequest;
-import com.jdbcdemo.jdbcdemo.dto.ReceiptItem;
+import com.jdbcdemo.reports.dto.ReceiptItem;
 import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
 import com.jdbcdemo.jdbcdemo.dto.TranslateText;
 import com.jdbcdemo.jdbcdemo.interfaces.ExportPdfService;
@@ -78,6 +78,7 @@ import com.jdbcdemo.service.Services;
 
 import excelProject.CSVReader;
 import excelProject.ImportURL;
+import utility.ReportDataSetter;
 import utility.Utility;
 
 @RestController
@@ -864,11 +865,57 @@ public class SimpleController {
 
 	@RequestMapping(value = URIConstants.DOWNLOAD_REPORT, method = RequestMethod.POST)
 	public void downloadReceipt(HttpServletResponse response) throws IOException {
-		Map<String, Object> data = Utility.createReportData();
+		Map<String, Object> data = ReportDataSetter.createReportData();
 		ByteArrayInputStream exportedData = exportPdfService.exportReceiptPdf("receipt", data);
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment; filename=receipt.pdf");
 		IOUtils.copy(exportedData, response.getOutputStream());
 	}
 
+	@RequestMapping(value = URIConstants.DOWNLOAD_ORDER_PDF, method = RequestMethod.POST)
+	public void downloadOrderPdf(HttpServletResponse response, @RequestParam String orderNumber) throws IOException {
+
+		Map<String, Object> orderData = new HashMap<>();
+
+		ICompany servs = new Services();
+
+		orderData = servs.calculateOrderValue(orderNumber);
+
+		Map<String, Object> data = ReportDataSetter.createOrderData(orderData);
+		ByteArrayInputStream exportedData = exportPdfService.exportReceiptPdf("receipt", data);
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment; filename=receipt.pdf");
+		IOUtils.copy(exportedData, response.getOutputStream());
+	}
+	
+	@RequestMapping(value = URIConstants.GET_EMPLOYEE_DATA, method = RequestMethod.GET)
+	ResponseEntity<Map> getEmployeeReport(@RequestParam String employeeCode ) throws JsonProcessingException {
+
+		Map<String, Object> response = new HashMap<>();
+
+		ICompany servs = new Services();
+
+		response = servs.getEmployeeData(employeeCode);
+
+		Utility.insertInternalApiLogs(URIConstants.GET_EMPLOYEE_REPORT, ow.writeValueAsString(employeeCode),
+				ow.writeValueAsString(response));
+		return new ResponseEntity<Map>(response, HttpStatus.OK);
+
+	}
+	@RequestMapping(value = URIConstants.GET_EMPLOYEE_REPORT, method = RequestMethod.POST)
+	public void getEmployeeReport(HttpServletResponse response, @RequestParam String employeeCode) throws IOException {
+
+		Map<String, Object> employeeData = new HashMap<>();
+
+		ICompany servs = new Services();
+
+		employeeData = servs.getEmployeeData(employeeCode);
+
+		Map<String, Object> data = ReportDataSetter.createEmployeeData(employeeData);
+		ByteArrayInputStream exportedData = exportPdfService.exportReceiptPdf("reports", data);
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment; filename=receipt.pdf");
+		IOUtils.copy(exportedData, response.getOutputStream());
+	}
+	
 }

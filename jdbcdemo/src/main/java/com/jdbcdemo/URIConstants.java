@@ -30,6 +30,10 @@ public class URIConstants {
 	public static final String CALCULATE_ORDER_VALUE="company/calculateOrderValue";
 	public static final String CREATE_NEW_ORDER="company/createNewOrder";
 	public static final String DOWNLOAD_REPORT="company/downloadReport";
+	public static final String DOWNLOAD_ORDER_PDF="company/downloadOrderPDF";
+	public static final String GET_EMPLOYEE_DATA="company/getEmployeeData";
+	public static final String GET_EMPLOYEE_REPORT="company/getEmployeeReport";
 	
+
 
 }

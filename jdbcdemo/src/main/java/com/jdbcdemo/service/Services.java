@@ -906,6 +906,29 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 		response.put("CustomerCode", customerCode);
 		return response;
 
+	}@Override
+	public Map getEmployeeData(String employeeCode) {
+		CoreServiceCall core = new CoreServiceCall();
+		Map<String, Object> response = new HashMap<>();
+		Map<String, Object> retMap = new HashMap<>();
+		retMap = core.getEmployeeData(employeeCode);
+		List<Map> megaList = new ArrayList<>();
+
+		if (retMap.get("clobData") != null) {
+			try {
+				megaList = Utility.getClobDataToListOfMaps((String) retMap.get("clobData"), "##", "~~", "@@");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		response.put("employeeCode", employeeCode);
+		response.put("ordersList", megaList);
+		response.put("grossAmount", retMap.get("grossAmount"));
+		response.put("gstAmount", retMap.get("gstAmount"));
+		response.put("netAmount", retMap.get("netAmount"));
+		return response;
+
 	}
 
 }

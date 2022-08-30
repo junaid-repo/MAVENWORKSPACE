@@ -1,4 +1,4 @@
-package com.jdbcdemo.jdbcdemo.dto;
+package com.jdbcdemo.reports.dto;
 
 public class Customer {
     private String companyName;

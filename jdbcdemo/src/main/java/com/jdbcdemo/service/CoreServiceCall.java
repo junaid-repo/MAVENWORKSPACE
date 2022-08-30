@@ -1285,5 +1285,68 @@ public class CoreServiceCall extends Services {
 		}
 
 	}
+	public Map getEmployeeData(String employeeCode) {
+
+		BaseOutput output = new BaseOutput();
+		Map<String, Object> retMap = new HashMap<>();
+		Float grossAmount = 0F;
+		Float gstAmount = 0F;
+		Float netAmount = 0F;
+
+		int errorCode = 0;
+		String errorDesc = "";
+		String clobSting = "";
+		java.sql.Clob clobOut = null;
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call ot.employeedatareport(?,?,?,?,?,?,?)}");
+				st.setString(1, employeeCode);
+				st.registerOutParameter(2, java.sql.Types.CLOB);
+				st.registerOutParameter(3, java.sql.Types.DOUBLE);
+				st.registerOutParameter(4, java.sql.Types.DOUBLE);
+				st.registerOutParameter(5, java.sql.Types.DOUBLE);
+				st.registerOutParameter(6, java.sql.Types.DOUBLE);
+				st.registerOutParameter(7, java.sql.Types.VARCHAR);
+				st.execute();
+				clobOut = st.getClob(2);
+
+				clobSting = Utility.convertCLOBToString(clobOut);
+
+				grossAmount = st.getFloat(3);
+				netAmount = st.getFloat(4);
+				gstAmount = st.getFloat(5);
+				errorCode = (int) st.getDouble(6);
+				errorDesc = st.getString(7);
+
+				retMap.put("grossAmount", grossAmount);
+				retMap.put("netAmount", netAmount);
+				retMap.put("gstAmount", gstAmount);
+				retMap.put("clobData", clobSting);
+				retMap.put("errorCode", errorCode);
+				retMap.put("errorDesc", errorDesc);
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(clobSting);
+
+		return retMap;
+
+	}
 
 }
