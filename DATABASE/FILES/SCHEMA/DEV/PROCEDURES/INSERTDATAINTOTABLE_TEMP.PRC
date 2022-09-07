@@ -67,7 +67,7 @@ begin
       
         vSubQuery :=vSubQuery|| ' ' || columnval||',';
       end if;
-    
+    dbms_output.put_line('vSubQuery is'||' ' ||vSubQuery);
       /*tableC := 'insert into ' || tableName || ' values ' || '( ' ||
                       ' tablesSeq.Nextval,    sysdate,';
       */

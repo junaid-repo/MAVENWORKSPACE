@@ -53,7 +53,7 @@ END IF;
         into columnName, columnType
       
         FROM dual;
-    
+    dbms_output.put_line(tableC);
     -------------------------------------------------------
     
     if(lower(columnType)='varchar') then
@@ -76,7 +76,11 @@ END IF;
   
     tableC := tableC || ')';
     vQuery := tableC;
+    
+    dbms_output.put_line(vQuery);
+    
     execute immediate vQuery;
+    
   exception
     when others then
       RETCODE := SQLCODE;

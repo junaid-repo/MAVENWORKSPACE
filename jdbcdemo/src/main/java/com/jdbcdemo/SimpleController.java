@@ -121,6 +121,13 @@ public class SimpleController {
 		return new ResponseEntity<BaseOutput>(bs, HttpStatus.OK);
 	}
 
+	@GetMapping("/")
+	public String first() {
+
+		return "Thhis is the first testing";
+
+	}
+
 	@RequestMapping(value = URIConstants.GET_EMPLOYEE_DETAILS, method = RequestMethod.GET)
 	ResponseEntity<EmployeeDetailsResponse> getEmpDetails(@RequestBody EmployeeDetailsRequest request)
 			throws JsonProcessingException {
@@ -887,9 +894,9 @@ public class SimpleController {
 		response.setHeader("Content-Disposition", "attachment; filename=receipt.pdf");
 		IOUtils.copy(exportedData, response.getOutputStream());
 	}
-	
+
 	@RequestMapping(value = URIConstants.GET_EMPLOYEE_DATA, method = RequestMethod.GET)
-	ResponseEntity<Map> getEmployeeReport(@RequestParam String employeeCode ) throws JsonProcessingException {
+	ResponseEntity<Map> getEmployeeReport(@RequestParam String employeeCode) throws JsonProcessingException {
 
 		Map<String, Object> response = new HashMap<>();
 
@@ -902,6 +909,7 @@ public class SimpleController {
 		return new ResponseEntity<Map>(response, HttpStatus.OK);
 
 	}
+
 	@RequestMapping(value = URIConstants.GET_EMPLOYEE_REPORT, method = RequestMethod.POST)
 	public void getEmployeeReport(HttpServletResponse response, @RequestParam String employeeCode) throws IOException {
 
@@ -917,5 +925,5 @@ public class SimpleController {
 		response.setHeader("Content-Disposition", "attachment; filename=receipt.pdf");
 		IOUtils.copy(exportedData, response.getOutputStream());
 	}
-	
+
 }

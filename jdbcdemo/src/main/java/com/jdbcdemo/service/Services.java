@@ -4,16 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -54,7 +51,6 @@ import com.jdbcdemo.jdbcdemo.interfaces.IServices;
 import com.jdbcdemo.jdbcdemo.interfaces.ITextTranslate;
 import com.jdbcdemo.jdbcdemo.interfaces.IUploadFile;
 
-import connection.ConnectionClass;
 import externalApi.ExternalServices;
 import utility.Utility;
 
@@ -95,7 +91,7 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 		response = bs.getEmployeeDetails(empId);
 
 		float sal = response.getSalary();
-		List<Float> salaryList = new ArrayList<>();
+		CopyOnWriteArrayList<Float> salaryList = new CopyOnWriteArrayList<>();
 		salaryList.add(sal);
 
 		System.out.println("printting to check lambda");

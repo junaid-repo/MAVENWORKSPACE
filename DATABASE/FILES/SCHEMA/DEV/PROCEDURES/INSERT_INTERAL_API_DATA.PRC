@@ -10,7 +10,7 @@ begin
   retError := 'Success';
 
   begin
-    insert into dev.WebService_logs
+    insert into dev.API_LOGS
     values
       (apilogseq.nextval, sysdate, serviceName, requestJson, responseJson);
   
