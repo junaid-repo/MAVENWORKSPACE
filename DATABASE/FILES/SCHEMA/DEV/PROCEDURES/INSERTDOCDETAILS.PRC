@@ -12,9 +12,9 @@ begin
   select DOC_SQUENCE.Nextval into docId from dual;
 
   begin
-    insert into document_details
+    insert into dev.document_details
     values
-      (docId, sysdate, fileName, fileLocation);
+      (docId, sysdate, fileName, fileLocation, null);
   
   Exception
     when others then

@@ -7,9 +7,10 @@
                                          collectionNumber out varchar2,
                                          retCode          out number,
                                          retError         out varchar2) as
-  orderId           number;
-  customerId        number;
-  OUTSTANDINGAMOUNT NUMBER;
+  orderId                number;
+  customerId             number;
+  OUTSTANDINGAMOUNT      NUMBER;
+  ALREADYCOLLECTEDAMOUNT NUMBER;
 
 begin
 
@@ -23,6 +24,7 @@ begin
     when others then
       retCode  := 100;
       retError := pOrderCode || ' is invalid';
+      RETURN;
   end;
 
   begin
@@ -35,6 +37,7 @@ begin
     when others then
       retCode  := 101;
       retError := pCustomerCode || ' is invalid';
+      RETURN;
   end;
 
   IF (paymentType = 'ONLINE') THEN
@@ -45,6 +48,25 @@ begin
     retCode  := 102;
     retError := OUTSTANDINGAMOUNT ||
                 ' amount is still pending  from Online';
+    return;
+  END IF;
+  BEGIN
+    select SUM(T.COLLECTEDAMOUNT)
+      INTO ALREADYCOLLECTEDAMOUNT
+      from COLLECTION t
+     WHERE T.ORDERID = orderId;
+  Exception
+    when others then
+      ALREADYCOLLECTEDAMOUNT := 0;
+  end;
+
+  IF ((orderAmount - ALREADYCOLLECTEDAMOUNT) < paymentAmount) THEN
+    RETCODE  := 111;
+    retError := 'Amount of ' || ALREADYCOLLECTEDAMOUNT ||
+                ' has already been payed by the customer. Just pay ' ||
+                (orderAmount - ALREADYCOLLECTEDAMOUNT) ||
+                ' more to continue';
+  
     return;
   END IF;
 
@@ -61,8 +83,23 @@ begin
      paymentAmount,
      paymentType,
      collectionNumber);
+     
+ IF(orderAmount - ALREADYCOLLECTEDAMOUNT<=0) THEN    
+
+  update ot.orders oo
+     set oo.status = 'PAID'
+   WHERE OO.ORDER_ID = orderId;
+
+ELSE
+   update ot.orders oo
+     set oo.status = 'PARTIALLY PAID'
+   WHERE OO.ORDER_ID = orderId;
+END IF;
+  
+
 
 exception
   when others then
-    null;
+    retCode  := sqlcode;
+    retError := sqlerrm;
 end;

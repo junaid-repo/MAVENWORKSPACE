@@ -766,24 +766,6 @@ public class Utility implements Runnable {
 			receiptItems.add(receiptItem1);
 			
 		}
-
-		/*
-		 * List<ReceiptItem> receiptItems = new ArrayList<>(); ReceiptItem receiptItem1
-		 * = new ReceiptItem(); receiptItem1.setDescription("Test Item 1");
-		 * receiptItem1.setQuantity(1); receiptItem1.setUnitPrice(100.0);
-		 * receiptItem1.setTotal(100.0); receiptItems.add(receiptItem1);
-		 * 
-		 * ReceiptItem receiptItem2 = new ReceiptItem();
-		 * receiptItem2.setDescription("Test Item 2"); receiptItem2.setQuantity(4);
-		 * receiptItem2.setUnitPrice(500.0); receiptItem2.setTotal(2000.0);
-		 * receiptItems.add(receiptItem2);
-		 * 
-		 * ReceiptItem receiptItem3 = new ReceiptItem();
-		 * receiptItem3.setDescription("Test Item 3"); receiptItem3.setQuantity(2);
-		 * receiptItem3.setUnitPrice(200.0); receiptItem3.setTotal(400.0);
-		 * receiptItems.add(receiptItem3);
-		 */
-
 		data.put("receiptItems", receiptItems);
 		return data;
 	}

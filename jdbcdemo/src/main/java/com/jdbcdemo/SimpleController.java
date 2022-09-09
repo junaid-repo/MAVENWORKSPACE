@@ -43,7 +43,6 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
-import com.jdbcdemo.reports.dto.Customer;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmailRequest;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeBulkDeleteRequest;
@@ -55,7 +54,8 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse2;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.NewCustomerRequest;
-import com.jdbcdemo.reports.dto.ReceiptItem;
+import com.jdbcdemo.jdbcdemo.dto.OrderPaymentRequest;
+import com.jdbcdemo.jdbcdemo.dto.OrderPaymentResponse;
 import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
 import com.jdbcdemo.jdbcdemo.dto.TranslateText;
 import com.jdbcdemo.jdbcdemo.interfaces.ExportPdfService;
@@ -924,6 +924,15 @@ public class SimpleController {
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment; filename=receipt.pdf");
 		IOUtils.copy(exportedData, response.getOutputStream());
+	}
+
+	@RequestMapping(value = URIConstants.COLLECTION, method = RequestMethod.POST)
+	ResponseEntity<OrderPaymentResponse> doCollection(OrderPaymentRequest request) throws JsonProcessingException {
+
+		OrderPaymentResponse response = new OrderPaymentResponse();
+		Utility.insertInternalApiLogs(URIConstants.COLLECTION, ow.writeValueAsString(request),
+				ow.writeValueAsString(response));
+		return new ResponseEntity<OrderPaymentResponse>(response, HttpStatus.OK);
 	}
 
 }

@@ -19,11 +19,11 @@ begin
 
   select ot.customer_id_seq.nextVal into vCustId from dual;
   
-  select 'CR'||OT.CUSTOMER_ID_SEQ.NEXTVAL into vCustNumber from dual;
+  select 'CM'||OT.CUSTOMER_ID_SEQ.NEXTVAL into vCustNumber from dual;
 
   insert into ot.customers
   values
-    (vCustId,vCustNumber,vType, vName, vAddress, vWebsite, vCreditLimit);
+    (vCustId,vCustNumber,vType, vName, vAddress, vWebsite, vCreditLimit, 0);
 
   insert into ot.contacts
   values

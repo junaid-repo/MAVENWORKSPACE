@@ -37,9 +37,12 @@ import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
 import com.jdbcdemo.jdbcdemo.dto.NewCustomerRequest;
+import com.jdbcdemo.jdbcdemo.dto.OrderPaymentRequest;
+import com.jdbcdemo.jdbcdemo.dto.OrderPaymentResponse;
 import com.jdbcdemo.jdbcdemo.dto.TranslateText;
 import com.jdbcdemo.jdbcdemo.interfaces.CreateEmployeeInBulkIF;
 import com.jdbcdemo.jdbcdemo.interfaces.ICompany;
+import com.jdbcdemo.jdbcdemo.interfaces.IDoCollection;
 import com.jdbcdemo.jdbcdemo.interfaces.IDownloadFile;
 import com.jdbcdemo.jdbcdemo.interfaces.IExportTableDataAsScript;
 import com.jdbcdemo.jdbcdemo.interfaces.IFN01;
@@ -56,7 +59,7 @@ import utility.Utility;
 
 @Component
 public class Services extends Thread implements IServices, IFN02, IFN03, IExportTableDataAsScript, IGDPCountries,
-		IUploadFile, IDownloadFile, ITextTranslate, ISendSimpleEmail, Runnable, ICompany {
+		IUploadFile, IDownloadFile, ITextTranslate, ISendSimpleEmail, Runnable, ICompany, IDoCollection {
 	@Value("${upload-dir}")
 	private static String FILE_DIRECTORY = "C:/Users/junai/OneDrive/Documents/FileUploadDir/";
 	@Autowired
@@ -769,7 +772,7 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 			newEmployeesResponse.add(obj);
 		}
 
-		retResponse.put("employeeList", newEmployeesResponse);
+		retResponse.put("employeeList", newEmployeesResponse);''
 
 		// ----------------------------------------------------------------------------
 
@@ -902,7 +905,9 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 		response.put("CustomerCode", customerCode);
 		return response;
 
-	}@Override
+	}
+
+	@Override
 	public Map getEmployeeData(String employeeCode) {
 		CoreServiceCall core = new CoreServiceCall();
 		Map<String, Object> response = new HashMap<>();
@@ -925,6 +930,33 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 		response.put("netAmount", retMap.get("netAmount"));
 		return response;
 
+	}
+
+	@Override
+	public OrderPaymentResponse doCollection(OrderPaymentRequest request) {
+		// TODO Auto-generated method stub
+		OrderPaymentResponse response = new OrderPaymentResponse();
+		IDoCollection coll = (OrderPaymentRequest request1) -> {
+			String paymentMethod = request1.getPaymentMethod();
+
+			if (paymentMethod.equals("ONLINE")) {
+				Thread thread = new Thread(new Runnable() {
+					@Override
+					public void run() {
+
+					}
+				});
+				thread.start();
+			}
+			
+
+			OrderPaymentResponse order = new OrderPaymentResponse();
+			return order;
+
+		};
+		response = coll.doCollection(request);
+
+		return response;
 	}
 
 }
