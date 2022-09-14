@@ -772,7 +772,7 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 			newEmployeesResponse.add(obj);
 		}
 
-		retResponse.put("employeeList", newEmployeesResponse);''
+		retResponse.put("employeeList", newEmployeesResponse);
 
 		// ----------------------------------------------------------------------------
 
