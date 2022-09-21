@@ -1,0 +1,51 @@
+
+  CREATE OR REPLACE PACKAGE "DEV"."THISISFIRSTPKG" as
+
+  procedure pkgFirstProc(pName     in varchar2,
+                         pAge      in Number,
+                         pRetCode  in out number,
+                         pRetError in out varchar2);
+
+end thisIsFirstPkg;
+
+CREATE OR REPLACE PACKAGE BODY "DEV"."THISISFIRSTPKG" as
+
+  procedure pkgFirstProc(pName     in varchar2,
+                         pAge      in number,
+                         pRetCode  in out number,
+                         pRetError in out varchar2) is
+  
+    type refcr is ref cursor;
+    masterQuery varchar2(2000);
+    empId       number(23);
+    firstName   varchar2(200);
+    lastName    varchar2(200);
+    phoneNumber varchar2(200);
+  
+    crsr refcr;
+  
+  begin
+  
+    masterQuery := ' select e.employee_id,  e.first_name, e.last_name, e.phone_number from dev.employees e where e.salary>4000 ';
+  
+    open crsr for masterQuery;
+  
+    loop
+      fetch crsr
+        into empId, firstName, lastName, phoneNumber;
+      exit when crsr%notfound;
+    
+      update dev.employees_tbd2 et
+         set et.salary = et.salary + 875
+       where et.employee_id = empId;
+    
+    end loop;
+    close crsr;
+  
+  exception
+    when others then
+    
+      null;
+  end;
+
+end thisIsFirstPkg;

@@ -1,0 +1,11 @@
+
+  CREATE OR REPLACE PACKAGE "DEV"."MYFIRSTPACKAGE" as
+
+
+procedure firstPackageProc(pName in varchar2 ,
+pAge in number ,
+retCode out number ,
+retError out varchar2 );
+
+end myfirstPackage;
+
