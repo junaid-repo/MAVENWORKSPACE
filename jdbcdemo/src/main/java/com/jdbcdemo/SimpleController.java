@@ -15,6 +15,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.MultiPart;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -78,6 +80,7 @@ import com.jdbcdemo.service.Services;
 
 import excelProject.CSVReader;
 import excelProject.ImportURL;
+import externalApi.ExternalServices;
 import utility.ReportDataSetter;
 import utility.Utility;
 
@@ -933,6 +936,33 @@ public class SimpleController {
 		Utility.insertInternalApiLogs(URIConstants.COLLECTION, ow.writeValueAsString(request),
 				ow.writeValueAsString(response));
 		return new ResponseEntity<OrderPaymentResponse>(response, HttpStatus.OK);
+	}
+
+	// @Produces("application/json")
+	@RequestMapping(value = URIConstants.GET_LOCATION_DETAILS, method = RequestMethod.GET, produces = {
+			"application/json" })
+	ResponseEntity<String> getHospitalValidity(@RequestParam String pincode, String trainNo) throws JsonProcessingException {
+
+		String response = new String();
+		StringBuffer response2 = new StringBuffer();
+
+		response = ExternalServices.getPinCodeDetails(pincode);
+
+		if (response.length() > 5) {
+			Utility.updatePincodeMasters(response, trainNo);
+			
+			
+		}
+		response2.append(response);
+		response2.deleteCharAt(0);
+		response2.deleteCharAt(response.length() - 2);
+		System.out.println(response2);
+		
+
+		Utility.insertInternalApiLogs(URIConstants.GET_LOCATION_DETAILS, ow.writeValueAsString(pincode),
+				ow.writeValueAsString(response));
+		return new ResponseEntity<String>(response, HttpStatus.OK);
+
 	}
 
 }

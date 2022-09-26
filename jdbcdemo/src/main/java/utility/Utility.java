@@ -26,16 +26,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jdbcdemo.SimpleController;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
-import com.jdbcdemo.reports.dto.Customer;
 import com.jdbcdemo.jdbcdemo.dto.CustomerContact;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.NewCustomerRequest;
+import com.jdbcdemo.jdbcdemo.dto.PincodeDetails;
+import com.jdbcdemo.jdbcdemo.dto.TrainDetailsResponse;
+import com.jdbcdemo.reports.dto.Customer;
 import com.jdbcdemo.reports.dto.ReceiptItem;
 import com.jdbcdemo.service.CoreServiceCall;
 
 import excelProject.ImportURL;
+import externalApi.ExternalServices;
+import multithread.MultiThreadOne;
+import objectSetters.ObjectCreator;
 
-public class Utility implements Runnable {
+public class Utility extends Thread implements Runnable {
 
 	ImportURL newImportUrl = new ImportURL();
 
@@ -736,11 +741,10 @@ public class Utility implements Runnable {
 		data.put("receiptItems", receiptItems);
 		return data;
 	}
-	
+
 	public static Map<String, Object> createOrderData(Map<String, Object> orderData) {
 		Map<String, Object> data = new HashMap<>();
-		
-		
+
 		Customer customer = new Customer();
 		customer.setCompanyName("Junaid Solutions");
 		customer.setContactName("Junaid Khan");
@@ -748,26 +752,126 @@ public class Utility implements Runnable {
 		customer.setEmail("contact@simplesolution.dev");
 		customer.setPhone("123 456 789");
 		data.put("customer", customer);
-		
-		List<Map> productDetails = (List<Map>)orderData.get("productDetails");
+
+		List<Map> productDetails = (List<Map>) orderData.get("productDetails");
 		List<ReceiptItem> receiptItems = new ArrayList<>();
-		for(Map productMap:productDetails) {
-			Integer quantity=Integer.parseInt((String)productMap.get("Quantity"));
-			Double unitPrice=Double.parseDouble((String)productMap.get("Gross Price"));
-			Double totalValue=Double.parseDouble((String)productMap.get("Net Price"));
-			
-		
+		for (Map productMap : productDetails) {
+			Integer quantity = Integer.parseInt((String) productMap.get("Quantity"));
+			Double unitPrice = Double.parseDouble((String) productMap.get("Gross Price"));
+			Double totalValue = Double.parseDouble((String) productMap.get("Net Price"));
+
 			ReceiptItem receiptItem1 = new ReceiptItem();
-			
-			receiptItem1.setDescription((String)productMap.get("Product Name"));
+
+			receiptItem1.setDescription((String) productMap.get("Product Name"));
 			receiptItem1.setQuantity(quantity);
 			receiptItem1.setUnitPrice(unitPrice);
 			receiptItem1.setTotal(totalValue);
 			receiptItems.add(receiptItem1);
-			
+
 		}
 		data.put("receiptItems", receiptItems);
 		return data;
+	}
+
+	public static void updatePincodeMasters(String pinCodeDetails, String trainNo) {
+
+		String st1 = "";
+		String st2 = "";
+		String pin = "400001";
+		String office = "Town Hall S.O (Mumbai)";
+		String office_type = "S.O";
+		String delivery = "Non-Delivery";
+		String division = "Mumbai  South";
+		String region = "Mumbai";
+		String circle = "Maharashtra";
+		String taluk = "Mumbai";
+		String district = "Mumbai";
+		String state_id = "19";
+		String phone = "022-22660701";
+		String related_suboffice = "Not Available";
+		String related_headoffice = "Mumbai G.P.O. ";
+		String longitude = "Not Available";
+		String latitude = "Not Available";
+		CoreServiceCall core = new CoreServiceCall();
+
+		String paramName = "";
+		String paramVal = "";
+		String longString = "[{\"pin\":400001,\"office\":\"Bazargate S.O\",\"office_type\":\"S.O\",\"delivery\":\"Non-Delivery\",\"division\":\"Mumbai  South\",\"region\":\"Mumbai\",\"circle\":\"Maharashtra\",\"taluk\":\"Mumbai\",\"district\":\"Mumbai\",\"state_id\":19,\"phone\":\"022-22613927\",\"related_suboffice\":\"Not Available\",\"related_headoffice\":\"Mumbai G.P.O. \",\"longitude\":\"Not Available\",\"latitude\":\"Not Available\"},{\"pin\":400001,\"office\":\"Elephanta Caves Po B.O\",\"office_type\":\"B.O directly a/w Head Office\",\"delivery\":\"Delivery\",\"division\":\"Mumbai  South\",\"region\":\"Mumbai\",\"circle\":\"Maharashtra\",\"taluk\":\"Uran\",\"district\":\"Raigarh(MH)\",\"state_id\":19,\"phone\":\"Not Available\",\"related_suboffice\":\"Not Available\",\"related_headoffice\":\"Mumbai G.P.O. \",\"longitude\":\"Not Available\",\"latitude\":\"Not Available\"},{\"pin\":400001,\"office\":\"M.P.T. S.O\",\"office_type\":\"S.O\",\"delivery\":\"Non-Delivery\",\"division\":\"Mumbai  South\",\"region\":\"Mumbai\",\"circle\":\"Maharashtra\",\"taluk\":\"Mumbai\",\"district\":\"Mumbai\",\"state_id\":19,\"phone\":\"022-22617590\",\"related_suboffice\":\"Not Available\",\"related_headoffice\":\"Mumbai G.P.O. \",\"longitude\":\"Not Available\",\"latitude\":\"Not Available\"},{\"pin\":400001,\"office\":\"Stock Exchange S.O\",\"office_type\":\"S.O\",\"delivery\":\"Non-Delivery\",\"division\":\"Mumbai  South\",\"region\":\"Mumbai\",\"circle\":\"Maharashtra\",\"taluk\":\"Mumbai\",\"district\":\"Mumbai\",\"state_id\":19,\"phone\":\"022-22676041\",\"related_suboffice\":\"Not Available\",\"related_headoffice\":\"Mumbai G.P.O. \",\"longitude\":\"Not Available\",\"latitude\":\"Not Available\"},{\"pin\":400001,\"office\":\"Tajmahal S.O\",\"office_type\":\"S.O\",\"delivery\":\"Non-Delivery\",\"division\":\"Mumbai  South\",\"region\":\"Mumbai\",\"circle\":\"Maharashtra\",\"taluk\":\"Mumbai\",\"district\":\"Mumbai\",\"state_id\":19,\"phone\":\"022-22023549\",\"related_suboffice\":\"Not Available\",\"related_headoffice\":\"Mumbai G.P.O. \",\"longitude\":\"Not Available\",\"latitude\":\"Not Available\"},{\"pin\":400001,\"office\":\"Town Hall S.O (Mumbai)\",\"office_type\":\"S.O\",\"delivery\":\"Non-Delivery\",\"division\":\"Mumbai  South\",\"region\":\"Mumbai\",\"circle\":\"Maharashtra\",\"taluk\":\"Mumbai\",\"district\":\"Mumbai\",\"state_id\":19,\"phone\":\"022-22660701\",\"related_suboffice\":\"Not Available\",\"related_headoffice\":\"Mumbai G.P.O. \",\"longitude\":\"Not Available\",\"latitude\":\"Not Available\"},{\"pin\":400001,\"office\":\"Mumbai G.P.O. \",\"office_type\":\"H.O\",\"delivery\":\"Delivery\",\"division\":\"Mumbai G.P.O.\",\"region\":\"Mumbai\",\"circle\":\"Maharashtra\",\"taluk\":\"Mumbai\",\"district\":\"Mumbai\",\"state_id\":19,\"phone\":\"022-22620693\",\"related_suboffice\":\"Not Available\",\"related_headoffice\":\"Not Available\",\"longitude\":\"Not Available\",\"latitude\":\"Not Available\"}]";
+
+		String[] st = pinCodeDetails.split("},");
+		String trainDetails = ExternalServices.getTrainDetails(trainNo);
+		for (int i = 0; i < st.length; i++) {
+			st1 = st[i];
+
+			StringBuffer stb = new StringBuffer(st1);
+			st2 = st1.replace("[", "");
+			st2 = st2.replace("{", "");
+			st2 = st2.replace("}]", "");
+			// System.out.println(st2);
+			System.out.println("###################################################################");
+			String[] innerSt = st2.split(",");
+			for (int j = 0; j < innerSt.length; j++) {
+				// System.out.println(innerSt[j]);
+
+				String[] inst = innerSt[j].split(":");
+
+				paramName = inst[0].replace('"', ' ');
+				paramVal = inst[1].replace('"', ' ');
+
+				if (paramName.trim().equals("pin"))
+					pin = paramVal.trim();
+
+				else if (paramName.trim().equals("office"))
+					office = paramVal.trim();
+				else if (paramName.trim().equals("office_type"))
+					office_type = paramVal.trim();
+				else if (paramName.trim().equals("delivery"))
+					delivery = paramVal.trim();
+				else if (paramName.trim().equals("division"))
+					division = paramVal.trim();
+				else if (paramName.trim().equals("region"))
+					region = paramVal.trim();
+				else if (paramName.trim().equals("circle"))
+					circle = paramVal.trim();
+				else if (paramName.trim().equals("taluk"))
+					taluk = paramVal.trim();
+				else if (paramName.trim().equals("district"))
+					district = paramVal.trim();
+				else if (paramName.trim().equals("state_id"))
+					state_id = paramVal.trim();
+				else if (paramName.trim().equals("phone"))
+					phone = paramVal.trim();
+				else if (paramName.trim().equals("related_suboffice"))
+					related_suboffice = paramVal.trim();
+				else if (paramName.trim().equals("related_headoffice"))
+					related_headoffice = paramVal.trim();
+				else if (paramName.trim().equals("longitude"))
+					longitude = paramVal.trim();
+				else if (paramName.trim().equals("latitude"))
+					latitude = paramVal.trim();
+
+			}
+
+			System.out.println(pin + "," + pin + "," + office + "," + office_type + "," + delivery + "," + division
+					+ "," + region + "," + circle + "," + taluk + "," + district + "," + state_id + "," + phone + ","
+					+ related_suboffice + "," + longitude + "," + latitude);
+
+			PincodeDetails pinCodeDt = new PincodeDetails();
+			TrainDetailsResponse train = new TrainDetailsResponse();
+			pinCodeDt = ObjectCreator.pinCodeDetailsSetter(pin, office, office_type, delivery, division, region, circle,
+					taluk, district, state_id, phone, related_suboffice, related_headoffice, longitude, latitude,
+					trainNo);
+
+			MultiThreadOne multi = new MultiThreadOne();
+
+			
+
+			train = ObjectCreator.trainDetailsSetter(trainNo, trainDetails);
+
+			multi.updatePincode(pinCodeDt, train);
+
+		}
+
 	}
 
 }

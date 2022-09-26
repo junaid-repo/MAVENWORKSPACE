@@ -15,8 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.sql.rowset.serial.SerialException;
-
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +27,9 @@ import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeList;
 import com.jdbcdemo.jdbcdemo.dto.InsertEmployeeResponse;
 import com.jdbcdemo.jdbcdemo.dto.JobDetails;
+import com.jdbcdemo.jdbcdemo.dto.PincodeDetails;
 import com.jdbcdemo.jdbcdemo.dto.Property;
+import com.jdbcdemo.jdbcdemo.interfaces.IMultiThreadOne;
 import com.jdbcdemo.jdbcdemo.properties.AppProperties;
 
 import connection.ConnectionClass;
@@ -41,7 +41,7 @@ import utility.Utility;
 
 @Service
 @Component
-public class CoreServiceCall extends Services {
+public class CoreServiceCall extends Services implements IMultiThreadOne {
 
 	public EmployeeDetailsResponse getEmployeeLists(String empId) {
 
@@ -894,14 +894,19 @@ public class CoreServiceCall extends Services {
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			Connection conn = null;
+
 			conn = ConnectionClass.getEDBConnection();
+			Clob requestClob = conn.createClob();
+			Clob responseClob = conn.createClob();
+			requestClob.setString(1, request);
+			responseClob.setString(1, response);
 			CallableStatement st = null;
 
 			try {
 				st = conn.prepareCall("{call dev.insert_api_data(?,?,?,?,?)}");
 				st.setString(1, url);
-				st.setString(2, request);
-				st.setString(3, response);
+				st.setClob(2, requestClob);
+				st.setClob(3, responseClob);
 
 				st.registerOutParameter(4, java.sql.Types.DOUBLE);
 				st.registerOutParameter(5, java.sql.Types.VARCHAR);
@@ -1285,6 +1290,7 @@ public class CoreServiceCall extends Services {
 		}
 
 	}
+
 	public Map getEmployeeData(String employeeCode) {
 
 		BaseOutput output = new BaseOutput();
@@ -1346,6 +1352,131 @@ public class CoreServiceCall extends Services {
 		System.out.println(clobSting);
 
 		return retMap;
+
+	}
+
+	public void updatePinCodeMasters(String pin, String office, String office_type, String delivery, String division,
+			String region, String circle, String taluk, String district, String state_id, String phone,
+			String related_suboffice, String related_headoffice, String longitude, String latitude) {
+
+		BaseOutput output = new BaseOutput();
+		Map<String, Object> retMap = new HashMap<>();
+
+		int errorCode = 0;
+		String errorDesc = "Success";
+		String clobSting = null;
+		String primaryConcat = "";
+		String secondaryConcat = "";
+		String customerCode = "";
+		java.sql.Clob clobOut = null;
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call dev.update_pincode_master(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+				st.setString(1, pin);
+				st.setString(2, office);
+				st.setString(3, office_type);
+				st.setString(4, delivery);
+				st.setString(5, division);
+
+				st.setString(6, region);
+				st.setString(7, circle);
+				st.setString(8, taluk);
+				st.setString(9, district);
+				st.setString(10, state_id);
+				st.setString(11, phone);
+
+				st.setString(12, related_suboffice);
+				st.setString(13, related_headoffice);
+				st.setString(14, longitude);
+				st.setString(15, latitude);
+
+				st.execute();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void updatePinCodeMasters2(PincodeDetails pd) {
+
+		String pin = pd.pin;
+		String office = pd.office;
+		String office_type = pd.office_type;
+		String delivery = pd.delivery;
+		String division = pd.division;
+		String region = pd.region;
+		String circle = pd.circle;
+		String taluk = pd.taluk;
+		String district = pd.district;
+		String state_id = pd.state_id;
+		String phone = pd.phone;
+		String related_suboffice = pd.related_suboffice;
+		String related_headoffice = pd.related_headoffice;
+		String longitude = pd.longitude;
+		String latitude = pd.latitude;
+
+		BaseOutput output = new BaseOutput();
+		Map<String, Object> retMap = new HashMap<>();
+
+		int errorCode = 0;
+		String errorDesc = "Success";
+		String clobSting = null;
+		String primaryConcat = "";
+		String secondaryConcat = "";
+		String customerCode = "";
+		java.sql.Clob clobOut = null;
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call dev.update_pincode_master(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+				st.setString(1, pin);
+				st.setString(2, office);
+				st.setString(3, office_type);
+				st.setString(4, delivery);
+				st.setString(5, division);
+
+				st.setString(6, region);
+				st.setString(7, circle);
+				st.setString(8, taluk);
+				st.setString(9, district);
+				st.setString(10, state_id);
+				st.setString(11, phone);
+
+				st.setString(12, related_suboffice);
+				st.setString(13, related_headoffice);
+				st.setString(14, longitude);
+				st.setString(15, latitude);
+
+				st.execute();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

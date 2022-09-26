@@ -79,4 +79,67 @@ public class ExternalServices {
 		return "Success!!!";
 	}
 
+	public static String getPinCodeDetails(String pinCode) {
+
+		String input = "{\r\"searchBy\": \"pincode\",\r\"value\":" + pinCode + "\r}";
+
+		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(AppProperties.postOfficeDetails))
+				.header("content-type", "application/json").header("Content-Type", "application/json")
+				.header("X-RapidAPI-Key", AppProperties.postOfficeAPIKey)
+				.header("X-RapidAPI-Host", "pincode.p.rapidapi.com")
+				.method("POST", HttpRequest.BodyPublishers.ofString(input)).build();
+		String toResponse = "";
+		HttpResponse<String> response;
+		try {
+			response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+			toResponse = response.body();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(Utility.insertApiLogs(AppProperties.postOfficeDetails, pinCode, toResponse));
+		return toResponse;
+	}
+
+	public static String getTrainDetails(String trainNumber) {
+
+		trainNumber="\""+trainNumber+"\"";
+		
+		String requestJson = "{\r\"search\":" + trainNumber + "\r}";
+		String requestJson2 = "{\r\"search\": \"Rajdhani\"\r}";
+
+		/*
+		 * HttpRequest request2 =
+		 * HttpRequest.newBuilder().uri(URI.create(AppProperties.trainDetailsURI))
+		 * .header("content-type", "application/json").header("X-RapidAPI-Key",
+		 * AppProperties.trainDetailsAPIKey) .header("X-RapidAPI-Host",
+		 * "trains.p.rapidapi.com") .method("POST",
+		 * HttpRequest.BodyPublishers.ofString(requestJson)).build();
+		 */
+
+		HttpRequest request2 = HttpRequest.newBuilder().uri(URI.create(AppProperties.trainDetailsURI))
+				.header("content-type", "application/json").header("X-RapidAPI-Key", AppProperties.trainDetailsAPIKey)
+				.header("X-RapidAPI-Host", "trains.p.rapidapi.com")
+				.method("POST", HttpRequest.BodyPublishers.ofString(requestJson)).build();
+
+		String toResponse = "";
+		HttpResponse<String> response2;
+		try {
+			response2 = HttpClient.newHttpClient().send(request2, HttpResponse.BodyHandlers.ofString());
+			System.out.println(response2.body());
+			toResponse = response2.body();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(Utility.insertApiLogs(AppProperties.trainDetailsURI, trainNumber, toResponse));
+		return toResponse;
+	}
+
 }

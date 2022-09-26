@@ -4,11 +4,16 @@ public class Area {
 
 	private int length;
 	private int breadth;
+	int radius = 10;
 
-	public Area(int length, int breadth) {
+	/*
+	 * public Area(int length, int breadth) {
+	 * 
+	 * this.length = length; this.breadth = breadth; }
+	 */
 
-		this.length = length;
-		this.breadth = breadth;
+	void display() {
+		System.out.println(radius);
 	}
 
 	public int getLength() {

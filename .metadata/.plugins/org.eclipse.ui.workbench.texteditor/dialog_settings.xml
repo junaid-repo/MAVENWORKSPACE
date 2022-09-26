@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="//IServices serv = new Services();"/>
+		<item key="selection" value="tD"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="tD"/>
+			<item value="setclob"/>
+			<item value="MyThread"/>
+			<item value="private "/>
+			<item value="String"/>
+			<item value=" = paramVal;"/>
+			<item value="else if (paramName"/>
+			<item value="\"/>
 			<item value="//IServices serv = new Services();"/>
 			<item value="IServices serv = new Services();"/>
 			<item value="serv"/>
 			<item value="userDetailsService"/>
 		</list>
 		<list key="replacehistory">
-			<item value="//IServices serv = new Services();"/>
+			<item value="MultiThreadOne"/>
+			<item value="public "/>
+			<item value="public"/>
 			<item value=""/>
+			<item value="private String"/>
+			<item value=" = paramVal.trim();"/>
+			<item value="else if (paramName.trim()"/>
+			<item value="else if (paramName"/>
+			<item value="//IServices serv = new Services();"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

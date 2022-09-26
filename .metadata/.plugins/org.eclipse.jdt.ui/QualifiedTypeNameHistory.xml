@@ -4,4 +4,13 @@
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="java.net.http.HttpResponse"/>
+    <fullyQualifiedTypeName name="java.net.http.HttpClient"/>
+    <fullyQualifiedTypeName name="java.net.http.HttpRequest"/>
+    <fullyQualifiedTypeName name="java.net.URI"/>
+    <fullyQualifiedTypeName name="objectSetters.PinCodeDetailObjectCreator"/>
+    <fullyQualifiedTypeName name="com.jdbcdemo.jdbcdemo.interfaces.IMultiThreadOne"/>
+    <fullyQualifiedTypeName name="externalApi.ExternalServices"/>
+    <fullyQualifiedTypeName name="objectSetters.ObjectCreator"/>
 </qualifiedTypeNameHistroy>
