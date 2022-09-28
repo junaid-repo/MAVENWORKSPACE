@@ -18,9 +18,11 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.jdbcdemo.chatservices.ChatServices;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPList;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
+import com.jdbcdemo.jdbcdemo.dto.CreateChatUserResponse;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetails;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeDetailsResponse;
@@ -41,7 +43,7 @@ import utility.Utility;
 
 @Service
 @Component
-public class CoreServiceCall extends Services implements IMultiThreadOne {
+public class CoreServiceCall extends ChatServices implements IMultiThreadOne {
 
 	public EmployeeDetailsResponse getEmployeeLists(String empId) {
 
@@ -1479,5 +1481,64 @@ public class CoreServiceCall extends Services implements IMultiThreadOne {
 		}
 
 	}
+	
+	public  CreateChatUserResponse createUserForChat(String firstName, String lastName, String gender, String dob, String psd) {
+		CreateChatUserResponse response = new CreateChatUserResponse();
+		
+		String pFistName =firstName;
+		String pLastName =lastName;
+		String pGender = gender;
+		String pDob= dob;
+		String password=psd;
+		
+		String userCode="";
+		String roleCode="USER";
+		String errorDesc="Success";
+		String status="ACTIVE";
+		int errorCode=0;
+		
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call ot.createuser(?,?,?,?,?,?,?,?,?)}");
+				st.setString(1, pFistName);
+				st.setString(2, pLastName);
+				st.setString(3, pGender);
+				st.setString(4, pDob);
+				st.setString(5, roleCode);
+				st.setString(6, password);
+				st.registerOutParameter(7, java.sql.Types.VARCHAR);
+				st.registerOutParameter(8, java.sql.Types.INTEGER);
+				st.registerOutParameter(9, java.sql.Types.VARCHAR);
+				st.execute();
+
+				errorCode = st.getInt(8);
+				errorDesc = st.getString(9);
+				userCode= st.getString(7);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		response.setStatus(status);
+		response.setUserCode(userCode);
+		response.setErrorCode(errorCode);
+		response.setErrorDesc(errorDesc);
+		return response;
+		
+	}
+	
+	
 
 }

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="tD"/>
+		<item key="selection" value="public"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="protected"/>
+			<item value="PincodeDetails"/>
+			<item value="public"/>
 			<item value="tD"/>
 			<item value="setclob"/>
 			<item value="MyThread"/>
@@ -22,9 +25,11 @@
 			<item value="userDetailsService"/>
 		</list>
 		<list key="replacehistory">
+			<item value="public"/>
+			<item value="PincodeDetails2"/>
+			<item value="private"/>
 			<item value="MultiThreadOne"/>
 			<item value="public "/>
-			<item value="public"/>
 			<item value=""/>
 			<item value="private String"/>
 			<item value=" = paramVal.trim();"/>

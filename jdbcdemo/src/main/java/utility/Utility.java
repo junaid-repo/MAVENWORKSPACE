@@ -773,7 +773,7 @@ public class Utility extends Thread implements Runnable {
 		return data;
 	}
 
-	public static void updatePincodeMasters(String pinCodeDetails, String trainNo) {
+	public static void updatePincodeMasters(String pinCodeDetails, String trainNo) throws InterruptedException {
 
 		String st1 = "";
 		String st2 = "";

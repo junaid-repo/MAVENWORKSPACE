@@ -15,8 +15,6 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.MultiPart;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -42,9 +40,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.jdbcdemo.chatservices.ChatServices;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
+import com.jdbcdemo.jdbcdemo.dto.CreateChatUserRequest;
+import com.jdbcdemo.jdbcdemo.dto.CreateChatUserResponse;
 import com.jdbcdemo.jdbcdemo.dto.DepartmentDetailsResponse;
 import com.jdbcdemo.jdbcdemo.dto.EmailRequest;
 import com.jdbcdemo.jdbcdemo.dto.EmployeeBulkDeleteRequest;
@@ -60,6 +61,7 @@ import com.jdbcdemo.jdbcdemo.dto.OrderPaymentRequest;
 import com.jdbcdemo.jdbcdemo.dto.OrderPaymentResponse;
 import com.jdbcdemo.jdbcdemo.dto.SalaryOperationsResponse;
 import com.jdbcdemo.jdbcdemo.dto.TranslateText;
+import com.jdbcdemo.jdbcdemo.interfaces.ChatInterface;
 import com.jdbcdemo.jdbcdemo.interfaces.ExportPdfService;
 import com.jdbcdemo.jdbcdemo.interfaces.ICompany;
 import com.jdbcdemo.jdbcdemo.interfaces.IDownloadFile;
@@ -623,16 +625,20 @@ public class SimpleController {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
 					authenticateRequest.getUserName(), authenticateRequest.getPassword()));
+			final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticateRequest.getUserName());
+
+			final String jwt = jwtTokenUtil.generateToken(userDetails);
+			System.out.println(jwt);
+
+			return ResponseEntity.ok(new AuthenticationResponse(jwt));
+			
+			
 		} catch (AuthenticationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticateRequest.getUserName());
-
-		final String jwt = jwtTokenUtil.generateToken(userDetails);
-		System.out.println(jwt);
-
-		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+		
+		return ResponseEntity.ok(new AuthenticationResponse("Id Psd is not correct"));
 	}
 
 	@RequestMapping(value = URIConstants.UPLOAD_TABLE_WITH_DATA, method = RequestMethod.POST)
@@ -941,7 +947,8 @@ public class SimpleController {
 	// @Produces("application/json")
 	@RequestMapping(value = URIConstants.GET_LOCATION_DETAILS, method = RequestMethod.GET, produces = {
 			"application/json" })
-	ResponseEntity<String> getHospitalValidity(@RequestParam String pincode, String trainNo) throws JsonProcessingException {
+	ResponseEntity<String> getHospitalValidity(@RequestParam String pincode, String trainNo)
+			throws JsonProcessingException {
 
 		String response = new String();
 		StringBuffer response2 = new StringBuffer();
@@ -949,19 +956,34 @@ public class SimpleController {
 		response = ExternalServices.getPinCodeDetails(pincode);
 
 		if (response.length() > 5) {
-			Utility.updatePincodeMasters(response, trainNo);
-			
-			
+			try {
+				Utility.updatePincodeMasters(response, trainNo);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 		response2.append(response);
 		response2.deleteCharAt(0);
 		response2.deleteCharAt(response.length() - 2);
 		System.out.println(response2);
-		
 
 		Utility.insertInternalApiLogs(URIConstants.GET_LOCATION_DETAILS, ow.writeValueAsString(pincode),
 				ow.writeValueAsString(response));
 		return new ResponseEntity<String>(response, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = URIConstants.CREATE_USER, method = RequestMethod.POST)
+	ResponseEntity<CreateChatUserResponse> createChatUser(@RequestBody CreateChatUserRequest request)
+			throws JsonProcessingException {
+		CreateChatUserResponse response = new CreateChatUserResponse();
+		ChatInterface chat = new ChatServices();
+		response = chat.createUser(request);
+		Utility.insertInternalApiLogs(URIConstants.COLLECTION, ow.writeValueAsString(request),
+				ow.writeValueAsString(response));
+		return new ResponseEntity<CreateChatUserResponse>(response, HttpStatus.OK);
 
 	}
 

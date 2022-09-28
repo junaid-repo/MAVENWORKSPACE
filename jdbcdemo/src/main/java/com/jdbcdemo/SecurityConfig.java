@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// --------------------enable jwt code starts---------------------------------
 		
-		  http.csrf().disable().authorizeRequests().antMatchers("/authenticate").
+		  http.csrf().disable().authorizeRequests().antMatchers("/authenticate", "/createUser", "/webService", "/company","/external").
 		  permitAll().anyRequest()
 		  .authenticated().and().sessionManagement().sessionCreationPolicy(
 		  SessionCreationPolicy.ALWAYS); http.addFilterBefore(jwtRequestFilter,

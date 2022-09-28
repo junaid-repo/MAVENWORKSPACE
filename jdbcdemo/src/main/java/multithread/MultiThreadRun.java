@@ -21,8 +21,8 @@ public class MultiThreadRun extends MultiThreadOne {
 
 	public void run() {
 		IMultiThreadOne core = new CoreServiceCall();
-		//core.updatePinCodeMasters2(pd);
-
+		if(pd!=null)
+			core.updatePinCodeMasters2(pd);
 		System.out.println(tD.toString());
 	} // end of run() method.
 
