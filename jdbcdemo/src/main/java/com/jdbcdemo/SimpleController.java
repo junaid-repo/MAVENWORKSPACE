@@ -43,6 +43,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jdbcdemo.chatservices.ChatServices;
 import com.jdbcdemo.jdbcdemo.dto.BaseOutput;
 import com.jdbcdemo.jdbcdemo.dto.BulkEmployeesResponse;
+import com.jdbcdemo.jdbcdemo.dto.ChatText;
 import com.jdbcdemo.jdbcdemo.dto.CountryGDPResponse;
 import com.jdbcdemo.jdbcdemo.dto.CreateChatUserRequest;
 import com.jdbcdemo.jdbcdemo.dto.CreateChatUserResponse;
@@ -631,13 +632,33 @@ public class SimpleController {
 			System.out.println(jwt);
 
 			return ResponseEntity.ok(new AuthenticationResponse(jwt));
-			
-			
+
 		} catch (AuthenticationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+		return ResponseEntity.ok(new AuthenticationResponse("Id Psd is not correct"));
+	}
+
+	@RequestMapping(value = "/loginAndCreateToken", method = RequestMethod.POST)
+	ResponseEntity<?> loginAndCreateToken(@RequestBody AuthenticationRequest authenticateRequest) throws Exception {
+
+		try {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+					authenticateRequest.getUserName(), authenticateRequest.getPassword()));
+			final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticateRequest.getUserName());
+
+			final String jwt = jwtTokenUtil.generateToken(userDetails);
+			System.out.println(jwt);
+
+			return ResponseEntity.ok(new AuthenticationResponse(jwt));
+
+		} catch (AuthenticationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return ResponseEntity.ok(new AuthenticationResponse("Id Psd is not correct"));
 	}
 
@@ -985,6 +1006,17 @@ public class SimpleController {
 				ow.writeValueAsString(response));
 		return new ResponseEntity<CreateChatUserResponse>(response, HttpStatus.OK);
 
+	}
+
+	@RequestMapping(value = URIConstants.CHAT, method = RequestMethod.POST)
+	ResponseEntity<Map> startChart(@RequestParam String sender, String receiver, @RequestBody ChatText textObj) {
+		Map<String, String> retMap = new HashMap<>();
+		String text = textObj.getText();
+		
+		Services serv = new Services();
+		retMap=serv.updateAndGetChat(sender, receiver, text);
+
+		return new ResponseEntity<Map>(retMap, HttpStatus.OK);
 	}
 
 }

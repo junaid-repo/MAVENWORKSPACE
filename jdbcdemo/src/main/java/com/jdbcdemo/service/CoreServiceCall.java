@@ -1539,6 +1539,63 @@ public class CoreServiceCall extends ChatServices implements IMultiThreadOne {
 		
 	}
 	
-	
+	public Map<String, String> updateAndGetChatData(String sender, String reciver, String text) {
+
+		BaseOutput output = new BaseOutput();
+		Map<String, String> retMap = new HashMap<>();
+
+		int errorCode = 0;
+		String errorDesc = "Success";
+		String clobSting = null;
+		String primaryConcat = "~~";
+		String secondaryConcat = "@@";
+		String tertConcat = "##";
+		java.sql.Clob clobOut = null;
+
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection conn = null;
+			conn = ConnectionClass.getEDBConnection();
+			CallableStatement st = null;
+
+			try {
+				st = conn.prepareCall("{call ot.updatechat(?,?,?,?,?,?)}");
+				st.setString(1, sender);
+				st.setString(2, reciver);
+				st.setString(3, text);
+				st.registerOutParameter(4, java.sql.Types.CLOB);
+				st.registerOutParameter(5, java.sql.Types.DOUBLE);
+				st.registerOutParameter(6, java.sql.Types.VARCHAR);
+				st.execute();
+				clobOut = st.getClob(4);
+				
+				errorCode = (int) st.getDouble(5);
+				errorDesc = st.getString(6);
+				if (clobOut != null)
+					clobSting = Utility.convertCLOBToString(clobOut);
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		retMap.put("clobData", clobSting);
+		retMap.put("primaryConcat", primaryConcat);
+		retMap.put("secondaryConcat", secondaryConcat);
+		retMap.put("tertConcat", tertConcat);
+		// retMap.put("errorCode", errorCode);
+		retMap.put("errorDesc", errorDesc);
+
+		System.out.println(clobSting);
+
+		return retMap;
+
+	}
 
 }

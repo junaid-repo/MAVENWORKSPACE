@@ -36,6 +36,7 @@ public class URIConstants {
 	public static final String COLLECTION ="company/collection";
 	public static final String GET_LOCATION_DETAILS = "/external/getCityDetails";
 	public static final String CREATE_USER = "/createUser";
+	public static final String CHAT = "/chat/startChat";
 	
 
 

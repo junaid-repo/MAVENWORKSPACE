@@ -958,5 +958,24 @@ public class Services extends Thread implements IServices, IFN02, IFN03, IExport
 
 		return response;
 	}
+	public Map updateAndGetChat(String sender, String receiver, String text) {
+		Map<String, Object> response = new HashMap();
+		CoreServiceCall csc = new CoreServiceCall();
+		Map<String, String> retMap = new HashMap<>();
+		List<Map> megaList = new ArrayList<>();
+		retMap = csc.updateAndGetChatData(sender, receiver, text);
+		if (retMap.get("clobData") != null) {
+			try {
+				megaList = Utility.getClobDataToListOfMaps(retMap.get("clobData"), retMap.get("primaryConcat"),
+						retMap.get("secondaryConcat"), retMap.get("tertConcat"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		response.put("response", megaList);
 
+		return response;
+
+	}
 }
