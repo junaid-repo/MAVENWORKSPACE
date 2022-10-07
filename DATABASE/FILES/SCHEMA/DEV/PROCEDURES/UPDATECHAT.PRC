@@ -13,7 +13,7 @@ begin
   reterr  := 'success';
   insert into ot.chattexts
   values
-    (vsender, vreceiver, vchattext, sysdate, '');
+    (vsender, vreceiver, vchattext, sysdate, '',ot.order_id_seq.nextval);
   commit;
 
   ot.getChatHistory(vsender,

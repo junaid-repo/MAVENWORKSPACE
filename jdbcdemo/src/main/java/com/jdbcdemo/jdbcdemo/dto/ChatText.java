@@ -2,7 +2,10 @@ package com.jdbcdemo.jdbcdemo.dto;
 
 public class ChatText {
 	String text = "";
+	
+	
 
+	
 	public String getText() {
 		return text;
 	}

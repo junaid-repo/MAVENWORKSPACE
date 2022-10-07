@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="getCountryDetails"/>
+		<item key="selection" value="/"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="\"/>
+			<item value="61"/>
+			<item value="61."/>
+			<item value="bs."/>
 			<item value="getCountryDetails"/>
 			<item value="Utility.convertCLOBToString"/>
 			<item value="clob"/>
@@ -19,12 +23,9 @@
 			<item value="setclob"/>
 			<item value="MyThread"/>
 			<item value="private "/>
-			<item value="String"/>
-			<item value=" = paramVal;"/>
-			<item value="else if (paramName"/>
-			<item value="\"/>
 		</list>
 		<list key="replacehistory">
+			<item value="/"/>
 			<item value="public"/>
 			<item value="PincodeDetails2"/>
 			<item value="private"/>

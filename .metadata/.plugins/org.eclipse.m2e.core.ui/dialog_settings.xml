@@ -2,6 +2,8 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\My_Workbench\MAVENWORKSPACE\limit-services"/>
+			<item value="C:\My_Workbench\MAVENWORKSPACE\javapractise"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\jdbcdemo"/>
 		</list>
 		<list key="projectNameTemplate">
@@ -12,5 +14,9 @@
 			<item value="[groupId].[artifactId]-[version]"/>
 			<item value="[name]"/>
 		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
 	</section>
 </section>

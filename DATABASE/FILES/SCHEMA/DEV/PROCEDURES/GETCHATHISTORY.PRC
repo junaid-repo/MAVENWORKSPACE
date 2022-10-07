@@ -30,26 +30,28 @@
   vText    varchar2(3000);
 
   vtextHistory varchar2(3000);
+  vcount number;
 
 begin
   vtextHistory := '';
+  vcount:=0;
   open getChatHis;
   loop
     fetch getChatHis
       into pSender, pReciver, vText;
-  
+  vcount:=vcount+1;
     exit when getChatHis%notfound;
    
   if(pSender=vsender) then 
-    pSender  := 'me';
-    pReciver:='her';
+    pSender  := 'me'||vcount;
+    pReciver:='her'||vcount;
   else
-    pSender  := 'her';
-     pReciver:='me';
+    pSender  := 'her'||vcount;
+     pReciver:='me'||vcount;
   end if;  
     
   
-    vtextHistory :=vtextHistory||pSender||'##'||vText||'&&';
+    vtextHistory :=vtextHistory||pSender||'##'||vText||'@@';
     
   
   end loop;

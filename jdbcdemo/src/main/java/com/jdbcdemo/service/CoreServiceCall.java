@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +45,8 @@ import utility.Utility;
 @Service
 @Component
 public class CoreServiceCall extends ChatServices implements IMultiThreadOne {
-
+	@Autowired
+	CoreServiceCall bs;
 	public EmployeeDetailsResponse getEmployeeLists(String empId) {
 
 		EmployeeDetailsResponse response = new EmployeeDetailsResponse();

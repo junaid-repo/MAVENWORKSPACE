@@ -673,7 +673,7 @@ public class Utility extends Thread implements Runnable {
 
 				if (arr[0] != null && arr[1] != null)
 
-					retMap.put(arr[1], arr[0]);
+					retMap.put(arr[0], arr[1]);
 				// System.out.println(retMap);
 			}
 			listOfMaps.add(retMap);
@@ -863,8 +863,6 @@ public class Utility extends Thread implements Runnable {
 					trainNo);
 
 			MultiThreadOne multi = new MultiThreadOne();
-
-			
 
 			train = ObjectCreator.trainDetailsSetter(trainNo, trainDetails);
 

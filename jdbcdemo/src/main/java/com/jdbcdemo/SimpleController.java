@@ -108,6 +108,9 @@ public class SimpleController {
 
 	@Autowired
 	private ExportPdfService exportPdfService;
+	
+	@Autowired
+	CoreServiceCall bs;
 
 	@RequestMapping("/")
 	public String index() {
@@ -1011,6 +1014,9 @@ public class SimpleController {
 	@RequestMapping(value = URIConstants.CHAT, method = RequestMethod.POST)
 	ResponseEntity<Map> startChart(@RequestParam String sender, String receiver, @RequestBody ChatText textObj) {
 		Map<String, String> retMap = new HashMap<>();
+		
+		//ChatText txt = new ChatText("this should not be blank");
+		//txt=textObj;
 		String text = textObj.getText();
 		
 		Services serv = new Services();
