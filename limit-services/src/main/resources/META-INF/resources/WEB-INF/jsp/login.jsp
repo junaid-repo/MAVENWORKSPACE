@@ -118,11 +118,11 @@ body {
 <body>
 <!-- partial:index.partial.html -->
 <div class="login-form">
-  <form>
+  <form method="post">
     <h1>Login here you </h1>
     <div class="content">
       <div class="input-field">
-        <input type="email"  autocomplete="nope" value=${name}>
+        <input type="email" placeholder="Email" autocomplete="nope">
       </div>
       <div class="input-field">
         <input type="password" placeholder="Password" autocomplete="new-password">
@@ -136,7 +136,7 @@ body {
   </form>
 </div>
 <!-- partial -->
-  <script  src="./script.js"></script>
+
 
 </body>
 </html>
