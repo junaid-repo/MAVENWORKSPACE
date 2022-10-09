@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\My_Workbench\MAVENWORKSPACE\spring-cloud-config-server"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\limit-services"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\javapractise"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\jdbcdemo"/>
