@@ -13024,3 +13024,393 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.springfra
 2022-10-12 12:17:06,331 [Worker-53: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2022-10-12 12:17:06,331 [Worker-53: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
 2022-10-12 12:17:06,331 [Worker-53: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\currency-conversion-service\src\test\resources
+2022-10-12 15:17:16,283 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.microservices:api-gateway:0.0.1-SNAPSHOT @ C:\My_Workbench\MAVENWORKSPACE\api-gateway\pom.xml.
+2022-10-12 15:17:17,710 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-starter-gateway/3.1.4/spring-cloud-starter-gateway-3.1.4.pom
+2022-10-12 15:17:18,126 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-starter-gateway/3.1.4/spring-cloud-starter-gateway-3.1.4.pom
+2022-10-12 15:17:18,335 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-gateway/3.1.4/spring-cloud-gateway-3.1.4.pom
+2022-10-12 15:17:18,548 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-gateway/3.1.4/spring-cloud-gateway-3.1.4.pom
+2022-10-12 15:17:18,829 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-gateway-server/3.1.4/spring-cloud-gateway-server-3.1.4.pom
+2022-10-12 15:17:19,066 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-gateway-server/3.1.4/spring-cloud-gateway-server-3.1.4.pom
+2022-10-12 15:17:19,375 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-webflux/2.7.4/spring-boot-starter-webflux-2.7.4.pom
+2022-10-12 15:17:19,600 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-webflux/2.7.4/spring-boot-starter-webflux-2.7.4.pom
+2022-10-12 15:17:19,814 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-reactor-netty/2.7.4/spring-boot-starter-reactor-netty-2.7.4.pom
+2022-10-12 15:17:20,034 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-reactor-netty/2.7.4/spring-boot-starter-reactor-netty-2.7.4.pom
+2022-10-12 15:17:20,240 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/projectreactor/netty/reactor-netty-http/1.0.23/reactor-netty-http-1.0.23.pom
+2022-10-12 15:17:20,464 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/projectreactor/netty/reactor-netty-http/1.0.23/reactor-netty-http-1.0.23.pom
+2022-10-12 15:17:20,683 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec-http/4.1.82.Final/netty-codec-http-4.1.82.Final.pom
+2022-10-12 15:17:20,904 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec-http/4.1.82.Final/netty-codec-http-4.1.82.Final.pom
+2022-10-12 15:17:21,127 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-parent/4.1.82.Final/netty-parent-4.1.82.Final.pom
+2022-10-12 15:17:21,604 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-parent/4.1.82.Final/netty-parent-4.1.82.Final.pom
+2022-10-12 15:17:21,830 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.82.Final/netty-common-4.1.82.Final.pom
+2022-10-12 15:17:22,039 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.82.Final/netty-common-4.1.82.Final.pom
+2022-10-12 15:17:22,247 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.82.Final/netty-buffer-4.1.82.Final.pom
+2022-10-12 15:17:22,469 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.82.Final/netty-buffer-4.1.82.Final.pom
+2022-10-12 15:17:22,685 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.82.Final/netty-transport-4.1.82.Final.pom
+2022-10-12 15:17:22,904 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.82.Final/netty-transport-4.1.82.Final.pom
+2022-10-12 15:17:23,122 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.82.Final/netty-resolver-4.1.82.Final.pom
+2022-10-12 15:17:23,326 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.82.Final/netty-resolver-4.1.82.Final.pom
+2022-10-12 15:17:23,555 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.82.Final/netty-codec-4.1.82.Final.pom
+2022-10-12 15:17:23,787 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.82.Final/netty-codec-4.1.82.Final.pom
+2022-10-12 15:17:24,003 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.82.Final/netty-handler-4.1.82.Final.pom
+2022-10-12 15:17:24,228 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.82.Final/netty-handler-4.1.82.Final.pom
+2022-10-12 15:17:24,450 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.1.82.Final/netty-transport-native-unix-common-4.1.82.Final.pom
+2022-10-12 15:17:24,671 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.1.82.Final/netty-transport-native-unix-common-4.1.82.Final.pom
+2022-10-12 15:17:24,881 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec-http2/4.1.82.Final/netty-codec-http2-4.1.82.Final.pom
+2022-10-12 15:17:25,098 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec-http2/4.1.82.Final/netty-codec-http2-4.1.82.Final.pom
+2022-10-12 15:17:25,305 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns/4.1.82.Final/netty-resolver-dns-4.1.82.Final.pom
+2022-10-12 15:17:25,531 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns/4.1.82.Final/netty-resolver-dns-4.1.82.Final.pom
+2022-10-12 15:17:25,750 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec-dns/4.1.82.Final/netty-codec-dns-4.1.82.Final.pom
+2022-10-12 15:17:25,970 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec-dns/4.1.82.Final/netty-codec-dns-4.1.82.Final.pom
+2022-10-12 15:17:26,188 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns-native-macos/4.1.82.Final/netty-resolver-dns-native-macos-4.1.82.Final.pom
+2022-10-12 15:17:26,417 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns-native-macos/4.1.82.Final/netty-resolver-dns-native-macos-4.1.82.Final.pom
+2022-10-12 15:17:26,642 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns-classes-macos/4.1.82.Final/netty-resolver-dns-classes-macos-4.1.82.Final.pom
+2022-10-12 15:17:26,857 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns-classes-macos/4.1.82.Final/netty-resolver-dns-classes-macos-4.1.82.Final.pom
+2022-10-12 15:17:27,063 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-epoll/4.1.82.Final/netty-transport-native-epoll-4.1.82.Final.pom
+2022-10-12 15:17:27,295 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-epoll/4.1.82.Final/netty-transport-native-epoll-4.1.82.Final.pom
+2022-10-12 15:17:27,510 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-transport-classes-epoll/4.1.82.Final/netty-transport-classes-epoll-4.1.82.Final.pom
+2022-10-12 15:17:27,742 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-transport-classes-epoll/4.1.82.Final/netty-transport-classes-epoll-4.1.82.Final.pom
+2022-10-12 15:17:27,961 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/projectreactor/netty/reactor-netty-core/1.0.23/reactor-netty-core-1.0.23.pom
+2022-10-12 15:17:28,203 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/projectreactor/netty/reactor-netty-core/1.0.23/reactor-netty-core-1.0.23.pom
+2022-10-12 15:17:28,419 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-handler-proxy/4.1.82.Final/netty-handler-proxy-4.1.82.Final.pom
+2022-10-12 15:17:28,657 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-handler-proxy/4.1.82.Final/netty-handler-proxy-4.1.82.Final.pom
+2022-10-12 15:17:28,876 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec-socks/4.1.82.Final/netty-codec-socks-4.1.82.Final.pom
+2022-10-12 15:17:29,121 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec-socks/4.1.82.Final/netty-codec-socks-4.1.82.Final.pom
+2022-10-12 15:17:29,337 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-webflux/5.3.23/spring-webflux-5.3.23.pom
+2022-10-12 15:17:29,583 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/spring-webflux/5.3.23/spring-webflux-5.3.23.pom
+2022-10-12 15:17:30,033 [AetherRepositoryConnector-repo.maven.apache.org-2-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-gateway-server/3.1.4/spring-cloud-gateway-server-3.1.4.jar
+2022-10-12 15:17:30,314 [AetherRepositoryConnector-repo.maven.apache.org-2-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-starter-gateway/3.1.4/spring-cloud-starter-gateway-3.1.4.jar
+2022-10-12 15:17:30,347 [AetherRepositoryConnector-repo.maven.apache.org-2-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-reactor-netty/2.7.4/spring-boot-starter-reactor-netty-2.7.4.jar
+2022-10-12 15:17:30,347 [AetherRepositoryConnector-repo.maven.apache.org-2-4] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/projectreactor/netty/reactor-netty-http/1.0.23/reactor-netty-http-1.0.23.jar
+2022-10-12 15:17:30,347 [AetherRepositoryConnector-repo.maven.apache.org-2-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-webflux/2.7.4/spring-boot-starter-webflux-2.7.4.jar
+2022-10-12 15:17:30,707 [AetherRepositoryConnector-repo.maven.apache.org-2-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-starter-gateway/3.1.4/spring-cloud-starter-gateway-3.1.4.jar
+2022-10-12 15:17:30,707 [AetherRepositoryConnector-repo.maven.apache.org-2-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-webflux/2.7.4/spring-boot-starter-webflux-2.7.4.jar
+2022-10-12 15:17:30,707 [AetherRepositoryConnector-repo.maven.apache.org-2-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-reactor-netty/2.7.4/spring-boot-starter-reactor-netty-2.7.4.jar
+2022-10-12 15:17:30,902 [AetherRepositoryConnector-repo.maven.apache.org-2-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-gateway-server/3.1.4/spring-cloud-gateway-server-3.1.4.jar
+2022-10-12 15:17:31,097 [AetherRepositoryConnector-repo.maven.apache.org-2-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.82.Final/netty-buffer-4.1.82.Final.jar
+2022-10-12 15:17:31,107 [AetherRepositoryConnector-repo.maven.apache.org-2-4] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/projectreactor/netty/reactor-netty-http/1.0.23/reactor-netty-http-1.0.23.jar
+2022-10-12 15:17:31,133 [AetherRepositoryConnector-repo.maven.apache.org-2-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec-http/4.1.82.Final/netty-codec-http-4.1.82.Final.jar
+2022-10-12 15:17:31,133 [AetherRepositoryConnector-repo.maven.apache.org-2-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.82.Final/netty-common-4.1.82.Final.jar
+2022-10-12 15:17:31,360 [AetherRepositoryConnector-repo.maven.apache.org-2-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.82.Final/netty-transport-4.1.82.Final.jar
+2022-10-12 15:17:31,515 [AetherRepositoryConnector-repo.maven.apache.org-2-4] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.82.Final/netty-codec-4.1.82.Final.jar
+2022-10-12 15:17:31,541 [AetherRepositoryConnector-repo.maven.apache.org-2-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.82.Final/netty-buffer-4.1.82.Final.jar
+2022-10-12 15:17:31,581 [AetherRepositoryConnector-repo.maven.apache.org-2-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec-http/4.1.82.Final/netty-codec-http-4.1.82.Final.jar
+2022-10-12 15:17:31,590 [AetherRepositoryConnector-repo.maven.apache.org-2-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.82.Final/netty-common-4.1.82.Final.jar
+2022-10-12 15:17:31,741 [AetherRepositoryConnector-repo.maven.apache.org-2-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.82.Final/netty-transport-4.1.82.Final.jar
+2022-10-12 15:17:31,769 [AetherRepositoryConnector-repo.maven.apache.org-2-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.82.Final/netty-handler-4.1.82.Final.jar
+2022-10-12 15:17:31,779 [AetherRepositoryConnector-repo.maven.apache.org-2-4] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.82.Final/netty-codec-4.1.82.Final.jar
+2022-10-12 15:17:31,936 [AetherRepositoryConnector-repo.maven.apache.org-2-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns/4.1.82.Final/netty-resolver-dns-4.1.82.Final.jar
+2022-10-12 15:17:31,948 [AetherRepositoryConnector-repo.maven.apache.org-2-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec-http2/4.1.82.Final/netty-codec-http2-4.1.82.Final.jar
+2022-10-12 15:17:31,973 [AetherRepositoryConnector-repo.maven.apache.org-2-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.82.Final/netty-resolver-4.1.82.Final.jar
+2022-10-12 15:17:31,986 [AetherRepositoryConnector-repo.maven.apache.org-2-4] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec-dns/4.1.82.Final/netty-codec-dns-4.1.82.Final.jar
+2022-10-12 15:17:32,149 [AetherRepositoryConnector-repo.maven.apache.org-2-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.82.Final/netty-handler-4.1.82.Final.jar
+2022-10-12 15:17:32,172 [AetherRepositoryConnector-repo.maven.apache.org-2-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns/4.1.82.Final/netty-resolver-dns-4.1.82.Final.jar
+2022-10-12 15:17:32,198 [AetherRepositoryConnector-repo.maven.apache.org-2-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.82.Final/netty-resolver-4.1.82.Final.jar
+2022-10-12 15:17:32,200 [AetherRepositoryConnector-repo.maven.apache.org-2-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec-http2/4.1.82.Final/netty-codec-http2-4.1.82.Final.jar
+2022-10-12 15:17:32,344 [AetherRepositoryConnector-repo.maven.apache.org-2-4] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec-dns/4.1.82.Final/netty-codec-dns-4.1.82.Final.jar
+2022-10-12 15:17:32,363 [AetherRepositoryConnector-repo.maven.apache.org-2-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns-native-macos/4.1.82.Final/netty-resolver-dns-native-macos-4.1.82.Final-osx-x86_64.jar
+2022-10-12 15:17:32,390 [AetherRepositoryConnector-repo.maven.apache.org-2-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns-classes-macos/4.1.82.Final/netty-resolver-dns-classes-macos-4.1.82.Final.jar
+2022-10-12 15:17:32,545 [AetherRepositoryConnector-repo.maven.apache.org-2-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.1.82.Final/netty-transport-native-unix-common-4.1.82.Final.jar
+2022-10-12 15:17:32,545 [AetherRepositoryConnector-repo.maven.apache.org-2-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-epoll/4.1.82.Final/netty-transport-native-epoll-4.1.82.Final-linux-x86_64.jar
+2022-10-12 15:17:32,574 [AetherRepositoryConnector-repo.maven.apache.org-2-4] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-transport-classes-epoll/4.1.82.Final/netty-transport-classes-epoll-4.1.82.Final.jar
+2022-10-12 15:17:32,594 [AetherRepositoryConnector-repo.maven.apache.org-2-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns-native-macos/4.1.82.Final/netty-resolver-dns-native-macos-4.1.82.Final-osx-x86_64.jar
+2022-10-12 15:17:32,769 [AetherRepositoryConnector-repo.maven.apache.org-2-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns-classes-macos/4.1.82.Final/netty-resolver-dns-classes-macos-4.1.82.Final.jar
+2022-10-12 15:17:32,785 [AetherRepositoryConnector-repo.maven.apache.org-2-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.1.82.Final/netty-transport-native-unix-common-4.1.82.Final.jar
+2022-10-12 15:17:32,787 [AetherRepositoryConnector-repo.maven.apache.org-2-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-epoll/4.1.82.Final/netty-transport-native-epoll-4.1.82.Final-linux-x86_64.jar
+2022-10-12 15:17:32,808 [AetherRepositoryConnector-repo.maven.apache.org-2-4] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-transport-classes-epoll/4.1.82.Final/netty-transport-classes-epoll-4.1.82.Final.jar
+2022-10-12 15:17:32,954 [AetherRepositoryConnector-repo.maven.apache.org-2-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/projectreactor/netty/reactor-netty-core/1.0.23/reactor-netty-core-1.0.23.jar
+2022-10-12 15:17:32,976 [AetherRepositoryConnector-repo.maven.apache.org-2-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-handler-proxy/4.1.82.Final/netty-handler-proxy-4.1.82.Final.jar
+2022-10-12 15:17:32,999 [AetherRepositoryConnector-repo.maven.apache.org-2-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec-socks/4.1.82.Final/netty-codec-socks-4.1.82.Final.jar
+2022-10-12 15:17:33,004 [AetherRepositoryConnector-repo.maven.apache.org-2-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-webflux/5.3.23/spring-webflux-5.3.23.jar
+2022-10-12 15:17:33,211 [AetherRepositoryConnector-repo.maven.apache.org-2-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-handler-proxy/4.1.82.Final/netty-handler-proxy-4.1.82.Final.jar
+2022-10-12 15:17:33,211 [AetherRepositoryConnector-repo.maven.apache.org-2-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/projectreactor/netty/reactor-netty-core/1.0.23/reactor-netty-core-1.0.23.jar
+2022-10-12 15:17:33,224 [AetherRepositoryConnector-repo.maven.apache.org-2-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec-socks/4.1.82.Final/netty-codec-socks-4.1.82.Final.jar
+2022-10-12 15:17:33,411 [AetherRepositoryConnector-repo.maven.apache.org-2-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/spring-webflux/5.3.23/spring-webflux-5.3.23.jar
+2022-10-12 15:17:34,316 [Worker-49: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /api-gateway/src/main/java
+2022-10-12 15:17:34,317 [Worker-49: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /api-gateway/src/main/resources
+2022-10-12 15:17:34,319 [Worker-49: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /api-gateway/src/main/resources
+2022-10-12 15:17:34,321 [Worker-49: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /api-gateway/src/test/java
+2022-10-12 15:17:34,655 [Worker-49: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 18 sec
+2022-10-12 15:17:35,541 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:17:35,541 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:17:35,541 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 15:17:35,542 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 15:17:35,543 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:17:35,543 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:17:35,543 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\api-gateway\src\test\resources
+2022-10-12 15:17:36,401 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-starter-gateway/3.1.4/spring-cloud-starter-gateway-3.1.4-sources.jar
+2022-10-12 15:17:36,406 [Worker-61: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download sources for org.springframework.cloud:spring-cloud-starter-gateway:3.1.4
+org.eclipse.core.runtime.CoreException: Could not resolve artifact org.springframework.cloud:spring-cloud-starter-gateway:jar:sources:3.1.4
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$4(MavenImpl.java:804)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:179)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:114)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:101)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:772)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:749)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:330)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:304)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:269)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:233)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:161)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:179)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:153)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:101)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.execute(MavenImpl.java:1374)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:161)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2022-10-12 15:17:37,197 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-gateway-server/3.1.4/spring-cloud-gateway-server-3.1.4-sources.jar
+2022-10-12 15:17:37,987 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-gateway-server/3.1.4/spring-cloud-gateway-server-3.1.4-sources.jar
+2022-10-12 15:17:38,048 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.cloud:spring-cloud-gateway-server:3.1.4
+2022-10-12 15:17:38,933 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-webflux/2.7.4/spring-boot-starter-webflux-2.7.4-sources.jar
+2022-10-12 15:17:39,356 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-webflux/2.7.4/spring-boot-starter-webflux-2.7.4-sources.jar
+2022-10-12 15:17:39,387 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.boot:spring-boot-starter-webflux:2.7.4
+2022-10-12 15:17:40,170 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-reactor-netty/2.7.4/spring-boot-starter-reactor-netty-2.7.4-sources.jar
+2022-10-12 15:17:40,559 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-reactor-netty/2.7.4/spring-boot-starter-reactor-netty-2.7.4-sources.jar
+2022-10-12 15:17:40,623 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.boot:spring-boot-starter-reactor-netty:2.7.4
+2022-10-12 15:17:41,391 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/projectreactor/netty/reactor-netty-http/1.0.23/reactor-netty-http-1.0.23-sources.jar
+2022-10-12 15:17:42,030 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/projectreactor/netty/reactor-netty-http/1.0.23/reactor-netty-http-1.0.23-sources.jar
+2022-10-12 15:17:42,086 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.projectreactor.netty:reactor-netty-http:1.0.23
+2022-10-12 15:17:42,906 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec-http/4.1.82.Final/netty-codec-http-4.1.82.Final-sources.jar
+2022-10-12 15:17:43,810 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec-http/4.1.82.Final/netty-codec-http-4.1.82.Final-sources.jar
+2022-10-12 15:17:43,845 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-codec-http:4.1.82.Final
+2022-10-12 15:17:44,737 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.82.Final/netty-common-4.1.82.Final-sources.jar
+2022-10-12 15:17:45,853 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.82.Final/netty-common-4.1.82.Final-sources.jar
+2022-10-12 15:17:45,923 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-common:4.1.82.Final
+2022-10-12 15:17:46,737 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.82.Final/netty-buffer-4.1.82.Final-sources.jar
+2022-10-12 15:17:47,410 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.82.Final/netty-buffer-4.1.82.Final-sources.jar
+2022-10-12 15:17:47,503 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-buffer:4.1.82.Final
+2022-10-12 15:17:48,155 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.82.Final/netty-transport-4.1.82.Final-sources.jar
+2022-10-12 15:17:48,775 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.82.Final/netty-transport-4.1.82.Final-sources.jar
+2022-10-12 15:17:48,863 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-transport:4.1.82.Final
+2022-10-12 15:17:49,498 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.82.Final/netty-codec-4.1.82.Final-sources.jar
+2022-10-12 15:17:50,108 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.82.Final/netty-codec-4.1.82.Final-sources.jar
+2022-10-12 15:17:50,138 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-codec:4.1.82.Final
+2022-10-12 15:17:50,748 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.82.Final/netty-handler-4.1.82.Final-sources.jar
+2022-10-12 15:17:51,394 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.82.Final/netty-handler-4.1.82.Final-sources.jar
+2022-10-12 15:17:51,426 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-handler:4.1.82.Final
+2022-10-12 15:17:52,063 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec-http2/4.1.82.Final/netty-codec-http2-4.1.82.Final-sources.jar
+2022-10-12 15:17:52,706 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec-http2/4.1.82.Final/netty-codec-http2-4.1.82.Final-sources.jar
+2022-10-12 15:17:52,764 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-codec-http2:4.1.82.Final
+2022-10-12 15:17:53,392 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns/4.1.82.Final/netty-resolver-dns-4.1.82.Final-sources.jar
+2022-10-12 15:17:53,757 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns/4.1.82.Final/netty-resolver-dns-4.1.82.Final-sources.jar
+2022-10-12 15:17:53,785 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-resolver-dns:4.1.82.Final
+2022-10-12 15:17:54,461 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.82.Final/netty-resolver-4.1.82.Final-sources.jar
+2022-10-12 15:17:54,810 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.82.Final/netty-resolver-4.1.82.Final-sources.jar
+2022-10-12 15:17:54,848 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-resolver:4.1.82.Final
+2022-10-12 15:17:55,475 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec-dns/4.1.82.Final/netty-codec-dns-4.1.82.Final-sources.jar
+2022-10-12 15:17:55,836 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec-dns/4.1.82.Final/netty-codec-dns-4.1.82.Final-sources.jar
+2022-10-12 15:17:55,906 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-codec-dns:4.1.82.Final
+2022-10-12 15:17:56,585 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns-native-macos/4.1.82.Final/netty-resolver-dns-native-macos-4.1.82.Final-sources.jar
+2022-10-12 15:17:56,591 [Worker-61: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download sources for io.netty:netty-resolver-dns-native-macos:4.1.82.Final:osx-x86_64
+org.eclipse.core.runtime.CoreException: Could not resolve artifact io.netty:netty-resolver-dns-native-macos:jar:sources:4.1.82.Final
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$4(MavenImpl.java:804)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:179)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:114)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:101)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:772)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:749)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:330)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:304)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:269)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:233)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:161)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:179)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:153)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:101)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.execute(MavenImpl.java:1374)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:161)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2022-10-12 15:17:57,218 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns-classes-macos/4.1.82.Final/netty-resolver-dns-classes-macos-4.1.82.Final-sources.jar
+2022-10-12 15:17:57,526 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns-classes-macos/4.1.82.Final/netty-resolver-dns-classes-macos-4.1.82.Final-sources.jar
+2022-10-12 15:17:57,581 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-resolver-dns-classes-macos:4.1.82.Final
+2022-10-12 15:17:58,194 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-epoll/4.1.82.Final/netty-transport-native-epoll-4.1.82.Final-sources.jar
+2022-10-12 15:17:58,494 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-epoll/4.1.82.Final/netty-transport-native-epoll-4.1.82.Final-sources.jar
+2022-10-12 15:17:58,626 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-transport-native-epoll:4.1.82.Final:linux-x86_64
+2022-10-12 15:17:59,290 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.1.82.Final/netty-transport-native-unix-common-4.1.82.Final-sources.jar
+2022-10-12 15:17:59,652 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.1.82.Final/netty-transport-native-unix-common-4.1.82.Final-sources.jar
+2022-10-12 15:17:59,703 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-transport-native-unix-common:4.1.82.Final
+2022-10-12 15:18:00,323 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-transport-classes-epoll/4.1.82.Final/netty-transport-classes-epoll-4.1.82.Final-sources.jar
+2022-10-12 15:18:00,672 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-transport-classes-epoll/4.1.82.Final/netty-transport-classes-epoll-4.1.82.Final-sources.jar
+2022-10-12 15:18:00,730 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-transport-classes-epoll:4.1.82.Final
+2022-10-12 15:18:01,395 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/projectreactor/netty/reactor-netty-core/1.0.23/reactor-netty-core-1.0.23-sources.jar
+2022-10-12 15:18:01,934 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/projectreactor/netty/reactor-netty-core/1.0.23/reactor-netty-core-1.0.23-sources.jar
+2022-10-12 15:18:01,987 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.projectreactor.netty:reactor-netty-core:1.0.23
+2022-10-12 15:18:02,657 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-handler-proxy/4.1.82.Final/netty-handler-proxy-4.1.82.Final-sources.jar
+2022-10-12 15:18:02,978 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-handler-proxy/4.1.82.Final/netty-handler-proxy-4.1.82.Final-sources.jar
+2022-10-12 15:18:03,033 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-handler-proxy:4.1.82.Final
+2022-10-12 15:18:03,659 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/netty/netty-codec-socks/4.1.82.Final/netty-codec-socks-4.1.82.Final-sources.jar
+2022-10-12 15:18:04,002 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-codec-socks/4.1.82.Final/netty-codec-socks-4.1.82.Final-sources.jar
+2022-10-12 15:18:04,061 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-codec-socks:4.1.82.Final
+2022-10-12 15:18:04,702 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-webflux/5.3.23/spring-webflux-5.3.23-sources.jar
+2022-10-12 15:18:05,399 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/spring-webflux/5.3.23/spring-webflux-5.3.23-sources.jar
+2022-10-12 15:18:05,457 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework:spring-webflux:5.3.23
+2022-10-12 15:18:06,122 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-starter-gateway/3.1.4/spring-cloud-starter-gateway-3.1.4-javadoc.jar
+2022-10-12 15:18:06,459 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-starter-gateway/3.1.4/spring-cloud-starter-gateway-3.1.4-javadoc.jar
+2022-10-12 15:18:06,530 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded javadoc for org.springframework.cloud:spring-cloud-starter-gateway:3.1.4
+2022-10-12 15:18:06,536 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.cloud:spring-cloud-gateway-server:3.1.4
+2022-10-12 15:18:06,541 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.boot:spring-boot-starter-webflux:2.7.4
+2022-10-12 15:18:06,546 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.boot:spring-boot-starter-reactor-netty:2.7.4
+2022-10-12 15:18:06,551 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.projectreactor.netty:reactor-netty-http:1.0.23
+2022-10-12 15:18:06,556 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-codec-http:4.1.82.Final
+2022-10-12 15:18:06,562 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-common:4.1.82.Final
+2022-10-12 15:18:06,568 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-buffer:4.1.82.Final
+2022-10-12 15:18:06,573 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-transport:4.1.82.Final
+2022-10-12 15:18:06,578 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-codec:4.1.82.Final
+2022-10-12 15:18:06,583 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-handler:4.1.82.Final
+2022-10-12 15:18:06,587 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-codec-http2:4.1.82.Final
+2022-10-12 15:18:06,595 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-resolver-dns:4.1.82.Final
+2022-10-12 15:18:06,601 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-resolver:4.1.82.Final
+2022-10-12 15:18:06,605 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-codec-dns:4.1.82.Final
+2022-10-12 15:18:07,261 [Worker-61: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns-native-macos/4.1.82.Final/netty-resolver-dns-native-macos-4.1.82.Final-javadoc.jar
+2022-10-12 15:18:07,266 [Worker-61: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download javadoc for io.netty:netty-resolver-dns-native-macos:4.1.82.Final:osx-x86_64
+org.eclipse.core.runtime.CoreException: Could not resolve artifact io.netty:netty-resolver-dns-native-macos:jar:javadoc:4.1.82.Final
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$4(MavenImpl.java:804)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:179)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:114)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:101)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:772)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:749)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:330)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:316)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:269)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:233)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:161)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:179)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:153)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:101)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.execute(MavenImpl.java:1374)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:161)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2022-10-12 15:18:07,272 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-resolver-dns-classes-macos:4.1.82.Final
+2022-10-12 15:18:07,276 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-transport-native-epoll:4.1.82.Final:linux-x86_64
+2022-10-12 15:18:07,279 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-transport-native-unix-common:4.1.82.Final
+2022-10-12 15:18:07,282 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-transport-classes-epoll:4.1.82.Final
+2022-10-12 15:18:07,285 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.projectreactor.netty:reactor-netty-core:1.0.23
+2022-10-12 15:18:07,288 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-handler-proxy:4.1.82.Final
+2022-10-12 15:18:07,290 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.netty:netty-codec-socks:4.1.82.Final
+2022-10-12 15:18:07,292 [Worker-61: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework:spring-webflux:5.3.23
+2022-10-12 15:18:07,850 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:18:07,850 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:18:07,850 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 15:18:07,850 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 15:18:07,851 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:18:07,851 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:18:07,851 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\api-gateway\src\test\resources
+2022-10-12 15:22:39,311 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:22:39,311 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:22:39,311 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 15:22:39,334 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 15:22:39,336 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:22:39,336 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:22:39,336 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\api-gateway\src\test\resources
+2022-10-12 15:23:47,117 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:23:47,117 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:23:47,118 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 15:23:47,167 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 15:23:47,169 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:23:47,169 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:23:47,169 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\api-gateway\src\test\resources
+2022-10-12 15:23:52,149 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:23:52,149 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:23:52,149 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 15:23:52,166 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 15:23:52,167 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:23:52,167 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:23:52,167 [Worker-61: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\api-gateway\src\test\resources
+2022-10-12 15:24:26,254 [Worker-65: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:24:26,254 [Worker-65: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:24:26,255 [Worker-65: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 15:24:26,257 [Worker-65: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 15:24:26,258 [Worker-65: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:24:26,259 [Worker-65: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:24:26,259 [Worker-65: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\api-gateway\src\test\resources
+2022-10-12 15:24:48,690 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:24:48,690 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:24:48,690 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 15:24:48,692 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 15:24:48,693 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:24:48,693 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:24:48,693 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\api-gateway\src\test\resources
+2022-10-12 15:30:44,731 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:30:44,731 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:30:44,731 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 15:30:44,737 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 15:30:44,738 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:30:44,738 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:30:44,738 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\currency-exchange-service\src\test\resources
+2022-10-12 15:31:16,088 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:31:16,088 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:31:16,088 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 15:31:16,102 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 15:31:16,105 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:31:16,105 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:31:16,105 [Worker-71: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\currency-exchange-service\src\test\resources
+2022-10-12 15:36:49,053 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:36:49,053 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:36:49,054 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 15:36:49,070 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 15:36:49,074 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:36:49,075 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:36:49,075 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\api-gateway\src\test\resources
+2022-10-12 15:37:31,916 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:37:31,916 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:37:31,916 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 15:37:31,931 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 15:37:31,933 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:37:31,933 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:37:31,933 [Worker-67: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\api-gateway\src\test\resources
+2022-10-12 15:41:26,409 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:41:26,409 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:41:26,410 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 15:41:26,443 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 15:41:26,446 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 15:41:26,446 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 15:41:26,446 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\api-gateway\src\test\resources
+2022-10-12 17:20:57,659 [Worker-80: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2022-10-12 17:20:57,976 [Worker-80: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.demo.microservices:spring-cloud-config-server:0.0.1 @ C:\My_Workbench\MAVENWORKSPACE\spring-cloud-config-server\pom.xml.
+2022-10-12 17:20:58,452 [Worker-80: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /spring-cloud-config-server/src/main/java
+2022-10-12 17:20:58,452 [Worker-80: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /spring-cloud-config-server/src/main/resources
+2022-10-12 17:20:58,452 [Worker-80: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /spring-cloud-config-server/src/main/resources
+2022-10-12 17:20:58,452 [Worker-80: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /spring-cloud-config-server/src/test/java
+2022-10-12 17:20:59,074 [Worker-80: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2022-10-12 17:20:59,476 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 17:20:59,476 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 17:20:59,476 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 17:20:59,477 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 17:20:59,478 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 17:20:59,478 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 17:20:59,478 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\spring-cloud-config-server\src\test\resources
+2022-10-12 17:23:03,842 [Worker-81: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 17:23:03,842 [Worker-81: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 17:23:03,842 [Worker-81: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 17:23:03,858 [Worker-81: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 17:23:03,859 [Worker-81: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 17:23:03,859 [Worker-81: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 17:23:03,859 [Worker-81: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\spring-cloud-config-server\src\test\resources
+2022-10-12 17:29:46,685 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 17:29:46,685 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 17:29:46,685 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 17:29:46,703 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 17:29:46,705 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 17:29:46,705 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 17:29:46,705 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\limit-services\src\test\resources
+2022-10-12 17:31:51,176 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 17:31:51,177 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 17:31:51,177 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 17:31:51,189 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 17:31:51,191 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 17:31:51,191 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 17:31:51,191 [Worker-80: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\limit-services\src\test\resources
+2022-10-12 17:33:05,850 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 17:33:05,850 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 17:33:05,850 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 17:33:05,854 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 17:33:05,855 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 17:33:05,855 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 17:33:05,855 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\limit-services\src\test\resources
+2022-10-12 17:34:10,872 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 17:34:10,872 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 17:34:10,872 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-10-12 17:34:10,884 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-12 17:34:10,885 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-12 17:34:10,885 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-10-12 17:34:10,885 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\My_Workbench\MAVENWORKSPACE\limit-services\src\test\resources
