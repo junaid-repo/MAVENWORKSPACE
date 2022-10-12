@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.demo.microservices</groupId>
 	<artifactId>spring-cloud-config-server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>spring-cloud-config-server</name>
 	<description>Centralized config server</description>
 	<properties>
