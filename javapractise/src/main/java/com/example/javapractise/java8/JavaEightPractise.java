@@ -20,7 +20,7 @@ public class JavaEightPractise {
 		extracted1(list1, pred1);
 		extracted1(list1, pred2);
 
-		// System.out.println(list1.stream().reduce(0, (x,y)->x+y));
+		 System.out.println(list1.stream().reduce(0, (x,y)->x+y));
 		System.out.println(list3.stream().filter(i -> i % 2 == 0).map(x -> x / 3).reduce(0, (x, y) -> x + y));
 
 		BiConsumer<Integer, Integer> biCon = (x, y) -> System.out.println(x + y);

@@ -10,28 +10,30 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.databasedemo.jdbc.PersonJdbcDAO;
 
 @SpringBootApplication
-public class DatabaseDemoApplication implements CommandLineRunner{
+public class DatabaseDemoApplication implements CommandLineRunner {
 
-	
-	private Logger logger= LoggerFactory.getLogger(this.getClass());
-	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	PersonJdbcDAO dao;
-	
-	public static void main(String[] args)  {
+
+	public static void main(String[] args) {
 		SpringApplication.run(DatabaseDemoApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		
-		//logger.info("{}",dao.findAll());
-		
-		System.out.println(dao.findAll());
-		System.out.println(dao.findById(10002));
-		System.out.println(dao.findByLocation("Kolkata"));
+
+		// logger.info("{}",dao.findAll());
+		// System.out.println(dao.deleteById(10001));
+
+		// System.out.println(dao.findById(10002));
+		// System.out.println(dao.findByLocation("Kolkata"));
 		// TODO Auto-generated method stub
-		
+
+		//System.out.println(dao.insertInTable(1005, "Amit", "Tata"));
+		//System.out.println(dao.updateTable(10001, "Tatisilye"));
+		System.out.println(dao.findAll());
 	}
 
 }

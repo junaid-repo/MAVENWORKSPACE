@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="/"/>
+		<item key="selection" value="String query"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="String query"/>
+			<item value="file"/>
+			<item value="Employee"/>
+			<item value="feign"/>
+			<item value="SeatAvailabilityResponse"/>
 			<item value="\"/>
+			<item value="@RequestParam"/>
 			<item value="/"/>
 			<item value="post"/>
 			<item value="61"/>
@@ -17,14 +23,11 @@
 			<item value="getCountryDetails"/>
 			<item value="Utility.convertCLOBToString"/>
 			<item value="clob"/>
-			<item value="authen"/>
-			<item value="protected"/>
-			<item value="PincodeDetails"/>
-			<item value="public"/>
-			<item value="tD"/>
-			<item value="setclob"/>
 		</list>
 		<list key="replacehistory">
+			<item value="EmployeeDetails"/>
+			<item value="GetTrainFairResponse"/>
+			<item value=""/>
 			<item value="/"/>
 			<item value="\"/>
 			<item value="public"/>
@@ -32,7 +35,6 @@
 			<item value="private"/>
 			<item value="MultiThreadOne"/>
 			<item value="public "/>
-			<item value=""/>
 			<item value="private String"/>
 			<item value=" = paramVal.trim();"/>
 			<item value="else if (paramName.trim()"/>
@@ -41,8 +43,8 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1209"/>
-		<item key="DIALOG_Y_ORIGIN" value="113"/>
+		<item key="DIALOG_X_ORIGIN" value="1371"/>
+		<item key="DIALOG_Y_ORIGIN" value="221"/>
 		<item key="DIALOG_WIDTH" value="284"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>

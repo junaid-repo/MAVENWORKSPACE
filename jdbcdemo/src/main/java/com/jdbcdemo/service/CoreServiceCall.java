@@ -238,7 +238,10 @@ public class CoreServiceCall extends ChatServices implements IMultiThreadOne {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
+		finally {
+			System.out.println("Ok");
+			
+		}
 		return response;
 	}
 

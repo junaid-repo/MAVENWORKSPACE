@@ -1,0 +1,33 @@
+
+  CREATE OR REPLACE PACKAGE "DEV"."TBDPACKAGE1" as
+
+  procedure tbdproc2(numm in varchar2, retcode out varchar2);
+end tbdpackage1;
+
+CREATE OR REPLACE PACKAGE BODY "DEV"."TBDPACKAGE1" as
+  procedure tbdproc2(numm in varchar2, retcode out varchar2) is
+  
+    cursor cs1 is
+      select ee.first_name || ' ' || ee.last_name, ee.salary
+        from dev.employees ee
+       where ee.employee_id > 100;
+  
+    empName varchar2(200);
+    salary  number(5, 3);
+  begin
+    open cs1;
+    loop
+      fetch cs1
+        into empName, salary;
+      exit when cs1%notfound;
+    end loop;
+  
+    close cs1;
+  exception
+    when others then
+    
+     dbms_output.put_line(sqlerrm);
+     dbms_output.put_line(sqlcode);
+    
+  end;
+end tbdpackage1;

@@ -2,6 +2,11 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\My_Workbench\MAVENWORKSPACE\getfair"/>
+			<item value="C:\My_Workbench\MAVENWORKSPACE\checkseatavailablity"/>
+			<item value="C:\My_Workbench\MAVENWORKSPACE\gettrainbetweenstations"/>
+			<item value="C:\My_Workbench\MAVENWORKSPACE\tut-react-and-spring-data-rest-master"/>
+			<item value="C:\My_Workbench\MAVENWORKSPACE\core"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\database-demo"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\api-gateway"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\naming-server"/>
