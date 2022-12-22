@@ -1,0 +1,173 @@
+
+  CREATE OR REPLACE PACKAGE "OT"."PKG_LIB_MAINTAIN" as
+
+  procedure create_lib_user(userName       in varchar2,
+                            gender         in varchar2,
+                            membershipType in varchar2,
+                            validity       in number,
+                            userCode       out varchar2,
+                            retCode        OUT varchar2,
+                            retError       OUT varchar2);
+
+  procedure addbook(bookName   in varchar2,
+                    bookGenerE in varchar2,
+                    bookCount  in number,
+                    
+                    bookCode  out varchar2,
+                    bookShelf out varchar2,
+                    retCode   out number,
+                    retError  out varchar2);
+
+end pkg_lib_maintain;
+
+CREATE OR REPLACE PACKAGE BODY "OT"."PKG_LIB_MAINTAIN" as
+
+  procedure create_lib_user(userName       in varchar2,
+                            gender         in varchar2,
+                            membershipType in varchar2,
+                            validity       in number,
+                            userCode       out varchar2,
+                            retCode        OUT varchar2,
+                            retError       OUT varchar2) as
+  
+  begin
+    USERCODE := NULL;
+    retCode  := 0;
+    retError := 'Success';
+    begin
+      select 'LIBUSR' || OT.CODE_SEQ.NEXTVAL INTO USERCODE FROM DUAL;
+    
+    exception
+      when others then
+        retCode  := sqlcode;
+        retError := sqlerrm;
+    end;
+  
+    IF (USERCODE IS NOT NULL) THEN
+    
+      BEGIN
+        INSERT INTO OT.LIB_USERS
+        VALUES
+          (OT.CONTACT_ID_SEQ.NEXTVAL,
+           USERCODE,
+           SYSDATE,
+           userName,
+           gender,
+           membershipType,
+           sysdate + validity);
+      exception
+        when others then
+          retCode  := sqlcode;
+          retError := sqlerrm;
+      end;
+    END IF;
+  exception
+    when others then
+    
+      retcode  := sqlcode;
+      reterror := sqlerrm;
+  end;
+
+  procedure addbook(bookName   in varchar2,
+                    bookGenerE in varchar2,
+                    bookCount  in number,
+                    bookCode   out varchar2,
+                    bookShelf  out varchar2,
+                    retCode    out number,
+                    retError   out varchar2) is
+  
+    checkflag number;
+    aa        number;
+    cursor cnt is
+      select lb.book_id from ot.lib_books lb where lb.book_name = bookname;
+  
+  begin
+    retCode   := 200;
+    retError  := 'Success';
+    checkflag := 0;
+    BOOKCODE  := NULL;
+  
+    open cnt;
+    loop
+      fetch cnt
+        into aa;
+      if (aa > 1) then
+        checkFlag := 1;
+      end if;
+      exit when cnt%notfound;
+    end loop;
+    close cnt;
+    /* 
+    begin
+    
+      select count(lbs.book_name)
+        into checkFlag
+        from ot.lib_books lbs
+      
+       group by lbs.book_name
+      having lbs.book_name = bookname;
+    
+    
+    exception
+      when others then
+        checkflag := 0;
+        retcode   := sqlcode;
+        reterror  := sqlerrm;
+    end;*/
+    if (checkFlag = 0) then
+      BEGIN
+        select 'B-00' || OT.CODE_SEQ.NEXTVAL INTO BOOKCODE FROM DUAL;
+      exception
+        when others then
+        
+          BOOKCODE := null;
+      end;
+    
+      BOOKSHELF := 'Q-AA-163';
+    
+      IF (BOOKCODE IS NOT NULL) THEN
+        BEGIN
+          INSERT INTO OT.LIB_BOOKS
+          VALUES
+            (OT.CONTACT_ID_SEQ.NEXTVAL,
+             BOOKCODE,
+             SYSDATE,
+             BOOKNAME,
+             BOOKGENERE,
+             BOOKSHELF,
+             bookCount);
+        
+        exception
+          when others then
+          
+            RETcODE  := SQLCODE;
+            retError := SQLERRM;
+        end;
+      END IF;
+    
+    else
+      begin
+      
+        update OT.LIB_BOOKS lb
+           set lb.book_count = lb.book_count + bookCount
+         where lb.book_name = bookName;
+      
+        select lb.book_code, lb.book_shelf
+          into bookCode, bookShelf
+          from ot.lib_books lb
+         where lb.book_name = bookname;
+      exception
+        when others then
+          retcode  := sqlcode;
+          reterror := sqlerrm;
+      end;
+    end if;
+  exception
+  
+    when others then
+    
+      RETcODE  := SQLCODE;
+      retError := SQLERRM;
+  end;
+
+end pkg_lib_maintain;

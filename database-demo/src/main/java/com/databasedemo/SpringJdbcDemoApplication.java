@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.databasedemo.jdbc.PersonJdbcDAO;
 
-@SpringBootApplication
-public class DatabaseDemoApplication implements CommandLineRunner {
+//@SpringBootApplication
+public class SpringJdbcDemoApplication implements CommandLineRunner {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -18,7 +18,7 @@ public class DatabaseDemoApplication implements CommandLineRunner {
 	PersonJdbcDAO dao;
 
 	public static void main(String[] args) {
-		SpringApplication.run(DatabaseDemoApplication.class, args);
+		SpringApplication.run(SpringJdbcDemoApplication.class, args);
 	}
 
 	@Override
@@ -27,13 +27,13 @@ public class DatabaseDemoApplication implements CommandLineRunner {
 		// logger.info("{}",dao.findAll());
 		// System.out.println(dao.deleteById(10001));
 
-		// System.out.println(dao.findById(10002));
-		// System.out.println(dao.findByLocation("Kolkata"));
+		 System.out.println(dao.findById(10002));
+		 System.out.println(dao.findByLocation("Kolkata"));
 		// TODO Auto-generated method stub
 
 		//System.out.println(dao.insertInTable(1005, "Amit", "Tata"));
 		//System.out.println(dao.updateTable(10001, "Tatisilye"));
-		System.out.println(dao.findAll());
+		//System.out.println(dao.findAll());
 	}
 
 }

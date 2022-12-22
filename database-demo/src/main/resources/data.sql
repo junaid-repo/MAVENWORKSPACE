@@ -1,10 +1,4 @@
-create table person
-(
-   id integer not null,
-   name varchar (200) not null,
-   location varchar (200),
-   primary key (id)
-);
+
 INSERT INTO PERSON VALUES
 (
    10001,

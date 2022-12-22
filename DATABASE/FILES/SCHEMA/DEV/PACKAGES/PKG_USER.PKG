@@ -1,0 +1,91 @@
+
+  CREATE OR REPLACE PACKAGE "DEV"."PKG_USER" as
+
+  procedure create_user(firstName in varchar2,
+                        lastName  in varchar2,
+                        email     in varchar2,
+                        psd       in varchar2,
+                        userName   out varchar2,
+                        retCode   out number,
+                        retError  out varchar2);
+
+  procedure search_user(firstName in varchar2,
+                        lastName  in varchar2,
+                        
+                        userNames out clob,
+                        retCode   out number,
+                        retError  out varchar2);
+
+end pkg_user;
+
+CREATE OR REPLACE PACKAGE BODY "DEV"."PKG_USER" as
+
+  procedure create_user(firstName in varchar2,
+                        lastName  in varchar2,
+                        email     in varchar2,
+                        psd       in varchar2,
+                        userName   out varchar2,
+                        retCode   out number,
+                        retError  out varchar2) is
+  
+    vUserName  varchar2(20);
+    vUserCount number;
+  
+  begin
+    vUserCount := 0;
+    retCode    := 0;
+    retError:='Success';
+   
+  userName:=lower(firstName)||lower(lastName)||ot.contact_id_seq.nextval;
+  
+    if vUserCount > 0 then
+      retCode  := 100;
+      retError := 'another user exist with the same userName, please choose another';
+    end if;
+  
+    if (retCode = 0) then
+    
+      insert into dev.c_users
+      values
+        (ot.code_seq.nextval, firstName, lastName, email, psd, userName);
+    
+    end if;
+  
+  exception
+    when others then
+    
+      retCode  := 200;
+      retError := 'issue during party creation';
+    
+  end;
+
+  procedure search_user(firstName in varchar2,
+                        lastName  in varchar2,
+                        
+                        userNames out clob,
+                        retCode   out number,
+                        retError  out varchar2) is
+  
+    vUserName  varchar2(20);
+    vUserCount number;
+  
+  begin
+    userNames := '';
+  
+    for I in (select cu.userName usrName
+                from dev.c_users cu
+               where cu.firstName = firstName
+                 and cu.lastName = lastName) loop
+    
+      vUserName := I.USRNAME;
+      userNames := userNames || '##' || vUserName;
+    end loop;
+  
+  exception
+    when others then
+    
+      null;
+    
+  end;
+
+end pkg_user;

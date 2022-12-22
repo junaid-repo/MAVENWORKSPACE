@@ -2,6 +2,9 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\My_Workbench\MAVENWORKSPACE\library"/>
+			<item value="C:\My_Workbench\MAVENWORKSPACE\products"/>
+			<item value="C:\My_Workbench\MAVENWORKSPACE\users"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\getfair"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\checkseatavailablity"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\gettrainbetweenstations"/>

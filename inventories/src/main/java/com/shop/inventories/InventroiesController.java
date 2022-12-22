@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class InventroiesController {
 
 	@GetMapping("/getInventoriesDetails")
-	List<Map> getWareHouseDetails(@RequestParam String inventoryId) {
+	List<Map> getWareHouseDetails() {
 
 		Map<String, String> retMap = new HashMap<>();
 		Map<String, String> retMap2 = new HashMap<>();

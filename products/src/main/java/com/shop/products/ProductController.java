@@ -6,8 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.shop.products.service.UserServices;
+import com.shop.products.users.dto.UserRequest;
+import com.shop.products.users.dto.UserResponse;
 
 @RestController
 public class ProductController {
@@ -52,4 +57,5 @@ public class ProductController {
 		return retList;
 	}
 
+	
 }
