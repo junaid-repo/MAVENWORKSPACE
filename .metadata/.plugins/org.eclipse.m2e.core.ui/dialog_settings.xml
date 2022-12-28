@@ -2,6 +2,8 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\My_Workbench\MAVENWORKSPACE\hibdemo"/>
+			<item value="C:\My_Workbench\MAVENWORKSPACE\junit-in-5-steps\test\junit\MyMathTest.java"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\library"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\products"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\users"/>
@@ -15,8 +17,6 @@
 			<item value="C:\My_Workbench\MAVENWORKSPACE\naming-server"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\spring-cloud-config-server"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\limit-services"/>
-			<item value="C:\My_Workbench\MAVENWORKSPACE\javapractise"/>
-			<item value="C:\My_Workbench\MAVENWORKSPACE\jdbcdemo"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

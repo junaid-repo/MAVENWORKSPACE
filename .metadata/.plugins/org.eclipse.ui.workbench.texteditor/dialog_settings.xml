@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="mapRow"/>
+		<item key="selection" value="Passport Details--&gt;"/>
 		<item key="wrap" value="true"/>
-		<item key="casesensitive" value="false"/>
+		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="Passport Details--&gt;"/>
+			<item value="course"/>
+			<item value="Course"/>
+			<item value="passportNumber"/>
+			<item value="Response of JPQL_NativQuery_update_timestamp----&gt;"/>
+			<item value="JPQL_NativQuery_With_Parameter"/>
+			<item value="sysdate()"/>
+			<item value="course_name"/>
 			<item value="mapRow"/>
 			<item value="authenticate"/>
 			<item value="CUser"/>
@@ -15,16 +23,15 @@
 			<item value="file"/>
 			<item value="Employee"/>
 			<item value="feign"/>
-			<item value="SeatAvailabilityResponse"/>
-			<item value="\"/>
-			<item value="@RequestParam"/>
-			<item value="/"/>
-			<item value="post"/>
-			<item value="61"/>
-			<item value="61."/>
-			<item value="bs."/>
 		</list>
 		<list key="replacehistory">
+			<item value="student"/>
+			<item value="Student"/>
+			<item value="passportnumber"/>
+			<item value="CURRENT_TIMESTAMP()"/>
+			<item value="Course"/>
+			<item value="course"/>
+			<item value="Course_details"/>
 			<item value="User"/>
 			<item value="EmployeeDetails"/>
 			<item value="GetTrainFairResponse"/>
@@ -33,20 +40,13 @@
 			<item value="\"/>
 			<item value="public"/>
 			<item value="PincodeDetails2"/>
-			<item value="private"/>
-			<item value="MultiThreadOne"/>
-			<item value="public "/>
-			<item value="private String"/>
-			<item value=" = paramVal.trim();"/>
-			<item value="else if (paramName.trim()"/>
-			<item value="else if (paramName"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1371"/>
-		<item key="DIALOG_Y_ORIGIN" value="221"/>
+		<item key="DIALOG_X_ORIGIN" value="1520"/>
+		<item key="DIALOG_Y_ORIGIN" value="642"/>
 		<item key="DIALOG_WIDTH" value="284"/>
-		<item key="DIALOG_HEIGHT" value="391"/>
+		<item key="DIALOG_HEIGHT" value="390"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 	</section>
 </section>

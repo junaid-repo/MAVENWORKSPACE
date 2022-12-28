@@ -45,6 +45,8 @@
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="java.sql.Statement"/>
     <fullyQualifiedTypeName name="java.sql.Types"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="oracle.jdbc.driver.OracleDriver"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.jpa.hibernate.hibdemo.entity.Course"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Table"/>
 </qualifiedTypeNameHistroy>

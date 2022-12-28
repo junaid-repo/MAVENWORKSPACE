@@ -11,7 +11,7 @@ public class ArrayListTest {
 		List<Double> ar = new ArrayList<>();
 		List<Double> ll = new LinkedList<>();
 
-		for (double a = 54745; a < 54795; a++) {
+		for (double a = 54; a < 100; a++) {
 			ar.add(a);
 		}
 		// System.out.println(ar);
