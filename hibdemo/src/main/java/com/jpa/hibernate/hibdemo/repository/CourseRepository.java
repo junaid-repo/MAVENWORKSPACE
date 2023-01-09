@@ -1,10 +1,13 @@
 package com.jpa.hibernate.hibdemo.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jpa.hibernate.hibdemo.entity.Course;
+import com.jpa.hibernate.hibdemo.entity.Review;
 
 import jakarta.persistence.EntityManager;
 
@@ -63,11 +66,11 @@ public class CourseRepository {
 
 		Course cr1 = new Course("Rest Web Services");
 
-		//cr1.setName(null);
+		// cr1.setName(null);
 		em.persist(cr1);
 
 	}
-	
+
 	public void playWithEntityManager3() {
 
 		// Course cr = new Course("Multithreading in Java");
@@ -77,11 +80,41 @@ public class CourseRepository {
 
 		Course cr1 = new Course("Rest Web Services");
 
-		//cr1.setName(null);
+		// cr1.setName(null);
 		em.persist(cr1);
-		
-		Course cr2 =findById(1001L);
+
+		Course cr2 = findById(1001L);
 		cr2.setName("The update name");
+
+	}
+
+	public void addHardCodedReviewsForCourses() {
+
+		Course course = findById(1003L);
+
+		Review review1 = new Review("5", "Outstanding course");
+		review1.setCourse(course);
+		course.addReviews(review1);
+
+		Review review2 = new Review("4", "Good way of teaching");
+		review2.setCourse(course);
+		course.addReviews(review2);
+
+		em.persist(review1);
+		em.persist(review2);
+
+	}
+
+	public void addReviewsForCourses(Long courseId, List<Review> reviews) {
+
+		Course course = findById(courseId);
+
+		for (Review review : reviews) {
+
+			review.setCourse(course);
+			course.addReviews(review);
+			em.persist(review);
+		}
 
 	}
 }

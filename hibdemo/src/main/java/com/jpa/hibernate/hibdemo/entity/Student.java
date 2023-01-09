@@ -1,10 +1,16 @@
 package com.jpa.hibernate.hibdemo.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -27,6 +33,18 @@ public class Student {
 
 	protected Student() {
 
+	}
+
+	@ManyToMany
+	@JoinTable(name = "STUDENT_COURSE", joinColumns = @JoinColumn(name = "STUDENT_ID"), inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
+	List<Course> courses = new ArrayList<>();
+
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void addCourses(Course courses) {
+		this.courses.add(courses);
 	}
 
 	public Passport getPassport() {

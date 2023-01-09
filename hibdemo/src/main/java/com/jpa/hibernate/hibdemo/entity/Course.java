@@ -11,6 +11,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -36,9 +37,20 @@ public class Course {
 
 	@OneToMany
 	private List<Review> reviews = new ArrayList<>();
+	
+	@ManyToMany(mappedBy = "courses")
+	List<Student> student= new ArrayList<>();
 
 	public List<Review> getReviews() {
 		return reviews;
+	}
+
+	public List<Student> getStudent() {
+		return student;
+	}
+
+	public void addStudent(Student student) {
+		this.student.add(student);
 	}
 
 	public void addReviews(Review reviews) {

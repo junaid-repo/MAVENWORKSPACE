@@ -1,13 +1,17 @@
 package com.jpa.hibernate.hibdemo.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jpa.hibernate.hibdemo.entity.Course;
 import com.jpa.hibernate.hibdemo.entity.Passport;
 import com.jpa.hibernate.hibdemo.entity.Student;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 
 @Repository
 @Transactional
@@ -65,6 +69,29 @@ public class StudentRepository {
 		student.setPassport(passport);
 
 		em.persist(student);
+
+	}
+
+	public void insertStudentAndCourse() {
+
+		Student student = new Student("Jack");
+		Course course = new Course("Angular JS");
+
+		em.persist(course);
+		em.persist(student);
+
+		student.addCourses(course);
+		course.addStudent(student);
+
+		em.persist(student);
+
+	}
+
+	public void jpql_similar_passportNumber() {
+		TypedQuery qry = em.createQuery("SELECT * FROM PASSPORT p where p.passportnumber =  '%123%'",
+				Passport.class);
+		List<Passport> crs = qry.getResultList();
+		System.out.println("The output of the test jpql_similar_passportNumber is--> " + crs);
 
 	}
 }

@@ -32,6 +32,13 @@ public class Review {
 	protected Review() {
 
 	}
+	
+
+	public Review(String ratings, String descriptions) {
+		super();
+		this.ratings = ratings;
+		this.descriptions = descriptions;
+	}
 
 	public Long getId() {
 		return id;
