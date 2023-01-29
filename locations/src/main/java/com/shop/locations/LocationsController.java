@@ -5,12 +5,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class LocationsController {
+	@Value("${this.is.a.testing.of.getting.value.from.application.dot.properties.file}")
+	private String serverPort;
 	
 	@GetMapping("/getLocationDetails")
 	List<Map> getWareHouseDetails(@RequestParam String locationId){
@@ -21,6 +24,7 @@ public class LocationsController {
 		
 		List<Map> retList=new LinkedList<>();
 	
+		System.out.println("The port number-->"+serverPort);
 		
 		retMap.put("addresss", "1297 Via Cola di Rie");
 		retMap.put("locationId", "1");

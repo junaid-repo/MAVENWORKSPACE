@@ -1,0 +1,120 @@
+
+  CREATE OR REPLACE PACKAGE "OT"."PKG_CHAT_MAINTAIN" as
+
+  procedure updatechatmessages(fromUser in varchar2,
+                               toUser   in varchar2,
+                               message  in varchar2,
+                               retcode  out number,
+                               reterror out varchar2);
+
+  procedure getchatmessageDetails(fromUser    in varchar2,
+                                  toUser      in varchar2,
+                                  tillDate    in varchar2,
+                                  messageList out clob,
+                                  retcode     out number,
+                                  reterror    out varchar2);
+
+end pkg_chat_maintain;
+
+CREATE OR REPLACE PACKAGE BODY "OT"."PKG_CHAT_MAINTAIN" as
+
+  procedure updatechatmessages(fromUser in varchar2,
+                               toUser   in varchar2,
+                               message  in varchar2,
+                               retcode  out number,
+                               reterror out varchar2) as
+  
+    increptedMsg varchar2(2000);
+    vUserId      number;
+    vChatid      number;
+  
+  begin
+  
+    begin
+      select u.userid
+        into vUserId
+        from ot.users u
+       where u.usercode = fromUser;
+    exception
+      when others then
+        vUserId := null;
+    end;
+  
+    vChatId := ot.code_seq.nextval;
+    if vuserId is not null then
+      insert into ot.chatmsgdetails
+      values
+        (vchatId, sysdate, vUserid, fromUser, toUser);
+    
+      begin
+        ot.encd_chat_data(vuserId, vchatId, message, retcode, reterror);
+      exception
+        when others then
+          retcode  := sqlcode;
+          reterror := sqlerrm;
+      end;
+    
+    end if;
+  
+  exception
+    when others then
+      retcode  := sqlcode;
+      reterror := sqlerrm;
+  end;
+
+  procedure getchatmessageDetails(fromUser    in varchar2,
+                                  toUser      in varchar2,
+                                  tillDate    in varchar2,
+                                  messageList out clob,
+                                  retcode     out number,
+                                  reterror    out varchar2) as
+  
+    msgText varchar2(2000);
+    
+    vUserName varchar2(2000);
+  
+  begin
+  
+    for i in (select *
+                from (select ch.userid, ch.chatid, ch.createddate
+                        from ot.chatmsgdetails ch
+                       where ch.fromuser = fromUser
+                         and toUser = toUser
+                      
+                      --   ORDER BY CH.CREATEDDATE desc
+                      UNION
+                      select ch.userid, ch.chatid, ch.createddate
+                        from ot.chatmsgdetails ch
+                       where ch.fromuser = toUser
+                         and toUser = fromUser) e
+               order by e.createddate
+              --ORDER BY CH.CREATEDDATE desc
+              ) loop
+    
+      ot.dncd_chat_data(i.userid, i.chatid, msgText, retcode, reterror);
+    
+     begin
+      select u.firstname||' '||u.lastname
+        into vUserName
+
+        from ot.users u
+       where u.userid = i.userid;
+    exception
+      when others then
+        vUsername := null;
+    end;    
+    
+      dbms_output.put_line(msgText || '~~' ||
+                           to_date(i.createddate, 'DD/MM/RRRR HH:MI:SS')||'~~'||vUserName); 
+                           
+     messageList:=messageList||'##'||msgText || '~~' ||
+                           to_date(i.createddate, 'DD/MM/RRRR HH:MI:SS')||'~~'||vUserName;                       
+    end loop;
+  
+  exception
+    when others then
+      retcode  := sqlcode;
+      reterror := sqlerrm;
+  end;
+
+end pkg_chat_maintain;

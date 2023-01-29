@@ -1,40 +1,37 @@
 package com.example.javapractise.exception;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ExceptionHandling1 {
 
 	public static void main(String[] args) {
-		int a = m1();
-		System.out.println(a);
-	}
 
-	public static int m1() {
-		int b = 0;
-		try {
-			b = m2();
-		} finally {
-			// TODO Auto-generated catch block
-			System.out.println("Here is the finally block");
+		String megaData = "##Hi AA, how are you~~10-JAN-23~~Saima Aftab##I am fine. How bout you?~~10-JAN-23~~Nemat Fatima##Enjoying my life~~10-JAN-23~~Saima Aftab##So.. where do you live these days?~~10-JAN-23~~Nemat Fatima##I am in Ohiao.. And you?~~10-JAN-23~~Saima Aftab##I am in new mexico~~10-JAN-23~~Nemat Fatima";
+
+		List<Map> listOfMaps = new ArrayList<>();
+
+		String megaDataArr[] = megaData.split("@@");
+		for (int i = 0; i < megaDataArr.length; i++) {
+
+			String dataArr[] = megaDataArr[i].split("##");
+
+			Map<String, String> retMap = new HashMap<>();
+			for (int j = 1; j < dataArr.length; j++) {
+
+				String arr[] = dataArr[j].split("~~");
+
+				if (arr[0] != null && arr[1] != null)
+
+					retMap.put(arr[0], arr[1]);
+
+			}
+			listOfMaps.add(retMap);
+
 		}
 
-		return b;
-	}
-
-	public static int m2() {
-		int c = 0;
-		try {
-			c = m3();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return c;
-	}
-
-	public static int m3() {
-		int d = 0;
-		d = 3 / 0;
-
-		return d;
+		System.out.println(listOfMaps);
 	}
 }

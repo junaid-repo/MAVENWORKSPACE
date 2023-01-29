@@ -35,6 +35,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.chat.chatapp.dto.ChatRequestDto;
+import com.chat.chatapp.dto.ChatResponseDto;
+import com.chat.chatapp.service.ImplChatServices;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -1024,5 +1027,25 @@ public class SimpleController {
 
 		return new ResponseEntity<Map>(retMap, HttpStatus.OK);
 	}
+	@RequestMapping(value ="/chat/startChat", method = RequestMethod.POST)
+	ResponseEntity<BaseOutput> startChat(@RequestBody ChatRequestDto request) throws JsonProcessingException {
+		ChatResponseDto response = new ChatResponseDto();
 
+		ImplChatServices csi = new ImplChatServices();
+		try {
+			response = csi.addChat(request);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setErrorDesc(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+			response.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			System.out.println("ar");
+			return new ResponseEntity<BaseOutput>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+		response.setErrorDesc(HttpStatus.OK.getReasonPhrase());
+		response.setErrorCode(HttpStatus.OK.value());
+		Utility.insertInternalApiLogs(URIConstants.REMOVE_EMPLOYEE, ow.writeValueAsString(request),
+				ow.writeValueAsString(response));
+		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
+	}
 }

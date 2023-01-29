@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
-    <fullyQualifiedTypeName name="java.util.Arrays"/>
-    <fullyQualifiedTypeName name="java.net.http.HttpResponse"/>
-    <fullyQualifiedTypeName name="java.net.http.HttpClient"/>
     <fullyQualifiedTypeName name="java.net.http.HttpRequest"/>
     <fullyQualifiedTypeName name="java.net.URI"/>
     <fullyQualifiedTypeName name="objectSetters.PinCodeDetailObjectCreator"/>
@@ -35,17 +31,13 @@
     <fullyQualifiedTypeName name="com.jdbcdemo.jdbcdemo.dto.BaseOutput"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
-    <fullyQualifiedTypeName name="connection.ConnectionClass"/>
     <fullyQualifiedTypeName name="com.product.connection.ConnectionClass"/>
     <fullyQualifiedTypeName name="com.example.javapractise.thread.MyThread2"/>
     <fullyQualifiedTypeName name="com.lib.library.service.interfaces.functional.AddBookInterface"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="com.lib.library.service.interfaces.functional.CreateLibUsersInterface"/>
-    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="java.sql.Statement"/>
     <fullyQualifiedTypeName name="java.sql.Types"/>
-    <fullyQualifiedTypeName name="oracle.jdbc.driver.OracleDriver"/>
     <fullyQualifiedTypeName name="com.jpa.hibernate.hibdemo.entity.Course"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Table"/>
     <fullyQualifiedTypeName name="org.springframework.test.context.junit4.SpringRunner"/>
@@ -57,4 +49,15 @@
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="jakarta.persistence.InheritanceType"/>
     <fullyQualifiedTypeName name="jakarta.persistence.TypedQuery"/>
+    <fullyQualifiedTypeName name="com.chat.chatapp.service.interfaces.ChatServiceI"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="oracle.jdbc.driver.OracleDriver"/>
+    <fullyQualifiedTypeName name="connection.ConnectionClass"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="com.chat.chatapp.service.ChatServiceImpl"/>
+    <fullyQualifiedTypeName name="com.chat.chatapp.dto.ChatRequestData"/>
+    <fullyQualifiedTypeName name="com.chat.chatapp.dto.ChatResponseData"/>
+    <fullyQualifiedTypeName name="com.chat.chatapp.service.interfaces.IChatService"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
 </qualifiedTypeNameHistroy>

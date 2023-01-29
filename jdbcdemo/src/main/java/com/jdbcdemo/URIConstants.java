@@ -26,18 +26,16 @@ public class URIConstants {
 	public static final String SEND_SIMPLE_EMAIL = "/external/sendSimpleEmail";
 	public static final String GET_COUNTRY_DETAILS = "/webService/getCountryDetails";
 	public static final String CREATE_BULK_EMPLOYEE_AND_GET_COUNTRY_DATA = "webService/createBulkEmployeeAndGetCountryData";
-	public static final String CREATE_NEW_CUSTOMER="company/createNewCustomer";
-	public static final String CALCULATE_ORDER_VALUE="company/calculateOrderValue";
-	public static final String CREATE_NEW_ORDER="company/createNewOrder";
-	public static final String DOWNLOAD_REPORT="company/downloadReport";
-	public static final String DOWNLOAD_ORDER_PDF="company/downloadOrderPDF";
-	public static final String GET_EMPLOYEE_DATA="company/getEmployeeData";
-	public static final String GET_EMPLOYEE_REPORT="company/getEmployeeReport";
-	public static final String COLLECTION ="company/collection";
+	public static final String CREATE_NEW_CUSTOMER = "company/createNewCustomer";
+	public static final String CALCULATE_ORDER_VALUE = "company/calculateOrderValue";
+	public static final String CREATE_NEW_ORDER = "company/createNewOrder";
+	public static final String DOWNLOAD_REPORT = "company/downloadReport";
+	public static final String DOWNLOAD_ORDER_PDF = "company/downloadOrderPDF";
+	public static final String GET_EMPLOYEE_DATA = "company/getEmployeeData";
+	public static final String GET_EMPLOYEE_REPORT = "company/getEmployeeReport";
+	public static final String COLLECTION = "company/collection";
 	public static final String GET_LOCATION_DETAILS = "/external/getCityDetails";
 	public static final String CREATE_USER = "/createUser";
 	public static final String CHAT = "/chat/startChat";
-	
-
 
 }

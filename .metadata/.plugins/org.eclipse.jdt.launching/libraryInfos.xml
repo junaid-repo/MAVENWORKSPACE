@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <libraryInfos>
+    <libraryInfo home="C:\jdk-18.0.1.1" version="18.0.1.1"/>
+    <libraryInfo home="C:\jdk-18.0.1.1\bin" version="18.0.1.1"/>
     <libraryInfo home="C:\Users\junai\jdk-18.0.1.1" version="18.0.1.1"/>
 </libraryInfos>
