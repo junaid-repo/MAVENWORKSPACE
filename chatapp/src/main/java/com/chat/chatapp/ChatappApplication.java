@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ChatappApplication {
 
 	public static void main(String[] args) {
-		System.out.println("Entering the main method of chatapp");
+		System.out.println("Entering the main method of chatapppppppp");
 		SpringApplication.run(ChatappApplication.class, args);
 	}
 
