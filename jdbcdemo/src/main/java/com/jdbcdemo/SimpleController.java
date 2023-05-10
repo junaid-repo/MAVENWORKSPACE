@@ -1027,25 +1027,5 @@ public class SimpleController {
 
 		return new ResponseEntity<Map>(retMap, HttpStatus.OK);
 	}
-	@RequestMapping(value ="/chat/startChat", method = RequestMethod.POST)
-	ResponseEntity<BaseOutput> startChat(@RequestBody ChatRequestDto request) throws JsonProcessingException {
-		ChatResponseDto response = new ChatResponseDto();
-
-		ImplChatServices csi = new ImplChatServices();
-		try {
-			response = csi.addChat(request);
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.setErrorDesc(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
-			response.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-			System.out.println("ar");
-			return new ResponseEntity<BaseOutput>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-
-		}
-		response.setErrorDesc(HttpStatus.OK.getReasonPhrase());
-		response.setErrorCode(HttpStatus.OK.value());
-		Utility.insertInternalApiLogs(URIConstants.REMOVE_EMPLOYEE, ow.writeValueAsString(request),
-				ow.writeValueAsString(response));
-		return new ResponseEntity<BaseOutput>(response, HttpStatus.OK);
-	}
+	
 }
