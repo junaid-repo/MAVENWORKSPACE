@@ -18,5 +18,5 @@ public class ApiGatewayConfiguration {
 		Function<PredicateSpec, Buildable<Route>> routeFunction = p -> p.path("/get").uri("http://httpbin.org:80");
 		return builder.routes().route(routeFunction).build();
 	}
-
+//Alllllssswerrrr
 }
