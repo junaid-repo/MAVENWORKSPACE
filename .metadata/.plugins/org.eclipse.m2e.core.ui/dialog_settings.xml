@@ -2,6 +2,9 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="/home/junaid/eclipse-workspace/Splitwise/"/>
+			<item value="/home/junaid/IdeaProjects/MAVENWORKSPACE/department-service"/>
+			<item value="/home/junaid/IdeaProjects/MAVENWORKSPACE/user-service"/>
 			<item value="C:\Workbench\MAVENWORKSPACE\MAVENWORKSPACE"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\chatdemo"/>
@@ -14,9 +17,6 @@
 			<item value="C:\My_Workbench\MAVENWORKSPACE\users"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\getfair"/>
 			<item value="C:\My_Workbench\MAVENWORKSPACE\checkseatavailablity"/>
-			<item value="C:\My_Workbench\MAVENWORKSPACE\gettrainbetweenstations"/>
-			<item value="C:\My_Workbench\MAVENWORKSPACE\tut-react-and-spring-data-rest-master"/>
-			<item value="C:\My_Workbench\MAVENWORKSPACE\core"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

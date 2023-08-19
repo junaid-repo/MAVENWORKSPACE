@@ -12,4 +12,6 @@ public class UserAndDepartmentDetails {
 
     Department department;
     Users user;
+
+    
 }

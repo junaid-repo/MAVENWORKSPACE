@@ -33,7 +33,8 @@ public class UserService {
         dept=restTemplate.getForObject("http://localhost:8081/department/"+user.getDeptId(),Department.class);
 
         response.setDepartment(dept);
-        response.setUser(user);
-        return response;
+		return response;
+        
+      
     }
 }
